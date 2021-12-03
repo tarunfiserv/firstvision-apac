@@ -60,17 +60,17 @@
 		"bug": {
 			"label": "bug,firstvision",
 			"template": "bug.md",
-			"assignees": "awaneesh.srivastava@fiserv.com,palani.p@fiserv.com"
+			"assignees": "AwaneeshSrivastava"
 		},
 		"feedback": {
 			"label": "feedback,firstvision",
 			"template": "feedback.md",
-			"assignees": "awaneesh.srivastava@fiserv.com"
+			"assignees": "AwaneeshSrivastava"
 		},
 		"enhancement": {
 			"label": "enhancement,firstvision",
 			"template": "feature.md",
-			"assignees": "awaneesh.srivastava@fiserv.com"
+			"assignees": "AwaneeshSrivastava"
 		}
 	}]
 }
