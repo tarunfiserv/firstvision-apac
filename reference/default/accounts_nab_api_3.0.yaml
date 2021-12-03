@@ -124,8 +124,8 @@ paths:
       tags:
       - Account Management
       x-group-name:  Account Management
-      x-proxy-name:  List Accounts Transactions
-      summary: List Accounts Transactions
+      x-proxy-name:  List Accounts' Transactions
+      summary: List Accounts' Transactions
       description: Provides transaction detail information from the last billing cycle
       operationId: Transaction details
       parameters:
