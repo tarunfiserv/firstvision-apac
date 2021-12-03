@@ -3,7 +3,7 @@
  The service provides list of accounts associated with the customer. 
 
 # Endpoint
-`GET https://stg34.visionplus.io/apidev/v1/customers/{customerNumber}/accountList/`
+`GET /v1/customers/{customerNumber}/accountList/`
 
 
 ## Payload Example

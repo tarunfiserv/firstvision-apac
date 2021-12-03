@@ -3,7 +3,7 @@
  The service provides list of cards associated with the customer. 
 
 # Endpoint
-`GET https://stg34.visionplus.io/apidev/v1/customers/{customerNumber}/cardList/`
+`GET /v1/customers/{customerNumber}/cardList/`
 
 
 ## Payload Example
