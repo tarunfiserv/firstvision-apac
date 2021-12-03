@@ -5,7 +5,7 @@ This service will be used to enquire the customer demographic details such as Na
 
 
 # Endpoint
-`GET /v1/customers/nameAddress?businessunit=100&accountNumber=0001000000000150191`
+`GET /v1/customers/nameAddress?businessUnit=100&accountNumber=0001000000000150191`
 
 
 ## Payload Example
