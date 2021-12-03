@@ -231,6 +231,218 @@ paths:
               example:
                - '504':
                     $ref: '#/components/examples/504-Errors'                     
+  /v1/customers/{customerNumber}/accountList/:
+    get:
+      tags:
+        - Customer Management
+      x-group-name: Customer Management
+      x-proxy-name: List Customers Accounts
+      summary: List Customers Accounts
+      description: Finds an Account number associated with a Customer number
+      operationId: accountsList
+      parameters:
+        - name: X-Correl-Id
+          in: header
+          description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
+          schema:
+            maxLength: 40
+            minLength: 0
+            type: string
+            example: EXC-ID-12345678-SUB
+        - name: X-Name
+          in: header
+          required: true
+          description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
+          schema:
+            maxLength: 20
+            minLength: 0
+            type: string
+            example: John
+        - name: X-context
+          in: header
+          required: true
+          description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
+          schema:
+            maxLength: 20
+            minLength: 0
+            type: string
+            example: 00001AUVMX
+        - name: customerNumber
+          in: path
+          required: true
+          schema:
+            maxLength: 19
+            type: string
+            format: uppercase
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccountListResp'
+              examples:
+                AccountListResponse:
+                  $ref: '#/components/examples/AccountListRespEx'
+        '400':
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '400':
+                    $ref: '#/components/examples/400-Errors'
+        '401':
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '401':
+                    $ref: '#/components/examples/401-Errors'
+        '404':
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '404':
+                    $ref: '#/components/examples/404-Errors'
+        '500':
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '500':
+                    $ref: '#/components/examples/500-Errors'
+        '503':
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '503':
+                    $ref: '#/components/examples/503-Errors'
+        '504':
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '504':
+                    $ref: '#/components/examples/504-Errors'
+  /v1/customers/{customerNumber}/cardList/:
+    get:
+      tags:
+      - Customer Management
+      x-group-name: Customer Management
+      x-proxy-name:  List Customers' Cards
+      summary: List Customers' Cards
+      description: Gets card details associated with a Customer number
+      operationId: CardList
+      parameters:
+      - name: X-Correl-Id
+        in: header
+        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
+        schema:
+          maxLength: 40
+          minLength: 0
+          type: string
+          example: EXC-ID-12345678-SUB
+      - name: X-Name
+        in: header
+        required: true
+        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
+        schema:
+          maxLength: 20
+          minLength: 0
+          type: string
+          example: John 
+      - name: X-context
+        in: header
+        required: true
+        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
+        schema:
+          maxLength: 20
+          minLength: 0
+          type: string
+          example: 00001AUVMX
+      - name: customerNumber
+        in: path
+        required: true
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerCardListResp'
+              examples: 
+                CardListResponse: {$ref: '#/components/examples/CardListRespEx'}
+        '400':
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ErrorList'}
+              example:
+               - '400':
+                    $ref: '#/components/examples/400-Errors'
+        '401':
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+               - '401':
+                    $ref: '#/components/examples/401-Errors'
+        '404':
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+               - '404':
+                  $ref: '#/components/examples/404-Errors'
+        '500':
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+               - '500':
+                  $ref: '#/components/examples/500-Errors'
+        '503':
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+               - '503':
+                    $ref: '#/components/examples/503-Errors'
+        '504':
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '504':
+                    $ref: '#/components/examples/504-Errors'
 components:
   schemas:
     CustomerAddressResponse:
@@ -550,6 +762,587 @@ components:
           format: uppercase
           description: "Email-that indicates the e-mail address of the owner"
           example: ABC@GMAIL 
+    CustomerAccountListResp:
+      type: object
+      properties:
+        businessUnit:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Identification number associated with this Account Base Segment
+            record
+          example: 100
+        customerNumber:
+          type: string
+          description: Customer ID assigned to the customer
+          format: uppercase
+          example: '0001000000333113902'
+        customerName:
+          type: string
+          description: Name of the Customer
+          format: uppercase
+          example: UATMFNXCX48
+        sSNID:
+          type: string
+          description: SSN ID of the Customer
+          format: uppercase
+          example: 1139XX
+        dateofBirth:
+          type: string
+          description: Date of Birth of the Customer
+          format: date
+          example: 00/00/0000
+        nameLine1:
+          type: string
+          description: First Name of the Customer
+          format: uppercase
+          example: UATMFNCU448 TWOPPPUAXXXNCUST448
+        addressLine1:
+          type: string
+          description: Address line 1 of the Customer
+          format: uppercase
+          example: 62 CHARTERIS DR
+        addressLine2:
+          type: string
+          description: Address Line 2 of the Customer
+          format: uppercase
+          example: ''
+        addressLine3:
+          type: string
+          description: Address Line 3 of the Customer
+          format: uppercase
+          example: ''
+        addressLine4:
+          type: string
+          description: Address Line 4 of the Customer
+          format: uppercase
+          example: ''
+        homeDistricName:
+          type: string
+          description: Home Distric Name of the Customer
+          format: uppercase
+          example: ''
+        emailAddress:
+          type: string
+          description: Email Address of the Customer
+          format: uppercase
+          example: UATMXXXU448@GMAIL.COM
+        homePhoneNumber:
+          type: string
+          description: Home Phone Number of the Customer
+          format: uppercase
+          example: ++61430010000
+        workPhoneNumber:
+          type: string
+          description: Work Phone Number of the Customer
+          format: uppercase
+          example: ++61430010000
+        mobileNumber:
+          type: string
+          description: Mobile Number of the Customer
+          format: uppercase
+          example: ++61430010000
+        numberofCards:
+          type: string
+          description: Number of Cards associated with the Customer
+          format: uppercase
+          example: '1'
+        numberofAccounts:
+          type: string
+          description: Number of Accounts associated with the Customer
+          format: uppercase
+          example: '1'
+        userDefinedField4:
+          type: string
+          description: User Defined Field 4
+          format: uppercase
+          example: ''
+        accountList:
+          type: array
+          items:
+            properties:
+              businessUnit:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Identification number associated with this Account Base Segment record
+                example: 100.0
+              accountNumber:
+                type: string
+                description: Account ID assigned to the customer for a given product
+                format: uppercase
+                example: "0001000011000050008"
+              product:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Product associated with the Card
+                example: 1.0
+              blockCode1:
+                type: string
+                description: Block Code 1 on the account
+                format: uppercase
+                example: ' '
+              blockCode2:
+                type: string
+                description: Block Code 2 on the account
+                format: uppercase
+                example: ' '
+              blockCode1Date:
+                type: string
+                description: Date the Block Code 1 is applied
+                format: date
+              blockCode2Date:
+                type: string
+                description: Date the Block Code 2 is applied
+                format: date 
+              internalStatus:
+                type: string
+                description: Status of the account
+                example: D
+                enum:
+                  - N
+                  - A
+                  - F
+                  - D
+                  - I
+                  - M
+                  - Z
+                  - B
+                  - C
+                  - V
+                  - X
+                  - Q
+                  - T
+                  - R
+                  - K
+                  - J
+                  - "8"
+                  - "9"
+                  - P
+                  - H
+              amountMemoDebit:
+                type: string
+                description: Amount of Debit Authorization that holds the Open to Buy
+                example: $0.00
+                default: "0.0" 
+              amountMemoCredit:
+                type: string
+                description: Amount of Credit Authorization applied on hte account
+                example: $0.00
+                default: "0.0"
+              mailingIndicator:
+                type: string
+                description: Mailing Indicator for sending mails to either Office Address or Home Address
+                example: " "
+                enum:
+                - H
+                - O
+              sUPPRESSTOKEN:
+                type: string
+                description: Flag to supporess the wallet token creation
+                example: "0"
+                enum:
+                - "0"
+                - "1"
+              rEISSCONTOLMETHOD:
+                maximum: 9
+                minimum: 0
+                type: number
+                description: Flag to indicate method to reissue
+                example: 0.0
+              nbrOfTokenizedCards:
+                maximum: 99
+                minimum: 0
+                type: number
+                description: Number of wallet cards associated with account
+                example: 0.0
+              ddaAccountNumber:
+                type: string
+                description: Debit Account number associated with the account
+                format: uppercase
+                example: "999999999"
+    CustomerCardListResp:
+      type: object
+      properties:
+        businessUnit:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Identification number associated with this Account Base Segment record
+          example: 100.
+        customerNumber:
+          type: string
+          description: Customer ID assigned to the customer
+          format: uppercase
+          example: "0001000000333113902"
+        customerName:
+          type: string
+          description: Name of the Customer
+          format: uppercase
+          example: UATMFNXCX48
+        sSNID:
+          type: string
+          description: SSN ID of the Customer
+          format: uppercase
+          example: '1139XX'
+        dateofBirth:
+          type: string
+          description: Date of Birth of the Customer
+          format: date
+          example: "00/00/0000"
+        nameLine1:
+          type: string
+          description: First Name of the Customer
+          format: uppercase
+          example: UATMFNCU448 TWOPPPUAXXXNCUST448
+        addressLine1:
+          type: string
+          description: Address line 1 of the Customer
+          format: uppercase
+          example: 62 CHARTERIS DR
+        addressLine2:
+          type: string
+          description: Address Line 2 of the Customer
+          format: uppercase
+          example: ""
+        addressLine3:
+          type: string
+          description: Address Line 3 of the Customer
+          format: uppercase
+          example: ""
+        addressLine4:
+          type: string
+          description: Address Line 4 of the Customer
+          format: uppercase
+          example: ""
+        homeDistricName:
+          type: string
+          description: Home Distric Name of the Customer
+          format: uppercase
+          example: ""
+        emailAddress:
+          type: string
+          description: Email Address of the Customer
+          format: uppercase
+          example: UATMXXXU448@GMAIL.COM
+        homePhoneNumber:
+          type: string
+          description: Home Phone Number of the Customer
+          format: uppercase
+          example: ++61430010000 
+        workPhoneNumber:
+          type: string
+          description: Work Phone Number of the Customer
+          format: uppercase
+          example: ++61430010000
+        mobileNumber:
+          type: string
+          description: Mobile Number of the Customer
+          format: uppercase
+          example: ++61430010000
+        numberofCards:
+          type: string
+          description: Number of Cards associated with the Customer
+          format: uppercase
+          example: "1"
+        numberofAccounts:
+          type: string
+          description: Number of Accounts associated with the Customer
+          format: uppercase
+          example: "1" 
+        userDefinedField4:
+          type: string
+          description: User Defined Field 4
+          format: uppercase
+          example: ""
+        cardList:
+          type: array
+          items:
+            properties:
+              businessUnit:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Identification number associated with this Account Base Segment record
+                example: 100.0
+              cardNumber:
+                type: string
+                description: Alterante Card ID associated with the account
+                format: uppercase
+                example: "0009846999010009405"
+              cardSequence:
+                maximum: 9999
+                minimum: 0
+                type: number
+                description: Sequence of the card ID
+                example: 1.0
+              posttoAccount:
+                type: string
+                description: Account to which the card is linked
+                format: uppercase
+                example: "000100001100000068"
+              nameOnCard:
+                type: string
+                description: Embossed Name On Card
+                format: uppercase
+                example: U T UATMLNCUS9999
+              product:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Product associated with the Card
+                example: 1.0
+              productDescription:
+                type: string
+                description: Description of the Card
+                format: uppercase
+                example: VISA XXXXXXXX DEBIT
+              cardholderType:
+                maximum: 9
+                minimum: 0
+                type: number
+                description: Type of Cardholder - Main or Supplementary
+                example: 1.0
+              dateOpened:
+                type: string
+                description: Date the Card is issued
+                format: date
+              embosserRecordStatus:
+                type: string
+                description: Status of the card
+                example: "0"
+                enum:
+                - "0"
+                - "1"
+                - F
+                - S
+                - T
+                - P
+                - ' '
+              blockCode:
+                type: string
+                description: Block Code on the card
+                format: uppercase
+                example: ' '
+              blockDate:
+                type: string
+                description: Date the Block Code is assigned on the card
+                format: date
+              currentCardNeedActivation:
+                type: string
+                description: Current Card Activation Status
+                format: uppercase
+                example: Y
+              currCardAction:
+                type: string
+                description: Current Embossing Action requested on the card
+                example: "0"
+                enum:
+                - "0"
+                - "1"
+                - "2"
+                - "3"
+                - "4"
+                - "5"
+                - "6"
+                - "7"
+                - "8"
+                - "9"
+              lastCardAction:
+                type: string
+                description: Last Embossing Action requested on the card
+                example: "1"
+                enum:
+                - "0"
+                - "1"
+                - "2"
+                - "3"
+                - "4"
+                - "5"
+                - "6"
+                - "7"
+                - "8"
+                - "9" 
+              cardActivatedDate:
+                type: string
+                description: Date the card is activated
+                format: date
+              cardTechnology:
+                type: string
+                description: Technology (chip / magnetic / contactless) used to emboss the card
+                example: "3"
+                enum:
+                - "0"
+                - "1"
+                - "3"
+                - "5"
+                - "2"
+                - "4"
+              cardIssueDate:
+                type: string
+                description: Date the Card is Issued
+                format: date
+              warningCode:
+                type: string
+                description: Warning Code applied to the card
+                format: uppercase
+                example: "0"
+              lastCardExpirationDate:
+                type: string
+                description: Expiration Date of the last card issued to cardholder
+                format: date
+              lastCardNeedActivation:
+                type: string
+                description: Last Card Need Activation
+                format: uppercase
+                example: Y
+              timeLastPlasticIssue:
+                maximum: 9999999
+                minimum: -9999999
+                type: number
+                description: Last Card Activation Status
+                example: 0.0
+              maskCardnumber:
+                type: string
+                description: Mask Card number of the actual card number associated with the card Id
+                format: uppercase
+                example: 000XXXXXXX
+              pinoffset:
+                type: string
+                description: Pin offset
+                format: uppercase
+                example: "3290000"
+              numberofcards:
+                type: string
+                description: Number of wallet token associated with card
+                format: uppercase
+                example: "0"
+              digitalid:
+                type: string
+                description: digital id of the wallet
+                format: uppercase
+                example: '  '
+              mOTOFlag:
+                type: string
+                description: Flag to determine MOTO transaction is allowed
+                format: uppercase
+                example: '   '
+              pAYwaveFlag:
+                type: string
+                description: Flag for Paywave usage
+                format: uppercase
+                example: Y
+              iNTATMPOSFlag:
+                type: string
+                description: Flag for international ATM POS usage
+                format: uppercase
+                example: Y
+              cashBackTranFlag:
+                type: string
+                description: Flag for cashback usage
+                format: uppercase
+                example: Y
+              cHEQUEACCOUNTNBR:
+                type: string
+                description: Checking Account number associated with the card (Debit Card Only)
+                format: uppercase
+                example: '   '
+              sAVINGSACCOUNTNBR:
+                type: string
+                description: Saving Account number associated with the card (Debit Card Only)
+                format: uppercase
+                example: '   '
+              dATELASTPLASTICUSED:
+                type: string
+                description: Date the last plastic is used
+                format: uppercase
+                example: "0"
+              dATELASTWALLETUSED:
+                type: string
+                description: Date the last wallet associated with card is used
+                format: uppercase
+                example: "0"		
+              dATELASTPLASTICSUPRESED:
+                type: string
+                description: Date the last plastic usage is suppressed
+                format: uppercase
+                example: "0"
+              pLASTICSUPPRESSSTATUS:
+                type: string
+                description: Flag for plastic usage suppression
+                format: uppercase
+                example: N
+              aTMFlag:
+                type: string
+                description: Flag for ATM usage
+                format: uppercase
+                example: Y
+              pOSFlag:
+                type: string
+                description: Flag for POS usage
+                format: uppercase
+                example: Y
+              e-COMACTFlag:
+                type: string
+                description: Flag for e-commerce usage
+                format: uppercase
+                example: "1"
+              eMBRNAME2:
+                type: string
+                description: Embossed Name-2 on the Card
+                format: uppercase
+                example: '   '
+              mCCLIMIT-1:
+                type: string
+                description: Occurence-1 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-2:
+                type: string
+                description: Occurence-2 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-3:
+                type: string
+                description: Occurence-3 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-4:
+                type: string
+                description: Occurence-4 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-5:
+                type: string
+                description: Occurence-5 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-6:
+                type: string
+                description: Occurence-6 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-7:
+                type: string
+                description: Occurence-7 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-8:
+                type: string
+                description: Occurence-8 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-9:
+                type: string
+                description: Occurence-9 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
+              mCCLIMIT-10:
+                type: string
+                description: Occurence-10 of the MCC limit applied on the Card
+                example: $0.01
+                default: "0.0"
     ErrorList:
       type: array
       items:
@@ -568,9 +1361,129 @@ components:
       value: { nameLine31: '', nameLine11: '', nameLine21: '' , businessUnit: 100 , accountNumber: '0001000000000150191', houseNumber1: ' ', addressLine11: '80.ANGLES', addressLine21: '', addressLine31: '', addressLine41: '', city1: 'US', stateProvince1: 'USA', countryCode1: 'USA', postalCode1: '27899', languageIndicator1: 'AUS', homePhoneNumber1: '123456788999999', homePhoneFlag1: '0', faxNumber1: '', faxPhoneFlag1: '0', mobileNumber1: '11110976444', sMSFlag1: '0', mobilePhoneFlag1: '0', emailAddress1: 'SAM@GMAIL'}
     AddressUpdateReq:
       value: { businessUnit: 100, accountNumber: '0001000000000150191', homePhoneNumber1: '123456788999999',   mobileNumber1: '11110976444', emailAddress1: 'SAM@GMAIL.COM'}
-    
     AddressUpdateResponse:
       value: { businessUnit: 100, accountNumber: '0001000000000150191', nameLine11: '', nameLine21: '', nameLine31: '', houseNumber1: '', addressLine11: '80.ANGLES', addressLine21: '', addressLine31: '', addressLine41: '', city1: 'US', stateProvince1: 'USA', countryCode1: 'USA', postalCode1: '27899', languageIndicator1: 'AUS', homePhoneNumber1: '123456788999999', homePhoneFlag1: '0', faxNumber1: '', faxPhoneFlag1: '0', mobileNumber1: '11110976444', sMSFlag1: '0',mobilePhoneFlag1: '0', emailAddress1: 'SAM@GMAIL' }
+    AccountListRespEx:
+      value: {
+        totalAvailable: $0.00,
+        dateofBirth: 11/14/,
+        businessUnit: '0',
+        homePhoneNumber: ++61430010348,
+        gender: '0',
+        mobileNumber: ++61430010348,
+        nameLine1: UATMFNCU448 TWOPPPUATMLNCUST448,
+        emailAddress: UATMFNCU448@GMAIL.COM,
+        sSNID: '113902',
+        workPhoneNumber: ++61430010348,
+        cREDITlimit: $0.00,
+        addressLine1: 62 CHARTERIS DR,
+        addressLine2: '',
+        addressLine3: '',
+        addressLine4: '',
+        relationshipnbr: '',
+        billingLvl: '0',
+        userDefinedField4: '',
+        numberofCards: '1',
+        numberofAccounts: '1',
+        customerNumber: '0001000000000113902',
+        customerName: UATMFNCU448,
+        homeDistricName: '',
+        accountList: [{
+            product: '1',
+            businessUnit: '100',
+            amountMemoCredit: $0.00,
+            ddaAccountNumber: '890005226',
+            mailingIndicator: ' ',
+            blockCode2Date: 00/00/0000,
+            accountNumber: '0001000011000052268',
+            sUPPRESSTOKEN: '0',
+            internalStatus: D,
+            amountMemoDebit: $0.00,
+            nbrOfTokenizedCards: '0',
+            blockCode1: ' ',
+            rEISSCONTOLMETHOD: '0',
+            blockCode2: ' ',
+            blockCode1Date: 00/00/0000 }],
+        rELNAME: '',
+        status: '' }
+    CardListRespEx:
+      value: { totalAvailable: $0.00,
+             dateofBirth: 11/14/1940,
+             businessUnit: '0',
+             homePhoneNumber: ++61430010348,
+             gender: '0',
+             mobileNumber: ++61430010348,
+             nameLine1: UATMFNCU448 TWOPPPUATMLNCUST448,
+             emailAddress: UATMFNCU448@GMAIL.COM,
+             sSNID: '113902',
+             workPhoneNumber: ++61430010348,
+             cREDITlimit: $0.00,
+             addressLine1: 62 CHARTERIS DR,
+             addressLine2: '',
+             addressLine3: '',
+             addressLine4: '',
+             relationshipnbr: '',
+             billingLvl: '0',
+             userDefinedField4: '',
+             numberofCards: '1',
+             numberofAccounts: '1',
+             customerNumber: 0001000000000113902,
+             customerName: UATMFNCU448,
+             homeDistricName: '',
+             cardList: [{ cardholderType: '1',
+                 businessUnit: '100',
+                 iNTATMPOSFlag: 'Y',
+                 lastCardExpirationDate: 00/00/0000,
+                 cardIssueDate: 09/28/2020,
+                 lastCardAction: '1',
+                 dateOpened: 09/17/2020,
+                 lastCardNeedActivation: 'Y',
+                 pinoffset: '329861',
+                 productDescription: VISA PLATINUM DEBIT,
+                 posttoAccount: 0001000011000052268,
+                 blockDate: 00/00/0000,
+                 cardTechnology: '3',
+                 mCCLIMIT10: $0.00,
+                 pLASTICSUPPRESSSTATUS: 'N',
+                 cHEQUEACCOUNTNBR: ' ',
+                 currCardAction: '0',
+                 dATELASTWALLETUSED: '0',
+                 mOTOFlag: ' ',
+                 embosserRecordStatus: '0',
+                 cardNumber: 0009846801010009405,
+                 timeLastPlasticIssue: '13815',
+                 numberofcards: '0',
+                 sAVINGSACCOUNTNBR: ' ',
+                 eMBRNAME2: ' ',
+                 digitalid: ' ',
+                 maskCardnumber: '000XXXXXX',
+                 aTMFlag: 'Y',
+                 currentCardNeedActivation: 'Y',
+                 nameOnCard: U T UATMLNCUST448,
+                 pOSFlag: 'Y',
+                 cardActivatedDate: 00/00/0000,
+                 pAYwaveFlag: 'Y',
+                 dATELASTPLASTICUSED: '0',
+                 blockCode: ' ',
+                 product: '1',
+                 mCCLIMIT6: $0.00,
+                 cardSequence: '1',
+                 warningCode: '0',
+                 mCCLIMIT7: $0.00,
+                 mCCLIMIT8: $0.00,
+                 mCCLIMIT9: $0.00,
+                 mCCLIMIT2: $0.00,
+                 mCCLIMIT3: $0.00,
+                 mCCLIMIT4: $0.00,
+                 mCCLIMIT5: $0.00,
+                 cashBackTranFlag: 'Y',
+                 mCCLIMIT1: $0.01,
+                 dATELASTPLASTICSUPRESED: '0',
+                 eCOMACTFlag: '1',
+                 cardExpirationDate: 09/16/2023 }],
+             rELNAME: '',
+             status: ''
+             }
     400-Errors:
       value:
         erorrCode: XXXXXXXX
