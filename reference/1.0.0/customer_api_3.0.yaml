@@ -579,10 +579,10 @@ components:
     CustomerAddressUpdateResponse:
       required:
       - accountNumber
-      - businessunit
+      - businessUnit
       type: object
       properties:
-        businessunit:
+        businessUnit:
           type: number
           example: 100
           description: "Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998."
@@ -728,13 +728,13 @@ components:
     CustomerAddressUpdateReq:
       required:
       - accountNumber
-      - businessunit
+      - businessUnit
       - homePhoneNumber1
       - mobileNumber1
       - emailAddress1
       type: object
       properties:
-        businessunit:
+        businessUnit:
           type: number
           example: 100
           description: "Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998."
