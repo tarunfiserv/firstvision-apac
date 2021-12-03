@@ -236,8 +236,8 @@ paths:
       tags:
         - Customer Management
       x-group-name: Customer Management
-      x-proxy-name: List Customers Accounts
-      summary: List Customers Accounts
+      x-proxy-name: List Customers' Accounts
+      summary: List Customers' Accounts
       description: Finds an Account number associated with a Customer number
       operationId: accountsList
       parameters:
