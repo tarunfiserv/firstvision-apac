@@ -274,7 +274,7 @@ paths:
             maxLength: 19
             type: string
             format: uppercase
-            example: 00010000000XXXXX902
+            example: '0001000000000113902'
       responses:
         '200':
           description: Success
@@ -282,9 +282,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomerAccountListResp'
-              examples:
-                AccountListResponse:
-                  $ref: '#/components/examples/AccountListRespEx'
         '400':
           description: The request cannot be validated
           content:
@@ -382,7 +379,7 @@ paths:
           maxLength: 19
           type: string
           format: uppercase
-          example: 00010000000XXXXX902
+          example: '0001000000000113902'
       responses:
         '200':
           description: Success
@@ -390,8 +387,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomerCardListResp'
-              examples: 
-                CardListResponse: {$ref: '#/components/examples/CardListRespEx'}
         '400':
           description: The request cannot be validated
           content:
@@ -1365,127 +1360,7 @@ components:
       value: { businessUnit: 100, accountNumber: '0001000000000150191', homePhoneNumber1: '123456788999999',   mobileNumber1: '11110976444', emailAddress1: 'SAM@GMAIL.COM'}
     AddressUpdateResponse:
       value: { businessUnit: 100, accountNumber: '0001000000000150191', nameLine11: '', nameLine21: '', nameLine31: '', houseNumber1: '', addressLine11: '80.ANGLES', addressLine21: '', addressLine31: '', addressLine41: '', city1: 'US', stateProvince1: 'USA', countryCode1: 'USA', postalCode1: '27899', languageIndicator1: 'AUS', homePhoneNumber1: '123456788999999', homePhoneFlag1: '0', faxNumber1: '', faxPhoneFlag1: '0', mobileNumber1: '11110976444', sMSFlag1: '0',mobilePhoneFlag1: '0', emailAddress1: 'SAM@GMAIL' }
-    AccountListRespEx:
-      value: {
-        totalAvailable: $0.00,
-        dateofBirth: 11/14/,
-        businessUnit: '0',
-        homePhoneNumber: ++61430010348,
-        gender: '0',
-        mobileNumber: ++61430010348,
-        nameLine1: UATMFNCU448 TWOPPPUATMLNCUST448,
-        emailAddress: UATMFNCU448@GMAIL.COM,
-        sSNID: '113902',
-        workPhoneNumber: ++61430010348,
-        cREDITlimit: $0.00,
-        addressLine1: 62 CHARTERIS DR,
-        addressLine2: '',
-        addressLine3: '',
-        addressLine4: '',
-        relationshipnbr: '',
-        billingLvl: '0',
-        userDefinedField4: '',
-        numberofCards: '1',
-        numberofAccounts: '1',
-        customerNumber: '0001000000000113902',
-        customerName: UATMFNCU448,
-        homeDistricName: '',
-        accountList: [{
-            product: '1',
-            businessUnit: '100',
-            amountMemoCredit: $0.00,
-            ddaAccountNumber: '890005226',
-            mailingIndicator: ' ',
-            blockCode2Date: 00/00/0000,
-            accountNumber: '0001000011000052268',
-            sUPPRESSTOKEN: '0',
-            internalStatus: D,
-            amountMemoDebit: $0.00,
-            nbrOfTokenizedCards: '0',
-            blockCode1: ' ',
-            rEISSCONTOLMETHOD: '0',
-            blockCode2: ' ',
-            blockCode1Date: 00/00/0000 }],
-        rELNAME: '',
-        status: '' }
-    CardListRespEx:
-      value: { totalAvailable: $0.00,
-             dateofBirth: 11/14/1940,
-             businessUnit: '0',
-             homePhoneNumber: ++61430010348,
-             gender: '0',
-             mobileNumber: ++61430010348,
-             nameLine1: UATMFNCU448 TWOPPPUATMLNCUST448,
-             emailAddress: UATMFNCU448@GMAIL.COM,
-             sSNID: '113902',
-             workPhoneNumber: ++61430010348,
-             cREDITlimit: $0.00,
-             addressLine1: 62 CHARTERIS DR,
-             addressLine2: '',
-             addressLine3: '',
-             addressLine4: '',
-             relationshipnbr: '',
-             billingLvl: '0',
-             userDefinedField4: '',
-             numberofCards: '1',
-             numberofAccounts: '1',
-             customerNumber: 0001000000000113902,
-             customerName: UATMFNCU448,
-             homeDistricName: '',
-             cardList: [{ cardholderType: '1',
-                 businessUnit: '100',
-                 iNTATMPOSFlag: 'Y',
-                 lastCardExpirationDate: 00/00/0000,
-                 cardIssueDate: 09/28/2020,
-                 lastCardAction: '1',
-                 dateOpened: 09/17/2020,
-                 lastCardNeedActivation: 'Y',
-                 pinoffset: '329861',
-                 productDescription: VISA PLATINUM DEBIT,
-                 posttoAccount: 0001000011000052268,
-                 blockDate: 00/00/0000,
-                 cardTechnology: '3',
-                 mCCLIMIT10: $0.00,
-                 pLASTICSUPPRESSSTATUS: 'N',
-                 cHEQUEACCOUNTNBR: ' ',
-                 currCardAction: '0',
-                 dATELASTWALLETUSED: '0',
-                 mOTOFlag: ' ',
-                 embosserRecordStatus: '0',
-                 cardNumber: 0009846801010009405,
-                 timeLastPlasticIssue: '13815',
-                 numberofcards: '0',
-                 sAVINGSACCOUNTNBR: ' ',
-                 eMBRNAME2: ' ',
-                 digitalid: ' ',
-                 maskCardnumber: '000XXXXXX',
-                 aTMFlag: 'Y',
-                 currentCardNeedActivation: 'Y',
-                 nameOnCard: U T UATMLNCUST448,
-                 pOSFlag: 'Y',
-                 cardActivatedDate: 00/00/0000,
-                 pAYwaveFlag: 'Y',
-                 dATELASTPLASTICUSED: '0',
-                 blockCode: ' ',
-                 product: '1',
-                 mCCLIMIT6: $0.00,
-                 cardSequence: '1',
-                 warningCode: '0',
-                 mCCLIMIT7: $0.00,
-                 mCCLIMIT8: $0.00,
-                 mCCLIMIT9: $0.00,
-                 mCCLIMIT2: $0.00,
-                 mCCLIMIT3: $0.00,
-                 mCCLIMIT4: $0.00,
-                 mCCLIMIT5: $0.00,
-                 cashBackTranFlag: 'Y',
-                 mCCLIMIT1: $0.01,
-                 dATELASTPLASTICSUPRESED: '0',
-                 eCOMACTFlag: '1',
-                 cardExpirationDate: 09/16/2023 }],
-             rELNAME: '',
-             status: ''
-             }
+    
     400-Errors:
       value:
         erorrCode: XXXXXXXX
