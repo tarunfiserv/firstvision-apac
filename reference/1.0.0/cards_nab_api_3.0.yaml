@@ -170,7 +170,7 @@ paths:
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
         schema:
           maxLength: 19
           type: string
@@ -804,7 +804,7 @@ paths:
       - name: cardNumber
         in: path
         example: '0009846801010273605'
-        description: "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
         required: true
         schema:
           maxLength: 19
@@ -924,7 +924,7 @@ paths:
       - name: cardNumber
         in: path
         example: '0009846801010273605'
-        description: "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
         required: true
         schema:
           maxLength: 19
