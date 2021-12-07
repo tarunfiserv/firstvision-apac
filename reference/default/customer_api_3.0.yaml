@@ -231,7 +231,7 @@ paths:
               example:
                - '504':
                     $ref: '#/components/examples/504-Errors'                     
-  /v1/customers/{customerNumber}/accountList/:
+  /v1/customers/{customerNumber}/accountList:
     get:
       tags:
         - Customer Management
@@ -339,7 +339,7 @@ paths:
               example:
                 - '504':
                     $ref: '#/components/examples/504-Errors'
-  /v1/customers/{customerNumber}/cardList/:
+  /v1/customers/{customerNumber}/cardList:
     get:
       tags:
       - Customer Management
