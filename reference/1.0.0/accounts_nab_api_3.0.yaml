@@ -10,7 +10,7 @@ servers:
 tags: 
   - name: 'Account Management'
 paths:
-  /v1/accounts/blockUnblock:
+  /v1/accounts/{accountNumber}/blockUnblock:
     put:
       tags:
         - Account Management
@@ -46,14 +46,30 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
+        - name: businessUnit
+          in: query
+          required: true
+          description : "Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998"
+          schema:
+            type: number
+            default: 0.0
+            example: 100
+        - name: accountNumber
+          in: path
+          required: true
+          description : "Account- Customer account number. Must be numeric and greater than zero. Max length = 19. Should be a valid Account number."
+          schema:
+            maxLength: 19
+            type: string
+            format: uppercase
+            example: '0001000010000510481'
+          
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AccountsBlockUnblockReq'
-            examples:
-              BlockAccount:
-                $ref: '#/components/examples/BlockAccount'
+
       responses:
         '200':
           description: Success
@@ -61,9 +77,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountsBlockUnblockResp'
-              examples:
-                BlockAccount:
-                  $ref: '#/components/examples/BlockAccountResp'
         '400':
           description: The request cannot be validated
           content:
@@ -370,25 +383,12 @@ components:
       required:
         - product
         - billingAcctInd
-        - businessUnit
-        - accountNumber
       type: object
       properties:
-        businessUnit:
-          type: number
-          default: 0
-          example: 100
-          description: Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998
-        accountNumber:
-          type: string
-          maxLength: 19
-          format: uppercase
-          example: 100001NNNNN0481
-          description: Account- Customer account number. Must be numeric and greater than zero. Max length = 19. Should be a valid Account number.
         product:
           type: number
-          example: 1
-          description: Product associated with this Account. The values are 001–998
+          example: 001
+          description: 'Product associated with this Account. The values are 001–998'
         billingAcctInd:
           type: number
           example: 0
@@ -1111,10 +1111,6 @@ components:
             example: Some message from the service
             description: Error message associated with the response
   examples:
-    BlockAccount:
-      value: { "businessUnit": "100", "accountNumber": "0001000010000510481", "blockCode1": "X" }
-    BlockAccountResp:
-      value: { "blockCodeDate1": "08/19/2021", "product": "1", "blockCodeDate2": "00/00/0000", "businessUnit": "100", "blockCode1": "X", "blockCode2": " ", "accountNumber": "0001000010000510481", "billingAcctInd": "0" }
     
     400-Errors:
       value:
