@@ -157,6 +157,7 @@ paths:
           example: 00001AUVMX
       - name: businessUnit
         in: query
+        required: true
         description : "Business Unit - Identification number associated with this Account Base Segment record."
         schema:
           type: number
@@ -173,6 +174,7 @@ paths:
           example: 100001NNNXX0481
       - name: product
         in: query
+        required: true
         description: "Product - Identification number of the product associated with the Account"
         schema:
           type: number
@@ -180,6 +182,7 @@ paths:
           example: 1
       - name: statementDate
         in: query
+        required: true
         description: "Statement Date - Period for which the user want to view the important statement details of the Account"
         schema:
           type: string
@@ -249,7 +252,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors' 
   
-  /v1/accounts/details:
+  /v1/accounts/{accountNumber}/details:
     get:
       tags:
         - Account Management
@@ -293,13 +296,15 @@ paths:
             minimum: 0
             type: number
             default: 0
+            example: 100
         - name: accountNumber
-          in: query
+          in: path
           required: true
           schema:
             maxLength: 19
             type: string
             format: uppercase
+            example: 00020000100XXXXX266
       responses:
         '200':
           description: Success
