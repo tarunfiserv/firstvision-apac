@@ -380,9 +380,6 @@ paths:
 components:
   schemas:
     AccountsBlockUnblockReq:
-      required:
-        - product
-        - billingAcctInd
       type: object
       properties:
         product:
