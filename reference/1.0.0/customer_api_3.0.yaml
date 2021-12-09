@@ -738,10 +738,6 @@ components:
           example: ABC@GMAIL
           description: "Email-that indicates the e-mail address of the owner"
     CustomerAddressUpdateReq:
-      required:
-      - homePhoneNumber1
-      - mobileNumber1
-      - emailAddress1
       type: object
       properties:
         homePhoneNumber1:
