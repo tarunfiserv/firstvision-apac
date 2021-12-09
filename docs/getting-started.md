@@ -21,11 +21,11 @@ Follow the below steps to get an access to the Developer Studio and use FirstVis
 
 ### 1. Sign up for  Developer Studio
 
-Request for APIs credentials through your account relationship manager.
+Request for APIs credentials through your Account relationship manager.
 
 ### 2. Getting the API key
 
-The relationship manager will share the credentials via the preferred secure channel
+The Account relationship manager will share the credentials via the preferred secure channel
 
 ### 3. Constructing the API call
 
