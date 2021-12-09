@@ -793,7 +793,6 @@ paths:
           example: 00001AUVMX
       - name: businessUnit
         in: query
-        example: 100
         description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
         required: true
         schema:
@@ -801,15 +800,16 @@ paths:
           minimum: 0.0
           type: number
           default: 0.0
+          example: 100
       - name: cardNumber
         in: path
-        example: '0009846801010273605'
         description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
         required: true
         schema:
           maxLength: 19
           type: string
           format: uppercase
+          example: '0009846801010273605'
 
       responses:
         200:
@@ -913,7 +913,6 @@ paths:
           example: 00001AUVMX
       - name: businessUnit
         in: query
-        example: 200
         description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
         required: true
         schema:
@@ -921,15 +920,16 @@ paths:
           minimum: 0.0
           type: number
           default: 0.0
+          example: 200
       - name: cardNumber
         in: path
-        example: '0009846801010273605'
         description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
         required: true
         schema:
           maxLength: 19
           type: string
           format: uppercase
+          example: '0009846801010273605'
           
       requestBody:
         content:
