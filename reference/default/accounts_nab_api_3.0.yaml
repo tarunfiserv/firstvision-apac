@@ -140,7 +140,7 @@ paths:
       x-proxy-name:  List Accounts' Transactions
       summary: List Accounts' Transactions
       description: Provides transaction detail information from the last billing cycle
-      operationId: Transaction details
+      operationId: Transaction LastStatement
       parameters:
       - name: X-Correl-Id
         in: header
@@ -377,6 +377,120 @@ paths:
               example:
                 - '504':
                     $ref: '#/components/examples/504-Errors'                
+  
+  /v1/accounts/{accountNumber}/balance:
+    get:
+      tags:
+      - Account Management
+      x-group-name:  Account Management
+      x-proxy-name:  Inquire Account Balances
+      summary: List Accounts' Transactions
+      description: This service is inquire on the different balances on the account.
+      operationId: Account Balances
+      parameters:
+      - name: X-Correl-Id
+        in: header
+        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
+        schema:
+          maxLength: 40
+          minLength: 0
+          type: string
+          example: EXC-ID-12345678-SUB
+      - name: X-Name
+        in: header
+        required: true
+        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
+        schema:
+          maxLength: 20
+          minLength: 0
+          type: string
+          example: John
+      - name: X-context
+        in: header
+        required: true
+        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
+        schema:
+          maxLength: 20
+          minLength: 0
+          type: string
+          example: 00000AUNAB
+      - name: businessUnit
+        in: query
+        required: true
+        description : Identification number of the business unit associated with this Account Base Segment record.
+        schema:
+          type: number
+          default: 0.0
+          example: 600
+      - name: accountNumber
+        in: path
+        required: true
+        description : Identification number of the Account Base Segment record.
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0000000001000000065'
+          
+      responses:
+        204:
+          description: No Content
+          
+        400:
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ErrorList'}
+              example:
+                400:
+                  $ref: '#/components/examples/400-Errors'
+        401:
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                401:
+                  $ref: '#/components/examples/401-Errors'
+        404:
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                404:
+                  $ref: '#/components/examples/404-Errors'
+        500:
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                500:
+                  $ref: '#/components/examples/500-Errors'
+        503:
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                503:
+                  $ref: '#/components/examples/503-Errors'
+        504:
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                504:
+                  $ref: '#/components/examples/504-Errors'
+                  
+
 components:
   schemas:
     AccountsBlockUnblockReq:
