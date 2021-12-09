@@ -1058,6 +1058,7 @@ components:
       required:
       - postToAccountNumber
       - cardSequence
+      - cardActivatedDate
       type: object
       properties:
         cardSequence:
@@ -1456,9 +1457,6 @@ components:
           description: Start date- the date when the serivce was called
           format: date
     CardsBlockUnblockReq:
-      required:
-      - cardSequence
-      - postToAccountNumber
       type: object
       properties:
         cardSequence:
