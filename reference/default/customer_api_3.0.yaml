@@ -45,7 +45,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: businessUnit
         in: query
         required: true
@@ -159,7 +159,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: businessUnit
         in: query
         required: true
@@ -281,7 +281,7 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
-            example: 00001AUVMX
+            example: 00000AUNAB
         - name: customerNumber
           in: path
           required: true
@@ -386,7 +386,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: customerNumber
         in: path
         required: true
