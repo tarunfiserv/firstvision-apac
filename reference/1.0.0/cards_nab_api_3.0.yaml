@@ -41,11 +41,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Token Number assigned to the cardholder embosser record."
         schema:
           maxLength: 19
           type: string
@@ -166,11 +166,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Number that is embossed on the plastic card. "
         schema:
           maxLength: 19
           type: string
@@ -290,11 +290,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Token Number assigned to the cardholder embosser record. "
         schema:
           maxLength: 19
           type: string
@@ -415,11 +415,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Token Number assigned to the cardholder embosser record. "
         schema:
           maxLength: 19
           type: string
@@ -539,11 +539,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Token Number assigned to the cardholder embosser record. "
         schema:
           maxLength: 19
           type: string
@@ -665,11 +665,11 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: cardNumber
         in: path
         required: true
-        description : "CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number"
+        description : "Token Number assigned to the cardholder embosser record. "
         schema:
           maxLength: 19
           type: string
@@ -790,7 +790,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: businessUnit
         in: query
         description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
@@ -803,7 +803,7 @@ paths:
           example: 100
       - name: cardNumber
         in: path
-        description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+        description: Number that is embossed on the plastic card. ""
         required: true
         schema:
           maxLength: 19
@@ -910,7 +910,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: businessUnit
         in: query
         description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
@@ -923,7 +923,7 @@ paths:
           example: 200
       - name: cardNumber
         in: path
-        description: Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+        description: Number that is embossed on the plastic card. ""
         required: true
         schema:
           maxLength: 19
@@ -1109,7 +1109,7 @@ components:
         cardNumber:
           type: string
           example: '00098468CCCCC273613'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
           maxLength: 19
         currentCardRequireActivation:
           type: string
@@ -1221,7 +1221,7 @@ components:
         cardNumber:
           type: string
           example: '0009846CCCCCC065787'
-          description: Card Number -Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Card Number -Number that is embossed on the plastic card. ""
           format: uppercase
     UpdateCardProfileReq:
       required:
@@ -1278,7 +1278,7 @@ components:
           maxLength: 19
           type: string
           example: '000984680NNNNN73613'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
           format: uppercase
     UpdateCardPinReq:
       required:
@@ -1531,7 +1531,7 @@ components:
           maxLength: 19
           type: string
           example: 00098468CCCCC273605
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter
+          description: Token Number assigned to the cardholder embosser record. Enter
             a value inthis field only if the card number is different from the post-toaccount
             number
           format: uppercase
@@ -1704,7 +1704,7 @@ components:
           type: string
           example: '00098468CCCCC273605'
           format: uppercase
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
     
   examples:
     CardActivateResp:

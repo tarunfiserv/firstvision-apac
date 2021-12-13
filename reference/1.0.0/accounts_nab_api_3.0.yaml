@@ -30,8 +30,8 @@ paths:
             type: string
         - name: X-Name
           in: header
-          required: false
-          example: 00001AUVMA
+          required: true
+          example: 00000AUNAB
           description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
           schema:
             maxLength: 30
@@ -40,7 +40,7 @@ paths:
         - name: X-context
           in: header
           required: true
-          example: 00001AUVMA
+          example: 00000AUNAB
           description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
           schema:
             maxLength: 20
@@ -167,7 +167,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
       - name: businessUnit
         in: query
         required: true
@@ -298,7 +298,7 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
-            example: 00001AUVMX
+            example: 00000AUNAB
         - name: businessUnit
           in: query
           required: true
@@ -378,7 +378,7 @@ paths:
                 - '504':
                     $ref: '#/components/examples/504-Errors'                
   
-  /v1/accounts/{accountNumber}/balance:
+  /v1/accounts/{accountNumber}/balances:
     get:
       tags:
       - Account Management
@@ -514,10 +514,8 @@ components:
           description: Block code 2-Field that identifies the block codes assigned to this account. Block codes control specific processing options at theaccount level. Valid block codes are the letters A to Z and spaces
     AccountsBlockUnblockResp:
       required:
-        - accountNumber
-        - billingAcctInd
-        - businessUnit
-        - product
+        - accountNumber        
+        - businessUnit        
       type: object
       properties:
         product:
@@ -693,9 +691,7 @@ components:
     AccountDetailsResp:
       required:
         - accountNumber
-        - billingAcctInd
-        - businessUnit
-        - product
+        - businessUnit        
       type: object
       properties:
         businessUnit:
