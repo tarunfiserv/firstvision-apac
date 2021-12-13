@@ -49,7 +49,7 @@ paths:
         - name: businessUnit
           in: query
           required: true
-          description : "Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998"
+          description : "Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998"
           schema:
             type: number
             default: 0.0
@@ -171,7 +171,7 @@ paths:
       - name: businessUnit
         in: query
         required: true
-        description : "Business Unit - Identification number associated with this Account Base Segment record."
+        description : "Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998"
         schema:
           type: number
           default: 0.0
@@ -179,7 +179,7 @@ paths:
       - name: accountNumber
         in: path
         required: true
-        description : "Account Number - Unique Identification number of the Account."
+        description : "Account- Customer account number. Must be numeric and greater than zero. Max length = 19. Should be a valid Account number."
         schema:
           maxLength: 19
           type: string
@@ -302,6 +302,7 @@ paths:
         - name: businessUnit
           in: query
           required: true
+          description: Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998
           schema:
             maximum: 999
             minimum: 0
@@ -311,6 +312,7 @@ paths:
         - name: accountNumber
           in: path
           required: true
+          description: Account- Customer account number. Must be numeric and greater than zero. Max length = 19. Should be a valid Account number.
           schema:
             maxLength: 19
             type: string
@@ -425,7 +427,7 @@ paths:
       - name: accountNumber
         in: path
         required: true
-        description : Identification number of the Account Base Segment record.
+        description : Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998
         schema:
           maxLength: 19
           type: string
@@ -433,9 +435,12 @@ paths:
           example: '0000000001000000065'
           
       responses:
-        204:
-          description: No Content
-          
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalancesResp'
         400:
           description: The request cannot be validated
           content:
@@ -720,7 +725,7 @@ components:
             - '3'
         alternateCustomerNumber:
           type: string
-          description: Number that identifies the alternate Customer Name/Address record containing an alternate address for statements and other correspondenc
+          description: Number that identifies the alternate Customer Name Address record containing an alternate address for statements and other correspondenc
           format: uppercase
           example: '0000000000000000000'
         vIPStatus:
@@ -1204,6 +1209,194 @@ components:
           type: number
           description: ISO currency code that identifies the currency of this account
           example: 36
+    AccountBalancesResp:
+      type: object
+      properties:
+        cycletoDatePayment:
+          type: string
+          description: Payments made withing the current cycle
+          example: $0.00
+          default: "0.0"
+        amountMemoCredit:
+          type: string
+          description: Amount of outstanding memo credits for the account
+          example: $0.00
+          default: "0.0"
+        businessUnit:
+          type: number
+          description: Identification number of the business unit associated with
+            this Account Base Segment record.
+          example: 600.0
+        dateLastStatement:
+          type: string
+          description: Date on which the previous statement was generated for the
+            account
+          format: uppercase
+          example: 07/17/2021
+        loanCreditLimit:
+          type: string
+          description: Amount of the loan credit limit for the account.
+          example: $0.00
+          default: "0.0"
+        dateLastPayment:
+          type: string
+          description: Date on which the last payment was made on the account
+          format: uppercase
+          example: 00/00/0000
+        loanAvailable:
+          type: string
+          description: Amount of the loan credit limit available for loans on this
+            account.
+          example: $0.00
+          default: "0.0"
+        loanBalance:
+          type: string
+          description: Total balance of all loan credit plans on this account.
+          example: $0.00
+          default: "0.0"
+        blockCodeDate1:
+          type: string
+          description: Date on which block code 1 was entered
+          format: uppercase
+          example: 00/00/0000
+        blockCodeDate2:
+          type: string
+          description: Date on which block code 2 was entered
+          format: uppercase
+          example: 00/00/0000
+        dateofLastPurchase:
+          type: string
+          description: Effective date of the last purchase that posted to the account
+          format: uppercase
+          example: 00/00/0000
+        cashBalance:
+          type: string
+          description: Current outstanding amount of the cash portion of the current
+            balance.
+          example: $0.00
+          default: "0.0"
+        cashAvailable:
+          type: string
+          description: Amount of the cash credit limit available for cash transaction
+            authorizations.
+          example: $0.00
+          default: "0.0"
+        creditLimit:
+          type: string
+          description: Credit limit of the account
+          example: $576000.00
+          default: "0.0"
+        lastPaymentAmount:
+          type: string
+          description: Amount of the last payment made on the account
+          example: $0.00
+          default: "0.0"
+        chargeOffStatus:
+          type: string
+          description: Code that identifies the charge-off status of this account
+          example: "0"
+        dateFirstPurchase:
+          type: string
+          description: Date on which the first purchase was made on the account
+          format: uppercase
+          example: ""
+        totAmtDue:
+          type: string
+          description: Total Amount Due
+          example: $0.00
+          default: "0.0"
+        cashCreditLimit:
+          type: string
+          description: Amount of the cash credit limit for the account
+          example: $0.00
+          default: "0.0"
+        firstPurchaseAmount:
+          type: string
+          description: Amount of the first purchase made on the account
+          example: $0.00
+          default: "0.0"
+        graceDayExpireDate:
+          type: string
+          description: Date on which the grace day period expires for the current
+            cycle, also called the grace day expiration date
+          format: uppercase
+          example: 00/00/0000
+        currentBalance:
+          type: string
+          description: Current balance of the account
+          example: $0.00
+          default: "0.0"
+        pastDuePaymentAmount:
+          type: string
+          description: This field indicates the amount delinquent for the account that has been delinquent for 1 to 29 days (also called “X” days)
+          example: $0.00
+          default: "0.0"
+        openToBuy:
+          type: string
+          description: Current open-to-buy amount of the account
+          example: $576000.00
+          default: "0.0"
+        customerNumber:
+          maxLength: 19
+          type: string
+          description: Customer number that identifies the Customer Name Address record to which this account is assigned
+          format: uppercase
+          example: "0000000001000000065"
+        accountNumber:
+          maxLength: 19
+          type: string
+          description: Identification number of the Account Base Segment record.
+          format: uppercase
+          example: "0000000001000000065"
+        currentDue:
+          type: string
+          description: Total current due amount for the account
+          example: $0.00
+          default: "0.0"
+        internalStatus:
+          type: string
+          description: Code that identifies the status of the account
+          example: D
+        paymentDueDate:
+          type: string
+          description: Date when the next payment is due
+          format: uppercase
+          example: 00/00/0000
+        nextStatementDate:
+          type: string
+          description: Date on which the next statement is due to be generated for the account
+          format: uppercase
+          example: 09/18/2021
+        amountMemoDebit:
+          type: string
+          description: Amount of outstanding memo debits for the account
+          example: $0.00
+          default: "0.0"
+        blockCode1:
+          type: string
+          description: This field identifies the block code assigned to this account
+          example: ""
+        billingCycle:
+          type: number
+          description: Cycle code that indicates the day of the month that CMS performs
+            cycle processing for the account
+          example: 18.0
+        dateAccountOpened:
+          type: string
+          description: Date on which the account was opened
+          format: uppercase
+          example: 08/17/2021
+        blockCode2:
+          type: string
+          description: This field identifies the block code assigned to this account
+          example: ""
+        shortName:
+          maxLength: 20
+          type: string
+          description: Short name of the account holder
+          format: uppercase
+          example: RKXNBCUACOEBKN
+          
     ErrorList:
       type: array
       items:
