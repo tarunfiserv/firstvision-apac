@@ -1,14 +1,12 @@
 # Activate Card
 
-This service is used to activate the card after successful verification of the cardholder. 
-
+This service is used to activate the card after successful verification of the cardholder.
 
 >Cardholder verification is the separate API that must be called in the card activation workflow.  Please [click here](./?path=docs/APIs/Card-Management/CVV2-Validation.md) to explore the cardholder verfication APIs.
 
+## Endpoint
 
-# Endpoint
-`PUT /v1/cards/activate`
-
+`PUT /v1/cards/{cardNumber}/activate`
 
 ## Payload Example
 
@@ -16,8 +14,6 @@ This service is used to activate the card after successful verification of the c
 
 ```json
 {
-    "businessUnit":"100",
-    "cardNumber":"0009846801010273613",
     "cardSequence": "0001",
     "currentCardRequireActivation": "N",
     "lastCardActivation": "N"    
@@ -25,18 +21,17 @@ This service is used to activate the card after successful verification of the c
 ```
 
 ### Minimum Requirements
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/card/activate).
+
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/cards/{cardNumber}/activate).
 
 The below table identifies the required parameters in the request payload.
 
 | Variable | Type | Length | Description |
 | -------- | :--: | :------------: | ------------------ |
 | `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. | 
-| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. | 
+| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. |
+| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. |
 | `currentCardRequireActivation` | *string* | 1 | Value ‘N’ To be passed to activate the card. |
-
-
 
 ### Successful Response Payload
 
@@ -60,6 +55,7 @@ The below table identifies the required parameters in the request payload.
   "errorMessage": "Business Unit not found in the system"  
 }
 ```
+
 Below table provides the list of application's error code and its description. 
 
 | ErrorCode |  Description |
@@ -70,5 +66,5 @@ Below table provides the list of application's error code and its description.
 | `V5ED4001SA` | Business Unit not found in the system |
 | `V5ED4001SB` | Business Unit is in Add Pending Status |
 | `V5ED4001SC` | Business Unit is in Purge Status |
-| `V5ED0309SV` | Invalid Current Card Activation | 
-| `V5ED0310SV` | Invalid Last Card Activation |  
+| `V5ED0309SV` | Invalid Current Card Activation |
+| `V5ED0310SV` | Invalid Last Card Activation |
