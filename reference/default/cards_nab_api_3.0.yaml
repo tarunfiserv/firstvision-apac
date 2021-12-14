@@ -6,7 +6,7 @@ info:
 servers:
 - url: 'https://stg34.visionplus.io:24500/fva_apac'
 paths:    
-  /v1/cards/activate: 
+  /v1/cards/{cardNumber}/activate: 
     put:
       tags:
       - Card Management
@@ -41,15 +41,31 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Token Number assigned to the cardholder embosser record."
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010273613'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 100
       
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateCardActivateReq'
-            examples:
-              ActivateCard: { $ref: '#/components/examples/CardActivateReq'}
               
       responses:
         200:
@@ -115,8 +131,8 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/blockUnblock:
-    patch:
+  /v1/cards/{cardNumber}/blockUnblock:
+    put:
       tags:
       - Card Management
       x-group-name: Card Management
@@ -150,15 +166,32 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Number that is embossed on the plastic card. "
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010273605'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 100
           
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CardsBlockUnblockReq'
-            examples: 
-              BlockCard: {$ref: '#/components/examples/BlockCardReq'}
+              
       responses:
         200:
           description: Success
@@ -222,7 +255,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/transfer:
+  /v1/cards/{cardNumber}/transfer:
     put:
       tags:
       - Card Management
@@ -257,15 +290,31 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Token Number assigned to the cardholder embosser record. "
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010001345'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 200
           
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateCardTransferReq'
-            examples:
-              CardTransfer: { $ref: '#/components/examples/CardTransferReq'}
            
       responses:
         200:
@@ -331,8 +380,8 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'                  
   
-  /v1/cards/profile:
-    patch:
+  /v1/cards/{cardNumber}/profile:
+    put:
       tags:
       - Card Management
       x-group-name: Card Management
@@ -366,14 +415,32 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Token Number assigned to the cardholder embosser record. "
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010273613'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 100
+      
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateCardProfileReq'
-            examples: 
-              CardsProfile: { $ref: '#/components/examples/CardProfileReq' }
+            
       responses:
         200:
           description: Success
@@ -437,7 +504,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/secureCode:
+  /v1/cards/{cardNumber}/secureCode:
     post:
       tags:
       - Card Management
@@ -472,15 +539,32 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Token Number assigned to the cardholder embosser record. "
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010065787'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 100
+          
           
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CardsSecureCodeReq'
-            examples:
-              CardsSecure: { $ref: '#/components/examples/CardSecureReq' }
 
       responses:
         200:
@@ -546,8 +630,8 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/spendLimits:
-    patch:
+  /v1/cards/{cardNumber}/spendLimits:
+    put:
       tags:
       -  Card Management
       x-group-name: Card Management
@@ -581,14 +665,31 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: cardNumber
+        in: path
+        required: true
+        description : "Token Number assigned to the cardholder embosser record. "
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010273605'
+      - name: businessUnit
+        in: query
+        required: true
+        description : 'Identification number of the organization associated
+          with thisAccount Base Segment record,The values are 001–998'
+        schema:
+          type: number
+          default: 0.0
+          example: 100
+          
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateCardLimitReq'
-            examples:
-              CardsLimit: { $ref: '#/components/examples/CardLimitReq' }
                           
       responses:
         200:
@@ -654,7 +755,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/clearPan:
+  /v1/cards/{cardNumber}/clearPan:
     get:
       tags:
       - Card Management
@@ -689,35 +790,26 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
-      - name: indicator
-        in: query
-        example: 'Y'
-        description: Indicator - Value 'Y' should be passed
-        required: true
-        schema:
-          maxLength: 1
-          type: string
-          format: uppercase
+          example: 00000AUNAB
       - name: businessUnit
         in: query
-        example: 100
-        description: Business Unit Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
+        description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
         required: true
         schema:
           maximum: 998.0
           minimum: 0.0
           type: number
           default: 0.0
+          example: 100
       - name: cardNumber
-        in: query
-        example: '000984680CCCCC73605'
-        description: Token PAN - 19 digit Tokenized PAN number
+        in: path
+        description: Number that is embossed on the plastic card. ""
         required: true
         schema:
           maxLength: 19
           type: string
           format: uppercase
+          example: '0009846801010273605'
 
       responses:
         200:
@@ -783,8 +875,8 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'      
                   
-  /v1/cards/pinBlock:
-    patch:
+  /v1/cards/{cardNumber}/pinBlock:
+    put:
       tags:
       - Card Management
       x-group-name: Card Management
@@ -818,15 +910,32 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: 00001AUVMX
+          example: 00000AUNAB
+      - name: businessUnit
+        in: query
+        description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
+        required: true
+        schema:
+          maximum: 998.0
+          minimum: 0.0
+          type: number
+          default: 0.0
+          example: 200
+      - name: cardNumber
+        in: path
+        description: Number that is embossed on the plastic card. ""
+        required: true
+        schema:
+          maxLength: 19
+          type: string
+          format: uppercase
+          example: '0009846801010273605'
           
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateCardPinReq'
-            examples: 
-              CardsPin: { $ref: '#/components/examples/CardPinReq' }
       responses:
         200:
           description: Success
@@ -895,34 +1004,19 @@ components:
   schemas:
     CardsSecureCodeReq:
       required:
-      - businessUnit
       - cVV2
-      - cardNumber
       type: object
       properties:
-        businessUnit:
-          maximum: 999
-          minimum: 0
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: '0009846801CCCCC5787'
-          description: Card Number -Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
-          format: uppercase    
         cVV2:
           maxLength: 3
           type: string
-          example: '777'
+          example: '855'
           description: CVV2-valid CVV2 should be entered printed on the card
           format: uppercase
         expiryDateMMYY:
           maxLength: 4
           type: string
-          example: '1122'
+          example: '1123'
           description: Expire Date-valid card expire date should be provided which is of 4 character with MMYY format
           format: uppercase
         signonName:
@@ -950,7 +1044,7 @@ components:
           description: Indicator - Value 'Y' should be passed
         businessUnit:
           type: number
-          description: 'Business Unit: Identification number of the organization associated
+          description: 'Identification number of the organization associated
           with thisAccount Base Segment record,The values are 001–998'
     cardsClearResponse:
       type: object
@@ -962,22 +1056,11 @@ components:
           format: uppercase
     UpdateCardActivateReq:
       required:
-      - businessUnit
       - postToAccountNumber
-      - cardNumber
       - cardSequence
+      - cardActivatedDate
       type: object
       properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: 'Business Unit: Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        cardNumber:
-          type: string
-          example: '000984680CCCCC73613'
-          description: Clear Pan - 19 digit Clear card number
-          format: uppercase
         cardSequence:
           type: number
           example: 0001
@@ -985,10 +1068,10 @@ components:
         postToAccountNumber:
           type: string
           example: ' '
-          description: Post to account number-Identification number of the Account BaseSegment record towhich CMS posts transactio received for this Embosser record
+          description: Identification number of the Account BaseSegment record towhich CMS posts transactio received for this Embosser record
         currentCardRequireActivation:
           type: string
-          example: 'Y'
+          example: 'N'
           enum:
            - 'Y - Yes'
            - 'N - No'
@@ -999,7 +1082,7 @@ components:
           description: Card activated date- This date will identifies the card activated date, this is a system generated date this will be changed
         lastCardActivation:
           type: string
-          example: ' '
+          example: 'Y'
           description: Last card activation flag-indicates whether cardactivation needs to occur for the previously issuedcard values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur   
     UpdateCardActivateResp:
       required:
@@ -1012,7 +1095,7 @@ components:
         businessUnit:
           type: number
           example: 100
-          description: 'Business Unit: Identification number of the organization associated
+          description: 'Identification number of the organization associated
           with thisAccount Base Segment record,The values are 001–998'
         cardSequence:
           type: number
@@ -1021,12 +1104,12 @@ components:
         postToAccountNumber:
           type: string
           example: '00010000CCCCC510760'
-          description: Post to account number-Identification number of the Account Base Segment record towhich CMS posts transactions  received for this Embosser record
+          description: Identification number of the Account Base Segment record towhich CMS posts transactions  received for this Embosser record
           maxLength: 19
         cardNumber:
           type: string
           example: '00098468CCCCC273613'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
           maxLength: 19
         currentCardRequireActivation:
           type: string
@@ -1138,21 +1221,14 @@ components:
         cardNumber:
           type: string
           example: '0009846CCCCCC065787'
-          description: Card Number -Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Card Number -Number that is embossed on the plastic card. ""
           format: uppercase
     UpdateCardProfileReq:
       required:
-      - businessUnit
-      - cardNumber
       - cardSequence
       - postToAccountNumber
       type: object
       properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
         cardSequence:
           type: number
           example: 0001
@@ -1161,17 +1237,11 @@ components:
           maxLength: 19
           type: string
           example: ' '
-          description: Post to account number-Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
-          format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: ' '
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
           format: uppercase
         cardHolderType:
           type: string
-          example: 'L'
+          example: '1'
           description: Cardholder Type-Code that indicates whether the cardholder is the primarycardholder or an additional cardholder associated with theaccount. The value for this field is set in the card-adding processwith the first cardholder designated as the primary cardholderand the other cardholders as additional cardholders. The values are 0 =Additional cardholder 1=Primary cardholder.
   
     UpdateCardsProfileResp:
@@ -1193,7 +1263,7 @@ components:
         businessUnit:
           type: number
           example: 100
-          description: Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
+          description: Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
         cardSequence:
           type: number
           example: 1
@@ -1202,39 +1272,27 @@ components:
           maxLength: 19
           type: string
           example: '000100001NNNNN0760'
-          description: Post to account number-Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
+          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
           format: uppercase
         cardNumber:
           maxLength: 19
           type: string
           example: '000984680NNNNN73613'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
           format: uppercase
     UpdateCardPinReq:
       required:
-      - businessUnit
       - requestedPinBlock
-      - cardNumber
       type: object
       properties:
-        businessUnit:
-          type: number
-          example: 200
-          description: Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
         product:
           type: number
-          example: ' '
+          example: 1
           description: Product - Product associated with this Account. The values are 001–998
-        cardNumber:
-          type: string
-          maxLength: 19
-          example: '000954349CCCCCCC0172'
-          description: Card Number-if the service is sucessiful, the response the updated card number will be send this will
-          format: uppercase
         requestedPinBlock:
           type: string
           maxLength: 16
-          example: 'CCCCC5DFB742A878'
+          example: '6BA8F5DFB742A878'
           description: Requested pin block(New pin block)-The new pin block should be provided, This will be new pin Enter by customer
         currentPinBlock:
           type: string
@@ -1244,7 +1302,7 @@ components:
           description: Current pin block( Old Pin Block)- The old pin block should be provided, This will be old pin Enter by customer
         pinOffSet:
           type: number
-          example: ' '
+          example: 0
           description: Current pin block( Old Pin Block)- The old pin block should be provided, This will be old pin Enter by customer
         pinChannel:
           type: string
@@ -1292,7 +1350,6 @@ components:
       - accountNumber
       - action
       - blockCode
-      - cardNumber
       - cardReplacementIndicator
       - cardSequenceNumber
       - effectiveDate
@@ -1304,17 +1361,10 @@ components:
       - transferToCustomer
       type: object
       properties:
-        businessUnit:
-          maximum: 999
-          minimum: 0
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
         accountNumber:
           maxLength: 19
           type: string
-          example: '000100001NNNNNN3777'
+          example: '0002000010000181486'
           description: Account number-Account currently associated with the card
           format: uppercase  
         product:
@@ -1333,7 +1383,7 @@ components:
           format: uppercase
         cardReplacementIndicator:
           type: string
-          example: '0'
+          example: '1'
           description: Card replacement indicator-Code that indicates whether CMS replaces the transfer card bygenerating a new Embosser record on the original account. The values are 0=Replace lost/stolen/fraud card (Default), 1=Do not replace lost/stolen/fraud card
           enum:
           - 0 - Replace
@@ -1388,12 +1438,6 @@ components:
           example: ' '
           description: Operator id-user signon operator id
           format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: '000984680NNNNNN1264'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-to account number
-          format: uppercase
         effectiveDate:
           type: string
           example: ' '
@@ -1413,38 +1457,22 @@ components:
           description: Start date- the date when the serivce was called
           format: date
     CardsBlockUnblockReq:
-      required:
-      - businessUnit
-      - cardNumber
-      - cardSequence
-      - postToAccountNumber
       type: object
       properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
         cardSequence:
           type: number
-          example: 0001
+          example: '0001'
           description: Card sequence- This a static value value 0001 shouldbe passed
-        postToAccountNumber:
-          maxLength: 19
+        blockCode:
           type: string
-          example: ABCDEFGHIJABCDEFGHI
-          description: Post to account number-Identification number of the Account
-            Base Segment record towhich CMS posts transactions received for this Embosser
-            record
-          format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: 000984CCCCC10273605
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter
-            a value inthis field only if the card number is different from the post-toaccount
-            number
-          format: uppercase
+          example: 'X'
+          description: Block code-The block code assigned to the Embosser record, Blcok code values can be be A- Z or SPACES
+          enum:
+          - X
+          - E
+          - F
+          - G
+          - ' '
        
     CardsBlockUnblockResp:
       required:
@@ -1495,7 +1523,7 @@ components:
           maxLength: 19
           type: string
           example: ABCDEFGHIJABCDEFGHI
-          description: Post to account number-Identification number of the Account
+          description: Identification number of the Account
             Base Segment record towhich CMS posts transactions received for this Embosser
             record
           format: uppercase
@@ -1503,7 +1531,7 @@ components:
           maxLength: 19
           type: string
           example: 00098468CCCCC273605
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter
+          description: Token Number assigned to the cardholder embosser record. Enter
             a value inthis field only if the card number is different from the post-toaccount
             number
           format: uppercase
@@ -1529,34 +1557,21 @@ components:
           - 9 - Approve Tip
     UpdateCardLimitReq:
       required:
-      - businessUnit
-      - cardNumber
       - cardSequence
       - postToAccountNumber
       type: object
       properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
         cardSequence:
           type: number
-          example: 0001
+          example: '0001'
           description: Card sequence- This a static value value 0001 should be passed
         postToAccountNumber:
           maxLength: 19
           type: string
           example: ' '
-          description: Post to account number-Identification number of the Account
+          description: Identification number of the Account
             Base Segment record towhich CMS posts transactions received for this Embosser
             record
-          format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: '000984680CCCCC73605'
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
           format: uppercase
         maximumAuthorizationsFrequnecy:
           type: string
@@ -1622,7 +1637,7 @@ components:
         businessUnit:
           type: number
           example: 100
-          description: Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
+          description: Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
         cardSequence:
           type: number
           description: Card sequence- This a static value value 0001 should be passed
@@ -1644,7 +1659,7 @@ components:
           maxLength: 19
           type: string
           example: '0001000CCCCCC510760'
-          description: Post to account number-Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
+          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
           format: uppercase
         maximumAmountATMCashAuthorizationsAllowed:
           type: string
@@ -1689,43 +1704,25 @@ components:
           type: string
           example: '00098468CCCCC273605'
           format: uppercase
-          description: CARD NUMBER-Number that is embossed on the plastic card. Enter a value inthis field only if the card number is different from the post-toaccount number
+          description: Token Number assigned to the cardholder embosser record. ""
     
   examples:
-    CardActivateReq:
-      value: { businessUnit: 100, cardNumber: '0009846801010273613', cardSequence: 0001, currentCardRequireActivation: 'N', postToAccountNumber: ' ', lastCardActivation: 'N'}
     CardActivateResp:
       value: {businessUnit: 100, cardNumber: 0009846801010273613,
         cardSequence: 1, lastCardActivation: N, currentCardRequireActivation: N, cardActivatedDate: 01/10/2021, postToAccountNumber: 0001000010000510760}
-      
-    BlockCardReq:
-      value: { businessUnit: 100, cardNumber: '0009846801010273605',
-              cardSequence: 0001, blockCode: 'X' }
     BlockCardResp:
       value: {businessUnit: 100,cardNumber: '0009846801010273605', cardSequence: 1, postToAccountNumber: '0001000010000510760', blockCode: 'X', blockDate: 01/10/2021, warningCode1: '1', cardholderType: '1'}
-    CardTransferReq:
-      value:  {businessUnit: 200, cardNumber: '0009543491002137871', cardSequenceNumber: 1, accountNumber: '0002000010000181486',  action: T,  cardReplacementIndicator: '1',  'blockCode': L }
     CardTransferResp:
       value: {serviceReturnCode: P, numberOfErrors: 0, maskCardnumber: '000404940XXXXXX4481', cardNumber: '0009846801010000089', effectiveDate: '10/01/2021', transferFromAccount: '0001000010000003777', blockCode: L}
-    
-    CardSecureReq:
-      value: {businessUnit: 100, cardNumber: '0009846801010065787',cVV2: '855',expiryDateMMYY: '1123'}
     CardSecureResp:
       value: {cardNumber: '0009846801010065787'}  
-    CardProfileReq: 
-      value: {businessUnit: 100, cardNumber: '0009846801010273613', cardSequence: 0001, cardholderType: 1}
     CardsProfileResp:
       value: { businessUnit: 100, cardNumber: '0009846801010273613', cardSequence: 1, postToAccountNumber: '0001000010000510760', cardholderType: 1 }
     CardClearResp:
       value: { cardNumber: '0004049400000274818' }
-    
-    CardPinReq: 
-      value: { businessUnit: 200,cardNumber: '0009543491000080172',product: '1', requestedPinBlock: '6BA8F5DFB742A878',pinChannel: 'W', pinOffset: '0' }
     CardPinResp: 
       value: { cardNumber: '0009543491000080172', userFiller: '',
                filler: '' }
-    CardLimitReq:
-      value: { businessUnit: 100, cardNumber: '0009846801010273605', cardSequence: 0001, maximumAuthorizationsFrequency: '1', maximumAmountSingleATMTransactionAllowed: '10000', maximumAmountATMCashAuthorizationsAllowed: '10000', maximumNumberATMCashAuthorizationsAllowed: 1,  singleOTCCashAuthorizationAllowed: '10000', maximumNumberOTCAuthorizationsAllowed: 1, maximumAmountOTCCashAuthorizationsAllowed: '20000',  singleRetailAuthorizationAllowed: '00000', maximumNumberRetailAuthorizationsAllowed: 1,  maximumAmountRetailAuthorizationsAllowed: '10000'   }
     CardLimitResp:
       value: { businessUnit: 100, cardNumber: '0009846801010273605', cardSequence: 1, maximumNumberRetailAuthorizationsAllowed: 1, maximumAmountSingleATMTransactionAllowed: '$100.00', singleOTCCashAuthorizationAllowed: '$100.00', maximumAmountATMCashAuthorizationsAllowed: '$100.00', postToAccountNumber: '0001000010000510760', maximumNumberOTCAuthorizationsAllowed: 1, maximumNumberATMCashAuthorizationsAllowed: 1, singleRetailAuthorizationAllowed: '$0.00', maximumAmountRetailAuthorizationsAllowed: '$100.00', maximumAuthorizationsFrequnecy: 1, maximumAmountOTCCashAuthorizationsAllowed: '$200.00' }
              
