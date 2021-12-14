@@ -1,30 +1,28 @@
 # List Customers' Accounts
 
- The service provides list of accounts associated with the customer. 
+ The service provides list of accounts associated with the customer.
 
-# Endpoint
+## Endpoint
+
 `GET /v1/customers/{customerNumber}/accountList/`
-
 
 ## Payload Example
 
-
 ### Request Payload
+
 > Empty.  
 
 ### Minimum Requirements
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/customer/accountList).
+
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/customers/{customerNumber}/accountList).
 
 The below table identifies the required parameters in the request payload.
 
 | Variable | Type | Length | Description/Values |
 | -------- | :--: | :------------: | ------------------ |
-| `customerNumber` | *string* | 19 | An identifier of the customer. | 
-
-
+| `customerNumber` | *string* | 19 | An identifier of the customer. |
 
 ### Successful Response Payload
-
 
 ```json
 {
@@ -84,8 +82,9 @@ The below table identifies the required parameters in the request payload.
   "errorMessage": "Customer Number not found"  
 }
 ```
-Below table provides the list of application's error code and its description. 
+
+Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
-| `V5DB4001AS` |	Customer Number not found|
+| `V5DB4001AS` |Customer Number not found|
