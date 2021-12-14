@@ -495,20 +495,247 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
                   
-
+  /v1/accounts/{accountRelationshipNBR}/transactions/memoPost:
+    get:
+      tags:
+        - Account Management
+      x-group-name: Account Management
+      x-proxy-name: Inquire Outstanding Authorizations
+      summary: Inquire Outstanding Authorizations
+      description: This service provide details of the memo-posted authorizations on a given account.
+      operationId: memoPost
+      parameters:
+        - name: X-Correl-Id
+          in: header
+          description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
+          schema:
+            maxLength: 40
+            minLength: 0
+            example: ABC123
+            type: string
+        - name: X-Name
+          in: header
+          required: true
+          description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
+          schema:
+            maxLength: 30
+            minLength: 0
+            example: 00000AUNAB
+            type: string
+        - name: X-context
+          in: header
+          required: true
+          description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
+          schema:
+            maxLength: 20
+            minLength: 0
+            example: 00000AUNAB
+            type: string
+        - name: businessUnit
+          in: query
+          description: Identification number of the business unit associated with this
+            Account Base Segment record.
+          required: true
+          schema:
+            maximum: 999.0
+            minimum: 0.0
+            type: number
+            default: 0.0
+            example: 600
+        - name: accountRelationshipNBR
+          in: path
+          description: Identification number of the Account Base Segment record.
+          required: true
+          schema:
+            maxLength: 19
+            type: string
+            format: uppercase
+            example: '0000000001000000073'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctMemoResp'
+        '400':
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '400':
+                    $ref: '#/components/examples/400-Errors'
+        '401':
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '401':
+                    $ref: '#/components/examples/401-Errors'
+        '404':
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '404':
+                    $ref: '#/components/examples/404-Errors'
+        '500':
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '500':
+                    $ref: '#/components/examples/500-Errors'
+        '503':
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '503':
+                    $ref: '#/components/examples/503-Errors'
+        '504':
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '504':
+                    $ref: '#/components/examples/504-Errors'
+  
+  /v1/accounts/{accountRelationshipNBR}/transactions/cycleToDate:
+    get:
+      tags:
+        - Account Management
+      x-group-name: Account Management
+      x-proxy-name: Inquire Posted authorizations
+      summary: Inquire Posted authorizations
+      description: This service provide details of the cycle-to-date transactions on a given account.
+      operationId: cycleToDate
+      parameters:
+        - name: X-Correl-Id
+          in: header
+          description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
+          schema:
+            maxLength: 40
+            minLength: 0
+            example: ABC123
+            type: string
+        - name: X-Name
+          in: header
+          required: true
+          description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
+          schema:
+            maxLength: 30
+            minLength: 0
+            example: 00000AUNAB
+            type: string
+        - name: X-context
+          in: header
+          required: true
+          description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
+          schema:
+            maxLength: 20
+            minLength: 0
+            example: 00000AUNAB
+            type: string
+        - name: businessUnit
+          in: query
+          description: Identification number of the business unit associated with this
+            Account Base Segment record.
+          required: true
+          schema:
+            maximum: 999.0
+            minimum: 0.0
+            type: number
+            default: 0.0
+            example: 600
+        - name: accountRelationshipNBR
+          in: path
+          description: Identification number of the Account Base Segment record.
+          required: true
+          schema:
+            maxLength: 19
+            type: string
+            format: uppercase
+            example: '0000000001000000073'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcctCycleDateResp'
+        '400':
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '400':
+                    $ref: '#/components/examples/400-Errors'
+        '401':
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '401':
+                    $ref: '#/components/examples/401-Errors'
+        '404':
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '404':
+                    $ref: '#/components/examples/404-Errors'
+        '500':
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '500':
+                    $ref: '#/components/examples/500-Errors'
+        '503':
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '503':
+                    $ref: '#/components/examples/503-Errors'
+        '504':
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+              example:
+                - '504':
+                    $ref: '#/components/examples/504-Errors'
+  
 components:
   schemas:
     AccountsBlockUnblockReq:
       type: object
       properties:
-        product:
-          type: number
-          example: 001
-          description: 'Product associated with this Account. The values are 001–998'
-        billingAcctInd:
-          type: number
-          example: 0
-          description: 'ACCOUNT TYPE-Code that indicates whether the account being added is atransaction (cardholder), billing, control, or diversion account'
         blockCode1:
           type: string
           example: X
@@ -1396,7 +1623,260 @@ components:
           description: Short name of the account holder
           format: uppercase
           example: RKXNBCUACOEBKN
-          
+    
+    AcctMemoResp:
+      required:
+      - accountNumber
+      - businessUnit
+      type: object
+      properties:
+        accountNumber:
+          maxLength: 19
+          type: string
+          description: Account Number
+          format: uppercase
+          example: "0000000001000000073"
+        fileFlag1:
+          maxLength: 1
+          type: string
+          description: Internal File Flag1
+          format: uppercase
+          example: Y
+        transactionType:
+          title: Transaction Type
+          maxLength: 30
+          type: string
+          description: Transaction Type Description
+          format: uppercase
+          example: MEMO POSTED TRANSACTION
+        fileFlag:
+          title: File Flag
+          maxLength: 4
+          type: string
+          description: Internal File Flag
+          format: uppercase
+          example: ' '
+        businessUnit:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Business Unit
+          example: 600.0
+        product:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Product - Identification number of the product associated with the Account
+          example: 600.0
+        aRIndicator:
+          maxLength: 1
+          type: string
+          description: Account / Relationship Indicator
+          format: uppercase
+          example: A
+        transactionList:
+          type: array
+          items:
+            properties:
+              date:
+                maximum: 9999999
+                minimum: 0
+                type: number
+                description: Date
+                example: 0.0
+              recordNumber:
+                maximum: 99999
+                minimum: 0
+                type: number
+                description: Record Number of the transaction
+                example: 10.0
+              amount:
+                type: string
+                description: Amount of the transaction
+                example: $8,00.00
+                default: "0.0"
+              authorizationCode:
+                maxLength: 6
+                type: string
+                description: Authorization code assigned to the transaction
+                format: uppercase
+                example: ' '
+              typeOfTransaction:
+                maxLength: 1
+                type: string
+                description: Transaction type that identifies the type of transaction. The values are D (debit), C (credit), and M (memo)
+                format: uppercase
+                example: D
+              description:
+                maxLength: 40
+                type: string
+                description: Description of the Transaction
+                format: uppercase
+                example: INTEREST/PRIN DEBIT8
+              postingDate:
+                type: string
+                description: Posting date of the transaction.(applicable only for posted transaction)
+                format: date
+              transactionCode:
+                maximum: 9999
+                minimum: 0
+                type: number
+                description: Transaction Code associated with the transaction
+                example: 1614.0
+              reference:
+                maxLength: 23
+                type: string
+                description: Reference number assigned to the transaction
+                format: uppercase
+                example: "19999999980818199970020"
+              creditPlan:
+                maximum: 99999
+                minimum: 0
+                type: number
+                description: Number that identifies the Credit Plan Master record for the redit plan to which the transaction was posted (applicable only for posted transaction)
+                example: 70001.0
+              logicModule:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Logic module associated with the transaction code
+                example: 1.0
+              time:
+                maximum: 9999999
+                minimum: 0
+                type: number
+                description: Time
+                example: 0.0
+              effectiveDate:
+                type: string
+                description: Effective date of the transaction.
+    
+    AcctCycleDateResp:
+      required:
+      - accountNumber
+      - businessUnit
+      type: object
+      properties:
+        accountNumber:
+          maxLength: 19
+          type: string
+          description: Account Number
+          format: uppercase
+          example: "0000000001000000073"
+        fileFlag1:
+          maxLength: 1
+          type: string
+          description: Internal File Flag1
+          format: uppercase
+          example: Y
+        transactionType:
+          title: Transaction Type
+          maxLength: 30
+          type: string
+          description: Transaction Type Description
+          format: uppercase
+          example: CYCLE-TO-DATE TRANSACTION
+        fileFlag:
+          title: File Flag
+          maxLength: 4
+          type: string
+          description: Internal File Flag
+          format: uppercase
+          example: ' '
+        businessUnit:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Business Unit
+          example: 600.0
+        product:
+          maximum: 999
+          minimum: 0
+          type: number
+          description: Product - Identification number of the product associated with the Account
+          example: 600.0
+        aRIndicator:
+          maxLength: 1
+          type: string
+          description: Account / Relationship Indicator
+          format: uppercase
+          example: A
+        transactionList:
+          type: array
+          items:
+            properties:
+              date:
+                maximum: 9999999
+                minimum: 0
+                type: number
+                description: Date
+                example: 0.0
+              recordNumber:
+                maximum: 99999
+                minimum: 0
+                type: number
+                description: Record Number of the transaction
+                example: 10.0
+              amount:
+                type: string
+                description: Amount of the transaction
+                example: $8,00.00
+                default: "0.0"
+              authorizationCode:
+                maxLength: 6
+                type: string
+                description: Authorization code assigned to the transaction
+                format: uppercase
+                example: ' '
+              typeOfTransaction:
+                maxLength: 1
+                type: string
+                description: Transaction type that identifies the type of transaction. The values are D (debit), C (credit), and M (memo)
+                format: uppercase
+                example: D
+              description:
+                maxLength: 40
+                type: string
+                description: Description of the Transaction
+                format: uppercase
+                example: INTEREST/PRIN DEBIT8
+              postingDate:
+                type: string
+                description: Posting date of the transaction.(applicable only for posted transaction)
+                format: date
+              transactionCode:
+                maximum: 9999
+                minimum: 0
+                type: number
+                description: Transaction Code associated with the transaction
+                example: 1614.0
+              reference:
+                maxLength: 23
+                type: string
+                description: Reference number assigned to the transaction
+                format: uppercase
+                example: "19999999980818199970020"
+              creditPlan:
+                maximum: 99999
+                minimum: 0
+                type: number
+                description: Number that identifies the Credit Plan Master record for the redit plan to which the transaction was posted (applicable only for posted transaction)
+                example: 70001.0
+              logicModule:
+                maximum: 999
+                minimum: 0
+                type: number
+                description: Logic module associated with the transaction code
+                example: 1.0
+              time:
+                maximum: 9999999
+                minimum: 0
+                type: number
+                description: Time
+                example: 0.0
+              effectiveDate:
+                type: string
+                description: Effective date of the transaction.      
     ErrorList:
       type: array
       items:
