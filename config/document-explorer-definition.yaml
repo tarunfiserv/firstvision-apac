@@ -40,6 +40,12 @@
       sections:
       - title: Block-Unblock Account
         link: docs/APIs/Account-Management/Block-Account.md
+      - title: Inquire Account Balances
+        link: docs/APIs/Account-Management/account-balances.md
+      - title: Inquire Account Details
+        link: docs/APIs/Account-Management/account-details.md      
+      - title: List Accounts' Transactions
+        link: docs/APIs/Account-Management/List-Account-Transactions.md
     - title: Card Management
       sections:
       - title: Activate Card
@@ -64,3 +70,7 @@
         link: docs/APIs/Customer-Management/Customer-Demographic-Inquiry.md    
       - title: Customer Demographic Update
         link: docs/APIs/Customer-Management/Customer-Demographic-Update.md
+      - title: List Customers' Accounts
+        link: docs/APIs/Customer-Management/List-Customers-Accounts.md
+      - title: "List Customers' Cards"
+        link: docs/APIs/Customer-Management/List-Customers-Cards.md

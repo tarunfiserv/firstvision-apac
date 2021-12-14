@@ -55,5 +55,22 @@
         "value": true
       }
   ]
-  }
+  },
+   "supportConfig": [{ 
+		"bug": {
+			"label": "bug,firstvision",
+			"template": "bug.md",
+			"assignees": "AwaneeshSrivastava"
+		},
+		"feedback": {
+			"label": "feedback,firstvision",
+			"template": "feedback.md",
+			"assignees": "AwaneeshSrivastava"
+		},
+		"enhancement": {
+			"label": "enhancement,firstvision",
+			"template": "feature.md",
+			"assignees": "AwaneeshSrivastava"
+		}
+	}]
 }
