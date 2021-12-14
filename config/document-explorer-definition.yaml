@@ -40,6 +40,10 @@
       sections:
       - title: Block-Unblock Account
         link: docs/APIs/Account-Management/Block-Account.md
+      - title: Inquire Account Balances
+        link: docs/APIs/Account-Management/account-balances.md
+      - title: Inquire Account Details
+        link: docs/APIs/Account-Management/account-details.md      
       - title: List Accounts' Transactions
         link: docs/APIs/Account-Management/List-Account-Transactions.md
     - title: Card Management

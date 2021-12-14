@@ -1,19 +1,20 @@
 # List Accounts' Transactions
 
- The service provides list of transactions along with detail information for transactions posted in the last statement cycle. 
+ The service provides list of transactions along with detail information of transactions posted in the last statement cycle.
 
-# Endpoint
+## Endpoint
+
 `GET /v1/accounts/{accountNumber}/transactions/lastStatement/?businessUnit=xxx&product=n&statementDate=DD/MM/YYYY`
-
 
 ## Payload Example
 
-
 ### Request Payload
+
 > Empty.  
 
 ### Minimum Requirements
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/accounts/listAccountTransactions).
+
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/accounts/{accountNumber}/transactions/lastStatement).
 
 The below table identifies the required parameters in the request payload.
 
@@ -24,10 +25,7 @@ The below table identifies the required parameters in the request payload.
 | `product` | *number* | 3 | Product associated with the Account. |
 | `statementDate` | *Date* | DD/MM/YYYY | Date the statement is produced for the account holder |
 
-
-
 ### Successful Response Payload
-
 
 ```json
 {
@@ -86,12 +84,13 @@ The below table identifies the required parameters in the request payload.
   "errorMessage": "No Statement History information found on file"  
 }
 ```
-Below table provides the list of application's error code and its description. 
+
+Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
-| `V5BS0011SF` |	Update Request - Record Add Pending|
-| `V5BS4001EA` |	Invalid Business Unit|                                      
-| `V5BS4001SC` |	Business Unit is in Purged Status|     
-| `V5BS4002SA` |	Invalid Account Number|  
-| `V5S34003SA` |	No Statement History information found on file|
+| `V5BS0011SF` |Update Request - Record Add Pending|
+| `V5BS4001EA` |Invalid Business Unit|
+| `V5BS4001SC` |Business Unit is in Purged Status|
+| `V5BS4002SA` |Invalid Account Number|  
+| `V5S34003SA` |No Statement History information found on file|
