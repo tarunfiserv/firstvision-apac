@@ -1055,8 +1055,7 @@ components:
           description: Clear Pan - 19 digit Clear card number
           format: uppercase
     UpdateCardActivateReq:
-      required:
-      - postToAccountNumber
+      required:      
       - cardSequence
       - cardActivatedDate
       type: object
@@ -1086,8 +1085,7 @@ components:
           description: Last card activation flag-indicates whether cardactivation needs to occur for the previously issuedcard values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur   
     UpdateCardActivateResp:
       required:
-      - businessUnit
-      - postToAccountNumber
+      - businessUnit      
       - cardNumber
       - cardSequence
       type: object
@@ -1225,8 +1223,7 @@ components:
           format: uppercase
     UpdateCardProfileReq:
       required:
-      - cardSequence
-      - postToAccountNumber
+      - cardSequence      
       type: object
       properties:
         cardSequence:
@@ -1248,8 +1245,7 @@ components:
       required:
       - businessUnit
       - cardNumber
-      - cardSequence
-      - postToAccountNumber
+      - cardSequence      
       type: object
       properties:
         cardholderType:
@@ -1478,8 +1474,7 @@ components:
       required:
       - businessUnit
       - cardNumber
-      - cardSequence
-      - postToAccountNumber
+      - cardSequence      
       type: object
       properties:
         businessUnit:
@@ -1557,8 +1552,7 @@ components:
           - 9 - Approve Tip
     UpdateCardLimitReq:
       required:
-      - cardSequence
-      - postToAccountNumber
+      - cardSequence      
       type: object
       properties:
         cardSequence:
@@ -1630,8 +1624,7 @@ components:
       required:
       - businessUnit
       - cardNumber
-      - cardSequence
-      - postToAccountNumber
+      - cardSequence      
       type: object
       properties:
         businessUnit:
