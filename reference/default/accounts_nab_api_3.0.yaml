@@ -618,8 +618,8 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Posted authorizations
-      summary: Inquire Posted authorizations
+      x-proxy-name: Inquire Posted Authorizations
+      summary: Inquire Posted Authorizations
       description: This service provide details of the cycle-to-date transactions on a given account.
       operationId: cycleToDate
       parameters:
