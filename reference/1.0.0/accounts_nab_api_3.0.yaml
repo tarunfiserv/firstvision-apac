@@ -495,7 +495,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
                   
-  /v1/accounts/{accountRelationshipNBR}/transactions/memoPost:
+  /v1/accounts/{accountRelationshipNbr}/transactions/memoPost:
     get:
       tags:
         - Account Management
@@ -542,7 +542,7 @@ paths:
             type: number
             default: 0.0
             example: 600
-        - name: accountRelationshipNBR
+        - name: accountRelationshipNbr
           in: path
           description: Identification number of the Account Base Segment record.
           required: true
@@ -613,7 +613,7 @@ paths:
                 - '504':
                     $ref: '#/components/examples/504-Errors'
   
-  /v1/accounts/{accountRelationshipNBR}/transactions/cycleToDate:
+  /v1/accounts/{accountRelationshipNbr}/transactions/cycleToDate:
     get:
       tags:
         - Account Management
@@ -660,7 +660,7 @@ paths:
             type: number
             default: 0.0
             example: 600
-        - name: accountRelationshipNBR
+        - name: accountRelationshipNbr
           in: path
           description: Identification number of the Account Base Segment record.
           required: true
