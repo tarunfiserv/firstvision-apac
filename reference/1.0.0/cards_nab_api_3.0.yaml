@@ -1210,7 +1210,7 @@ components:
     UpdateCardProfileReq:
       type: object
       properties:
-        cardHolderType:
+        cardholderType:
           type: string
           example: '1'
           description: Cardholder Type-Code that indicates whether the cardholder is the primarycardholder or an additional cardholder associated with theaccount. The value for this field is set in the card-adding processwith the first cardholder designated as the primary cardholderand the other cardholders as additional cardholders. The values are 0 =Additional cardholder 1=Primary cardholder.
