@@ -23,7 +23,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -32,7 +32,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -148,7 +148,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -157,7 +157,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -272,7 +272,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -281,7 +281,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -397,7 +397,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -406,7 +406,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -521,7 +521,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: EXCABC123
       - name: X-Name
         in: header
         required: true
@@ -530,7 +530,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -647,7 +647,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -656,7 +656,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -772,7 +772,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -781,7 +781,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -892,7 +892,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -901,7 +901,7 @@ paths:
           maxLength: 30
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -1055,20 +1055,8 @@ components:
           description: Clear Pan - 19 digit Clear card number
           format: uppercase
     UpdateCardActivateReq:
-      required:
-      - postToAccountNumber
-      - cardSequence
-      - cardActivatedDate
       type: object
       properties:
-        cardSequence:
-          type: number
-          example: 0001
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          type: string
-          example: ' '
-          description: Identification number of the Account BaseSegment record towhich CMS posts transactio received for this Embosser record
         currentCardRequireActivation:
           type: string
           example: 'N'
@@ -1076,10 +1064,6 @@ components:
            - 'Y - Yes'
            - 'N - No'
           description: Current activation flag-Indicates whether cardactivation needs to occur for the most recently issued card values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur
-        cardActivatedDate: 
-          type: string
-          example: ' '
-          description: Card activated date- This date will identifies the card activated date, this is a system generated date this will be changed
         lastCardActivation:
           type: string
           example: 'Y'
@@ -1224,22 +1208,9 @@ components:
           description: Card Number -Number that is embossed on the plastic card. ""
           format: uppercase
     UpdateCardProfileReq:
-      required:
-      - cardSequence
-      - postToAccountNumber
       type: object
       properties:
-        cardSequence:
-          type: number
-          example: 0001
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          maxLength: 19
-          type: string
-          example: ' '
-          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
-          format: uppercase
-        cardHolderType:
+        cardholderType:
           type: string
           example: '1'
           description: Cardholder Type-Code that indicates whether the cardholder is the primarycardholder or an additional cardholder associated with theaccount. The value for this field is set in the card-adding processwith the first cardholder designated as the primary cardholderand the other cardholders as additional cardholders. The values are 0 =Additional cardholder 1=Primary cardholder.
@@ -1351,7 +1322,6 @@ components:
       - action
       - blockCode
       - cardReplacementIndicator
-      - cardSequenceNumber
       - effectiveDate
       - operatorId
       - product
@@ -1445,12 +1415,6 @@ components:
             The value must be a date less than or equal to today’sdateThe default
             value is today’s date. If you enter a future date The system will abend
           format: date
-        cardSequenceNumber:
-          maximum: 9999
-          minimum: 1
-          type: number
-          example: 0001
-          description: Card sequence- This a static value value 0001 should be passed
         startDate:
           type: string
           example: ' '
@@ -1459,10 +1423,6 @@ components:
     CardsBlockUnblockReq:
       type: object
       properties:
-        cardSequence:
-          type: number
-          example: '0001'
-          description: Card sequence- This a static value value 0001 shouldbe passed
         blockCode:
           type: string
           example: 'X'
@@ -1556,24 +1516,9 @@ components:
           - 8 - Decline User Exit 
           - 9 - Approve Tip
     UpdateCardLimitReq:
-      required:
-      - cardSequence
-      - postToAccountNumber
       type: object
       properties:
-        cardSequence:
-          type: number
-          example: '0001'
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          maxLength: 19
-          type: string
-          example: ' '
-          description: Identification number of the Account
-            Base Segment record towhich CMS posts transactions received for this Embosser
-            record
-          format: uppercase
-        maximumAuthorizationsFrequnecy:
+        maximumAuthorizationsFrequency:
           type: string
           example: '1'
           description: Maximum authorization frequency-Code that indicates the frequency for the maximumauthorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date

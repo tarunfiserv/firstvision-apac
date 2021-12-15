@@ -10,7 +10,7 @@ servers:
 tags:
  - name: "Customer Management"
 paths:
-  /v1/customers/{accountNumber}/nameAddress:
+  /v1/customers/{customerNumber}/nameAddress:
     get:
       tags:
       - Customer Management
@@ -27,7 +27,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -36,7 +36,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John 
+          example: 00000AUNAB 
       - name: X-context
         in: header
         required: true
@@ -54,7 +54,7 @@ paths:
           type: number
           default: 0.0
           example: 100
-      - name: accountNumber
+      - name: customerNumber
         in: path
         required: true
         description : "Must be numeric and greater than zero. Max length = 19. Should be a valid customer number."
@@ -141,7 +141,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -150,7 +150,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -168,7 +168,7 @@ paths:
           type: number
           default: 0.0
           example: 100
-      - name: accountNumber
+      - name: customerNumber
         in: path
         required: true
         description : "Must be numeric and greater than zero. Max length = 19. Should be a valid customer number."
@@ -263,7 +263,7 @@ paths:
             maxLength: 40
             minLength: 0
             type: string
-            example: EXC-ID-12345678-SUB
+            example: ABC123
         - name: X-Name
           in: header
           required: true
@@ -272,7 +272,7 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
-            example: John
+            example: 00000AUNAB
         - name: X-context
           in: header
           required: true
@@ -368,7 +368,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -377,7 +377,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John 
+          example: 00000AUNAB 
       - name: X-context
         in: header
         required: true
@@ -740,24 +740,18 @@ components:
     CustomerAddressUpdateReq:
       type: object
       properties:
-        homePhoneNumber1:
-          maxLength: 20
+        firstName1:
+          maxLength: 40
           type: string
           format: uppercase
-          description: "Home Phone Number-that indicates the home telephone number ofthe owner"
-          example: "123456788999346"
-        mobileNumber1:
-          maxLength: 20
+          description: "First Name"
+          example: "JOHN"
+        lastName1:
+          maxLength: 40
           type: string
           format: uppercase
-          description: "Mobile Number-that indicates the mobile telephone number ofthe owner."
-          example: '11110976444'
-        emailAddress1:
-          maxLength: 60
-          type: string
-          format: uppercase
-          description: "Email-that indicates the e-mail address of the owner"
-          example: SAM@GMAIL.COM 
+          description: "Last Name"
+          example: 'SMITH'
     CustomerAccountListResp:
       type: object
       properties:

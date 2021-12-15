@@ -137,8 +137,8 @@ paths:
       tags:
       - Account Management
       x-group-name:  Account Management
-      x-proxy-name:  List Accounts' Transactions
-      summary: List Accounts' Transactions
+      x-proxy-name:  List Billed Transactions
+      summary: List Billed Transactions
       description: Provides transaction detail information from the last billing cycle
       operationId: Transaction LastStatement
       parameters:
@@ -149,7 +149,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -158,7 +158,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -200,7 +200,7 @@ paths:
         schema:
           type: string
           format: date
-          example: '04/09/2021'
+          example: '09/04/2021'
 
       responses:
         200:
@@ -280,7 +280,7 @@ paths:
             maxLength: 40
             minLength: 0
             type: string
-            example: EXC-ID-12345678-SUB
+            example: ABC123
         - name: X-Name
           in: header
           required: true
@@ -289,7 +289,7 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
-            example: John
+            example: 00000AUNAB
         - name: X-context
           in: header
           required: true
@@ -386,8 +386,8 @@ paths:
       - Account Management
       x-group-name:  Account Management
       x-proxy-name:  Inquire Account Balances
-      summary: List Accounts' Transactions
-      description: This service is inquire on the different balances on the account.
+      summary:  Inquire Account Balances
+      description: This service provides the different balances on the account.
       operationId: Account Balances
       parameters:
       - name: X-Correl-Id
@@ -397,7 +397,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -406,7 +406,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -495,14 +495,14 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
                   
-  /v1/accounts/{accountRelationshipNBR}/transactions/memoPost:
+  /v1/accounts/{accountRelationshipNbr}/transactions/memoPost:
     get:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Outstanding Authorizations
-      summary: Inquire Outstanding Authorizations
-      description: This service provide details of the memo-posted authorizations on a given account.
+      x-proxy-name: List Outstanding Authorizations
+      summary: List Outstanding Authorizations
+      description: This service provides details of the memo-posted authorizations on a given account.
       operationId: memoPost
       parameters:
         - name: X-Correl-Id
@@ -542,7 +542,7 @@ paths:
             type: number
             default: 0.0
             example: 600
-        - name: accountRelationshipNBR
+        - name: accountRelationshipNbr
           in: path
           description: Identification number of the Account Base Segment record.
           required: true
@@ -550,7 +550,7 @@ paths:
             maxLength: 19
             type: string
             format: uppercase
-            example: '0000000001000000073'
+            example: '0000000001000000057'
       responses:
         '200':
           description: Success
@@ -613,14 +613,14 @@ paths:
                 - '504':
                     $ref: '#/components/examples/504-Errors'
   
-  /v1/accounts/{accountRelationshipNBR}/transactions/cycleToDate:
+  /v1/accounts/{accountRelationshipNbr}/transactions/cycleToDate:
     get:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Posted Authorizations
-      summary: Inquire Posted Authorizations
-      description: This service provide details of the cycle-to-date transactions on a given account.
+      x-proxy-name: List Unbilled Transactions
+      summary: List Unbilled Transactions
+      description: This service provides details of the cycle-to-date transactions on a given account.
       operationId: cycleToDate
       parameters:
         - name: X-Correl-Id
@@ -660,7 +660,7 @@ paths:
             type: number
             default: 0.0
             example: 600
-        - name: accountRelationshipNBR
+        - name: accountRelationshipNbr
           in: path
           description: Identification number of the Account Base Segment record.
           required: true
