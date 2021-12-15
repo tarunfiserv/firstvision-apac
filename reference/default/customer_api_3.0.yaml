@@ -740,13 +740,13 @@ components:
     CustomerAddressUpdateReq:
       type: object
       properties:
-        firstName:
+        firstName1:
           maxLength: 40
           type: string
           format: uppercase
           description: "First Name"
           example: "JOHN"
-        lastName:
+        lastName1:
           maxLength: 40
           type: string
           format: uppercase
