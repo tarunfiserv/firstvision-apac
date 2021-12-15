@@ -27,7 +27,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -36,7 +36,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John 
+          example: 00000AUNAB 
       - name: X-context
         in: header
         required: true
@@ -141,7 +141,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -150,7 +150,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John Smith
+          example: 00000AUNAB
       - name: X-context
         in: header
         required: true
@@ -263,7 +263,7 @@ paths:
             maxLength: 40
             minLength: 0
             type: string
-            example: EXC-ID-12345678-SUB
+            example: ABC123
         - name: X-Name
           in: header
           required: true
@@ -272,7 +272,7 @@ paths:
             maxLength: 20
             minLength: 0
             type: string
-            example: John
+            example: 00000AUNAB
         - name: X-context
           in: header
           required: true
@@ -368,7 +368,7 @@ paths:
           maxLength: 40
           minLength: 0
           type: string
-          example: EXC-ID-12345678-SUB
+          example: ABC123
       - name: X-Name
         in: header
         required: true
@@ -377,7 +377,7 @@ paths:
           maxLength: 20
           minLength: 0
           type: string
-          example: John 
+          example: 00000AUNAB 
       - name: X-context
         in: header
         required: true
