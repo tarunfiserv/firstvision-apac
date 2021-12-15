@@ -77,7 +77,7 @@ featuredFeatures:
       - relatedAPI: 
         title: Block-Unblock Account
         description: This service is used to update the Account Block Code.
-        type: "patch"        
+        type: "post"        
         path: "/v1/accounts/{accountNumber}/blockUnblock"
       - relatedAPI: 
         title: Block-Unblock Card
