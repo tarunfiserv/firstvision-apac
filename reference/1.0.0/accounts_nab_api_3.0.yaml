@@ -137,8 +137,8 @@ paths:
       tags:
       - Account Management
       x-group-name:  Account Management
-      x-proxy-name:  List Accounts' Transactions
-      summary: List Accounts' Transactions
+      x-proxy-name:  List Billed Transactions
+      summary: List Billed Transactions
       description: Provides transaction detail information from the last billing cycle
       operationId: Transaction LastStatement
       parameters:
@@ -386,8 +386,8 @@ paths:
       - Account Management
       x-group-name:  Account Management
       x-proxy-name:  Inquire Account Balances
-      summary: List Accounts' Transactions
-      description: This service is inquire on the different balances on the account.
+      summary:  Inquire Account Balances
+      description: This service provides the different balances on the account.
       operationId: Account Balances
       parameters:
       - name: X-Correl-Id
@@ -500,9 +500,9 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Outstanding Authorizations
-      summary: Inquire Outstanding Authorizations
-      description: This service provide details of the memo-posted authorizations on a given account.
+      x-proxy-name: List Outstanding Authorizations
+      summary: List Outstanding Authorizations
+      description: This service provides details of the memo-posted authorizations on a given account.
       operationId: memoPost
       parameters:
         - name: X-Correl-Id
@@ -618,9 +618,9 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Posted Authorizations
-      summary: Inquire Posted Authorizations
-      description: This service provide details of the cycle-to-date transactions on a given account.
+      x-proxy-name: List Unbilled Transactions
+      summary: List Unbilled Transactions
+      description: This service provides details of the cycle-to-date transactions on a given account.
       operationId: cycleToDate
       parameters:
         - name: X-Correl-Id
