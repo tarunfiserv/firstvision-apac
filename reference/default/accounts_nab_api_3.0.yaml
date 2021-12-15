@@ -550,7 +550,7 @@ paths:
             maxLength: 19
             type: string
             format: uppercase
-            example: '0000000001000000073'
+            example: '0000000001000000057'
       responses:
         '200':
           description: Success
