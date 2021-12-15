@@ -200,7 +200,7 @@ paths:
         schema:
           type: string
           format: date
-          example: '04/09/2021'
+          example: '09/04/2021'
 
       responses:
         200:
