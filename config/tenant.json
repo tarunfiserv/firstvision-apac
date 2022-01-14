@@ -58,17 +58,17 @@
   },
    "supportConfig": [{ 
 		"bug": {
-			"label": "bug,firstvision",
+			"label": "bug,FirstVisionAPAC",
 			"template": "bug.md",
 			"assignees": "AwaneeshSrivastava"
 		},
 		"feedback": {
-			"label": "feedback,firstvision",
+			"label": "feedback,FirstVisionAPAC",
 			"template": "feedback.md",
 			"assignees": "AwaneeshSrivastava"
 		},
 		"enhancement": {
-			"label": "enhancement,firstvision",
+			"label": "enhancement,FirstVisionAPAC",
 			"template": "feature.md",
 			"assignees": "AwaneeshSrivastava"
 		}
