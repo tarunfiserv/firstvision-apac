@@ -945,7 +945,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-    
+  /v1/accounts/{accountNumber}/directDebit:  
     get:
       tags:
       - Account Management
