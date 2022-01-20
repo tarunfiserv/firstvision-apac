@@ -504,7 +504,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'
   
-  /v1/cards/{cardNumber}/secureCode:
+  /v1/cards/{cardNumber}/validateCVV2:
     post:
       tags:
       - Card Management
@@ -875,7 +875,7 @@ paths:
                 504:
                   $ref: '#/components/examples/504-Errors'      
                   
-  /v1/cards/{cardNumber}/pinBlock:
+  /v1/cards/{cardNumber}/pinBlockChange:
     put:
       tags:
       - Card Management
