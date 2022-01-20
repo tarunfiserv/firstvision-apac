@@ -2451,10 +2451,11 @@ components:
           description: DD Payment Expiry Date - Date on which direct debit processing
             expires for the account
           type: string
-          example: 04/11/2021
+          example: "10/04/2024"
         product:
           default: 0.0
           type: number
+          example: 0
         dDRoutingBankID:
           default: 0.0
           description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
@@ -2492,6 +2493,7 @@ components:
         billingAcctInd:
           default: 0.0
           type: number
+          example: 0
         dDAccountNumber:
           description: DD Account Number - This field is the account number
           type: string
@@ -2502,7 +2504,7 @@ components:
           description: DD Payment Start Date - Date on which direct debit processing
             starts for the account
           type: string
-          example: 04/10/2021
+          example: "09/04/2022"
         dDAccountType:
           description: DD Account Type - This field is a code that indicates the type
             of account to which the direct debit is sent
