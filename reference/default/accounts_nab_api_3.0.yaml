@@ -1155,7 +1155,114 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-                
+  /v1/accounts/{accountNumber}/chargeoff:
+    put:
+      tags:
+      - Account Management
+      summary: Account Status Update
+      description: This service is used to update account status
+      operationId: AccountStatusUpdate
+      x-group-name: Account Management
+      x-proxy-name: Account Status Update
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number - Unique Identification numbers of the Account
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0000000001000000057
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountStatusUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountStatusUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
     AccountsBlockUnblockReq:
@@ -2605,7 +2712,76 @@ components:
           description: Temporary Credit Limit - Temporary line of credit for the account in whole monetary units. This amount overrides the credit limit assigned to the account
           type: string
           example: 1000      
-    
+    AccountStatusUpdateReq:
+      type: object
+      properties:
+        dateofNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+          type: string
+          example: 01/01/2018
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - " "
+          - T
+          example: C
+    AccountStatusUpdateResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        dateofNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+          type: string
+          example: 01/01/2018
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - " "
+          - T
+          example: C
+        chargeOffStatus:
+          description: Charge Off Status - Code that identifies the charge-off status
+            of this account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
+          example: 0
+        numberofChargeOffDays:
+          default: 0.0
+          description: Number of Charge Off Days - Number of days until charge-off
+          type: number
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"      
     ErrorList:
       type: array
       items:
