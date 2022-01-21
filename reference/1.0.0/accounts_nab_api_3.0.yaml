@@ -2498,7 +2498,7 @@ components:
           description: DD Account Number - This field is the account number
           type: string
           maxLength: 17
-          example: "0000000001000000057"
+          example: "1000000057"
         dDPaymentStartDate:
           format: date
           description: DD Payment Start Date - Date on which direct debit processing
@@ -2577,7 +2577,7 @@ components:
           description: DD Account Number - This field is the account number
           type: string
           maxLength: 17
-          example: "0000000001000000057"
+          example: "1000000057"
         dDPaymentStartDate:
           format: date
           description: DD Payment Start Date - Date on which direct debit processing
