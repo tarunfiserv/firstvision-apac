@@ -1214,7 +1214,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0000000001000000057
+          example: "0000000001000000057"
       requestBody:
         content:
           application/json:
