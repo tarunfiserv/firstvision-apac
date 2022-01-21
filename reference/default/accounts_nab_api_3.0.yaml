@@ -2451,7 +2451,7 @@ components:
           description: DD Payment Expiry Date - Date on which direct debit processing
             expires for the account
           type: string
-          example: "10/04/2024"
+          example: 10/04/2024
         product:
           default: 0.0
           type: number
@@ -2504,7 +2504,7 @@ components:
           description: DD Payment Start Date - Date on which direct debit processing
             starts for the account
           type: string
-          example: "09/04/2022"
+          example: 09/04/2022
         dDAccountType:
           description: DD Account Type - This field is a code that indicates the type
             of account to which the direct debit is sent
