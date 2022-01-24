@@ -50,6 +50,14 @@
               link: docs/APIs/Account-Management/List-unbilled-Transactions.md
             - title: List Outstanding Authorizations
               link: docs/APIs/Account-Management/List-Outstanding-Authorizations.md
+            - title: Inquire Direct Debit
+              link: docs/APIs/Account-Management/Direct-Debit_inq.md
+            - title: Update Credit Limit
+              link: docs/APIs/Account-Management/Credit-Limit_upd.md              
+            - title: Update Direct Debit
+              link: docs/APIs/Account-Management/Direct-Debit_upd.md
+            - title: Update Temp Credit Limit
+              link: docs/APIs/Account-Management/Temp-Credit-Limit_upd.md
         - title: Card Management
           sections:
             - title: Activate Card
