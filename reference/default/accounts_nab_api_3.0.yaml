@@ -137,8 +137,8 @@ paths:
       tags:
       - Account Management
       x-group-name:  Account Management
-      x-proxy-name:  List Accounts' Transactions
-      summary: List Accounts' Transactions
+      x-proxy-name:  List Billed Transactions 
+      summary: List Billed Transactions 
       description: Provides transaction detail information from the last billing cycle
       operationId: Transaction LastStatement
       parameters:
@@ -500,8 +500,8 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Outstanding Authorizations
-      summary: Inquire Outstanding Authorizations
+      x-proxy-name: List Outstanding Authorizations
+      summary: List Outstanding Authorizations
       description: This service provide details of the memo-posted authorizations on a given account.
       operationId: memoPost
       parameters:
@@ -618,8 +618,8 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Posted Authorizations
-      summary: Inquire Posted Authorizations
+      x-proxy-name: List Unbilled Transactions
+      summary: List Unbilled Transactions
       description: This service provide details of the cycle-to-date transactions on a given account.
       operationId: cycleToDate
       parameters:
@@ -1329,15 +1329,15 @@ components:
           format: date
           example: 04/09/2021
           description: "Statement Date - Period for which the user want to view the important statement details of the Account"
-        account/Relationship:
+        accountRelationship:
           maxLength: 19
           type: string
-          example: 0002XX001NNN0001211
+          example: "0002000010000001211"
           description: "Identification number of the account"
         fileType:
           maxLength: 2
           type: string
-          example: XXX
+          example: SL
           description: "Type of file. Small Statement or Large Statement"
     
         transactionList:
@@ -1368,17 +1368,17 @@ components:
                 amount: 
                   type: string
                   default: 0
-                  example: $XX.XX
+                  example: $61.40
                   description: "Amount of the transaction"
                 transactionCode:
                   type: string
                   default: 0
-                  example: NNNN
+                  example: 4006
                   description: "Transaction Code associated with the transaction"
                 logicModule: 
                   type: number
                   default: 0
-                  example: X
+                  example: 1
                   description: "Logic module associated with the transaction code"
                 creditPlan:
                   type: number
@@ -1393,7 +1393,7 @@ components:
                 authorizationCode:
                   type: string
                   maxLength: 6
-                  example: " "
+                  example: "049461"
                   description: "Authorization code assigned to the transaction"
                 aMSLKey:
                   type: string
@@ -1404,13 +1404,13 @@ components:
                   type: string
                   default: 0
                   maximum: 99999
-                  example: XX
+                  example: 3
                   description: "Sequence Number of the transaction"
                 logo: 
                   type: number
                   default: 0
                   maximum: 999
-                  example: X
+                  example: "001"
                   description: "Number that identifies the logo associated with the account"
                 businessUnit:
                   type: number
@@ -2187,7 +2187,7 @@ components:
           type: string
           description: Internal File Flag
           format: uppercase
-          example: ' '
+          example: " "
         businessUnit:
           maximum: 999
           minimum: 0
@@ -2215,7 +2215,7 @@ components:
                 minimum: 0
                 type: number
                 description: Date
-                example: 0.0
+                example: 2021247
               recordNumber:
                 maximum: 99999
                 minimum: 0
@@ -2232,7 +2232,7 @@ components:
                 type: string
                 description: Authorization code assigned to the transaction
                 format: uppercase
-                example: ' '
+                example: 051180
               typeOfTransaction:
                 maxLength: 1
                 type: string
@@ -2248,7 +2248,7 @@ components:
               postingDate:
                 type: string
                 description: Posting date of the transaction.(applicable only for posted transaction)
-                format: date
+                example: 16/08/2011
               transactionCode:
                 maximum: 9999
                 minimum: 0
@@ -2278,10 +2278,11 @@ components:
                 minimum: 0
                 type: number
                 description: Time
-                example: 0.0
+                example: 134251
               effectiveDate:
                 type: string
                 description: Effective date of the transaction.
+                example: 06/09/2021
     
     AcctCycleDateResp:
       required:
@@ -2342,7 +2343,7 @@ components:
                 minimum: 0
                 type: number
                 description: Date
-                example: 0.0
+                example: 2021247
               recordNumber:
                 maximum: 99999
                 minimum: 0
@@ -2376,6 +2377,7 @@ components:
                 type: string
                 description: Posting date of the transaction.(applicable only for posted transaction)
                 format: date
+                example: 09/08/2021
               transactionCode:
                 maximum: 9999
                 minimum: 0
@@ -2405,10 +2407,11 @@ components:
                 minimum: 0
                 type: number
                 description: Time
-                example: 0.0
+                example: 132035
               effectiveDate:
                 type: string
-                description: Effective date of the transaction.      
+                description: Effective date of the transaction.
+                example: 20/09/2021
     CreditLimitUpdateReq:
       type: object
       required:
@@ -2442,7 +2445,7 @@ components:
           format: uppercase
           description: Date on which the current credit limit was assigned.
           type: string
-          example: ' '
+          example: 19/08/2021
     DirectDebitUpdateReq:
       type: object
       properties:
@@ -2455,7 +2458,7 @@ components:
         product:
           default: 0.0
           type: number
-          example: 0
+          example: 1
         dDRoutingBankID:
           default: 0.0
           description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
@@ -2594,6 +2597,9 @@ components:
           example: D
     DirectDebitDetResp:
       type: object
+      required:
+       - accountNumber
+       - businessUnit
       properties:
         dDPaymentExpiryDate:
           format: date
@@ -2692,6 +2698,8 @@ components:
       required:
       - temporaryCreditLimitExpiryDate
       - temporaryCreditLimit
+      - businessUnit
+      - accountNumber
       properties:
         temporaryCreditLimitExpiryDate:
           format: uppercase
