@@ -1,6 +1,6 @@
 # Inquire Account Balances
 
- The service provide account's balances such as available balance/ current balance / due amount / last payment amount / first purchase amount / credit limit, associated with the customer.
+ The service provide account's balances such as available balance/ current balance / due amount / last payment amount / first purchase amount / credit limit, associated with the customer..
 
 ## Endpoint
 
