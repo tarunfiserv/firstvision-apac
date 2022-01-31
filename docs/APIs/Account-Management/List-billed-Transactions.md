@@ -4,7 +4,7 @@
 
 ## Endpoint
 
-`GET /v1/accounts/{accountNumber}/transactions/lastStatement/?businessUnit=xxx&product=n&statementDate=DD/MM/YYYY`
+`GET /v1/accounts/{accountNumber}/transactions/lastStatement`
 
 ## Payload Example
 
