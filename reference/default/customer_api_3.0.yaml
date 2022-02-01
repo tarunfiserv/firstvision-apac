@@ -182,7 +182,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomerAddressUpdateReq'
+              $ref: '#/components/schemas/CustomerUpdateNameAddressReq'
             
       responses:
         '200':
@@ -190,7 +190,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerAddressUpdateResponse'
+                $ref: '#/components/schemas/CustomerUpdateNameAddressResp'
               examples: 
                 AddressUpdate: {$ref: '#/components/examples/AddressUpdateResponse'}  
         '400':
@@ -588,170 +588,8 @@ components:
           format: uppercase
           example: ABC@GMAIL
           description: "Email-that indicates the e-mail address of the owner"
-    CustomerAddressUpdateResponse:
-      required:
-      - accountNumber
-      - businessUnit
-      type: object
-      properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: "Business Unit -Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998."
-        accountNumber:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: 100001NNNNN0481
-          description: "CUSTOMER NUMBER - Must be numeric and greater than zero. Max length = 19. Should be a valid customer number."
-        nameLine11:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " " 
-          description: "NAME-LINE 1-This field is the owner personal name, businessname, or a generic name. If the name is a personal name(type)this field displays the contents of the FIRST NAME, MIDDLENAME, and LAST NAME fields The name tyep fields are 0=Personal name (Default),1=Business name,3 = gender name"  
-        nameLine21:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " "
-          description: "NAME-LINE 2-this field is the owner name. You must enternames in the correct format as defined in the Organization"
-        nameLine31:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " "
-          description: "NAME-LINE 3-this field is a code that indicates the type ofname. This untitled field displays to the right of the NAME LINE 3field. The values arefields are 0=Personal name (Default),1=Business name,3 = gender name"
-        houseNumber1:
-          maxLength: 20
-          type: string
-          format: uppercase
-          example: " "
-          description: "HOUSE NAME-House name of the owner. The default is spaces"
-        addressLine11:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: X.ANGLES
-          description: "Address Line 1-Mailing address for the owner"
-        addressLine21:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " "
-          description: "Address Line 2-Mailing address for the owner"
-        addressLine31:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " "
-          description: "Address Line 3-Mailing address for the owner"
-        addressLine41:
-          maxLength: 40
-          type: string
-          format: uppercase
-          example: " "
-          description: "Address Line 4-Mailing address for the owner"
-        city1:
-          maxLength: 30
-          type: string
-          format: uppercase
-          example: XXX
-          description: "City-City portion of the mailing address of the owner"
-        stateProvince1:
-          maxLength: 3
-          type: string
-          format: uppercase
-          example: XXX
-          description: "State/Province-Abbreviation of the state or province portion of the mailingaddress of the owner"
-        countryCode1:
-          maxLength: 3
-          type: string
-          format: uppercase
-          example: XXX
-          description: "Country Code-Thevalue entered must be a valid country code previously definedin the Security Subsystem and Common Routines (SSC) system"
-        postalCode1:
-          maxLength: 10
-          type: string
-          format: uppercase
-          example: "12345"
-          description: "Postal Code-Postal code portion of the mailing address of the owner"
-        languageIndicator1:
-          maxLength: 3
-          type: string
-          format: uppercase
-          example: XXX
-          description: "Language Indicator-User-defined code that indicates the language spoken by theowner."
-        homePhoneNumber1:
-          maxLength: 20
-          type: string
-          format: uppercase
-          example: "12345678989898"
-          description: "Home Phone Number-that indicates the home telephone number ofthe owner"
-        homePhoneFlag1:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          - '2'
-          example: '0'
-          description: "Home Phone Flag-this field is a code that specifies whether theyou have the owner’s permission to call this number. The values 0 =No, do not contact the customer at this number,1=Yes, you can contact the customer at thisnumber (Default) 2=Preferred contact method"
-        faxNumber1:
-          maxLength: 20
-          type: string
-          format: uppercase
-          example: " "
-          description: "Fax Number-field that indicates the facsimile (fax) number of theowner"
-        faxPhoneFlag1:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          - '2' 
-          example: '1'
-          description: "Fax Phone Flagthis field is a code that specifies whether theyou have the owner’s permission to call this number. The values 0 =No, do not contact the customer at this number,1=Yes, you can contact the customer at thisnumber (Default) 2=Preferred contact method"
-        mobileNumber1:
-          maxLength: 20
-          type: string
-          format: uppercase
-          example: "12345678901"
-          description: "Mobile Number-that indicates the mobile telephone number ofthe owner"
-        sMSFlag1:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          example: '1'
-          description: "SMS Flag-Code that indicates whether an SMS (short message service)message can be sent to the owner. The values are 0=No, do not contact the customer via SMS, 1=Yes, you can contact the customer via SMS(Default)"
-        mobilePhoneFlag1:
-          type: string
-          enum:
-          - '0'
-          - '1' 
-          - '2'
-          example: '1'
-          description: "Mobile Phone Flag-this field is a code that indicates whether youhave the owner’s permission to call this number. The values are0 =No, do not contact the customer at this number,1=Yes, you can contact the customer at thisnumber (Default) 2=Preferred contact method"
-        emailAddress1:
-          maxLength: 60
-          type: string
-          format: uppercase
-          example: ABC@GMAIL
-          description: "Email-that indicates the e-mail address of the owner"
-    CustomerAddressUpdateReq:
-      type: object
-      properties:
-        firstName1:
-          maxLength: 40
-          type: string
-          format: uppercase
-          description: "First Name"
-          example: "JOHN"
-        lastName1:
-          maxLength: 40
-          type: string
-          format: uppercase
-          description: "Last Name"
-          example: 'SMITH'
+    
+    
     CustomerAccountListResp:
       type: object
       properties:
@@ -1333,6 +1171,412 @@ components:
                 description: Occurence-10 of the MCC limit applied on the Card
                 example: $0.01
                 default: "0.0"
+    CustomerUpdateNameAddressResp:
+      type: object
+      properties:
+        postalCode1:
+          format: uppercase
+          description: Postal Code-Postal code portion of the mailing address of the
+            owner
+          type: string
+          maxLength: 10
+          example: ""
+        city1:
+          format: uppercase
+          description: City-City portion of the mailing address of the owner
+          type: string
+          maxLength: 30
+          example: ""
+        businessUnit:
+          default: 0.0
+          description: Identification number of the organization associated with thisAccount
+            Base Segment record. The values are 001–998.
+          type: number
+          example: 100
+        nameLine21:
+          format: uppercase
+          description: NAME-LINE 2-this field is the owner name. You must enternames
+            in the correct format as defined in the Organization
+          type: string
+          maxLength: 40
+          example: ""
+        firstName1:
+          format: uppercase
+          description: First Name 1
+          type: string
+          maxLength: 40
+          example: ABC
+        emailAddress1:
+          format: uppercase
+          description: Email-that indicates the e-mail address of the owner
+          type: string
+          maxLength: 60
+          example: SAM@FISERV.COM
+        homePhoneFlag1:
+          description: "Home Phone Flag-this field is a code that specifies whether\
+            \ theyou have the owner’s permission to call this number. The values 0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        userDefinedField41:
+          format: uppercase
+          description: User Defined Field 4 1
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1.0
+          example: "Y"
+        stateProvince1:
+          format: uppercase
+          description: State/Province-Abbreviation of the state or province portion
+            of the mailingaddress of the owner
+          type: string
+          maxLength: 3
+          example: ""
+        middleName1:
+          format: uppercase
+          description: Middle Name 1
+          type: string
+          maxLength: 40
+          example: ""
+        faxNumber1:
+          format: uppercase
+          description: Fax Number-field that indicates the facsimile (fax) number
+            of theowner
+          type: string
+          maxLength: 20
+          example: ""
+        addressLine21:
+          format: uppercase
+          description: Address Line 2-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        addressLine41:
+          format: uppercase
+          description: Address Line 4-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        lastName1:
+          format: uppercase
+          description: Last Name 1
+          type: string
+          maxLength: 40
+          example: ""
+        faxPhoneFlag1:
+          description: "Fax Phone Flagthis field is a code that specifies whether\
+            \ theyou have the owner’s permission to call this number. The values 0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        nameLine31:
+          format: uppercase
+          description: "NAME-LINE 3-this field is a code that indicates the type ofname.\
+            \ This untitled field displays to the right of the NAME LINE 3field. The\
+            \ values arefields are 0=Personal name (Default),1=Business name,3 = gender\
+            \ name"
+          type: string
+          maxLength: 40
+          example: ""
+        nameLine11:
+          format: uppercase
+          description: "NAME-LINE 1-This field is the owner personal name, businessname,\
+            \ or a generic name. If the name is a personal name(type)this field displays\
+            \ the contents of the FIRST NAME, MIDDLENAME, and LAST NAME fields The\
+            \ name tyep fields are 0=Personal name (Default),1=Business name,3 = gender\
+            \ name"
+          type: string
+          maxLength: 40
+          example: ""
+        mobileNumber1:
+          format: uppercase
+          description: Mobile Number-that indicates the mobile telephone number ofthe
+            owner
+          type: string
+          maxLength: 20
+          example: 112233
+        accountNumber:
+          format: uppercase
+          description: CUSTOMER NUMBER - Must be numeric and greater than zero. Max
+            length = 19. Should be a valid customer number.
+          type: string
+          maxLength: 19.0
+          example: "0001000000000150191"
+        countryCode1:
+          format: uppercase
+          description: Country Code-Thevalue entered must be a valid country code
+            previously definedin the Security Subsystem and Common Routines (SSC)
+            system
+          type: string
+          maxLength: 3
+          example: ""
+        languageIndicator1:
+          format: uppercase
+          description: Language Indicator-User-defined code that indicates the language
+            spoken by theowner.
+          type: string
+          maxLength: 3
+          example: ""
+        addressLine31:
+          format: uppercase
+          description: Address Line 3-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        sMSFlag1:
+          description: "SMS Flag-Code that indicates whether an SMS (short message\
+            \ service)message can be sent to the owner. The values are 0=No, do not\
+            \ contact the customer via SMS, 1=Yes, you can contact the customer via\
+            \ SMS(Default)"
+          type: string
+          enum:
+          - 0
+          - 1
+          example: ""
+        homePhoneNumber1:
+          format: uppercase
+          description: Home Phone Number-that indicates the home telephone number
+            ofthe owner
+          type: string
+          maxLength: 20
+          example: 1234567
+        addressLine11:
+          format: uppercase
+          description: Address Line 1-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        houseNumber1:
+          format: uppercase
+          description: HOUSE NAME-House name of the owner. The default is spaces
+          type: string
+          maxLength: 20
+          example: ""
+        mobilePhoneFlag1:
+          description: "Mobile Phone Flag-this field is a code that indicates whether\
+            \ youhave the owner’s permission to call this number. The values are0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        dateOfBirth1:
+          format: uppercase
+          description: Date Of Birth 1
+          type: string
+          example: ""
+    CustomerUpdateNameAddressReq:
+      type: object
+      properties:
+        postalCode1:
+          format: uppercase
+          description: Postal Code-Postal code portion of the mailing address of the
+            owner
+          type: string
+          maxLength: 10
+          example: ""
+        city1:
+          format: uppercase
+          description: City-City portion of the mailing address of the owner
+          type: string
+          maxLength: 30
+          example: ""
+        nameLine21:
+          format: uppercase
+          description: NAME-LINE 2-this field is the owner name. You must enternames
+            in the correct format as defined in the Organization
+          type: string
+          maxLength: 40
+          example: ""
+        firstName1:
+          format: uppercase
+          description: First Name 1
+          type: string
+          maxLength: 40
+          example: ABC
+        emailAddress1:
+          format: uppercase
+          description: Email-that indicates the e-mail address of the owner
+          type: string
+          maxLength: 60
+          example: SAM@FISERV.COM
+        homePhoneFlag1:
+          description: "Home Phone Flag-this field is a code that specifies whether\
+            \ theyou have the owner’s permission to call this number. The values 0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        userDefinedField41:
+          format: uppercase
+          description: User Defined Field 4 1
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1.0
+          example: "Y"
+        stateProvince1:
+          format: uppercase
+          description: State/Province-Abbreviation of the state or province portion
+            of the mailingaddress of the owner
+          type: string
+          maxLength: 3
+          example: ""
+        middleName1:
+          format: uppercase
+          description: Middle Name 1
+          type: string
+          maxLength: 40
+          example: ""
+        faxNumber1:
+          format: uppercase
+          description: Fax Number-field that indicates the facsimile (fax) number
+            of theowner
+          type: string
+          maxLength: 20
+          example: ""
+        addressLine21:
+          format: uppercase
+          description: Address Line 2-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        addressLine41:
+          format: uppercase
+          description: Address Line 4-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        lastName1:
+          format: uppercase
+          description: Last Name 1
+          type: string
+          maxLength: 40
+          example: ""
+        faxPhoneFlag1:
+          description: "Fax Phone Flagthis field is a code that specifies whether\
+            \ theyou have the owner’s permission to call this number. The values 0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        nameLine31:
+          format: uppercase
+          description: "NAME-LINE 3-this field is a code that indicates the type ofname.\
+            \ This untitled field displays to the right of the NAME LINE 3field. The\
+            \ values arefields are 0=Personal name (Default),1=Business name,3 = gender\
+            \ name"
+          type: string
+          maxLength: 40
+          example: ""
+        nameLine11:
+          format: uppercase
+          description: "NAME-LINE 1-This field is the owner personal name, businessname,\
+            \ or a generic name. If the name is a personal name(type)this field displays\
+            \ the contents of the FIRST NAME, MIDDLENAME, and LAST NAME fields The\
+            \ name tyep fields are 0=Personal name (Default),1=Business name,3 = gender\
+            \ name"
+          type: string
+          maxLength: 40
+          example: ""
+        mobileNumber1:
+          format: uppercase
+          description: Mobile Number-that indicates the mobile telephone number ofthe
+            owner
+          type: string
+          maxLength: 20
+          example: 112233
+        countryCode1:
+          format: uppercase
+          description: Country Code-Thevalue entered must be a valid country code
+            previously definedin the Security Subsystem and Common Routines (SSC)
+            system
+          type: string
+          maxLength: 3
+          example: ""
+        languageIndicator1:
+          format: uppercase
+          description: Language Indicator-User-defined code that indicates the language
+            spoken by theowner.
+          type: string
+          maxLength: 3
+          example: ""
+        addressLine31:
+          format: uppercase
+          description: Address Line 3-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        sMSFlag1:
+          description: "SMS Flag-Code that indicates whether an SMS (short message\
+            \ service)message can be sent to the owner. The values are 0=No, do not\
+            \ contact the customer via SMS, 1=Yes, you can contact the customer via\
+            \ SMS(Default)"
+          type: string
+          enum:
+          - 0
+          - 1
+          example: ""
+        homePhoneNumber1:
+          format: uppercase
+          description: Home Phone Number-that indicates the home telephone number
+            ofthe owner
+          type: string
+          maxLength: 20
+          example: 1234567
+        addressLine11:
+          format: uppercase
+          description: Address Line 1-Mailing address for the owner
+          type: string
+          maxLength: 40
+          example: ""
+        houseNumber1:
+          format: uppercase
+          description: HOUSE NAME-House name of the owner. The default is spaces
+          type: string
+          maxLength: 20
+          example: ""
+        mobilePhoneFlag1:
+          description: "Mobile Phone Flag-this field is a code that indicates whether\
+            \ youhave the owner’s permission to call this number. The values are0\
+            \ =No, do not contact the customer at this number,1=Yes, you can contact\
+            \ the customer at thisnumber (Default) 2=Preferred contact method"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: ""
+        dateOfBirth1:
+          format: uppercase
+          description: Date Of Birth 1
+          type: string
+          example: ""
+          
     ErrorList:
       type: array
       items:
