@@ -1180,13 +1180,13 @@ components:
             owner
           type: string
           maxLength: 10
-          example: ""
+          example: " "
         city1:
           format: uppercase
           description: City-City portion of the mailing address of the owner
           type: string
           maxLength: 30
-          example: ""
+          example: " "
         businessUnit:
           default: 0.0
           description: Identification number of the organization associated with thisAccount
@@ -1199,7 +1199,7 @@ components:
             in the correct format as defined in the Organization
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         firstName1:
           format: uppercase
           description: First Name 1
@@ -1222,7 +1222,7 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         userDefinedField41:
           format: uppercase
           description: User Defined Field 4 1
@@ -1238,38 +1238,38 @@ components:
             of the mailingaddress of the owner
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         middleName1:
           format: uppercase
           description: Middle Name 1
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         faxNumber1:
           format: uppercase
           description: Fax Number-field that indicates the facsimile (fax) number
             of theowner
           type: string
           maxLength: 20
-          example: ""
+          example: " "
         addressLine21:
           format: uppercase
           description: Address Line 2-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         addressLine41:
           format: uppercase
           description: Address Line 4-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         lastName1:
           format: uppercase
           description: Last Name 1
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         faxPhoneFlag1:
           description: "Fax Phone Flagthis field is a code that specifies whether\
             \ theyou have the owner’s permission to call this number. The values 0\
@@ -1280,7 +1280,7 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         nameLine31:
           format: uppercase
           description: "NAME-LINE 3-this field is a code that indicates the type ofname.\
@@ -1289,7 +1289,7 @@ components:
             \ name"
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         nameLine11:
           format: uppercase
           description: "NAME-LINE 1-This field is the owner personal name, businessname,\
@@ -1299,7 +1299,7 @@ components:
             \ name"
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         mobileNumber1:
           format: uppercase
           description: Mobile Number-that indicates the mobile telephone number ofthe
@@ -1321,20 +1321,20 @@ components:
             system
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         languageIndicator1:
           format: uppercase
           description: Language Indicator-User-defined code that indicates the language
             spoken by theowner.
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         addressLine31:
           format: uppercase
           description: Address Line 3-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         sMSFlag1:
           description: "SMS Flag-Code that indicates whether an SMS (short message\
             \ service)message can be sent to the owner. The values are 0=No, do not\
@@ -1344,7 +1344,7 @@ components:
           enum:
           - 0
           - 1
-          example: ""
+          example: " "
         homePhoneNumber1:
           format: uppercase
           description: Home Phone Number-that indicates the home telephone number
@@ -1357,13 +1357,13 @@ components:
           description: Address Line 1-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         houseNumber1:
           format: uppercase
           description: HOUSE NAME-House name of the owner. The default is spaces
           type: string
           maxLength: 20
-          example: ""
+          example: " "
         mobilePhoneFlag1:
           description: "Mobile Phone Flag-this field is a code that indicates whether\
             \ youhave the owner’s permission to call this number. The values are0\
@@ -1374,12 +1374,12 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         dateOfBirth1:
           format: uppercase
           description: Date Of Birth 1
           type: string
-          example: ""
+          example: " "
     CustomerUpdateNameAddressReq:
       type: object
       properties:
@@ -1389,20 +1389,20 @@ components:
             owner
           type: string
           maxLength: 10
-          example: ""
+          example: " "
         city1:
           format: uppercase
           description: City-City portion of the mailing address of the owner
           type: string
           maxLength: 30
-          example: ""
+          example: " "
         nameLine21:
           format: uppercase
           description: NAME-LINE 2-this field is the owner name. You must enternames
             in the correct format as defined in the Organization
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         firstName1:
           format: uppercase
           description: First Name 1
@@ -1425,7 +1425,7 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         userDefinedField41:
           format: uppercase
           description: User Defined Field 4 1
@@ -1441,38 +1441,38 @@ components:
             of the mailingaddress of the owner
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         middleName1:
           format: uppercase
           description: Middle Name 1
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         faxNumber1:
           format: uppercase
           description: Fax Number-field that indicates the facsimile (fax) number
             of theowner
           type: string
           maxLength: 20
-          example: ""
+          example: " "
         addressLine21:
           format: uppercase
           description: Address Line 2-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         addressLine41:
           format: uppercase
           description: Address Line 4-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         lastName1:
           format: uppercase
           description: Last Name 1
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         faxPhoneFlag1:
           description: "Fax Phone Flagthis field is a code that specifies whether\
             \ theyou have the owner’s permission to call this number. The values 0\
@@ -1483,7 +1483,7 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         nameLine31:
           format: uppercase
           description: "NAME-LINE 3-this field is a code that indicates the type ofname.\
@@ -1492,7 +1492,7 @@ components:
             \ name"
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         nameLine11:
           format: uppercase
           description: "NAME-LINE 1-This field is the owner personal name, businessname,\
@@ -1502,7 +1502,7 @@ components:
             \ name"
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         mobileNumber1:
           format: uppercase
           description: Mobile Number-that indicates the mobile telephone number ofthe
@@ -1517,7 +1517,7 @@ components:
             system
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         languageIndicator1:
           format: uppercase
           description: Language Indicator-User-defined code that indicates the language
@@ -1530,7 +1530,7 @@ components:
           description: Address Line 3-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         sMSFlag1:
           description: "SMS Flag-Code that indicates whether an SMS (short message\
             \ service)message can be sent to the owner. The values are 0=No, do not\
@@ -1540,7 +1540,7 @@ components:
           enum:
           - 0
           - 1
-          example: ""
+          example: " "
         homePhoneNumber1:
           format: uppercase
           description: Home Phone Number-that indicates the home telephone number
@@ -1553,13 +1553,13 @@ components:
           description: Address Line 1-Mailing address for the owner
           type: string
           maxLength: 40
-          example: ""
+          example: " "
         houseNumber1:
           format: uppercase
           description: HOUSE NAME-House name of the owner. The default is spaces
           type: string
           maxLength: 20
-          example: ""
+          example: " "
         mobilePhoneFlag1:
           description: "Mobile Phone Flag-this field is a code that indicates whether\
             \ youhave the owner’s permission to call this number. The values are0\
@@ -1570,12 +1570,12 @@ components:
           - 0
           - 1
           - 2
-          example: ""
+          example: " "
         dateOfBirth1:
           format: uppercase
           description: Date Of Birth 1
           type: string
-          example: ""
+          example: " "
           
     ErrorList:
       type: array
