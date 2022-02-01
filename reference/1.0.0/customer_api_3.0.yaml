@@ -1425,7 +1425,7 @@ components:
           - 0
           - 1
           - 2
-          example: " "
+          example: ""
         userDefinedField41:
           format: uppercase
           description: User Defined Field 4 1
@@ -1483,7 +1483,7 @@ components:
           - 0
           - 1
           - 2
-          example: " "
+          example: ""
         nameLine31:
           format: uppercase
           description: "NAME-LINE 3-this field is a code that indicates the type ofname.\
@@ -1524,7 +1524,7 @@ components:
             spoken by theowner.
           type: string
           maxLength: 3
-          example: ""
+          example: " "
         addressLine31:
           format: uppercase
           description: Address Line 3-Mailing address for the owner
@@ -1540,7 +1540,7 @@ components:
           enum:
           - 0
           - 1
-          example: " "
+          example: ""
         homePhoneNumber1:
           format: uppercase
           description: Home Phone Number-that indicates the home telephone number
@@ -1570,12 +1570,12 @@ components:
           - 0
           - 1
           - 2
-          example: " "
+          example: ""
         dateOfBirth1:
           format: uppercase
           description: Date Of Birth 1
           type: string
-          example: " "
+          example: ""
           
     ErrorList:
       type: array
