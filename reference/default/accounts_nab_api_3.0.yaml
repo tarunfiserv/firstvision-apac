@@ -1263,6 +1263,112 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'              
+  /v1/accounts/{accountNumber}/statement/details:
+    get:
+      tags:
+      - Account Management
+      summary: Inquire Statement Details
+      description: This service is used to fetch statement details for a given statement
+        date
+      operationId: InquireStatementDetails
+      x-group-name: Account Management
+      x-proxy-name: Inquire Statement Details
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number - Unique Identification numbers of the Account
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0006000011000000137"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InquireStatementDetailsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
     AccountsBlockUnblockReq:
@@ -2792,6 +2898,824 @@ components:
           type: string
           maxLength: 19.0
           example: "0000000001000000057"      
+    InquireStatementDetailsResp:
+      type: object
+      properties:
+        personalId:
+          format: uppercase
+          description: Personal ID - Personal ID
+          type: string
+          example: ""
+        businessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          minimum: 0.0
+          example: 600
+        dateLastStatement:
+          format: date
+          description: Date Last Statement - Date of the statement prior to this statement
+          type: string
+          example: 05/08/2021
+        daysInCycle:
+          default: 0.0
+          maximum: 99.0
+          description: Days In Cycle - Number of days in the cycle covered by this
+            statement
+          type: number
+          minimum: 0.0
+          example: 13
+        dueDate:
+          format: date
+          description: Due Date - Due date of the payment billed on this account
+          type: string
+          example: 18/09/2021
+        alternateCustomerNumber:
+          format: uppercase
+          description: Alternate Customer Number - Number that identifies the alternate
+            Customer Name/Address record containing an alternate address for statements
+            and other correspondence
+          type: string
+          example: ""
+        accountRelationship:
+          format: uppercase
+          description: Account/Relationship - Account or Relationship Number
+          type: string
+          example: "0006000011000000137"
+        storeID:
+          default: 0.0
+          maximum: 99999999
+          description: Store ID - Identification number of the store to which the
+            account is assigned for reporting purposes
+          type: number
+          minimum: 0.0
+          example: 999999998
+        interestThisStatement:
+          default: 0.0
+          description: Interest This Statement - Amount of generated interest billed
+            on cycle date and accrued interest billed on payment
+          type: string
+          example: $0.00
+        fSAdjustedPoints:
+          default: 0.0
+          maximum: 999999999999
+          description: FS Adjusted Points - Number of frequent shopper points adjusted
+            this cycle
+          type: number
+          minimum: 0.0
+          example: 0
+        beginningBalanceI:
+          default: 0.0
+          description: Beginning Balance1 - Beginning Balance
+          type: string
+          example: $0.00
+        currentPaymentDue:
+          default: 0.0
+          description: Current Payment Due - Amount billed as current due on this
+            statement
+          type: string
+          example: $0.00
+        minimumPayment:
+          default: 0.0
+          maximum: 99999999999999999
+          description: Minimum payment - Converted account minimum payment
+          type: number
+          minimum: 0.0
+          example: $0.00
+        cashAvailable:
+          default: 0.0
+          description: Cash Available - Amount of the total cash credit limit available
+            to this account
+          type: string
+          example: $0.00
+        fSBeginningBalance:
+          default: 0.0
+          maximum: 99999999999999
+          description: Beginning Balance - Number of frequent shopper points accrued
+            at the beginning of this cycle
+          type: number
+          minimum: 0.0
+          example: 0
+        fSEndBalance:
+          default: 0.0
+          maximum: 99999999999999
+          description: FS End Balance - Amount of frequent shopper points accrued
+            at the end of this cycle
+          type: number
+          minimum: 0.0
+          example: 0
+        creditLimit:
+          default: 0.0
+          description: Credit Limit - Total credit limit established for this account
+          type: string
+          example: "$150,000.00"
+        storeOrg:
+          default: 0.0
+          maximum: 999.0
+          description: Store ORG - Organization number of the store of original purchase
+          type: number
+          minimum: 0.0
+          example: 600
+        statementTransactionDetails:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                default: 0.0
+                type: string
+                description: Amount - Amount of the Transaction
+                example: "$1,000.00"
+              cardSequence:
+                default: 0.0
+                maximum: 9999.0
+                type: number
+                minimum: 0.0
+                description: Card Sequence - Card sequence that identifies the Embosser
+                  record of the card that initiated the transaction
+                example: 0
+              merchOrg:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: -999.0
+                description: Merchant ORG - Organization number for the merchant where
+                  frequent shopper points were awarded
+                example: 0
+              authorizationCode:
+                format: uppercase
+                type: string
+                description: Auth Code - Authorization code assigned to the transaction
+                example: ' '
+              transactionStatus:
+                format: uppercase
+                type: string
+                description: Transaction Status -Transaction Status
+                example: ' '
+              description:
+                format: uppercase
+                type: string
+                description: Description - Description of the Transaction
+                example: INITIAL LOAN DISBURSEMENT
+              cardNBR:
+                format: uppercase
+                type: string
+                maxLength: 19.0
+                description: Card Number - Card number that identifies the Embosser
+                  record of the card that initiated the transaction
+                example: "0006000011000000137"
+              store:
+                default: 0.0
+                maximum: 999999999
+                type: number
+                minimum: -999999999
+                description: Store - Identification number of the store where the
+                  transaction originated
+                example: "999999998"
+              dEPT:
+                format: uppercase
+                type: string
+                maxLength: 4.0
+                description: Department - Department code assigned to the transaction
+                example: ' '
+              transactionCode:
+                default: 0.0
+                maximum: 9999.0
+                type: number
+                minimum: 0.0
+                description: Transaction Code - Transaction Code
+                example: 4565
+              ePPConvInd:
+                format: uppercase
+                type: string
+                maxLength: 1.0
+                description: EPP Conversion Indicator -EPP Conversion Indicator
+                example: ' '
+              reference:
+                format: uppercase
+                type: string
+                description: Reference - Reference number assigned to the transaction
+                example: "0999999990818000060018"
+              transactionType:
+                format: uppercase
+                type: string
+                description: Transaction Type - Type of Transaction
+                example: D
+              merchStore:
+                default: 0.0
+                maximum: 999999999
+                type: number
+                minimum: -999999999
+                description: Merchant Store - Identification number of the store where
+                  the transaction originated
+                example: 0
+              qUALIND:
+                format: uppercase
+                type: string
+                maxLength: 1.0
+                description: Qualifying Indicator - Frequent shopper program number
+                  for which the transaction qualified
+                example: ' '
+              pLANSEQ:
+                default: 0.0
+                maximum: 99.0
+                type: number
+                minimum: 0.0
+                description: Plan Sequence - Plan sequence number
+                example: 1
+              postDate:
+                format: date
+                type: string
+                description: Post Date - Posting date of the transaction
+                example: 18/08/2021
+              creditPlan:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: 0.0
+                description: Credit Plan - Number that identifies the Credit Plan
+                  Master record for the credit plan to which the transaction was posted
+                example: 70001
+              logicModule:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: 0.0
+                description: Logic Module - Logic module associated with the transaction
+                  code
+                example: 1
+              sKU:
+                default: 0.0
+                maximum: 999999999
+                type: number
+                minimum: -999999999
+                description: SKU - Stock keeping unit (SKU) number associated with
+                  the transaction
+                example: 0
+              cATG:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: -99999.0
+                description: Category - ISO standard category code of the merchant
+                  where frequent shopper points were awarded
+                example: 0
+              effectiveDate:
+                format: date
+                type: string
+                description: Effective Date - Effective date of the transaction in
+                  month-day format (MMDD)
+                example: 18/08/2021
+        skipPaymentLevel:
+          default: 0.0
+          maximum: 9.0
+          description: Skip Payment Level - Code that indicates if there is an account-level
+            skip payment in effect
+          type: number
+          minimum: 0.0
+          example: 0
+        noOfQualifiedTXNS:
+          format: uppercase
+          description: Number of qualified Transactions - Number of qualified Transactions
+          type: string
+          example: 0
+        creditClass:
+          format: uppercase
+          description: Credit Classification - This field provides an indication of
+            the customer’s payment performance
+          type: string
+          example: N1
+        fSEarned:
+          default: 0.0
+          maximum: 999999999999
+          description: FS Earned - Number of frequent shopper points the customer
+            earned cycle-to-date
+          type: number
+          minimum: 0.0
+          example: 0
+        beginningBalance:
+          default: 0.0
+          description: Beginning Balance - Balance for this account at the beginning
+            of this cycle
+          type: string
+          example: $0.00
+        currBalanceXchk:
+          default: 0.0
+          description: "Current Balance Xcheck - Cross-check against the current balance\
+            \ for this account. This field displays the total beginning balance (minus\
+            \ debits, plus credits) if the beginning balance is not the same as the\
+            \ ending balance"
+          type: string
+          example: "$1,000.00"
+        currentBalance:
+          default: 0.0
+          maximum: 99999999999
+          description: Current Balance - Converted account current balance
+          type: number
+          minimum: 0.0
+          example: $0.00
+        deferBillBalance:
+          default: 0.0
+          description: Defer Bill Balance - Current balance to be deferred. This field
+            displays in place of the CURR BAL XCHK field only when there is a balance
+            to be deferred
+          type: string
+          example: $0.00
+        debitsNumber:
+          default: 0.0
+          maximum: 999.0
+          description: Debit Number - Number of Cycle-to-date debits
+          type: number
+          minimum: 0.0
+          example: 2
+        internalStatus:
+          format: uppercase
+          description: Internal Status - Code that identifies the status of the account
+          type: string
+          example: A
+        scheduledPaymentAmount:
+          default: 0.0
+          description: Scheduled Payment Amount - Amount of scheduled payment for
+            this account
+          type: string
+          example: $0.00
+        unbilledDebitBalance:
+          default: 0.0
+          description: Unbilled Debit Balance - Unbilled Debit Balance
+          type: string
+          example: $0.00
+        yTDDisclosedCharge:
+          default: 0.0
+          description: YTD Disclosed Charge - Amount of disclosed fees assessed from
+            the beginning of this calendar year through this statement
+          type: string
+          example: $0.00
+        billIndicator:
+          default: 0.0
+          maximum: 9.0
+          description: BILL IND - Code that indicates whether the PROJECTED DD and/or
+            the CURR PMT DUE fields reflect cycle-to-date fees or an overlimit amount
+            in addition to the scheduled payment amount
+          type: number
+          minimum: 0.0
+          example: 0
+        billingCycle:
+          default: 0.0
+          maximum: 99.0
+          description: Billing Cycle - Cycle code that indicates the day of the month
+            that CMS performs cycle processing for the account
+          type: number
+          minimum: 0.0
+          example: 18
+        unResolvedCreditBalance:
+          default: 0.0
+          description: Unresolved Credit Balance - Unresolved Credit Balance
+          type: string
+          example: $0.00
+        shortName:
+          format: uppercase
+          description: Short Name - Name of the account holder on the Customer Name/Address
+            record associated with the primary account in the relationship
+          type: string
+          example: EPHTIARRAUHROE
+        numberOfPlans:
+          default: 0.0
+          maximum: 99.0
+          description: Number of Plans - Number of credit plans associated with this
+            account
+          type: number
+          minimum: 0.0
+          example: 1
+        totalPastDue:
+          default: 0.0
+          description: Total Past Due - Total amount billed as past due at the time
+            of this statement
+          type: string
+          example: $0.00
+        amountOfQualifiedTXNS:
+          default: 0.0
+          description: Amount of qualified Transactions - Amount of qualified Transactions
+          type: string
+          example: $0.00
+        altDueDelqThreshold:
+          default: 0.0
+          description: Alternate Due/Delinquency Threshold - Alternate minimum payment
+            amount requested for the current statement date to prevent account delinquency
+          type: string
+          example: $0.00
+        statementFlag:
+          format: uppercase
+          description: Statement Flag - This field is a statement flag that indicates
+            the type of statement
+          type: string
+          example: ""
+        qualifyingGraceBalance:
+          default: 0.0
+          description: Qualifying Grace Balance - Calculated qualifying grace balance
+          type: string
+          example: "$1,500.00"
+        cashLimit:
+          default: 0.0
+          description: Cash Limit - Total cash credit limit established for this account
+          type: string
+          example: "$3,000.00"
+        creditsAmount:
+          default: 0.0
+          description: Credit Amount - Amount of Cycle-to-date credits
+          type: string
+          example: $0.00
+        totalPaymentDue:
+          default: 0.0
+          description: "Total Payment Due - Total payment amount due, including current\
+            \ and past due, which is a sum total of all the consolidated subordinate\
+            \ account total payment dues"
+          type: string
+          example: $0.00
+        yTDOverlimitCharge:
+          default: 0.0
+          description: APP INST Amount - APP INST Amount
+          type: string
+          example: $0.00
+        dateThisStatement:
+          format: date
+          description: Statement Date - Effective date of this statement
+          type: string
+          example: 18/08/2021
+        yTDInterest:
+          default: 0.0
+          description: YTD Interest - Amount of finance charges assessed from the
+            beginning of this calendar year through this statement
+          type: string
+          example: $0.00
+        endBalanceI:
+          default: 0.0
+          description: End Balance-1 - Ending Balance
+          type: string
+          example: $0.00
+        yTDLateCharge:
+          default: 0.0
+          description: YTD Late Charge - Late charges assessed from the beginning
+            of this calendar year through this statement
+          type: string
+          example: $0.00
+        residenceID:
+          format: uppercase
+          description: "Residential ID - Code that identifies the state, province,\
+            \ or country in which the account holder resides"
+          type: string
+          example: 600
+        employeeCode:
+          format: uppercase
+          description: Employee Code - User-defined employee code
+          type: string
+          example: ""
+        rVLVStatus:
+          format: uppercase
+          description: RVLV Status - Revolving Status
+          type: string
+          example: ""
+        endBalance:
+          default: 0.0
+          description: End Balance - Ending balance of the relationship at the time
+            of the statement. This amount is the sum of the ending balances for the
+            subordinate accounts in the relationship
+          type: string
+          example: "$1,500.00"
+        fixedPaymentAmount:
+          default: 0.0
+          description: Fixed Payment Amount - Fixed payment amount for this account
+          type: string
+          example: $500.00
+        cycleDue:
+          default: 0.0
+          maximum: 9.0
+          description: Cycle Due - Cycle due code that indicates the level of contractual
+            delinquency for the account at the time of the statement
+          type: number
+          minimum: 0.0
+          example: 0
+        debitsAmount:
+          default: 0.0
+          description: Debit Amount - Amount of Cycle-to-date debits
+          type: string
+          example: "$1,500.00"
+        corresCustomerNumber:
+          format: uppercase
+          description: Corresponding Customer Number - Number that identifies the
+            Customer Name/Address record that contains the correspondence customer
+            address for statements and other correspondence
+          type: string
+          example: ' '
+        product:
+          default: 0.0
+          maximum: 999.0
+          description: Product - Identification number of the logo associated with
+            this Account Base Segment record.
+          type: number
+          minimum: 0.0
+          example: 600
+        creditPlanInterestRateHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              creditPlan:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: 0.0
+                description: Credit Plan - Credit plan number associated with the
+                  account
+                example: 0
+              periodicInterestRate:
+                format: uppercase
+                type: string
+                description: Periodic Interest rate - Periodic interest rate
+                example: 0.0000000%
+              lMTNO:
+                format: uppercase
+                type: string
+                description: Limit ID - Limit ID
+                example: ' '
+              upToLimit:
+                format: uppercase
+                type: string
+                description: Up To Limit - Interest limit in whole monetary units
+                  for the interest rate listed in the previous PERIODIC and ANNUAL
+                  fields
+                example: $0.00
+              annualInterestRate:
+                format: uppercase
+                type: string
+                description: Annual Interest rate - Annual interest rate
+                example: 0.0000000%
+        convertedCreditPlanHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              creditPlan:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: 0.0
+                description: Credit Plan - Number identifying the credit plan
+                example: 70001
+              currentBalance:
+                default: 0.0
+                maximum: 100000000000000000
+                type: number
+                minimum: 0.0
+                description: Converted Current Balance - Current balance of the credit
+                  plan
+                example: $0.00
+              minimumPayment:
+                default: 0.0
+                maximum: 100000000000000000
+                type: number
+                minimum: 0.0
+                description: Minimum Payment - Minimum payment amount due for the
+                  credit plan
+                example: $0.00
+        creditPlanStatementHistory:
+          type: array
+          items:
+            type: object
+            properties:
+              periodAvgBalance:
+                default: 0.0
+                type: string
+                description: Period Average Balance - Period average balance
+                example: $0.00
+              deferRecapInt:
+                default: 0.0
+                type: string
+                description: Defer/Recap interest - Amount of deferred interest
+                example: $0.00
+              transferRollIn:
+                default: 0.0
+                type: string
+                description: Transfer/Roll In - Amount moved into this credit plan
+                  segment during the statement period as a result of plan transfer
+                  or plan roll activity
+                example: $0.00
+              currentBalance:
+                default: 0.0
+                type: string
+                description: Current Balance - Current balance of the credit plan
+                example: "$1,500.00"
+              previousBalance:
+                default: 0.0
+                type: string
+                description: Previous balance - Beginning balance of the credit plan
+                example: $0.00
+              minimumPay:
+                default: 0.0
+                type: string
+                description: Minimum Pay -Minimum payment amount due for the credit
+                  plan
+                example: $0.00
+              serviceCharge:
+                default: 0.0
+                type: string
+                description: Service Charge - Amount of service charges calculated
+                  for specific transactions and posted to the credit plan
+                example: $0.00
+              calculatedYearBase:
+                default: 0.0
+                maximum: 9.0
+                type: number
+                minimum: 0.0
+                description: Calculated Year Base - Year base used to calculate interest
+                example: 1
+              interest:
+                default: 0.0
+                type: string
+                description: Interest - Amount of billed interest that appeared on
+                  the statement for this credit plan
+                example: $0.00
+              purchaseDebits:
+                default: 0.0
+                type: string
+                description: Purchase/Debits - Total amount of debits posted to the
+                  credit plan during this statement period
+                example: "$1,5000.00"
+              creditPlan:
+                format: uppercase
+                type: string
+                description: Credit Plan - Number identifying the credit plan
+                example: 70002
+              paymentsCredits:
+                default: 0.0
+                type: string
+                description: Payments /Credits - Total amount of credits posted to
+                  the credit plan during this statement period
+                example: $0.00
+              transferRollOut:
+                default: 0.0
+                type: string
+                description: Transfer/Roll out - Amount moved out of this credit plan
+                  segment during the statement period as a result of plan transfer
+                  or plan roll activity
+                example: $0.00
+              aSChrg:
+                default: 0.0
+                type: string
+                description: A/S Charge - Amount of charges comprised of any transaction
+                  amounts on which a service charge was assessed
+                example: $0.00
+              actuarialAPR:
+                default: 0.0
+                type: string
+                description: Actuarial APR - Amount of the calculated actuarial annual
+                  percentage rate (APR) cycle-to-date
+                example: 0.0000000%
+              deferInsurance:
+                default: 0.0
+                type: string
+                description: Defer Insurance - Amount of insurance that has accrued
+                  for the credit plan to date as a result of insurance being deferred
+                example: $0.00
+              cycleAverageBalance:
+                default: 0.0
+                type: string
+                description: Cycle Average Balance - Cycle average balance of the
+                  credit plan for the current cycle only
+                example: $0.00
+        graceExpire:
+          format: date
+          description: Grace Expire - Date on which the grace period expired for this
+            statement
+          type: string
+          example: 18/09/2021
+        lastYTDInterest:
+          default: 0.0
+          description: Last YTD Interest - Total amount of finance charges paid in
+            the last calendar year
+          type: string
+          example: $0.00
+        openToBuy:
+          default: 0.0
+          description: Open to Buy - Amount of the total credit limit available to
+            this account
+          type: string
+          example: "$148,000.00"
+        customerNumber:
+          format: uppercase
+          description: Customer Number - Identification number of the Customer Name/Address
+            record
+          type: string
+          example: "0006000011000000137"
+        recency:
+          default: 0.0
+          maximum: 9.0
+          description: Recency - Recency delinquency level of the account for the
+            period covered by the statement. This number indicates the number of billing
+            cycles since the last qualified payment was received
+          type: number
+          minimum: 0.0
+          example: 0
+        relationshipNumber:
+          format: uppercase
+          description: "Relationship Number - Relationship number to which the account\
+            \ is assigned, if the account is a subordinate account in a relationship"
+          type: string
+          example: ""
+        userCode6:
+          format: uppercase
+          description: User Code6 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        graceIntFree:
+          default: 0.0
+          description: "Grace/Int Free - Total current due, if plans are interest\
+            \ free or deferred"
+          type: string
+          example: $0.00
+        userCode5:
+          format: uppercase
+          description: User Code5 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        fSDisbursedPoints:
+          default: 0.0
+          maximum: 999999999999
+          description: FS Disbursed Points - Amount of cycle-to-date frequent shopper
+            points disbursed to this customer
+          type: number
+          minimum: 0.0
+          example: 0
+        userCode4:
+          format: uppercase
+          description: User Code4 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        userCode3:
+          format: uppercase
+          description: User Code3 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        totalAmtDueBalance:
+          default: 0.0
+          description: Total Transaction Due Balance - Total Transaction Due Balance
+          type: string
+          example: $0.00
+        userCode2:
+          format: uppercase
+          description: User Code2 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        creditsNumber:
+          default: 0.0
+          maximum: 999.0
+          description: Credit Number - Number of Cycle-to-date credits
+          type: number
+          minimum: 0.0
+          example: 0
+        blockCode1:
+          format: uppercase
+          description: Block Code-1 - Identifies block codes 1 assigned to this account
+          type: string
+          example: ""
+        userCode1:
+          format: uppercase
+          description: User Code1 - User codes currently assigned to the account
+          type: string
+          example: ' '
+        billCurrency:
+          format: uppercase
+          description: Bill Currency - Currency in which the customer prefers to be
+            billed
+          type: string
+          example: SGD
+        blockCode2:
+          format: uppercase
+          description: Block Code-2 - Identifies block codes 2 assigned to this account
+          type: string
+          example: ""
+        projectedDD:
+          default: 0.0
+          description: Projected DD - Projected payment amount of the direct debit
+            calculated on cycle date
+          type: string
+          example: $0.00
+        currencyConversionRate:
+          default: 0.0
+          maximum: 999999999999
+          description: Currency conversion rate - Currency conversion rate
+          type: number
+          minimum: 0.0
+          example: 0.0000000%
+        lifeToDateCounter:
+          default: 0.0
+          maximum: 9999.0
+          description: Life To Date Counter - This field is a life-to-date counter
+            that indicates the number of paper statements produced for the account
+          type: number
+          minimum: 0.0
+          example: 1
     ErrorList:
       type: array
       items:
