@@ -1410,14 +1410,14 @@ components:
           format: uppercase
         effectiveDate:
           type: string
-          example: ' '
+          example: '1990-01-01'
           description: Effective date-Date that the fraud card transfer is effective
             The value must be a date less than or equal to today’sdateThe default
             value is today’s date. If you enter a future date The system will abend
           format: date
         startDate:
           type: string
-          example: ' '
+          example: '1990-01-01'
           description: Start date- the date when the serivce was called
           format: date
     CardsBlockUnblockReq:
