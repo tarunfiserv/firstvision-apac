@@ -999,7 +999,116 @@ paths:
               example:
                 504:
                   $ref: '#/components/examples/504-Errors'
-                
+  /v1/cards/{cardNumber}/controls:
+    put:
+      tags:
+      - Card Management
+      summary: Update Card Controls
+      description: This service updates the card controls for a given card number
+      operationId: UpdateCardControls
+      x-group-name: Card Management
+      x-proxy-name: Update Card Controls
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Card Number - Number that is embossed on the plastic card. Enter
+          a value in this field only if the card number is different from the post-to
+          account number
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000115"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCardControlsReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCardControlsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'               
 components:
   schemas:
     CardsSecureCodeReq:
@@ -1650,7 +1759,145 @@ components:
           example: '00098468CCCCC273605'
           format: uppercase
           description: Token Number assigned to the cardholder embosser record. ""
-    
+    UpdateCardControlsReq:
+      type: object
+      properties:
+        ecomActSW:
+          description: ECOM Active switch - ECOM Active switch
+          type: string
+          enum:
+          - 0
+          - 1
+          example: 0
+        aTMFlag:
+          description: ATM Flag - ATM Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          example: ' '
+        iNTATMPOSFlag:
+          description: International ATM POS Flag - International ATM POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        mOTOFlag:
+          description: MOTO Flag - MOTO Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        pOSFlag:
+          description: POS Flag - POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          example: ' '
+        cashBackTranFlag:
+          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        pAYwaveFlag:
+          description: Pay Wave Switch - Pay Wave Switch
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+    UpdateCardControlsResp:
+      type: object
+      properties:
+        ecomActSW:
+          description: ECOM Active switch - ECOM Active switch
+          type: string
+          enum:
+          - 0
+          - 1
+          example: 0
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        cardSequence:
+          default: 0.0
+          description: Card Sequence - Identification number assigned to an Embosser
+            record to distinguish between multiple cards issued with the same card
+            number
+          type: number
+          example: 1
+        aTMFlag:
+          description: ATM Flag - ATM Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          example: ' '
+        iNTATMPOSFlag:
+          description: International ATM POS Flag - International ATM POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        mOTOFlag:
+          description: MOTO Flag - MOTO Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        pOSFlag:
+          description: POS Flag - POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          example: ' '
+        cashBackTranFlag:
+          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        postToAccountNumber:
+          format: uppercase
+          description: "Post To Account Number - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account. This field displays only in add mode (ARAB) and is open to\
+            \ input only"
+          type: string
+          maxLength: 19.0
+          example: "0006000022000000076"
+        cardNumber:
+          format: uppercase
+          description: Card Number - Number that is embossed on the plastic card.
+            Enter a value in this field only if the card number is different from
+            the post-to account number
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000115"
+        pAYwaveFlag:
+          description: Pay Wave Switch - Pay Wave Switch
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+  
   examples:
     CardActivateResp:
       value: {businessUnit: 100, cardNumber: 0009846801010273613,
