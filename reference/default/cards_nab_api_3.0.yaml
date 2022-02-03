@@ -1109,6 +1109,112 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'               
+  /v1/cards/{cardNumber}/details:
+    get:
+      tags:
+      - Card Management
+      summary: Inquire Card Details
+      description: This service is used to fetch card details
+      operationId: InquireCardDetails
+      x-group-name: Card Management
+      x-proxy-name: Inquire Card Details
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          maxLength: 3
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Card Number - Number that is embossed on the plastic card. Enter
+          a value in this field only if the card number is different from the post-to
+          account number
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0009544410000000062"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InquireCardDetailsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
     CardsSecureCodeReq:
@@ -1897,7 +2003,817 @@ components:
           - "Y"
           - "N"
           example: "N"
-  
+    InquireCardDetailsResp:
+      type: object
+      properties:
+        cardholderType:
+          description: Cardholders Type - Code that indicates whether the cardholder
+            is the primary cardholder or an additional cardholder associated with
+            the account.
+          type: string
+          enum:
+          - 0
+          - 1
+          maxLength: 1
+          example: 0
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 600
+        blockSecurityID:
+          format: uppercase
+          description: Block Security ID - Operator ID of the person who applied Block
+            Code on Card
+          type: string
+          maxLength: 3.0
+          example: ' '
+        lastCardExpirationDate:
+          format: uppercase
+          description: Last Card Expiration Date - Date on which the previously issued
+            card expired
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        cardIssueDate:
+          format: uppercase
+          description: Card Issue Date - The date when the most recently issued card
+            was produced
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        lastCardActivation:
+          description: Last Card Activation - Indicates whether card activation needs
+            to occur for the previously issued card
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "N"
+        postalCode:
+          format: uppercase
+          description: Postal Code - Postal code of the mailing address for cards
+            and PIN mailers
+          type: string
+          maxLength: 10.0
+          example: ' '
+        pinOverride:
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - ' '
+        typeOfCardRequested:
+          default: 0.0
+          description: Type of Card Requested - This field (REQ) is a user-defined
+            code that identifies the type of card requested
+          type: number
+          example: 0
+        secureCodeActiveForAccount:
+          description: Secure Code Active for Account - Code that indicates whether
+            the account number has had at least one fully authenticated MasterCard
+            SecureCode transaction and is eligible for SecureCode.
+          type: string
+          maxLength: 1
+          example: 0
+        firstIssueBranch:
+          default: 0.0
+          description: First Issue Branch - Branch number that identifies the card
+            mailing location for the issue of new cards when the branch delivery option
+            is used
+          type: number
+          maxLength: 9
+          example: 0
+        singleOTCCashAuthorizationAllowed:
+          default: 0.0
+          description: Single OTC Cash Authorization Allowed - Maximum amount in monetary
+            units and subunits of OTC authorizations allowed for this Embosser record
+            for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: $0.00
+        spendingLimitPrepaymentAvailable:
+          default: 0.0
+          description: Spending Limit Prepayment Available - Current amount of the
+            temporary increase in the spending limit for this cardholder as a result
+            of a spending limit prepayment transaction
+          type: string
+          maxLength: 17
+          example: $0.00
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount Retail Auths allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
+        addressLine1:
+          format: uppercase
+          description: Address Line 1 - Address used for mailing the card and PIN
+            mailer
+          type: string
+          maxLength: 40.0
+          example: ' '
+        addressLine2:
+          format: uppercase
+          description: Address Line 2 - Address used for mailing the card and PIN
+            mailer
+          type: string
+          maxLength: 40.0
+          example: ' '
+        currentChipSequenceNumber:
+          default: 0.0
+          description: Current Chip Sequence Number - Chip sequence number of the
+            most recently issued card
+          type: number
+          example: 0
+        mailerDate:
+          format: uppercase
+          description: Mailer Date - Date the current card was mailed to the cardholder
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        mobileProvisionStatus:
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+        emblem:
+          default: 0.0
+          type: number
+        cardReissueDeliveryOption:
+          description: Card Reissue Delivery Option - Delivery option for reissued
+            cards
+          type: string
+          enum:
+          - 0-999
+          maxLength: 3
+          example: 0
+        blockDate:
+          format: uppercase
+          description: Block Code Date - Date the Block Code was assigned
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        name1TypeIndicator:
+          description: Name 1 Type Indicator  - Type of name for EMBOSSED NAME 1.
+            This field displays only for prepaid cards
+          type: string
+          maxLength: 1
+          example: 0
+        cardholderName1:
+          format: uppercase
+          description: "Cardholders Name 1 - Name of the card-holder. If you leave\
+            \ this field blank, CMS uses the name entered in EMBOSSED NAME 1. This\
+            \ field is used when nprinting name and address information"
+          type: string
+          maxLength: 40.0
+          example: ' '
+        digitalId:
+          format: uppercase
+          type: string
+          maxLength: 10.0
+        cardholderName2:
+          format: uppercase
+          description: Cardholders Name2 - Name of the card-holder used for mailing
+            the card and PIN mailers
+          type: string
+          maxLength: 40.0
+          example: ' '
+        name2TypeIndicator:
+          description: Name 2 Type Indicator - Type of name for EMBOSSED NAME 2. This
+            field displays only for prepaid cards
+          type: string
+          maxLength: 1
+          example: 0
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number Retail Auths allowed - Maximum number of retail
+            authorizations allowed for this Embosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        stateProvince:
+          format: uppercase
+          description: State / Province - State or province of the mailing address
+            for cards and PIN mailers
+          type: string
+          maxLength: 3.0
+          example: ' '
+        maximumAmountSingleATMTransactionAllowed:
+          default: 0.0
+          description: Maximum Amount Single ATM Transaction Allowed - Maximum authorization
+            amount in monetary units and subunits of a single ATM transaction allowed
+            for this Embosser record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$2,000.00"
+        cardReissueDeliveryLocation:
+          default: 0.0
+          description: Card Reissue Delivery Location - Branch number that identifies
+            the card mailing location for all reissued cards (all card actions except
+            1) when the branch delivery option is used
+          type: number
+          maxLength: 9
+          example: 0
+        maximumAmountATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount ATM Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of ATM cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field.
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
+        warningBulletinDistributionRegion:
+          format: uppercase
+          description: Warning Bulletin Distribution Region - Code that identifies
+            regions for distribution of the Recovery Card List or the Card Recovery
+            Bulletin
+          type: string
+          maxLength: 9.0
+          example: ' '
+        maximumNumberATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number ATM Cash Authorizations Allowed - Maximum number
+            of ATM cash authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        mobileDeviceID:
+          format: uppercase
+          type: string
+          maxLength: 20.0
+        languageIndicator:
+          format: uppercase
+          description: Language Indicator - User-defined code to indicate the language
+            spoken by the cardholder
+          type: string
+          maxLength: 3.0
+          example: ' '
+        vISAPlusIndicator:
+          description: "VISA Plus Indicator - Code that indicates whether the PLUS,\
+            \ Cirrus, or Maestro symbol is displayed on the card"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          maxLength: 1
+          example: 0
+        embosserRecordStatus:
+          description: Status - Status of Embosser record
+          type: string
+          maxLength: 1
+          example: 0
+        maximumAuthorizationsFrequnecy:
+          description: "Maximum Authorizations Frequency - Code that indicates the\
+            \ frequency for the maximum authorization parameters. This frequency code\
+            \ applies to the RETAIL PURCH AMT through TXN LIMIT RETAIL fields, inclusive"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        authorizationCriteriaTableIDNumber:
+          format: uppercase
+          description: Authorization Criteria Table ID Number - Identification number
+            of the Authorization Criteria table assigned to the Embosser record
+          type: string
+          maxLength: 3.0
+          example: ' '
+        maximumAmountOTCCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount OTC Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of OTC cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
+        cardDelayDays:
+          default: 0.0
+          type: number
+        cardNumber:
+          format: uppercase
+          description: Card Number - Number that is embossed on the plastic card.
+            Enter a value in this field only if the card number is different from
+            the post-to account number
+          type: string
+          maxLength: 19.0
+          example: "0009544410000000062"
+        statusDateChange:
+          format: uppercase
+          description: Status Change Date - Date on which the status was last changed
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        transferEffectiveDate:
+          format: uppercase
+          description: Fraud Transfer Date - Date that a fraud card transfer for this
+            embosser is effective
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        spendingLimitPrepaymentAmount:
+          default: 0.0
+          description: Spending Limit Prepayment Amount - Amount of the spending limit
+            prepayment transaction that resulted in a temporary increase in the spending
+            limit for this cardholder
+          type: string
+          maxLength: 17
+          example: $0.00
+        city:
+          format: uppercase
+          description: City - City portion of the mailing address for cards and PIN
+            mailers
+          type: string
+          maxLength: 30.0
+          example: ' '
+        spendingCategoryStatistics:
+          type: array
+          items:
+            type: object
+            properties:
+              spendingCategoryNumberWTD1:
+                default: 0.0
+                type: number
+                description: Spending Category Number WTD - Total number of authorizations
+                  for the spending category for this card week-to-date  (Sunday through
+                  Saturday)
+                maxLength: 9
+                example: 999999999
+              spendingCategoryNumberLTD1:
+                default: 0.0
+                type: number
+                description: Spending Category Number LTD - Total number of authorizations
+                  for the spending category for this card life-to-date
+                maxLength: 9
+                example: 999999999
+              spendingCategoryAmountToday1:
+                default: 0.0
+                type: number
+                description: Spending Category Amount Today - Total amount of authorizations
+                  for the spending category for this card today
+                maxLength: 17
+                example: "$1,000.00"
+              spendingCategoryNumberToday1:
+                default: 0.0
+                type: number
+                description: Spending Category Number Today - Total number of authorizations
+                  for the spending category for this card today
+                maxLength: 9
+                example: 999999999
+              spendingCategoryNumberCTD1:
+                default: 0.0
+                type: number
+                description: Spending Category Number CTD - Total number of authorizations
+                  for the spending category for this card cycle-to-date
+                maxLength: 9
+                example: 999999999
+              spendingCategoryAmountCTD1:
+                default: 0.0
+                type: string
+                description: Spending Category Amount CTD - Total amount of authorizations
+                  for the spending category for this card cycle-to-date
+                maxLength: 17
+                example: "$1,000.00"
+              spendingCategoryAmountYTD1:
+                default: 0.0
+                type: string
+                description: Spending Category Amount YTD - Total amount of authorizations
+                  for the spending category for this card year-to-date
+                maxLength: 17
+                example: "$1,000.00"
+              spendingCategoryAmountLTD1:
+                default: 0.0
+                type: string
+                description: Spending Category Amount LTD - Total amount of authorizations
+                  for the spending category for this card life-to-date
+                maxLength: 17
+                example: "$1,000.00"
+              spendingCategoryNumberYTD1:
+                default: 0.0
+                type: number
+                description: Spending Category Number YTD - Total number of authorizations
+                  for the spending category for this card year-to-date
+                maxLength: 9
+                example: 999999999
+              spendingCategoryAmountWTD1:
+                default: 0.0
+                type: string
+                description: Spending Category Amount WTD - Total amount of authorizations
+                  for the spending category for this card week-to-date (Sunday through
+                  Saturday)
+                maxLength: 17
+                example: "$1,000.00"
+        dateCurrentCardValid:
+          format: uppercase
+          type: string
+        pOSServiceCode:
+          format: uppercase
+          description: POS Service Code - Code that indicates the type of point-of-sale
+            service in effect for a card.
+          type: string
+          maxLength: 3.0
+          example: ' '
+        maximumNumberOTCAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number OTC Cash Authorizations Allowed - Maximum number
+            of OTC authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        currentCardNeedActivation:
+          description: Current Card Needs Activation - Indicates whether card activation
+            needs to occur for the most recently issued card
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "N"
+        nameOnCard:
+          format: uppercase
+          description: Name on Card - Name to be embossed on the first embossing line
+            of the card. Enter the name exactly as it is to appear on the card
+          type: string
+          maxLength: 26.0
+          example: DAVID TEST 2
+        nameOn2ndLine:
+          format: uppercase
+          description: Name on 2nd Card - Type of name for EMBOSSED NAME 2. This field
+            displays only for prepaid cards
+          type: string
+          maxLength: 26.0
+          example: ' '
+        secureIDStatusChanged:
+          format: uppercase
+          description: Secure ID Status Changed - operator ID of the person who changed
+            the status
+          type: string
+          maxLength: 3.0
+          example: C1X
+        spendingLimitPrepaymentExpiryDate:
+          format: uppercase
+          description: Spending Limit Prepayment Amount - Date on which the temporary
+            increase in the spending limit expires for this cardholder
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        fraudCardTransferNumber:
+          format: uppercase
+          description: Fraud Card Transfer Number - Number of the Embosser record
+            replacement associated with a fraud card transfer
+          type: string
+          maxLength: 19.0
+          example: ' '
+        vISAMiniCardVersion:
+          description: VISA Mini Card Version - Code that indicates the version of
+            Visa Mini card
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        cardsReturnedForEmbosser:
+          default: 0.0
+          description: Cards Returned for Embosser  - Number of cards that were returned
+            for the current day
+          type: number
+          example: 0
+        reasonCode:
+          format: uppercase
+          type: string
+          maxLength: 1.0
+        issuingAttemptsRemaining:
+          default: 0.0
+          description: Reissue Attempts - Number of issue or reissue attempts remaining
+            for this card
+          type: number
+          maxLength: 3
+          example: 0
+        cardActivatedDate:
+          format: uppercase
+          description: Card Activated Date - Date on which the card is activated
+          type: string
+          maxLength: 10
+          example: 19/08/2021
+        expirationDate:
+          format: uppercase
+          description: Expiration Date - Date on which the most recently issued card
+            expires
+          type: string
+          maxLength: 10
+          example: 16/08/2024
+        pINOffset:
+          default: 0.0
+          description: PIN Offset - Current PIN offset of the card
+          type: number
+          maxLength: 1
+          example: 0
+        userdefinedField5:
+          format: uppercase
+          description: User-defined Field 5 - User-defined code for this Embosser
+            record. You can change the field name in the Logo record (EMB CODES 5
+            on ARML23)
+          type: string
+          maxLength: 1.0
+          example: ' '
+        userdefinedField4:
+          default: 0.0
+          description: User-defined Field 4 - User-defined code or description for
+            this Embosser record. You can change the field name in the Logo record
+            (EMB CODES 3–4 on ARML23)
+          type: number
+          maxLength: 4
+          example: 0
+        product:
+          default: 0.0
+          type: number
+        blockCode:
+          format: uppercase
+          description: Block Code -  Block Code assigned to the cardholder
+          type: string
+          maxLength: 1
+          example: ' '
+        numberOfCardsOutstanding:
+          default: 0.0
+          description: Number of Cards Outstanding - Number of cards currently outstanding
+            for this embosser
+          type: number
+          example: 1
+        typeOfCard:
+          default: 0.0
+          description: Type of Card - This field (CARD) is a user-defined code that
+            indicates the type of plastic stock
+          type: number
+          example: 0
+        previousPINOffset:
+          default: 0.0
+          description: Previous PIN Offset - Previous PIN offset of the card
+          type: number
+          example: 0
+        authorizationSpendingLimits:
+          type: array
+          items:
+            type: object
+            properties:
+              frequency1:
+                type: string
+                description: Frequency - Code that indicates the frequency for commercial
+                  card spending limits
+                maxLength: 1
+                example: 0
+              number1:
+                default: 0.0
+                type: number
+                description: "Number - Number of transactions allowed for the frequency\
+                  \ defined in the FREQ field. If this field is zero, the number of\
+                  \ transactions is unlimited"
+                maxLength: 9
+                example: 5
+              maximum1:
+                default: 0.0
+                type: number
+                description: Maximum - Spending limit in monetary units and subunits
+                  for each commercial card spending category
+                maxLength: 17
+                example: $0.00
+        customersGender:
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+        warningCode7:
+          description: "Warning Code 2 - Warning codes 7, which determine whether\
+            \ to authorize or decline authorizations for this Embosser record (card),\
+            \ which is not currently used at the card level"
+          type: string
+          enum:
+          - 0
+          - ' '
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 0
+        typeOfMailer:
+          format: uppercase
+          description: Type of Mailer - This field (MAIL) is a user-defined code that
+            identifies the type of card mailer to use to mail the card
+          type: string
+          maxLength: 2.0
+          example: ' '
+        pinDelayDays:
+          default: 0.0
+          description: PIN Delay Days -This field indicates the number of days to
+            warehouse the PIN mailer before releasing it for printing
+          type: number
+          maxLength: 2
+          example: 0
+        customerNumber:
+          format: uppercase
+          description: Customer Number  - Customer number that identifies the Customer
+            Name/Address record which lists the mailing address of the cardholder.
+            The customer number entered must identify an existing Customer Name/Address
+            record previously added into CMS
+          type: string
+          maxLength: 19.0
+          example: ' '
+        userdefinedField1:
+          format: uppercase
+          description: XUser-defined Field 1 - User-defined code or description for
+            this Embosser record. You can change the field name in the Logo record
+            (EMB CODES 1–2 on ARML23)
+          type: string
+          maxLength: 20.0
+          example: ' '
+        postToAccountNumber:
+          format: uppercase
+          description: "Post To Account Number - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account. This field displays only in add mode (ARAB) and is open to\
+            \ input only"
+          type: string
+          maxLength: 19.0
+          example: "0006000022000000076"
+        userdefinedField3:
+          format: uppercase
+          description: User-defined Field 3 - User-defined code or description for
+            this Embosser record. You can change the field name in the Logo record
+            (EMB CODES 3–4 on ARML23)
+          type: string
+          maxLength: 19.0
+          example: ' '
+        warningCode1:
+          description: "Warning Code 1 - Warning codes 1, which determine whether\
+            \ to authorize or decline authorizations for this Embosser record (card)."
+          type: string
+          enum:
+          - 0
+          - ' '
+          - 1
+          - 2
+          - 3
+          - 4
+          - 6
+          - 8
+          - 9
+          maxLength: 1
+          example: 0
+        userdefinedField2:
+          format: uppercase
+          description: User-defined Field 2 - User-defined code or description for
+            this Embosser record. You can change the field name in the Logo record
+            (EMB CODES 1–2 on ARML23)
+          type: string
+          maxLength: 20.0
+          example: ' '
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Single Retail Authorization Allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$999,999,999,999,999.99"
+        authorizationAccumulators:
+          type: array
+          items:
+            type: object
+            properties:
+              accumulatedAuthorizationAmountCTD1:
+                default: 0.0
+                type: string
+                description: Accumulator Auth Amt-2 - Total amount of ATM/OTC/Retail
+                  cash authorizations for this card cycle-to-date
+                maxLength: 17
+                example: $10234.00
+              accumulatedAuthorizationAmountYTD1:
+                default: 0.0
+                type: string
+                description: Accumulator Auth Amt-3 - Total amount of ATM/OTC/Retail
+                  cash authorizations for this card year-to-date
+                maxLength: 17
+                example: $123456.00
+              accumulatedAuthorizationAmountToday1:
+                default: 0.0
+                type: string
+                description: Accumulator Auth Amt-1 - Total amount of ATM/OTC/Retail
+                  cash authorizations for this card today
+                maxLength: 17
+                example: $1000.00
+              accumulatedAuthorizationNumberToday1:
+                default: 0.0
+                type: number
+                description: Accumulator Auth NBR-1 - Total number of ATM/OTC/Retail
+                  cash authorizations for this card today
+                maxLength: 9
+                example: 5
+              accumulatedAuthorizationNumberCTD1:
+                default: 0.0
+                type: number
+                description: Accumulator Auth NBR-2 - Total number of ATM/OTC/Retail
+                  cash authorizations for this card cycle-to-date
+                maxLength: 9
+                example: 6
+              accumulatedAuthorizationNumberYTD1:
+                default: 0.0
+                type: number
+                description: Accumulator Auth NBR-3 - Total number of ATM/OTC/Retail
+                  cash authorizations for this card year-to-date
+                maxLength: 9
+                example: 8
+              accumulatedAuthorizationAmountLTD1:
+                default: 0.0
+                type: string
+                description: Accumulator Auth Amt-4 - Total amount of ATM/OTC/Retail
+                  cash authorizations for this card life-to-date
+                maxLength: 17
+                example: $1234560.00
+              accumulatedAuthorizationNumberLTD1:
+                default: 0.0
+                type: number
+                description: Accumulator Auth NBR-4 - Total number of ATM/OTC/Retail
+                  cash authorizations for this card life-to-date
+                maxLength: 9
+                example: 12
+        cardAction:
+          description: Card Action - Card issue action code that determines the action
+            CMS performs during the next run of the Card Issue program
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          example: 1
+        numberOfCardsRequested:
+          default: 0.0
+          description: Number of Cards Requested -  Identifies the number of cards
+            required
+          type: number
+          example: 1
+        warningBulletinLastDate:
+          format: uppercase
+          description: Warning Bulletin Last Date - Date on which the account last
+            appeared on a warning bulletin
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        nextCardExpirationDate:
+          format: uppercase
+          description: Next Card Expiration Date - Next expiration date of the card
+          type: string
+          maxLength: 10
+          example: 00/00/0000
+        previousChipSequenceNumber:
+          default: 0.0
+          description: Previous Chip Sequence Number - Chip sequence number of the
+            card issued prior to the most recently issued card
+          type: number
+          example: 0
+        pINMailerSuppression:
+          description: PIN Mailer Suppression - Flag indicating whether the PIN number
+            and PIN mailer are produced.
+          type: string
+          enum:
+          - 0
+          - 1
+          maxLength: 1
+          example: 0
+        datefirstcardVerify:
+          format: uppercase
+          description: Date First Card Verify - Date on which card activation requirements
+            are enforced
+          type: string
+          maxLength: 10
+          example: 00/00/0000
   examples:
     CardActivateResp:
       value: {businessUnit: 100, cardNumber: 0009846801010273613,
