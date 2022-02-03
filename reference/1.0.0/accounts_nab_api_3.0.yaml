@@ -1369,6 +1369,115 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+  /v1/accounts/{accountNumber}/pricingControls:
+    put:
+      tags:
+      - Account Management
+      summary: Pricing Control
+      description: This service is used update pricing control structure over an accounts
+      operationId: PricingControls
+      x-group-name: Account Management
+      x-proxy-name: Pricing Controls
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit  - Identification number of the business unit associated
+          with this Account Base Segment record
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number  - Identification number of the Account Base Segment
+          record
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0006000011000000137
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingControlsReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingControlsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
     AccountsBlockUnblockReq:
@@ -3716,6 +3825,93 @@ components:
           type: number
           minimum: 0.0
           example: 1
+    PricingControlsReq:
+      type: object
+      properties:
+        pCTOverride:
+          format: uppercase
+          description: PCT Override -  Code that identifies an existing Processing
+            Control Table (PCT ID) used to establish special pricing controls for
+            the account
+          type: string
+          maxLength: 3.0
+          example: HCS
+        pCTStartDate:
+          format: uppercase
+          description: PCT Start Date - Date on which the special pricing controls
+            start for the account
+          type: string
+          example: 29/01/2022
+        stateOfResidency:
+          format: uppercase
+          description: "State Of Residency -  Code that identifies the state, province,\
+            \ or country in which the account holder resides"
+          type: string
+          maxLength: 3.0
+          example: SX1
+        stateOfIssuance:
+          format: uppercase
+          description: "State Of Issuance -  Code that identifies the state, province\
+            \ or country in which the account was issued"
+          type: string
+          maxLength: 3.0
+          example: SX1
+        pCTExpiryDate:
+          format: uppercase
+          description: PCT Expiry Date - Date on which the special pricing controls
+            expire for the account
+          type: string
+          example: 31/12/2025
+    PricingControlsResp:
+      type: object
+      properties:
+        pCTOverride:
+          format: uppercase
+          description: PCT Override -  Code that identifies an existing Processing
+            Control Table (PCT ID) used to establish special pricing controls for
+            the account
+          type: string
+          maxLength: 3.0
+          example: HCS
+        pCTStartDate:
+          format: uppercase
+          description: PCT Start Date - Date on which the special pricing controls
+            start for the account
+          type: string
+          example: 29/01/2022
+        businessUnit:
+          default: 0.0
+          description: Business Unit  - Identification number of the business unit
+            associated with this Account Base Segment record
+          type: number
+          example: 600
+        stateOfResidency:
+          format: uppercase
+          description: "State Of Residency -  Code that identifies the state, province,\
+            \ or country in which the account holder resides"
+          type: string
+          maxLength: 3.0
+          example: SX1
+        stateOfIssuance:
+          format: uppercase
+          description: "State Of Issuance -  Code that identifies the state, province\
+            \ or country in which the account was issued"
+          type: string
+          maxLength: 3.0
+          example: SX1
+        accountNumber:
+          format: uppercase
+          description: Account Number  - Identification number of the Account Base
+            Segment record
+          type: string
+          maxLength: 19.0
+          example: "0006000011000000137"
+        pCTExpiryDate:
+          format: uppercase
+          description: PCT Expiry Date - Date on which the special pricing controls
+            expire for the account
+          type: string
+          example: 31/12/2025
     ErrorList:
       type: array
       items:
