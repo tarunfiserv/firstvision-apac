@@ -137,8 +137,8 @@ paths:
       tags:
       - Account Management
       x-group-name:  Account Management
-      x-proxy-name:  List Accounts' Transactions
-      summary: List Accounts' Transactions
+      x-proxy-name:  List Billed Transactions 
+      summary: List Billed Transactions 
       description: Provides transaction detail information from the last billing cycle
       operationId: Transaction LastStatement
       parameters:
@@ -500,8 +500,8 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Outstanding Authorizations
-      summary: Inquire Outstanding Authorizations
+      x-proxy-name: List Outstanding Authorizations
+      summary: List Outstanding Authorizations
       description: This service provide details of the memo-posted authorizations on a given account.
       operationId: memoPost
       parameters:
@@ -618,8 +618,8 @@ paths:
       tags:
         - Account Management
       x-group-name: Account Management
-      x-proxy-name: Inquire Posted Authorizations
-      summary: Inquire Posted Authorizations
+      x-proxy-name: List Unbilled Transactions
+      summary: List Unbilled Transactions
       description: This service provide details of the cycle-to-date transactions on a given account.
       operationId: cycleToDate
       parameters:
@@ -731,6 +731,538 @@ paths:
                 - '504':
                     $ref: '#/components/examples/504-Errors'
   
+  /v1/accounts/{accountNumber}/creditLimit:
+    put:
+      tags:
+      - Account Management
+      summary: Update Credit Limit
+      description: This service is used to update permanent credit limit.
+      operationId: CreditLimitUpdate
+      x-group-name: Account Management
+      x-proxy-name: Update Credit Limit
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        required: true
+        description: "Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998"
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        required: true
+        description: Account Number - Unique Identification numbers of the Account
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "9994588580000000011"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditLimitUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditLimitUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  
+  /v1/accounts/{accountNumber}/directDebit:
+    put:
+      tags:
+      - Account Management
+      summary: Update Direct Debit
+      description: This service is used to amend diret debit options
+      operationId: DirectDebitUpdate
+      x-group-name: Account Management
+      x-proxy-name: Update Direct Debit
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        required: true
+        description: "Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998"
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        required: true
+        description: Account Number - Unique Identification numbers of the Account
+        schema:
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DirectDebitUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectDebitUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+    
+    get:
+      tags:
+      - Account Management
+      summary: Inquire Direct Debit
+      description: This service is used to get detail for diret debit.
+      operationId: DirectDebitDet
+      x-group-name: Account Management
+      x-proxy-name: Inquire Direct Debit
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        required: true
+        description: "Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998"
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        required: true
+        description: Account Number - Unique Identification numbers of the Account
+        schema:
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectDebitDetResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
+                
+  /v1/accounts/{accountNumber}/tempCreditLimit:
+    put:
+      tags:
+      - Account Management
+      summary: Update Temp Credit Limit
+      description: This service is used to update temporary credit limit to an account
+      operationId: TempCreditLimitUpdate
+      x-group-name: Account Management
+      x-proxy-name: Update Temp Credit Limit
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        required: true
+        description: "Business Unit - Identification number associated with this
+            Account Base Segment record, the values are 001–998"
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        required: true
+        description: Account Number - Unique Identification numbers of the Account
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0006000011000000103"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TempCreditLimitUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TempCreditLimitUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/accounts/{accountNumber}/chargeoff:
+    put:
+      tags:
+      - Account Management
+      summary: Account Status Update
+      description: This service is used to update account status
+      operationId: AccountStatusUpdate
+      x-group-name: Account Management
+      x-proxy-name: Account Status Update
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number - Unique Identification numbers of the Account
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountStatusUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountStatusUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
     AccountsBlockUnblockReq:
@@ -797,15 +1329,15 @@ components:
           format: date
           example: 04/09/2021
           description: "Statement Date - Period for which the user want to view the important statement details of the Account"
-        account/Relationship:
+        accountRelationship:
           maxLength: 19
           type: string
-          example: 0002XX001NNN0001211
+          example: "0002000010000001211"
           description: "Identification number of the account"
         fileType:
           maxLength: 2
           type: string
-          example: XXX
+          example: SL
           description: "Type of file. Small Statement or Large Statement"
     
         transactionList:
@@ -836,17 +1368,17 @@ components:
                 amount: 
                   type: string
                   default: 0
-                  example: $XX.XX
+                  example: $61.40
                   description: "Amount of the transaction"
                 transactionCode:
                   type: string
                   default: 0
-                  example: NNNN
+                  example: 4006
                   description: "Transaction Code associated with the transaction"
                 logicModule: 
                   type: number
                   default: 0
-                  example: X
+                  example: 1
                   description: "Logic module associated with the transaction code"
                 creditPlan:
                   type: number
@@ -861,7 +1393,7 @@ components:
                 authorizationCode:
                   type: string
                   maxLength: 6
-                  example: " "
+                  example: "049461"
                   description: "Authorization code assigned to the transaction"
                 aMSLKey:
                   type: string
@@ -872,13 +1404,13 @@ components:
                   type: string
                   default: 0
                   maximum: 99999
-                  example: XX
+                  example: 3
                   description: "Sequence Number of the transaction"
                 logo: 
                   type: number
                   default: 0
                   maximum: 999
-                  example: X
+                  example: "001"
                   description: "Number that identifies the logo associated with the account"
                 businessUnit:
                   type: number
@@ -1655,7 +2187,7 @@ components:
           type: string
           description: Internal File Flag
           format: uppercase
-          example: ' '
+          example: " "
         businessUnit:
           maximum: 999
           minimum: 0
@@ -1683,7 +2215,7 @@ components:
                 minimum: 0
                 type: number
                 description: Date
-                example: 0.0
+                example: 2021247
               recordNumber:
                 maximum: 99999
                 minimum: 0
@@ -1700,7 +2232,7 @@ components:
                 type: string
                 description: Authorization code assigned to the transaction
                 format: uppercase
-                example: ' '
+                example: 051180
               typeOfTransaction:
                 maxLength: 1
                 type: string
@@ -1716,7 +2248,7 @@ components:
               postingDate:
                 type: string
                 description: Posting date of the transaction.(applicable only for posted transaction)
-                format: date
+                example: 16/08/2011
               transactionCode:
                 maximum: 9999
                 minimum: 0
@@ -1746,10 +2278,11 @@ components:
                 minimum: 0
                 type: number
                 description: Time
-                example: 0.0
+                example: 134251
               effectiveDate:
                 type: string
                 description: Effective date of the transaction.
+                example: 06/09/2021
     
     AcctCycleDateResp:
       required:
@@ -1810,7 +2343,7 @@ components:
                 minimum: 0
                 type: number
                 description: Date
-                example: 0.0
+                example: 2021247
               recordNumber:
                 maximum: 99999
                 minimum: 0
@@ -1844,6 +2377,7 @@ components:
                 type: string
                 description: Posting date of the transaction.(applicable only for posted transaction)
                 format: date
+                example: 09/08/2021
               transactionCode:
                 maximum: 9999
                 minimum: 0
@@ -1873,10 +2407,391 @@ components:
                 minimum: 0
                 type: number
                 description: Time
-                example: 0.0
+                example: 132035
               effectiveDate:
                 type: string
-                description: Effective date of the transaction.      
+                description: Effective date of the transaction.
+                example: 20/09/2021
+    CreditLimitUpdateReq:
+      type: object
+      required:
+      - creditLimit
+      properties:
+        creditLimit:
+          default: 0.0
+          description: Credit limit of the account
+          type: string
+          example: 50.0
+    CreditLimitUpdateResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        creditLimit:
+          default: 0.0
+          description: Credit limit of the account
+          type: string
+          example: 70
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: 9994588580000000011
+        creditLimitDate:
+          format: uppercase
+          description: Date on which the current credit limit was assigned.
+          type: string
+          example: 19/08/2021
+    DirectDebitUpdateReq:
+      type: object
+      properties:
+        dDPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account
+          type: string
+          example: 10/04/2024
+        product:
+          default: 0.0
+          type: number
+          example: 1
+        dDRoutingBankID:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          example: 123456
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          example: 1
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          example: "0"
+          enum:
+          - 0
+          - 1
+          - 2
+        dDNominatedPaymentAmtorPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          example: 10
+        billingAcctInd:
+          default: 0.0
+          type: number
+          example: 0
+        dDAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 17
+          example: "1000000057"
+        dDPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account
+          type: string
+          example: 09/04/2022
+        dDAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          example: D
+    DirectDebitUpdateResp:
+      type: object
+      properties:
+        dDPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account
+          type: string
+          example: 04/11/2021
+        product:
+          default: 0.0
+          type: number
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        dDRoutingBankID:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          example: 123456
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          example: 1
+        accountNumber:
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: 0
+        dDNominatedPaymentAmtorPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          example: 10
+        billingAcctInd:
+          default: 0.0
+          type: number
+        dDAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 17
+          example: "1000000057"
+        dDPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account
+          type: string
+          example: 04/10/2021
+        dDAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          example: D
+    DirectDebitDetResp:
+      type: object
+      required:
+       - accountNumber
+       - businessUnit
+      properties:
+        dDPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account
+          type: string
+          example: 04/11/2021
+        product:
+          default: 0.0
+          type: number
+          example: 600
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998
+          type: number
+          example: 600
+        dDRoutingBankID:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          example: 123456
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          example: 1
+        accountNumber:
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: 0
+        dDNominatedPaymentAmtorPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          example: 10
+        billingAcctInd:
+          default: 0.0
+          type: number
+        dDAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 17
+          example: "0000000001000000057"
+        dDPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account
+          type: string
+          example: 04/10/2021
+        dDAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          example: D
+    TempCreditLimitUpdateReq:
+      type: object
+      properties:
+        temporaryCreditLimitExpiryDate:
+          format: uppercase
+          description: Temporary Credit Limit Expiry Date - Date on which temporary
+            line of credit expires
+          type: string
+          example: 31/10/2022
+        temporaryCreditLimit:
+          default: 0.0
+          description: Temporary Credit Limit - Temporary line of credit for the account
+            in whole monetary units. This amount overrides the credit limit assigned
+            to the account
+          type: string
+          example: 1000
+    TempCreditLimitUpdateResp:
+      type: object
+      required:
+      - temporaryCreditLimitExpiryDate
+      - temporaryCreditLimit
+      - businessUnit
+      - accountNumber
+      properties:
+        temporaryCreditLimitExpiryDate:
+          format: uppercase
+          description: Temporary Credit Limit Expiry Date - Date on which temporary line of credit expires
+          type: string
+          example: 31/10/2022
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this Account Base Segment record, the values are 001–998
+          type: number
+          example: 600
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: "0006000011000000103"
+        temporaryCreditLimit:
+          default: 0.0
+          description: Temporary Credit Limit - Temporary line of credit for the account in whole monetary units. This amount overrides the credit limit assigned to the account
+          type: string
+          example: 1000      
+    AccountStatusUpdateReq:
+      type: object
+      properties:
+        dateofNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+          type: string
+          example: 01/01/2018
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - " "
+          - T
+          example: C
+    AccountStatusUpdateResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        dateofNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+          type: string
+          example: 01/01/2018
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - " "
+          - T
+          example: C
+        chargeOffStatus:
+          description: Charge Off Status - Code that identifies the charge-off status
+            of this account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
+          example: 0
+        numberofChargeOffDays:
+          default: 0.0
+          description: Number of Charge Off Days - Number of days until charge-off
+          type: number
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000057"      
     ErrorList:
       type: array
       items:
