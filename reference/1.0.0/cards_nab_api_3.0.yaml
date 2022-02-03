@@ -1215,6 +1215,112 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/controlDetails:
+    get:
+      tags:
+      - Card Management
+      summary: Inquire Card Controls
+      description: This service fetches the card controls for a given card number
+      operationId: InquireCardControls
+      x-group-name: Card Management
+      x-proxy-name: Inquire Card Controls
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Card Number - Number that is embossed on the plastic card. Enter
+          a value in this field only if the card number is different from the post-to
+          account number
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0009544410000000062"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InquireCardControlsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'                
+                
 components:
   schemas:
     CardsSecureCodeReq:
@@ -2814,6 +2920,105 @@ components:
           type: string
           maxLength: 10
           example: 00/00/0000
+    InquireCardControlsResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        cardSequence:
+          default: 0.0
+          description: Card Sequence - Identification number assigned to an Embosser
+            record to distinguish between multiple cards issued with the same card
+            number
+          type: number
+          example: 1
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number Retail Auths allowed - Maximum number of retail
+            authorizations allowed for this Embosser record for the frequency defined
+            in the FREQ field
+          type: number
+          example: 999999999
+        maximumAmountSingleATMTransactionAllowed:
+          default: 0.0
+          description: Maximum Amount Single ATM Transaction Allowed - Maximum authorization
+            amount in monetary units and subunits of a single ATM transaction allowed
+            for this Embosser record for the frequency defined in the FREQ field
+          type: string
+          example: "$2,000.00"
+        singleOTCCashAuthorizationAllowed:
+          default: 0.0
+          description: Single OTC Cash Authorization Allowed - Maximum amount in monetary
+            units and subunits of OTC authorizations allowed for this Embosser record
+            for the frequency defined in the FREQ field
+          type: string
+          example: $0.00
+        postToAccountNumber:
+          format: uppercase
+          description: "Post To Account Number - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account. This field displays only in add mode (ARAB) and is open to\
+            \ input only"
+          type: string
+          maxLength: 19.0
+          example: "0006000022000000076"
+        maximumAmountATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount ATM Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of ATM cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field.
+          type: string
+          example: "$1,000.00"
+        maximumNumberOTCAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number OTC Cash Authorizations Allowed - Maximum number
+            of OTC authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          example: 999999999
+        maximumNumberATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number ATM Cash Authorizations Allowed - Maximum number
+            of ATM cash authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          example: 999999999
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Single Retail Authorization Allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          example: "$999,999,999,999,999.99"
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount Retail Auths allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          example: "$1,000.00"
+        maximumAuthorizationsFrequnecy:
+          description: "Maximum Authorizations Frequency - Code that indicates the\
+            \ frequency for the maximum authorization parameters. This frequency code\
+            \ applies to the RETAIL PURCH AMT through TXN LIMIT RETAIL fields, inclusive"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          example: 1
+        maximumAmountOTCCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount OTC Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of OTC cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field
+          type: string
+  
   examples:
     CardActivateResp:
       value: {businessUnit: 100, cardNumber: 0009846801010273613,
