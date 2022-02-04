@@ -10,7 +10,12 @@ This service provides details of the memo-posted authorizations on a given accou
 
 ### Request Payload
 
-> Empty.  
+```json
+{
+Shoud be empty.
+***The Business Unit and Account Number should be sent as query parameters and path variable.*** 
+}
+```  
 
 ### Minimum Requirements
 
@@ -18,10 +23,10 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
 
 ### Successful Response Payload
 

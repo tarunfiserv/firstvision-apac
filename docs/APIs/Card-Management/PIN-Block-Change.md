@@ -4,7 +4,7 @@ The PIN Block Change Service is used to update the PIN Block with the prerequisi
 
 ## Endpoint
 
-`PUT /v1/cards/{cardNumber}/pinBlock`
+`PUT /v1/cards/{cardNumber}/pinBlockChange`
 
 ## Payload Example
 
@@ -21,16 +21,16 @@ The PIN Block Change Service is used to update the PIN Block with the prerequisi
 
 ### Minimum Requirements
 
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/cards/{cardNumber}/pinBlock).
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/cards/{cardNumber}/pinBlockChange).
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. |
-| `currentPinBlock` | *string* | 16 | Current PIN block |
-| `requestedPinBlock` | *string* | 16 | PIN block to be updated |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. |
+| `currentPinBlock` | Payload | *string* | 16 | Current PIN block |
+| `requestedPinBlock` | Payload | *string* | 16 | PIN block to be updated |
 
 ### Successful Response Payload
 

@@ -6,7 +6,7 @@ This service is typically called before the card activation or PIN reset service
 
 ## Endpoint
 
-`POST /v1/cards/{cardNumber}/secureCode`
+`POST /v1/cards/{cardNumber}/validateCVV2`
 
 ## Payload Example
 
@@ -21,15 +21,15 @@ This service is typically called before the card activation or PIN reset service
 
 ### Minimum Requirements
 
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=post&path=/v1/cards/{cardNumber}/secureCode).
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=post&path=/v1/cards/{cardNumber}/validateCVV2).
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. | 
-| `cVV2` | *string* | 3 | CVV2 value of the card |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. | 
+| `cVV2` | Payload | *string* | 3 | CVV2 value of the card |
 
 ### Successful Response Payload
 

@@ -1,32 +1,56 @@
-# Update Customer Demographic Information
+# Customer Demographic Update
 
 This service will be used to update the customer demographic details such as Name / Address / Phone Number / Email ID/ Date of Birth of the given customer.  The customer ID will be passed in the input request to retrieve the demographic information. 
 
 ## Endpoint
 
-`PUT /v1/customers/{accountNumber}/nameAddress`
+`PUT /v1/customers/{customerNumber}/nameAddress`
 
 ## Payload Example
 
 ### Request Payload
 
 ```json
-{  
-  "firstName1" : "JOHN",
-  "middleName1" : "SMITH"  
+{
+  "postalCode1": " ",
+  "city1": " ",
+  "nameLine21": " ",
+  "firstName1": "ABC",
+  "emailAddress1": "SAM@FISERV.COM",
+  "homePhoneFlag1": "",
+  "userDefinedField41": "Y",
+  "stateProvince1": " ",
+  "middleName1": " ",
+  "faxNumber1": " ",
+  "addressLine21": " ",
+  "addressLine41": " ",
+  "lastName1": " ",
+  "faxPhoneFlag1": "",
+  "nameLine31": " ",
+  "nameLine11": " ",
+  "mobileNumber1": 112233,
+  "countryCode1": " ",
+  "languageIndicator1": " ",
+  "addressLine31": " ",
+  "sMSFlag1": "",
+  "homePhoneNumber1": 1234567,
+  "addressLine11": " ",
+  "houseNumber1": " ",
+  "mobilePhoneFlag1": "",
+  "dateOfBirth1": ""
 }
 ```
 
 ### Minimum Requirements
 
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/customers/{accountNumber}/nameAddress).
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=put&path=/v1/customers/{customerNumber}/nameAddress).
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the Card. |
-| `accountNumber` | *string* | 19 | Customer Number of the cardholder. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the Card. |
+| `customerNumber` | Path Variable | *string* | 19 | Customer Number of the cardholder. |
 
 Along with above key fields any of the Name / address / Phone number / email ID information that is required to be updated.
 
@@ -34,34 +58,34 @@ Along with above key fields any of the Name / address / Phone number / email ID 
 
 ```json
 {
-    "postalCode1": "2011",
-    "city1": "SYDNEY",
-    "nameLine21": "CHRISTIAN",
-    "firstName1": "JOHN",
-    "emailAddress1": "SAM@GMAIL.COM",
-    "homePhoneFlag1": "0",
-    "userDefinedField41": "Y",
-    "stateProvince1": "NSW",
-    "middleName1": "SMITH",
-    "faxNumber1": " ",
-    "addressLine21": " ",
-    "addressLine41": " ",
-    "lastName1": "HARBER",
-    "faxPhoneFlag1": "0",
-    "nameLine31": "HARBER",
-    "nameLine11": "Smith",
-    "mobileNumber1": "11110976444",
-    "accountNumber": "0001000000000150191",
-    "countryCode1": "AU",
-    "businessunit": "100",
-    "languageIndicator1": "AUS",
-    "addressLine31": " ",
-    "sMSFlag1": "0",
-    "homePhoneNumber1": "123456788999999",
-    "addressLine11": "77 30 HARVEY ISLAND",
-    "houseNumber1": " ",
-    "mobilePhoneFlag1": "0",
-    "dateOfBirth1": "04/02/1975"
+  "postalCode1": " ",
+  "city1": " ",
+  "businessUnit": 100,
+  "nameLine21": " ",
+  "firstName1": "ABC",
+  "emailAddress1": "SAM@FISERV.COM",
+  "homePhoneFlag1": " ",
+  "userDefinedField41": "Y",
+  "stateProvince1": " ",
+  "middleName1": " ",
+  "faxNumber1": " ",
+  "addressLine21": " ",
+  "addressLine41": " ",
+  "lastName1": " ",
+  "faxPhoneFlag1": " ",
+  "nameLine31": " ",
+  "nameLine11": " ",
+  "mobileNumber1": 112233,
+  "accountNumber": "0001000000000150191",
+  "countryCode1": " ",
+  "languageIndicator1": " ",
+  "addressLine31": " ",
+  "sMSFlag1": " ",
+  "homePhoneNumber1": 1234567,
+  "addressLine11": " ",
+  "houseNumber1": " ",
+  "mobilePhoneFlag1": " ",
+  "dateOfBirth1": " "
 } 
 ```
 

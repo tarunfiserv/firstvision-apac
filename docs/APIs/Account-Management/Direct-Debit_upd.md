@@ -3,11 +3,11 @@
 The Direct Debit Update message enables the user to update the Direct Debit information on an account. 
 The information that can be updated includes:  bank account and routing data and various other associated fields. 
 This service does not initiate the Direct Debit, it just provides a mechanism to update the Direct Debit related fields.
-> *It is necessary to perform an inquiry using the Direct Debit/Credit inquiry message first, as this service requires all fields to be sent in the request, whether they have been changed or not. If a tag is sent in empty, it is presumed that the field is to be deleted.
+> *It is necessary to perform an inquiry using the Direct Debit/Credit inquiry message first, as this service requires all fields to be sent in the request, whether they have been changed or not. If a tag is sent in empty, it is presumed that the field is to be deleted.*
 
 ## Endpoint
 
-`PUT /v1/accounts/{accountNumber}/directDebit?businessUnit=nnn`
+`PUT /v1/accounts/{accountNumber}/directDebit`
 
 ## Payload Example
 
@@ -34,13 +34,13 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `paymentRemittanceMethod` | *number* | 1 | Payment Remittance Method. |
-| `dDPaymentStartDate` | *string* | 10 | DD Payment Start Date. |
-| `dDPaymentExpiryDate` | *string* | 10 | DD Payment Expiry Date. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `paymentRemittanceMethod` | Payload | *number* | 1 | Payment Remittance Method. |
+| `dDPaymentStartDate` | Payload | *string* | 10 | DD Payment Start Date. |
+| `dDPaymentExpiryDate` | Payload | *string* | 10 | DD Payment Expiry Date. |
 
 ### Successful Response Payload
 
@@ -75,6 +75,7 @@ Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
+| `V5BS0010SF` | Update Request - Record not found|
 | `V5BS0628EA` | Pay remit method valid values are 0 through 2 |
 | `V5BS0628EB` | When cms logo is set to Y, allowed values are 0, 1 or 2 |
 | `V5BS0628EC` | Pay remit method not editable when debit active at cms logo level |

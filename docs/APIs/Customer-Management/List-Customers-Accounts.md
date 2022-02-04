@@ -4,13 +4,14 @@
 
 ## Endpoint
 
-`GET /v1/customers/{customerNumber}/accountList/`
+`GET /v1/customers/{customerNumber}/accountList`
 
 ## Payload Example
 
 ### Request Payload
 
-> Empty.  
+>Shoud be empty.  
+***Customer Number should be sent as Path Variable.***  
 
 ### Minimum Requirements
 
@@ -18,9 +19,9 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `customerNumber` | *string* | 19 | An identifier of the customer. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `customerNumber` | Path Variable | *string* | 19 | An identifier of the customer. |
 
 ### Successful Response Payload
 
@@ -79,7 +80,7 @@ The below table identifies the required parameters in the request payload.
 ```json
 {
   "errorCode": "V5DB4001AS",
-  "errorMessage": "Customer Number not found"  
+  "errorMessage": "Cust nbr not found"  
 }
 ```
 
@@ -87,4 +88,4 @@ Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
-| `V5DB4001AS` |Customer Number not found|
+| `V5DB4001AS` |Cust nbr not found|

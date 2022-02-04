@@ -4,7 +4,7 @@ This service is used to update the credit limit of the cardholder’s account.
 
 ## Endpoint
 
-`PUT /v1/accounts/{accountNumber}/creditLimit?businessUnit=nnn`
+`PUT /v1/accounts/{accountNumber}/creditLimit`
 
 ## Payload Example
 
@@ -22,11 +22,11 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `creditLimit` | *string* | 17 | Credit limit of the account. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `creditLimit` | Payload | *string* | 17 | Credit limit of the account. |
 
 ### Successful Response Payload
 
@@ -52,6 +52,7 @@ Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
+| `V5BS0010SF` | Update Request - Record not found|
 | `V5BS0103SA` | Credit limit not maintained if AMRM-CLM-SUB-NOT-ALLOWED|
 | `V5BS0103SC` | Input Credit limit cannot be greater than logo credit limit |
 | `V5BS0103SD` | Credit limit exceeds secured amount use |

@@ -7,7 +7,7 @@ This Lost or Stolen service is used to block the lost card and request for the r
 `PUT /v1/cards/{cardNumber}/transfer`
 
 ## Payload Example
-
+	
 ### Request Payload
 
 ```json
@@ -27,15 +27,15 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. |
-| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. |
-| `accountNumber` | *string* | 19 | Account Number. |
-| `action` | *string* | 19 | Pass value as "T" for transfer. |
-| `cardReplacementIndicator` | *number* | 1 |  Pass "1" for replacement of card or "0" to avoid initiation of Card Replacement . |
-| `blockCode` | *string* | 1 | Pass value as "L" to block the old card. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. |
+| `cardSequence` | Payload | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. |
+| `accountNumber` | Payload | *string* | 19 | Account Number. |
+| `action` | Payload | *string* | 19 | Pass value as "T" for transfer. |
+| `cardReplacementIndicator` | Payload | *number* | 1 |  Pass "1" for replacement of card or "0" to avoid initiation of Card Replacement . |
+| `blockCode` | Payload | *string* | 1 | Pass value as "L" to block the old card. |
 
 ### Successful Response Payload
 

@@ -10,7 +10,12 @@
 
 ### Request Payload
 
-> Empty.  
+```json
+{
+Shoud be empty.
+***The Business Unit/Product/Statement date and Account Number should be sent as query parameters and path variable.***
+}
+```
 
 ### Minimum Requirements
 
@@ -18,12 +23,12 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `product` | *number* | 3 | Product associated with the Account. |
-| `statementDate` | *Date* | DD/MM/YYYY | Date the statement is produced for the account holder |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `product` | Query Parameter | *number* | 3 | Product associated with the Account. |
+| `statementDate` | Query Parameter | *Date* | DD/MM/YYYY | Date the statement is produced for the account holder |
 
 ### Successful Response Payload
 

@@ -14,9 +14,8 @@ This service is used to activate the card after successful verification of the c
 
 ```json
 {
-    "cardSequence": "0001",
-    "currentCardRequireActivation": "N",
-    "lastCardActivation": "N"    
+  "currentCardRequireActivation": "N",
+  "lastCardActivation": "Y"
 }
 ```
 
@@ -26,24 +25,23 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. |
-| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. |
-| `currentCardRequireActivation` | *string* | 1 | Value ‘N’ To be passed to activate the card. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. |
+| `currentCardRequireActivation` | Payload | *string* | 1 | Value ‘N’ To be passed to activate the card. |
 
 ### Successful Response Payload
 
 ```json
 {
-    "businessUnit": "100",
-    "cardNumber": "0009846801010273613",
-    "cardSequence": "1",
-    "lastCardActivation": "N",
-    "currentCardRequireActivation": "N",
-    "cardActivatedDate": "01/10/2021",
-    "postToAccountNumber": "0001000010000510760"    
+  "businessUnit": 100,
+  "cardSequence": 1,
+  "postToAccountNumber": "00010000CCCCC510760",
+  "cardNumber": "00098468CCCCC273613",
+  "currentCardRequireActivation": "N",
+  "cardActivatedDate": "01/10/2021",
+  "lastCardActivation": "Y"
 }
 ```
 

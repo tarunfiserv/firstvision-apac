@@ -4,11 +4,14 @@ This service is used to update the Account Block Code.
 
 This service can be called with an account number. When either blockCode 1 or blockCode 2 has a value other than spaces, the new Block code can be applied to the unused entry on the account. This service is 
 also used to remove block code from the account when space provided on existing block code field.
-> *If there is an entry in the Block Code, the system is using the block code priorities established on the Logo record. The message then will check if the new block code has a higher priority than the block code it is replacing. If so new block code will be applied else the old will remain.* 
 
+> *If there is an entry in block code 1 or block code 2, the system is using the block code priorities defined at the logo record to decide to either apply the new block code values or to keep the existing block code value.
+  The system will check if the new block code 1 or 2 priority is greater than the existing block code priority then system will update the new block code value in block code 1 or block code 2 fields.
+  Other wise it will retain the existing value itself.* 
+  
 ## Endpoint
 
-`PUT /v1/accounts/{accountNumber}/blockUnblock?businessUnit=nnn`
+`PUT /v1/accounts/{accountNumber}/blockUnblock`
 
 ## Payload Example
 
@@ -27,11 +30,11 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `blockCode1/blockCode2` | *string* | 1 | Block Code to assign to the account. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `blockCode1/blockCode2` | Payload | *string* | 1 | Block Code to assign to the account. |
 
 ### Successful Response Payload
 
