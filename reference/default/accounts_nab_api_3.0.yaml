@@ -1306,6 +1306,17 @@ paths:
           maxLength: 20.0
           example: 00000AUNAB
         required: true
+      - name: product
+        in: query
+        description: Product - Identification number of the logo associated with this
+          Account Base Segment record.
+        required: false
+        schema:
+          default: 0.0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          example: 600
       - name: businessUnit
         in: query
         description: "Business Unit - Identification number associated with this Account\
@@ -1317,6 +1328,15 @@ paths:
           type: number
           minimum: 0.0
           example: 600
+      - name: statementDate
+        in: query
+        description: Statement Date - Identification number of the logo associated
+          with this Account Base Segment record.
+        required: true
+        schema:
+          format: date
+          type: string
+          example: 18/08/2021
       - name: accountNumber
         in: path
         description: Account Number - Unique Identification numbers of the Account
@@ -1373,11 +1393,11 @@ paths:
     put:
       tags:
       - Account Management
-      summary: Pricing Control
+      summary: Update Pricing Control
       description: This service is used update pricing control structure over an accounts
       operationId: PricingControls
       x-group-name: Account Management
-      x-proxy-name: Pricing Controls
+      x-proxy-name: Update Pricing Control
       parameters:
       - name: X-Correl-Id
         description: Any correlational text client's may want to send in the request
@@ -1429,7 +1449,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0006000011000000137
+          example: "0006000011000000137"
       requestBody:
         content:
           application/json:
@@ -1478,6 +1498,115 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+  /v1/accounts/{accountNumber}/waiveFee:
+    put:
+      tags:
+      - Account Management
+      summary: Update Waive Fee
+      description: This service is used waive the fees at account level
+      operationId: WaiveFee
+      x-group-name: Account Management
+      x-proxy-name: Update Waive Fee
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit  - Identification number of the business unit associated
+          with this Account Base Segment record
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number  - Identification number of the Account Base Segment
+          record
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0000000001000000115
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WaiveFeeReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WaiveFeeResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
     AccountsBlockUnblockReq:
@@ -3912,6 +4041,309 @@ components:
             expire for the account
           type: string
           example: 31/12/2025
+    WaiveFeeReq:
+      type: object
+      properties:
+        product:
+          description: Identification number of the product associated with this Account Base Segment record
+          type: number
+          example: 0
+        billingAcctInd:
+          description: Code that indicates whether the account being added is a transaction (cardholder), billing, control, or diversion account
+          type: number
+          example: 0
+        waiveInterest:
+          description: Waive Interest - Flag that indicates whether to waive interest
+            for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        userFees5:
+          description: User Fees 5 - Flag that indicates whether to waive user fees
+            5 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        userFees4:
+          description: User Fees 4 - Flag that indicates whether to waive user fees
+            4 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1
+        suppressMembershipFee:
+          description: Suppress Membership Fee - Flag that indicates whether to waive
+            all supplemental card membership fees
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 0
+        userFees6:
+          description: User Fees 6 - Flag that indicates whether to waive user fees
+            6 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        userFees1:
+          description: User Fees 1 - Flag that indicates whether to waive user fees
+            1 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        waiveOverlimitFee:
+          description: Waive Overlimit Fee - Flag that indicates whether to waive
+            the overlimit fee for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 0
+        userFees3:
+          description: User Fees 3 - Flag that indicates whether to waive user fees
+            3 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+        userFees2:
+          description: User Fees 2 - Flag that indicates whether to waive user fees
+            2 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1
+        waiveTaxCalculation:
+          description: Waive Tax Calculation  - Flag that indicates whether to waive
+            the tax for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveMembership:
+          description: Waive Membership - Flag that indicates whether to waive the
+            annual membership fee for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          - "2"
+          - "3"
+          example: 0
+        waiveLateCharges:
+          description: Waive Late Charges - Flag that indicates whether to waive late
+            charges for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveCardIssuanceFees:
+          description: Waive Card Issuance Fees - Flag that indicates whether to waive
+            card issuance fees whenever cards are issued on the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveNSF15Fees:
+          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
+            funds (NSF) fees for returned checks
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          - "2"
+          - "3"
+          example: 3
+        waiveLetterFee:
+          description: Waive Letter Fee - Flag that indicates whether to waive the
+            letter fee for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1        
+    WaiveFeeResp:
+      type: object
+      properties:
+        waiveInterest:
+          description: Waive Interest - Flag that indicates whether to waive interest
+            for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        product:
+          default: 0.0
+          description: Product - Identification number of the product associated with
+            this Account Base Segment record
+          type: number
+          example: 1
+        businessUnit:
+          default: 0.0
+          description: Business Unit  - Identification number of the business unit
+            associated with this Account Base Segment record
+          type: number
+          example: 600
+        userFees5:
+          description: User Fees 5 - Flag that indicates whether to waive user fees
+            5 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        userFees4:
+          description: User Fees 4 - Flag that indicates whether to waive user fees
+            4 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1
+        suppressMembershipFee:
+          description: Suppress Membership Fee - Flag that indicates whether to waive
+            all supplemental card membership fees
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 0
+        serviceFees:
+          type: array
+          items:
+            type: object
+            properties:
+              serviceFees1:
+                type: string
+                enum:
+                - ZERO
+                - "1"
+                - "2"
+                - "3"
+        cashAdvanceFees:
+          type: array
+          items:
+            type: object
+            properties:
+              waiveCashAdvance1:
+                type: string
+                enum:
+                - "0"
+                - "1"
+                - "2"
+                - "3"
+        userFees6:
+          description: User Fees 6 - Flag that indicates whether to waive user fees
+            6 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        accountNumber:
+          format: uppercase
+          description: Account Number  - Identification number of the Account Base
+            Segment record
+          type: string
+          maxLength: 19.0
+          example: 0000000001000000115
+        userFees1:
+          description: User Fees 1 - Flag that indicates whether to waive user fees
+            1 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 0
+        waiveOverlimitFee:
+          description: Waive Overlimit Fee - Flag that indicates whether to waive
+            the overlimit fee for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 0
+        userFees3:
+          description: User Fees 3 - Flag that indicates whether to waive user fees
+            3 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+        userFees2:
+          description: User Fees 2 - Flag that indicates whether to waive user fees
+            2 for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1
+        waiveTaxCalculation:
+          description: Waive Tax Calculation  - Flag that indicates whether to waive
+            the tax for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveMembership:
+          description: Waive Membership - Flag that indicates whether to waive the
+            annual membership fee for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          - "2"
+          - "3"
+          example: 0
+        waiveLateCharges:
+          description: Waive Late Charges - Flag that indicates whether to waive late
+            charges for the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveCardIssuanceFees:
+          description: Waive Card Issuance Fees - Flag that indicates whether to waive
+            card issuance fees whenever cards are issued on the account
+          type: string
+          enum:
+          - "0"
+          - "1"
+          example: 1
+        waiveNSF15Fees:
+          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
+            funds (NSF) fees for returned checks
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          - "2"
+          - "3"
+          example: 3
+        waiveLetterFee:
+          description: Waive Letter Fee - Flag that indicates whether to waive the
+            letter fee for the account
+          type: string
+          enum:
+          - ZERO
+          - "1"
+          example: 1      
     ErrorList:
       type: array
       items:
