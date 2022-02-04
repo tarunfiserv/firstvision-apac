@@ -1060,7 +1060,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: "0000000001000000115"
+          example: "0000000001000000107"
       requestBody:
         content:
           application/json:
@@ -1265,6 +1265,7 @@ paths:
         schema:
           default: 0.0
           type: number
+          maxLength: 3
           example: 600
       - name: cardNumber
         in: path
@@ -1276,7 +1277,23 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: "0009544410000000062"
+          example: "0000000001000000115"
+      - name: postToAccountNumber
+        in: query
+        description: "Post To Account Number - Code that indicates whether the account being added is a  transaction (cardholder), billing, control, or diversion account. This field displays only in add mode (ARAB) and is open to input only"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: "0000000001000000115"
+      - name: cardSequence
+        in: query
+        description: "Card Sequence - Identification number assigned to an Embosser record to distinguish between multiple cards issued with the same card number"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          example: 1    
       responses:
         "200":
           description: Success
@@ -1974,6 +1991,22 @@ components:
     UpdateCardControlsReq:
       type: object
       properties:
+        cardSequence:
+          default: 0.0
+          description: Card Sequence - Identification number assigned to an Embosser
+            record to distinguish between multiple cards issued with the same card
+            number
+          type: number
+          example: 1
+        postToAccountNumber:
+          format: uppercase
+          description: "Post To Account Number - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account. This field displays only in add mode (ARAB) and is open to\
+            \ input only"
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000107"
         ecomActSW:
           description: ECOM Active switch - ECOM Active switch
           type: string
