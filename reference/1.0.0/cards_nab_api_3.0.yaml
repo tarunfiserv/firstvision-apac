@@ -4,1001 +4,10 @@ info:
   description: V10 open API document.
   version: 1.0.0
 servers:
-- url: 'https://stg34.visionplus.io:24500/fva_apac'
-paths:    
-  /v1/cards/{cardNumber}/activate: 
-    put:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: Activate Card
-      summary: Activate Card
-      description: This service is used to activate the card after successful verification of the cardholder.
-      operationId: Card Activate
-      parameters: 
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Token Number assigned to the cardholder embosser record."
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273613'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 100
-      
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardActivateReq'
-              
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardActivateResp'
-              examples: 
-                ActivateCard: {$ref: '#/components/examples/CardActivateResp'}
-
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema: {$ref: '#/components/schemas/ErrorList'}
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                404:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
-  
-  /v1/cards/{cardNumber}/blockUnblock:
-    put:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: Block-Unblock Card
-      summary: Block-Unblock Card
-      description: This service is used to update the block codes and the reason codes for the block codes for cards and accounts. Same service can be used to unblock the card by passing spaces in the block-code field of the request body.
-      operationId: cardsBlock
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Number that is embossed on the plastic card. "
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273605'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 100
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CardsBlockUnblockReq'
-              
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CardsBlockUnblockResp'
-              examples:
-                BlockCard: {$ref: '#/components/examples/BlockCardResp'}
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema: {$ref: '#/components/schemas/ErrorList'}
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                404:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
-  
-  /v1/cards/{cardNumber}/transfer:
-    put:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: Lost Stolen Card Transfer
-      summary: Lost Stolen Card Transfer
-      description: This Lost or Stolen service is used to block the lost card and request for the replacement card.
-      operationId: cardTransfer
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Token Number assigned to the cardholder embosser record. "
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010001345'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 200
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardTransferReq'
-           
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardTransferResp'
-              examples:
-                CardTransfer: { $ref: '#/components/examples/CardTransferResp'}
-                
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema: {$ref: '#/components/schemas/ErrorList'}
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                404:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'                  
-  
-  /v1/cards/{cardNumber}/profile:
-    put:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: CardType Update
-      summary: CardType Update
-      description: This service is used to update the type of cardholder between primary and supplementary (Joint Cardholder).
-      operationId: cardsProfile
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Token Number assigned to the cardholder embosser record. "
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273613'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 100
-      
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardProfileReq'
-            
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardsProfileResp'
-              examples: 
-                CardsProfile: { $ref: '#/components/examples/CardsProfileResp'}
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema: {$ref: '#/components/schemas/ErrorList'}
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                404:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
-  
-  /v1/cards/{cardNumber}/validateCVV2:
-    post:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: CVV2 Validation
-      summary: CVV2 Validation
-      description: The Card Secure Code Validation service is used to validate the CVV2 and optionally the expiry date of a given card.     This service is typically called before the card activation or PIN reset service to validate the cardholder.
-      operationId: secureCode
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: EXCABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Token Number assigned to the cardholder embosser record. "
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010065787'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 100
-          
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CardsSecureCodeReq'
-
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CardsSecureCodeResp'
-              examples: 
-                CardsSecure: { $ref: '#/components/examples/CardSecureResp' }
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
-  
-  /v1/cards/{cardNumber}/spendLimits:
-    put:
-      tags:
-      -  Card Management
-      x-group-name: Card Management
-      x-proxy-name: Spend Limit Updates
-      summary: Spend Limit Updates
-      description: This service is used to update the spending limits to control the card usage. These limits are set at individual card level.
-      operationId: Card Limits
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: cardNumber
-        in: path
-        required: true
-        description : "Token Number assigned to the cardholder embosser record. "
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273605'
-      - name: businessUnit
-        in: query
-        required: true
-        description : 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        schema:
-          type: number
-          default: 0.0
-          example: 100
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardLimitReq'
-                          
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardLimitResp'
-              examples: 
-                CardsLimit: { $ref: '#/components/examples/CardLimitResp' }
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
-  
-  /v1/cards/{cardNumber}/clearPan:
-    get:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: Fetch Clear PAN from Token
-      summary: Fetch Clear PAN from Token
-      description: This service is used to fetch the clear pan for the requested First Vision's Token PAN.
-      operationId: cardClearPan
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: businessUnit
-        in: query
-        description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
-        required: true
-        schema:
-          maximum: 998.0
-          minimum: 0.0
-          type: number
-          default: 0.0
-          example: 100
-      - name: cardNumber
-        in: path
-        description: Number that is embossed on the plastic card. ""
-        required: true
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273605'
-
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cardsClearResponse'
-              examples: 
-                CardsClear: { $ref: '#/components/examples/CardClearResp' }
-              
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema: {$ref: '#/components/schemas/ErrorList'}
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                404:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'      
-                  
-  /v1/cards/{cardNumber}/pinBlockChange:
-    put:
-      tags:
-      - Card Management
-      x-group-name: Card Management
-      x-proxy-name: PIN Block Change
-      summary: PIN Block Change
-      description: The PIN Block Change Service is used to update the PIN Block with the prerequisite that the existing PIN block must be supplied and validated.
-      operationId: pinBlock
-      parameters:
-      - name: X-Correl-Id
-        in: header
-        description: Any correlational text client's may want to send in the request for mapping the response on their side. Any value passed in the request message will be return back as-is in the API response message
-        schema:
-          maxLength: 40
-          minLength: 0
-          type: string
-          example: ABC123
-      - name: X-Name
-        in: header
-        required: true
-        description: User’s sign-on name. The value passed in this field will be validated within application for user's authority to consume the requested API
-        schema:
-          maxLength: 30
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: X-context
-        in: header
-        required: true
-        description: A unique random ID assigned to the requestor once authenticated to the First Vision application. Value passed in this field will be used within application to authenticate the valid signed-on user
-        schema:
-          maxLength: 20
-          minLength: 0
-          type: string
-          example: 00000AUNAB
-      - name: businessUnit
-        in: query
-        description: Identification number of the organization associated with thisAccount Base Segment record,The values are 001–998
-        required: true
-        schema:
-          maximum: 998.0
-          minimum: 0.0
-          type: number
-          default: 0.0
-          example: 200
-      - name: cardNumber
-        in: path
-        description: Number that is embossed on the plastic card. ""
-        required: true
-        schema:
-          maxLength: 19
-          type: string
-          format: uppercase
-          example: '0009846801010273605'
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardPinReq'
-      responses:
-        200:
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardPinResp'
-              examples: 
-                CardsPin: { $ref: '#/components/examples/CardPinResp' }
-        400:
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                400:
-                  $ref: '#/components/examples/400-Errors'
-        401:
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/401-Errors'
-        404:
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                401:
-                  $ref: '#/components/examples/404-Errors'
-        500:
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                500:
-                  $ref: '#/components/examples/500-Errors'
-        503:
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                503:
-                  $ref: '#/components/examples/503-Errors'
-        504:
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-              example:
-                504:
-                  $ref: '#/components/examples/504-Errors'
+- url: https://stg34.visionplus.io:24500/fva_apac
+tags:
+- name: Card Management
+paths:
   /v1/cards/{cardNumber}/controls:
     put:
       tags:
@@ -1008,116 +17,6 @@ paths:
       operationId: UpdateCardControls
       x-group-name: Card Management
       x-proxy-name: Update Card Controls
-      parameters:
-      - name: X-Correl-Id
-        description: Any correlational text client's may want to send in the request
-          for mapping the response on their side. Any value passed in the request
-          message will be return back as-is in the API response message
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 40.0
-          example: ABC123
-        required: false
-      - name: X-Name
-        description: User’s sign-on name. The value passed in this field will be validated
-          within application for user's authority to consume the requested API
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: X-context
-        description: A unique random ID assigned to the requestor once authenticated
-          to the First Vision application. Value passed in this field will be used
-          within application to authenticate the valid signed-on user
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: businessUnit
-        in: query
-        description: "Business Unit - Identification number associated with this Account\
-          \ Base Segment record, the values are 001–998"
-        required: true
-        schema:
-          default: 0.0
-          type: number
-          example: 600
-      - name: cardNumber
-        in: path
-        description: Card Number - Number that is embossed on the plastic card. Enter
-          a value in this field only if the card number is different from the post-to
-          account number
-        required: true
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 19.0
-          example: "0000000001000000107"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateCardControlsReq'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UpdateCardControlsResp'
-        "400":
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "401":
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "500":
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "404":
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "503":
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "504":
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'               
-  /v1/cards/{cardNumber}/details:
-    get:
-      tags:
-      - Card Management
-      summary: Inquire Card Details
-      description: This service is used to fetch card details
-      operationId: InquireCardDetails
-      x-group-name: Card Management
-      x-proxy-name: Inquire Card Details
       parameters:
       - name: X-Correl-Id
         description: Any correlational text client's may want to send in the request
@@ -1170,15 +69,239 @@ paths:
         schema:
           format: uppercase
           type: string
-          maxLength: 19.0
-          example: "0009544410000000062"
+          maxLength: 19
+          example: 0000000001000000115
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCardControlsReq'
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InquireCardDetailsResp'
+                $ref: '#/components/schemas/UpdateCardControlsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/activate:
+    put:
+      tags:
+      - Card Management
+      summary: Activate Card
+      description: This service is used to activate the card after successful verification
+        of the cardholder.
+      operationId: ActivateCard
+      x-group-name: Card Management
+      x-proxy-name: Activate Card
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          type: number
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the cardholder embosser
+          record.
+        required: true
+        schema:
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273613
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateCardReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivateCardResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/pinBlockChange:
+    put:
+      tags:
+      - Card Management
+      summary: Change PIN
+      description: The PIN Block Change Service is used to update the PIN Block with
+        the prerequisite that the existing PIN block must be supplied and validated.
+      operationId: CardPinBlock
+      x-group-name: Card Management
+      x-proxy-name: 'Change PIN '
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Identification number of the organization associated with thisAccount\
+          \ Base Segment record,The values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          maximum: 998.0
+          type: number
+          minimum: 0.0
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Number that is embossed on the plastic card.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009544401000009153
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardPinBlockReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardPinBlockResp'
         "400":
           description: The request cannot be validated
           content:
@@ -1276,24 +399,8 @@ paths:
         schema:
           format: uppercase
           type: string
-          maxLength: 19.0
-          example: "0000000001000000115"
-      - name: postToAccountNumber
-        in: query
-        description: "Post To Account Number - Code that indicates whether the account being added is a  transaction (cardholder), billing, control, or diversion account. This field displays only in add mode (ARAB) and is open to input only"
-        required: true
-        schema:
-          default: 0.0
-          type: number
-          example: "0000000001000000115"
-      - name: cardSequence
-        in: query
-        description: "Card Sequence - Identification number assigned to an Embosser record to distinguish between multiple cards issued with the same card number"
-        required: true
-        schema:
-          default: 0.0
-          type: number
-          example: 1    
+          maxLength: 19
+          example: 0009544410000000062
       responses:
         "200":
           description: Success
@@ -1336,743 +443,787 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorList'                
-                
-components:
-  schemas:
-    CardsSecureCodeReq:
-      required:
-      - cVV2
-      type: object
-      properties:
-        cVV2:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/details:
+    get:
+      tags:
+      - Card Management
+      summary: Inquire Card
+      description: This service is used to fetch card details
+      operationId: InquireCardDetails
+      x-group-name: Card Management
+      x-proxy-name: Inquire Card
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
           maxLength: 3
-          type: string
-          example: '855'
-          description: CVV2-valid CVV2 should be entered printed on the card
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Card Number - Number that is embossed on the plastic card. Enter
+          a value in this field only if the card number is different from the post-to
+          account number
+        required: true
+        schema:
           format: uppercase
-        expiryDateMMYY:
-          maxLength: 4
-          type: string
-          example: '1123'
-          description: Expire Date-valid card expire date should be provided which is of 4 character with MMYY format
-          format: uppercase
-        signonName:
-          type: string
-          example: ' ' 
-          description: Signon name
-        securitySignon:
-          type: string
-          example: ' '
-          description: Security signon
-        
-    CardsClearReq:
-      required:
-      - indicator
-      - businessUnit
-      - cardNumber
-      type: object
-      properties:
-        cardNumber:
-          type: string
-          description: Clear Pan - 19 digit Clear card number
-          format: uppercase
-        indicator:
-          type: string
-          description: Indicator - Value 'Y' should be passed
-        businessUnit:
-          type: number
-          description: 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-    cardsClearResponse:
-      type: object
-      properties:
-        cardNumber:
-          type: string
-          example: '000404940CCCCC74818'
-          description: Clear Pan - 19 digit Clear card number
-          format: uppercase
-    UpdateCardActivateReq:
-      type: object
-      properties:
-        currentCardRequireActivation:
-          type: string
-          example: 'N'
-          enum:
-           - 'Y - Yes'
-           - 'N - No'
-          description: Current activation flag-Indicates whether cardactivation needs to occur for the most recently issued card values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur
-        lastCardActivation:
-          type: string
-          example: 'Y'
-          description: Last card activation flag-indicates whether cardactivation needs to occur for the previously issuedcard values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur   
-    UpdateCardActivateResp:
-      required:
-      - businessUnit
-      - postToAccountNumber
-      - cardNumber
-      - cardSequence
-      type: object
-      properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: 'Identification number of the organization associated
-          with thisAccount Base Segment record,The values are 001–998'
-        cardSequence:
-          type: number
-          example: 1
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          type: string
-          example: '00010000CCCCC510760'
-          description: Identification number of the Account Base Segment record towhich CMS posts transactions  received for this Embosser record
-          maxLength: 19
-        cardNumber:
-          type: string
-          example: '00098468CCCCC273613'
-          description: Token Number assigned to the cardholder embosser record. ""
-          maxLength: 19
-        currentCardRequireActivation:
-          type: string
-          example: 'N'
-          enum:
-           - 'Y - Yes'
-           - 'N - No'
-          description: Current activation flag-Indicates whether cardactivation needs to occur for the most recently issued card values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur
-        cardActivatedDate: 
-          type: string
-          example: '01/10/2021'
-          description: Card activated date- This date will identifies the card activated date, this is a system generated date this will be changed
-        lastCardActivation:
-          type: string
-          example: 'Y'
-          description: Last card activation flag-indicates whether cardactivation needs to occur for the previously issuedcard values are N=No card activation is required or cardactivation has already occurred, Y=Card activation needs to occur
-
-    ErrorList:
-      type: array
-      items:
-        type: object
-        properties:
-          errorCode:
-            type: string
-            example:  XXXXXXXX
-            description: Error code associated with the response
-          errorMessage:
-            type: string
-            example: Some message from the service
-            description: Error message associated with the response
-            
-    UpdateCardTransferResp:
-      required:
-      - cardNumber
-      type: object
-      properties:
-        blockCode:
-          type: string
-          example: 'L'
-          description: Block Code- Block code of OLD card or fraud card this can be any value from A TO Z
-          format: uppercase
-        errorDescription:
-          type: string
-          example: ' '
-          description: Error description
-        errorType:
-          type: string
-          example: ' '
-          description: Error Type
-        serviceReturnCode:
-          type: string
-          example: ' '
-          description: Service Return Code- This is specific to API return code the values are P AND F
-        transactionReturnCode:
-          type: string
-          example: ' '
-          description: Transaction return code
-        errorCode:
-          type: string
-          example: ' '
-          description: Error code
-        maskCardnumber:
-          type: string
-          example: '000404940XXXXXX4481'
-          description: Mask Pan Number- The clear card number will be masked with XXXX from 9 didgit to 15th didgit
-          format: uppercase
-        numberOfErrors:
-          type: string
-          example: '0'
-          description: Number of errors- This will displays the number of errors in the service This is an occur cause which can store maxmum 20 erros
-        transferToAccount:
-          type: string
-          example: '000100001NNNNNN3777'
-          description: Transfer To Account- The account asscoicated to the old card
-          format: uppercase
-        transferToCustomer:
-          type: string
-          example: '984100001NNNNNN3777'
-          description: Transfer To Customer-The customer asscoicated to the old card
-          format: uppercase
-        applicationReturnCode:
-          type: string
-          example: ' '
-          description: Application Return code
-        systemReturnCode:
-          type: string
-          example: ' '
-          description: System retrun code
-        cardNumber:
-          type: string
-          example: '000984680NNNNNN0089'
-          description: New  card number- The new generated card number
-          format: uppercase
-        effectiveDate:
-          type: string
-          example: '10/01/2021'
-          description: Effective Date-Date that the fraud card transfer is effective
-          format: date
-        transferFromAccount:
-          type: string
-          example: '000100001NNNNNN3777'
-          description: Transfer From Account- The account asscoicated to the old card
-          format: uppercase
-    CardsSecureCodeResp:
-      required:
-      - cardNumber
-      type: object
-      properties:
-        cardNumber:
-          type: string
-          example: '0009846CCCCCC065787'
-          description: Card Number -Number that is embossed on the plastic card. ""
-          format: uppercase
-    UpdateCardProfileReq:
-      type: object
-      properties:
-        cardholderType:
-          type: string
-          example: '1'
-          description: Cardholder Type-Code that indicates whether the cardholder is the primarycardholder or an additional cardholder associated with theaccount. The value for this field is set in the card-adding processwith the first cardholder designated as the primary cardholderand the other cardholders as additional cardholders. The values are 0 =Additional cardholder 1=Primary cardholder.
-  
-    UpdateCardsProfileResp:
-      required:
-      - businessUnit
-      - cardNumber
-      - cardSequence
-      - postToAccountNumber
-      type: object
-      properties:
-        cardholderType:
-          type: string
-          example: '1'
-          description: Cardholder Type-Code that indicates whether the cardholder is the primarycardholder or an additional cardholder associated with theaccount. The value for this field is set in the card-adding processwith the first cardholder designated as the primary cardholderand the other cardholders as additional cardholders. The values are 0 =Additional cardholder 1=Primary
-            cardholder
-          enum:
-          - 0 - Additional
-          - 1 - Primary
-        businessUnit:
-          type: number
-          example: 100
-          description: Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
-        cardSequence:
-          type: number
-          example: 1
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          maxLength: 19
-          type: string
-          example: '000100001NNNNN0760'
-          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
-          format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: '000984680NNNNN73613'
-          description: Token Number assigned to the cardholder embosser record. ""
-          format: uppercase
-    UpdateCardPinReq:
-      required:
-      - requestedPinBlock
-      type: object
-      properties:
-        product:
-          type: number
-          example: 1
-          description: Product - Product associated with this Account. The values are 001–998
-        requestedPinBlock:
-          type: string
-          maxLength: 16
-          example: '6BA8F5DFB742A878'
-          description: Requested pin block(New pin block)-The new pin block should be provided, This will be new pin Enter by customer
-        currentPinBlock:
-          type: string
-          maxLength: 16
-          format: uppercase
-          example: ' '
-          description: Current pin block( Old Pin Block)- The old pin block should be provided, This will be old pin Enter by customer
-        pinOffset:
-          type: number
-          example: 0
-          description: Current pin block( Old Pin Block)- The old pin block should be provided, This will be old pin Enter by customer
-        pinChannel:
-          type: string
-          example: 'W'
-          description: Pin channel-This field will identifiy the channel through which The request has been ititialted The valid values are A-ATM,I-IVR, W-WEB
-        keyAssociation:
-          type: string
-          example: ' '
-          description: Key association-The value will be used to read the keys stored in KMS files,from input we always recive spaces
-        securitySignon:
-          type: string
-          example: ' '
-          description: Security signon-valid signon id should be provided
-        signonName:
-          type: string
-          example: ' '
-          description: Signon name- valid signin name should be provided
-        vgsFiller:
-          type: string
-          example: ' '
-          description: Vgs filler- This is filler used for future purpose
-        userFiller:
-          type: string
-          example: ' '
-          description: User filler-This is filler used for future purpose
-    
-    UpdateCardPinResp:
-      type: object
-      properties:
-        userFiller:
-          type: string
-          example: ' '
-          description: User filler-This is filler used for future purpose
-        filler:
-          type: string
-          example: ' '
-          description: Vgs filler- This is filler used for future purpose
-        cardNumber:
-          type: string
-          example: '0009543CCCCCCC80172'
-          description: Card Number-if the service is sucessiful, the response the updated card number will be send this will
-          format: uppercase
-    UpdateCardTransferReq:
-      required:
-      - accountNumber
-      - action
-      - blockCode
-      - cardReplacementIndicator
-      - effectiveDate
-      - operatorId
-      - product
-      - startDate
-      - terminalId
-      - transferToAccount
-      - transferToCustomer
-      type: object
-      properties:
-        accountNumber:
-          maxLength: 19
-          type: string
-          example: '0002000010000181486'
-          description: Account number-Account currently associated with the card
-          format: uppercase  
-        product:
-          maximum: 999
-          minimum: 0
-          type: number
-          example: 1
-          description: Product - Product associated with this Account. The values
-            are 001–998
-        blockCode:
-          maxLength: 1
-          type: string
-          example: 'L'
-          description: Block code-Block code to apply to the transfer cardThe values
-            are blank(or space) and A to Z
-          format: uppercase
-        cardReplacementIndicator:
-          type: string
-          example: '1'
-          description: Card replacement indicator-Code that indicates whether CMS replaces the transfer card bygenerating a new Embosser record on the original account. The values are 0=Replace lost/stolen/fraud card (Default), 1=Do not replace lost/stolen/fraud card
-          enum:
-          - 0 - Replace
-          - 1 - Do Not Replace
-        terminalId:
-          maxLength: 4
-          type: string
-          example: ' '
-          description: Terminal id- The terminal from where the service was called
-          format: uppercase
-        customerBusinessUnit:
-          maximum: 999
-          minimum: 0
-          type: number
-          example: ' '
-          description: Card transfer org-Identification number of the organization
-            associated with thisAccount Base Segment record. The values are 001–9
-        transferToAccount:
-          maxLength: 19
-          type: string
-          example: ' '
-          description: Transfer to account-Number of the account to which you want
-            to transfer the cardYou can enter a specific account number or enter a
-            slash (/) ifthe auto-generation functionality is active for account numbers.
-          format: uppercase
-        transferToCustomer:
-          maxLength: 19
-          type: string
-          example: ' '
-          description: Transfer to customer-Number that identifies the Customer Name/Address recordassociated with the transfer-to accountIf you are transferring the card to an existing accountdo notmake an entry in the CUSTOMER fieldCMS uses the customernumber associated with the existing account
-          format: uppercase
-        signonName:
-          type: string
-          example: ' '
-          description: signon name
-        action:
-          type: string
-          example: 'T'
-          description: Action-This field issystem-generated; you cannot modify it.
-            The values are R=Reverse a card transfer, T=Transfer the card (lost, stolen,
-            or fraud).
-          enum:
-          - T - Transfer
-          - R - Reversal
-        securitySignon:
-          type: string
-          description: security signon
-          example: ' '
-        operatorId:
-          maxLength: 3
-          type: string
-          example: ' '
-          description: Operator id-user signon operator id
-          format: uppercase
-        effectiveDate:
-          type: string
-          example: ' '
-          description: Effective date-Date that the fraud card transfer is effective
-            The value must be a date less than or equal to today’sdateThe default
-            value is today’s date. If you enter a future date The system will abend
-          format: date
-        startDate:
-          type: string
-          example: ' '
-          description: Start date- the date when the serivce was called
-          format: date
-    CardsBlockUnblockReq:
-      type: object
-      properties:
-        blockCode:
-          type: string
-          example: 'X'
-          description: Block code-The block code assigned to the Embosser record, Blcok code values can be be A- Z or SPACES
-          enum:
-          - X
-          - E
-          - F
-          - G
-          - ' '
-       
-    CardsBlockUnblockResp:
-      required:
-      - businessUnit
-      - cardNumber
-      - cardSequence
-      - postToAccountNumber
-      type: object
-      properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: Business Unit -Identification number of the organization associated
-            with thisAccount Base Segment record. The values are 001–998.
-        cardholderType:
-          example: '1'
-          type: string
-          description: Card holder type-'Code that indicates whether the cardholder
-            is the primarycardholder or an additional cardholder associated with theaccount.
-            The value for this field is set in the card-adding processwith the first
-            cardholder designated as the primary cardholderand the other cardholders
-            as additional cardholders, values are 0=Additional cardholder, 1=Primary
-            cardholder
-          enum:
-          - 1 - Primary
-          - 0 - Additional
-        blockCode:
-          type: string
-          example: 'E'
-          description: Block code-The block code assigned to the Embosser record,
-            Blcok code values can be be A- Z or SPACES
-          enum:
-          - X
-          - E
-          - F
-          - G
-          - ' '
-        blockDate:
-          type: string
-          example: 00/00/0000
-          description: Card block date-The date on which card is blocked
-          format: uppercase
-        cardSequence:
-          type: number
-          example: 0001
-          description: Card sequence- This a static value value 0001 should be passed
-        postToAccountNumber:
-          maxLength: 19
-          type: string
-          example: ABCDEFGHIJABCDEFGHI
-          description: Identification number of the Account
-            Base Segment record towhich CMS posts transactions received for this Embosser
-            record
-          format: uppercase
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: 00098468CCCCC273605
-          description: Token Number assigned to the cardholder embosser record. Enter
-            a value inthis field only if the card number is different from the post-toaccount
-            number
-          format: uppercase
-        warningCode1:
-          type: string
-          example: '0'
-          description: Warning Code1 -This field determine whether to authorize or
-            decline authorizations for this Embosser record (card), These are display
-            fieldscannot change the values The values are 0 =Normal authorizations
-            (Default), 1=Decline, 2=Decline and pick up,3=Decline and pick up for
-            fraud or lost/stolencard,4=Decline with referral,5=Approve after verifying
-            cardholder ID,6=Decline for suspected fraud,8=Decline with a user exit,9=VIP
-            account; always approve
-          enum:
-          - 0 - No Action
-          - ' '
-          - 1 - Decline Auth
-          - 2 - Decline Pickup
-          - 3 - Decline Fraud
-          - 4 - Decline Refer
-          - 6 - Decline Susp Fraud
-          - 8 - Decline User Exit 
-          - 9 - Approve Tip
-    UpdateCardLimitReq:
-      type: object
-      properties:
-        maximumAuthorizationsFrequency:
-          type: string
-          example: '1'
-          description: Maximum authorization frequency-Code that indicates the frequency for the maximumauthorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date
-          enum:
-          - 0 - Frequency Not Used
-          - 1 - Daily Frequency
-          - 2 - Cycle To Date Frequency
-          - 3 - Year To Date Frequency
-        maximumAmountATMCashAuthorizationsAllowed:
-          type: string
-          example: '10000'
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary units and subunits of ATM cashauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        maximumNumberATMCashAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number ATM cash authorization-Maximum number of ATM cash authorizations allowed for thisEmbosser record for the frequency defined in the FREQ field
-        maximumAmountSingleATMTransactionAllowed:
-          type: string
-          example: 10000
-          description: Maximum amount SINGLE ATM Transaction-Maximum authorization amount in monetary units and subunitsof a single ATM transaction allowed for this Embosser recordfor the frequency defined in the FREQ field
-          default: 0.0
-        maximumNumberOTCAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-        maximumAmountOTCCashAuthorizationsAllowed:
-          type: string
-          example: 2000
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary units and subunits of OTC cashauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-        singleOTCCashAuthorizationAllowed:
-          type: string
-          example: 10000
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum amount in monetary units and subunits of OTCauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        maximumAmountRetailAuthorizationsAllowed:
-          type: string
-          example: 1000
-          description: Maximum amount retail authorization-Maximum amount in monetary units and subunits of retailauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        maximumNumberRetailAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number retail authorization-Maximum number of retail authorizations allowed for thisEmbosser record for the frequency defined in the FREQ field
-        singleRetailAuthorizationAllowed:
-          type: string
-          example: '0000'
-          description: Maximum Amount Single retail authorization allowed- Maximum amount in monetary units and subunits of OTCauthorizations allowed for 'this Embosser record for thefrequency defined in the FREQ field.
-          default: 0.0
-          
-    UpdateCardLimitResp:
-      required:
-      - businessUnit
-      - cardNumber
-      - cardSequence
-      - postToAccountNumber
-      type: object
-      properties:
-        businessUnit:
-          type: number
-          example: 100
-          description: Identification number of the organization associated with thisAccount Base Segment record. The values are 001–998.
-        cardSequence:
-          type: number
-          description: Card sequence- This a static value value 0001 should be passed
-        maximumNumberRetailAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number retail authorization-Maximum number of retail authorizations allowed for thisEmbosser record for the frequency defined in the FREQ field
-        maximumAmountSingleATMTransactionAllowed:
-          type: string
-          example: '1000'
-          description: Maximum amount SINGLE ATM Transaction-Maximum authorization amount in monetary units and subunitsof a single ATM transaction allowed for this Embosser recordfor the frequency defined in the FREQ field
-          default: 0.0
-        singleOTCCashAuthorizationAllowed:
-          type: string
-          example: '100'
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum amount in monetary units and subunits of OTCauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        postToAccountNumber:
-          maxLength: 19
-          type: string
-          example: '0001000CCCCCC510760'
-          description: Identification number of the Account Base Segment record towhich CMS posts transactions received for this Embosser record
-          format: uppercase
-        maximumAmountATMCashAuthorizationsAllowed:
-          type: string
-          example: '100'
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary units and subunits of ATM cashauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        maximumNumberOTCAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-        maximumNumberATMCashAuthorizationsAllowed:
-          type: number
-          example: 1
-          description: Maximum number ATM cash authorization-Maximum number of ATM cash authorizations allowed for thisEmbosser record for the frequency defined in the FREQ field
-        singleRetailAuthorizationAllowed:
-          type: string
-          example: '0'
-          description: Maximum Amount Single retail authorization allowed- Maximum amount in monetary units and subunits of OTCauthorizations allowed for 'this Embosser record for thefrequency defined in the FREQ field.
-          default: 0.0
-        maximumAmountRetailAuthorizationsAllowed:
-          type: string
-          example: '1000'
-          description: Maximum amount retail authorization-Maximum amount in monetary units and subunits of retailauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-          default: 0.0
-        maximumAuthorizationsFrequnecy:
-          type: string
-          example: '1'
-          description: Maximum authorization frequency-Code that indicates the frequency for the maximumauthorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date
-          enum:
-          - 0 - Frequency Not Used
-          - 1 - Daily Frequency
-          - 2 - Cycle To Date Frequency
-          - 3 - Year To Date Frequency
-        maximumAmountOTCCashAuthorizationsAllowed:
-          type: string
-          example: '2000'
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary units and subunits of OTC cashauthorizations allowed for this Embosser record for thefrequency defined in the FREQ field
-        cardNumber:
-          maxLength: 19
-          type: string
-          example: '00098468CCCCC273605'
-          format: uppercase
-          description: Token Number assigned to the cardholder embosser record. ""
-    UpdateCardControlsReq:
-      type: object
-      properties:
-        cardSequence:
-          default: 0.0
-          description: Card Sequence - Identification number assigned to an Embosser
-            record to distinguish between multiple cards issued with the same card
-            number
-          type: number
-          example: 1
-        postToAccountNumber:
-          format: uppercase
-          description: "Post To Account Number - Code that indicates whether the account\
-            \ being added is a transaction (cardholder), billing, control, or diversion\
-            \ account. This field displays only in add mode (ARAB) and is open to\
-            \ input only"
           type: string
           maxLength: 19.0
-          example: "0000000001000000107"
-        ecomActSW:
-          description: ECOM Active switch - ECOM Active switch
+          example: 0009544410000000062
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InquireCardDetailsResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/validateCVV2:
+    post:
+      tags:
+      - Card Management
+      summary: Validate CVV2
+      description: The Card Secure Code Validation service is used to validate the
+        CVV2 and optionally the expiry date of a given card. This service is typically
+        called before the card activation or PIN reset service to validate the cardholder.
+      operationId: cardSecureCode
+      x-group-name: Card Management
+      x-proxy-name: Validate CVV2
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - 0
-          - 1
-          example: 0
-        aTMFlag:
-          description: ATM Flag - ATM Flag
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - "Y"
-          - "N"
-          - ' '
-          example: ' '
-        iNTATMPOSFlag:
-          description: International ATM POS Flag - International ATM POS Flag
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
-        mOTOFlag:
-          description: MOTO Flag - MOTO Flag
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Token Number assigned to the cardholder embosser record.
+        required: true
+        schema:
+          format: uppercase
           type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
-        pOSFlag:
-          description: POS Flag - POS Flag
+          maxLength: 19.0
+          example: 0009846801010065787
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cardSecureCodeReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardSecureCodeResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/cardType:
+    put:
+      tags:
+      - Card Management
+      summary: Update Card Type
+      description: This service is used to update the type of cardholder between primary
+        and supplementary (Joint Cardholder).
+      operationId: CardTypeUpdate
+      x-group-name: Card Management
+      x-proxy-name: Update Card Type
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - "Y"
-          - "N"
-          - ' '
-          example: ' '
-        cashBackTranFlag:
-          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
-        pAYwaveFlag:
-          description: Pay Wave Switch - Pay Wave Switch
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
           type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "N"
-    UpdateCardControlsResp:
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          type: number
+          example: 600
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the cardholder embosser
+          record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273613
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardTypeUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardTypeUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/clearPan:
+    get:
+      tags:
+      - Card Management
+      summary: Fetch Clear PAN from Token
+      description: This service is inquire on the different balances on the account.
+      operationId: FetchClearPan
+      x-group-name: Card Management
+      x-proxy-name: Fetch Clear PAN from Token
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        schema:
+          default: 0.0
+          maximum: 998.0
+          type: number
+          minimum: 0.0
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Number that is embossed on the plastic card.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273605
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchClearPanResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/spendLimits:
+    put:
+      tags:
+      - Card Management
+      summary: Update Spend Limits
+      description: This service is used to update the spending limits to control the
+        card usage. These limits are set at individual card level.
+      operationId: SpendLimitUpdate
+      x-group-name: Card Management
+      x-proxy-name: Spend Limit Updates
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          type: number
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the cardholder embosser
+          record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010000001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpendLimitUpdateReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpendLimitUpdateResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/transfer:
+    put:
+      tags:
+      - Card Management
+      summary: Transfer Lost Stolen Card
+      description: This Lost or Stolen service is used to block the lost card and
+        request for the replacement card.
+      operationId: LostStolenCardTransfer
+      x-group-name: Card Management
+      x-proxy-name: Lost Stolen Card Transfer
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the card-holder embosser
+          record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010001345
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LostStolenCardTransferReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LostStolenCardTransferResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/blockUnblock:
+    put:
+      tags:
+      - Card Management
+      summary: Block-Unblock Card
+      description: This service is used to update the block codes and the reason codes
+        for the block codes for cards and accounts. Same service can be used to unblock
+        the card by passing spaces in the block-code field of the request body.
+      operationId: BlockUnblockCard
+      x-group-name: Card Management
+      x-proxy-name: Block Unblock Card
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          type: number
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the cardholder embosser
+          record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273605
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BlockUnblockCardReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockUnblockCardResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+components:
+  schemas:
+    FetchClearPanResp:
       type: object
       properties:
-        ecomActSW:
-          description: ECOM Active switch - ECOM Active switch
+        cardNumber:
+          format: uppercase
+          description: Clear Pan - 19 digit Clear card number
           type: string
-          enum:
-          - 0
-          - 1
-          example: 0
+          example: 0009846801010273605
+    InquireCardControlsResp:
+      type: object
+      properties:
         businessUnit:
           default: 0.0
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
+          maxLength: 3
           example: 600
         cardSequence:
           default: 0.0
@@ -2080,44 +1231,32 @@ components:
             record to distinguish between multiple cards issued with the same card
             number
           type: number
+          maxLength: 4
           example: 1
-        aTMFlag:
-          description: ATM Flag - ATM Flag
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number Retail Auths allowed - Maximum number of retail
+            authorizations allowed for this Embosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        maximumAmountSingleATMTransactionAllowed:
+          default: 0.0
+          description: Maximum Amount Single ATM Transaction Allowed - Maximum authorization
+            amount in monetary units and subunits of a single ATM transaction allowed
+            for this Embosser record for the frequency defined in the FREQ field
           type: string
-          enum:
-          - "Y"
-          - "N"
-          - ' '
-          example: ' '
-        iNTATMPOSFlag:
-          description: International ATM POS Flag - International ATM POS Flag
+          maxLength: 17
+          example: "$2,000.00"
+        singleOTCCashAuthorizationAllowed:
+          default: 0.0
+          description: Single OTC Cash Authorization Allowed - Maximum amount in monetary
+            units and subunits of OTC authorizations allowed for this Embosser record
+            for the frequency defined in the FREQ field
           type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
-        mOTOFlag:
-          description: MOTO Flag - MOTO Flag
-          type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
-        pOSFlag:
-          description: POS Flag - POS Flag
-          type: string
-          enum:
-          - "Y"
-          - "N"
-          - ' '
-          example: ' '
-        cashBackTranFlag:
-          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
-          type: string
-          enum:
-          - "Y"
-          - "N"
-          example: "Y"
+          maxLength: 17
+          example: $0.00
         postToAccountNumber:
           format: uppercase
           description: "Post To Account Number - Code that indicates whether the account\
@@ -2125,23 +1264,162 @@ components:
             \ account. This field displays only in add mode (ARAB) and is open to\
             \ input only"
           type: string
-          maxLength: 19.0
-          example: "0006000022000000076"
+          maxLength: 19
+          example: 0006000022000000076
+        maximumAmountATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount ATM Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of ATM cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field.
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
+        maximumNumberOTCAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number OTC Cash Authorizations Allowed - Maximum number
+            of OTC authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        maximumNumberATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Number ATM Cash Authorizations Allowed - Maximum number
+            of ATM cash authorizations allowed for this Embosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 9
+          example: 999999999
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Single Retail Authorization Allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$999,999,999,999,999.99"
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount Retail Auths allowed - Maximum amount in monetary
+            units and subunits of retail authorizations allowed for this Embosser
+            record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
+        maximumAuthorizationsFrequnecy:
+          description: "Maximum Authorizations Frequency - Code that indicates the\
+            \ frequency for the maximum authorization parameters. This frequency code\
+            \ applies to the RETAIL PURCH AMT through TXN LIMIT RETAIL fields, inclusive"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        maximumAmountOTCCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum Amount OTC Cash Authorizations Allowed - Maximum amount
+            in monetary units and subunits of OTC cash authorizations allowed for
+            this Embosser record for the frequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: "$1,000.00"
         cardNumber:
           format: uppercase
           description: Card Number - Number that is embossed on the plastic card.
             Enter a value in this field only if the card number is different from
             the post-to account number
           type: string
-          maxLength: 19.0
-          example: "0000000001000000115"
-        pAYwaveFlag:
-          description: Pay Wave Switch - Pay Wave Switch
+          maxLength: 19
+          example: 0009544410000000062
+    CardPinBlockReq:
+      type: object
+      properties:
+        userFiller:
+          description: User filler-This is filler used for future purpose
+          type: string
+          example: ' '
+        product:
+          default: 0.0
+          maximum: 999.0
+          description: Product - Product associated with this Account. The values
+            are 001–998
+          type: number
+          minimum: 0.0
+          example: 1
+        signonName:
+          description: Signon name- valid signin name should be provided
+          type: string
+          example: ' '
+        requestedPinBlock:
+          format: uppercase
+          description: "Requested pin block(New pin block)-The new pin block should\
+            \ be provided, This will be new pin Enter by customer"
+          type: string
+          maxLength: 16.0
+          example: 123456
+        pinChannel:
+          description: "Pin channel-This field will identifiy the channel through\
+            \ which The request has been ititialted The valid values are A-ATM,I-IVR,\
+            \ W-WEB"
           type: string
           enum:
-          - "Y"
-          - "N"
-          example: "N"
+          - A
+          - I
+          - W
+          example: A
+        securitySignon:
+          description: Security signon-valid signon id should be provided
+          type: string
+          example: ' '
+        currentPinBlock:
+          format: uppercase
+          description: "Requested pin block(New pin block)-The new pin block should\
+            \ be provided, This will be new pin Enter by customer"
+          type: string
+          maxLength: 16.0
+          example: ' '
+        keyAssociation:
+          format: uppercase
+          description: "Key association-The value will be used to read the keys stored\
+            \ in KMS files,from input we always recive spaces"
+          type: string
+          maxLength: 3.0
+          example: ' '
+        vgsFiller:
+          description: Vgs filler- This is filler used for future purpose
+          type: string
+          example: ' '
+        pinOffset:
+          default: 0.0
+          maximum: 9999.0
+          description: "Current pin Offset( Old Pin Offset)- The old pin block should\
+            \ be provided, This will be old pin Enter by customer"
+          type: number
+          minimum: 0.0
+          example: 0
+    cardSecureCodeReq:
+      type: object
+      properties:
+        cVV2:
+          format: uppercase
+          description: Token Number assigned to the cardholder embosser record.
+          type: string
+          maxLength: 3.0
+          example: 9.846801010065788E15
+        expiryDateMMYY:
+          format: uppercase
+          description: Expire Date-valid card expire date should be provided which
+            is of 4 character with MMYY format
+          type: string
+          maxLength: 4.0
+          example: 1123
+        signonName:
+          type: string
+        securitySignon:
+          type: string
     InquireCardDetailsResp:
       type: object
       properties:
@@ -2454,7 +1732,7 @@ components:
             the post-to account number
           type: string
           maxLength: 19.0
-          example: "0009544410000000062"
+          example: 0009544410000000062
         statusDateChange:
           format: uppercase
           description: Status Change Date - Date on which the status was last changed
@@ -2794,7 +2072,7 @@ components:
             \ input only"
           type: string
           maxLength: 19.0
-          example: "0006000022000000076"
+          example: 0006000022000000076
         userdefinedField3:
           format: uppercase
           description: User-defined Field 3 - User-defined code or description for
@@ -2953,14 +2231,120 @@ components:
           type: string
           maxLength: 10
           example: 00/00/0000
-    InquireCardControlsResp:
+    CardTypeUpdateResp:
       type: object
       properties:
+        cardholderType:
+          description: Cardholder Type - Code that indicates whether the cardholder
+            is the primary cardholder or an additional cardholder associated with
+            theaccount
+          type: string
+          enum:
+          - 0 - Additional
+          - 1 - Primary
+          example: 1
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          example: 600
+        cardNumber:
+          format: uppercase
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273613
+    CardPinBlockResp:
+      type: object
+      properties:
+        userFiller:
+          description: User filler-This is filler used for future purpose
+          type: string
+          example: ' '
+        filler:
+          description: Vgs filler- This is filler used for future purpose
+          type: string
+          example: ' '
+        cardNumber:
+          format: uppercase
+          description: "Card Number-if the service is sucessiful, the response the\
+            \ updated card number will be sent"
+          type: string
+          example: 0009544401000009153
+    BlockUnblockCardResp:
+      type: object
+      properties:
+        cardholderType:
+          description: Card holder type - Code that indicates whether the cardholder
+            is the primarycardholder or an additional cardholder associated with theaccount.  .
+          type: string
+          enum:
+          - 1
+          - 0
+          example: 1
+        blockCode:
+          description: "Block code - The block code assigned to the Embosser record,\
+            \ Blcok code values can be be A- Z or SPACES."
+          type: string
+          enum:
+          - X
+          - E
+          - F
+          - G
+          - ' '
+          example: X
+        blockDate:
+          format: uppercase
+          description: Card block date - The date on which card is blocked.
+          type: string
+          example: 01/03/2020
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          example: 100
+        cardNumber:
+          format: uppercase
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273605
+        warningCode1:
+          description: Warning Code 1 - Warning Code -This field determine whether
+            to authorize or decline authorizations for this Embosser record (card).
+          type: string
+          enum:
+          - 0
+          - ' '
+          - 1
+          - 2
+          - 3
+          - 4
+          - 6
+          - 8
+          - 9
+          example: 1
+    UpdateCardControlsResp:
+      type: object
+      properties:
+        ecomActSW:
+          description: ECOM Active switch - ECOM Active switch
+          type: string
+          enum:
+          - 0
+          - 1
+          maxLength: 1
+          example: 0
         businessUnit:
           default: 0.0
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
+          maxLength: 3
           example: 600
         cardSequence:
           default: 0.0
@@ -2968,28 +2352,50 @@ components:
             record to distinguish between multiple cards issued with the same card
             number
           type: number
+          maxLength: 4
           example: 1
-        maximumNumberRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum Number Retail Auths allowed - Maximum number of retail
-            authorizations allowed for this Embosser record for the frequency defined
-            in the FREQ field
-          type: number
-          example: 999999999
-        maximumAmountSingleATMTransactionAllowed:
-          default: 0.0
-          description: Maximum Amount Single ATM Transaction Allowed - Maximum authorization
-            amount in monetary units and subunits of a single ATM transaction allowed
-            for this Embosser record for the frequency defined in the FREQ field
+        aTMFlag:
+          description: ATM Flag - ATM Flag
           type: string
-          example: "$2,000.00"
-        singleOTCCashAuthorizationAllowed:
-          default: 0.0
-          description: Single OTC Cash Authorization Allowed - Maximum amount in monetary
-            units and subunits of OTC authorizations allowed for this Embosser record
-            for the frequency defined in the FREQ field
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          maxLength: 1
+          example: ' '
+        iNTATMPOSFlag:
+          description: International ATM POS Flag - International ATM POS Flag
           type: string
-          example: $0.00
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
+        mOTOFlag:
+          description: MOTO Flag - MOTO Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
+        pOSFlag:
+          description: POS Flag - POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          maxLength: 1
+          example: ' '
+        cashBackTranFlag:
+          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
         postToAccountNumber:
           format: uppercase
           description: "Post To Account Number - Code that indicates whether the account\
@@ -2997,47 +2403,57 @@ components:
             \ account. This field displays only in add mode (ARAB) and is open to\
             \ input only"
           type: string
-          maxLength: 19.0
-          example: "0006000022000000076"
-        maximumAmountATMCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum Amount ATM Cash Authorizations Allowed - Maximum amount
-            in monetary units and subunits of ATM cash authorizations allowed for
-            this Embosser record for the frequency defined in the FREQ field.
+          maxLength: 19
+          example: 0006000022000000076
+        cardNumber:
+          format: uppercase
+          description: Card Number - Number that is embossed on the plastic card.
+            Enter a value in this field only if the card number is different from
+            the post-to account number
           type: string
-          example: "$1,000.00"
+          maxLength: 19
+          example: 0000000001000000115
+        pAYwaveFlag:
+          description: Pay Wave Switch - Pay Wave Switch
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "N"
+    SpendLimitUpdateResp:
+      type: object
+      properties:
         maximumNumberOTCAuthorizationsAllowed:
           default: 0.0
-          description: Maximum Number OTC Cash Authorizations Allowed - Maximum number
-            of OTC authorizations allowed for this Embosser record for the frequency
-            defined in the FREQ field
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
           type: number
-          example: 999999999
+          example: 1
         maximumNumberATMCashAuthorizationsAllowed:
           default: 0.0
-          description: Maximum Number ATM Cash Authorizations Allowed - Maximum number
-            of ATM cash authorizations allowed for this Embosser record for the frequency
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
             defined in the FREQ field
           type: number
-          example: 999999999
+          example: 1
         singleRetailAuthorizationAllowed:
           default: 0.0
-          description: Single Retail Authorization Allowed - Maximum amount in monetary
-            units and subunits of retail authorizations allowed for this Embosser
-            record for the frequency defined in the FREQ field
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
           type: string
-          example: "$999,999,999,999,999.99"
-        maximumAmountRetailAuthorizationsAllowed:
+          example: 0000
+        businessUnit:
           default: 0.0
-          description: Maximum Amount Retail Auths allowed - Maximum amount in monetary
-            units and subunits of retail authorizations allowed for this Embosser
-            record for the frequency defined in the FREQ field
-          type: string
-          example: "$1,000.00"
-        maximumAuthorizationsFrequnecy:
-          description: "Maximum Authorizations Frequency - Code that indicates the\
-            \ frequency for the maximum authorization parameters. This frequency code\
-            \ applies to the RETAIL PURCH AMT through TXN LIMIT RETAIL fields, inclusive"
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          example: 100
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
           type: string
           enum:
           - 0
@@ -3045,54 +2461,410 @@ components:
           - 2
           - 3
           example: 1
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          example: 1
+        maximumAmountSingleATMTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          example: 10000
+        singleOTCCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
         maximumAmountOTCCashAuthorizationsAllowed:
           default: 0.0
-          description: Maximum Amount OTC Cash Authorizations Allowed - Maximum amount
-            in monetary units and subunits of OTC cash authorizations allowed for
-            this Embosser record for the frequency defined in the FREQ field
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
           type: string
-  
-  examples:
-    CardActivateResp:
-      value: {businessUnit: 100, cardNumber: 0009846801010273613,
-        cardSequence: 1, lastCardActivation: N, currentCardRequireActivation: N, cardActivatedDate: 01/10/2021, postToAccountNumber: 0001000010000510760}
-    BlockCardResp:
-      value: {businessUnit: 100,cardNumber: '0009846801010273605', cardSequence: 1, postToAccountNumber: '0001000010000510760', blockCode: 'X', blockDate: 01/10/2021, warningCode1: '1', cardholderType: '1'}
-    CardTransferResp:
-      value: {serviceReturnCode: P, numberOfErrors: 0, maskCardnumber: '000404940XXXXXX4481', cardNumber: '0009846801010000089', effectiveDate: '10/01/2021', transferFromAccount: '0001000010000003777', blockCode: L}
-    CardSecureResp:
-      value: {cardNumber: '0009846801010065787'}  
-    CardsProfileResp:
-      value: { businessUnit: 100, cardNumber: '0009846801010273613', cardSequence: 1, postToAccountNumber: '0001000010000510760', cardholderType: 1 }
-    CardClearResp:
-      value: { cardNumber: '0004049400000274818' }
-    CardPinResp: 
-      value: { cardNumber: '0009543491000080172', userFiller: '',
-               filler: '' }
-    CardLimitResp:
-      value: { businessUnit: 100, cardNumber: '0009846801010273605', cardSequence: 1, maximumNumberRetailAuthorizationsAllowed: 1, maximumAmountSingleATMTransactionAllowed: '$100.00', singleOTCCashAuthorizationAllowed: '$100.00', maximumAmountATMCashAuthorizationsAllowed: '$100.00', postToAccountNumber: '0001000010000510760', maximumNumberOTCAuthorizationsAllowed: 1, maximumNumberATMCashAuthorizationsAllowed: 1, singleRetailAuthorizationAllowed: '$0.00', maximumAmountRetailAuthorizationsAllowed: '$100.00', maximumAuthorizationsFrequnecy: 1, maximumAmountOTCCashAuthorizationsAllowed: '$200.00' }
-             
-    400-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
-    401-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
-    404-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
-    500-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
-    503-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
-    504-Errors:
-      value:
-        erorrCode: XXXXXXXX
-        errorMessage: Some message from the service
+          example: 20000
+        maximumAmountATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
+        cardNumber:
+          format: uppercase
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19.0
+          example: 0009846801010000001
+    UpdateCardControlsReq:
+      type: object
+      properties:
+        ecomActSW:
+          description: ECOM Active switch - ECOM Active switch
+          type: string
+          enum:
+          - 0
+          - 1
+          maxLength: 1
+          example: 0
+        aTMFlag:
+          description: ATM Flag - ATM Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          maxLength: 1
+          example: ' '
+        iNTATMPOSFlag:
+          description: International ATM POS Flag - International ATM POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
+        mOTOFlag:
+          description: MOTO Flag - MOTO Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
+        pOSFlag:
+          description: POS Flag - POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          maxLength: 1
+          example: ' '
+        cashBackTranFlag:
+          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
+        pAYwaveFlag:
+          description: Pay Wave Switch - Pay Wave Switch
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "N"
+    ActivateCardReq:
+      type: object
+      properties:
+        lastCardActivation:
+          description: Last Card Activation required
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        currentCardRequireActivation:
+          description: Current Card Required Activation.
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+    SpendLimitUpdateReq:
+      type: object
+      properties:
+        maximumNumberOTCAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
+          type: number
+          example: 1
+        maximumNumberATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
+            defined in the FREQ field
+          type: number
+          example: 1
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          example: 0000
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          example: 1
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          example: 1
+        maximumAmountSingleATMTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          example: 10000
+        singleOTCCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
+        maximumAmountOTCCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          example: 20000
+        maximumAmountATMCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          example: 10000
+    cardSecureCodeResp:
+      type: object
+      properties:
+        cardNumber:
+          format: uppercase
+          type: string
+    BlockUnblockCardReq:
+      type: object
+      properties:
+        blockCode:
+          description: "Block code - The block code assigned to the Embosser record,\
+            \ Blcok code values can be be A- Z or SPACES."
+          type: string
+          enum:
+          - X
+          - E
+          - F
+          - G
+          - ' '
+          example: X
+    ErrorList:
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            example: XXXXXX
+            description: Error code associated with the response
+          errorMessage:
+            type: string
+            example: Some message from the service
+            description: Error message associated with the response
+    LostStolenCardTransferReq:
+      type: object
+      properties:
+        blockCode:
+          format: uppercase
+          description: Block code-Block code to apply to the transfer card. The values
+            are blank(or space) and A to Z
+          type: string
+          maxLength: 1.0
+          example: L
+        product:
+          default: 0.0
+          maximum: 999.0
+          description: Product - Product associated with this Account. The values
+            are 001–998
+          type: number
+          minimum: 0.0
+          example: 1
+        cardReplacementIndicator:
+          description: "Card replacement indicator-Code that indicates whether CMS\
+            \ replaces the transfer card by generating a new Embosser record on the\
+            \ original account. The values are 0=Replace lost/stolen/fraud card (Default),\
+            \ 1=Do not replace lost/stolen/fraud card\""
+          type: string
+          enum:
+          - 0 - Replace
+          - 1 - Do Not Replace
+          example: 0
+        terminalId:
+          format: uppercase
+          description: Terminal id- The terminal from where the service was called
+          type: string
+          maxLength: 4.0
+          example: ' '
+        accountNumber:
+          format: uppercase
+          description: Account Number - Identification number of the Account Base
+            Segment record to which CMS posts transactions received for this Embosser
+            record.
+          type: string
+          maxLength: 19.0
+          example: 0001000011000033827
+        customerBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Card transfer org-Identification number of the organization
+            associated with thisAccount Base Segment record. The values are 001–9
+          type: number
+          minimum: 0.0
+          example: ' '
+        transferToAccount:
+          format: uppercase
+          description: Transfer to account-Number of the account to which you want
+            to transfer the cardYou can enter a specific account number or enter a
+            slash (/) ifthe auto-generation functionality is active for account numbers.
+          type: string
+          maxLength: 19.0
+          example: ' '
+        transferToCustomer:
+          format: uppercase
+          description: Transfer to customer-Number that identifies the Customer Name/Address
+            record associated with the transfer-to accountIf you are transferring
+            the card to an existing accountdo notmake an entry in the CUSTOMER fieldCMS
+            uses the customernumber associated with the existing account
+          type: string
+          maxLength: 19.0
+          example: ' '
+        signonName:
+          description: Sign on Name
+          type: string
+          example: ' '
+        action:
+          description: "Action-This field issystem-generated; you cannot modify it.\
+            \ The values are R=Reverse a card transfer, T=Transfer the card (lost,\
+            \ stolen, or fraud)."
+          type: string
+          enum:
+          - T - Transfer
+          - R - Reversal
+          example: T
+        securitySignon:
+          description: security signon
+          type: string
+          example: ' '
+        processType:
+          type: string
+          enum:
+          - 0
+          - 1
+        operatorId:
+          format: uppercase
+          description: Operator id-user signon operator id
+          type: string
+          maxLength: 3.0
+          example: ' '
+        effectiveDate:
+          format: date
+          description: Effective date-Date that the fraud card transfer is effective
+            The value must be a date less than or equal to today’sdateThe default
+            value is today’s date. If you enter a future date The system will abend"
+          type: string
+          example: ' '
+        cardSequenceNumber:
+          default: 1.0
+          maximum: 9999.0
+          description: Card Sequence Number.
+          type: number
+          minimum: 1.0
+          example: 0001
+        startDate:
+          format: date
+          description: Start date- the date when the service was called
+          type: string
+          example: ' '
+    CardTypeUpdateReq:
+      type: object
+      properties:
+        cardholderType:
+          description: Cardholder Type - Code that indicates whether the cardholder
+            is the primary cardholder or an additional cardholder associated with
+            theaccount
+          type: string
+          enum:
+          - 0-Additional
+          - 1-Primary
+          example: 1
+    LostStolenCardTransferResp:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+        errorType:
+          type: string
+        transactionReturnCode:
+          type: string
+        errorCode:
+          type: string
+    ActivateCardResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          example: 100
+        lastCardActivation:
+          description: Last Card Activation required
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
+        currentCardRequireActivation:
+          description: Current Card Required Activation.
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          example: "N"
+        cardActivatedDate:
+          format: date
+          description: Card Activated Date.
+          type: string
+          example: 03/01/2020
+        cardNumber:
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19.0
+          example: 0009846801010273613
