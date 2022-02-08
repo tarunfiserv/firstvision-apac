@@ -90,9 +90,9 @@
               link: docs/APIs/Card-Management/Inquire-Card-Controls.md                   
         - title: Customer Management
           sections:
-            - title: Customer Demographic Inquiry
+            - title: Inquire Customer Demographic
               link: docs/APIs/Customer-Management/Customer-Demographic-Inquiry.md
-            - title: Customer Demographic Update
+            - title: Update Customer Demographic
               link: docs/APIs/Customer-Management/Customer-Demographic-Update.md
             - title: List Customers' Accounts
               link: docs/APIs/Customer-Management/List-Customers-Accounts.md
