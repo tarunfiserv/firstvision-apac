@@ -1394,7 +1394,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /accounts/{accountNumber}/monetaryAction:
+  
+  /v1/accounts/{accountNumber}/monetaryAction:
     post:
       tags:
       - Account Management
@@ -1423,7 +1424,7 @@ paths:
           minLength: 0.0
           type: string
           maxLength: 20.0
-          example: 00002AUNAB
+          example: 00000AUNAB
         required: true
       - name: X-context
         description: A unique random ID assigned to the requestor once authenticated
@@ -1434,7 +1435,7 @@ paths:
           minLength: 0.0
           type: string
           maxLength: 20.0
-          example: 00002AUNAB
+          example: 00000AUNAB
         required: true
       - name: accountNumber
         in: path
@@ -1667,26 +1668,7 @@ components:
           - Z
           - ' '
           example: ' '
-    DirectDebitUpdateResp:
-      type: object
-      properties:
-        product:
-          default: 0.0
-          type: number
-        businessUnit:
-          default: 0.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          example: 600
-        accountNumber:
-          description: Account Number - Unique Identification numbers of the Account
-          type: string
-          maxLength: 19.0
-          example: 0000000001000000057
-        billingAcctInd:
-          default: 0.0
-          type: number
+    
     PricingControlsResp:
       type: object
       properties:
@@ -2666,74 +2648,7 @@ components:
           type: number
           minimum: 0.0
           example: 1
-    DirectDebitUpdateReq:
-      type: object
-      properties:
-        dDPaymentExpiryDate:
-          format: date
-          description: DD Payment Expiry Date - Date on which direct debit processing
-            expires for the account
-          type: string
-          example: 04/11/2021
-        product:
-          default: 0.0
-          type: number
-        dDRoutingBankID:
-          default: 0.0
-          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
-            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
-            to identify the financial institution to receive direct debit transactions
-            for account payments
-          type: number
-          example: 123456
-        fixedPaymentAmount:
-          description: DD Nominated Type - Code that indicates the type of customer-nominated
-            payment
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 9
-          example: 1
-        paymentRemittanceMethod:
-          description: Payment Remittance Method - Code that indicates the payment
-            remittance method for the account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          example: 0
-        dDNominatedPaymentAmtorPercentage:
-          default: 0.0
-          description: DD Nominated Payment Amt/% - This field is the amount of direct
-            debit
-          type: number
-          example: 10
-        billingAcctInd:
-          default: 0.0
-          type: number
-        dDAccountNumber:
-          description: DD Account Number - This field is the account number
-          type: string
-          maxLength: 17
-          example: 0000000001000000057
-        dDPaymentStartDate:
-          format: date
-          description: DD Payment Start Date - Date on which direct debit processing
-            starts for the account
-          type: string
-          example: 04/10/2021
-        dDAccountType:
-          description: DD Account Type - This field is a code that indicates the type
-            of account to which the direct debit is sent
-          type: string
-          enum:
-          - D
-          - S
-          example: D
+    
     InquireAccountBalancesResp:
       type: object
       properties:
@@ -3869,7 +3784,410 @@ components:
           example: ""
     MonetaryActionResp:
       type: object
-      properties: {}
+      properties:
+        insurance:
+          format: uppercase
+          description: Insurance - Insurance product associated with the transaction
+          type: string
+          example: ""
+        walletID:
+          format: uppercase
+          description: Wallet ID - This field displays the identification number of
+            the wallet
+          type: string
+          example: ""
+        storeNumber:
+          default: 0.0
+          maximum: 9.99999999E8
+          description: Store Number - Store number associated with the transaction
+          type: number
+          minimum: -9.99999999E8
+          example: 999999998
+        collectionSequenceNumber:
+          default: 0.0
+          maximum: 99999.0
+          description: Collection Sequence Number - This field displays the CTA sequence
+            number
+          type: number
+          minimum: 0.0
+          example: 0
+        currrencyNod:
+          default: 0.0
+          maximum: 9.0
+          description: Currency NOD - This field displays the identification of the
+            currency nod associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 2
+        departmentCode:
+          format: uppercase
+          description: Department Code - This field displays the identification of
+            the department code associated with the transaction
+          type: string
+          example: ""
+        pointsProgram:
+          default: 0.0
+          maximum: 9.0
+          description: Point Program - This field is used for the identification of
+            points program associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 0
+        letterBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Letter Business Unit - This field displays the identification
+            number of the business unit associated with the Letter
+          type: number
+          minimum: 0.0
+          example: 0
+        transactionDescription:
+          format: uppercase
+          description: Transaction Description - This field displays the description
+            of the transaction
+          type: string
+          example: '  '
+        historyDate:
+          format: date
+          description: History Date - This field displays the history date associated
+            with the transaction
+          type: string
+          example: 27/01/2022
+        notePurgeDate:
+          format: date
+          description: Note Purge Date - This field displays the date at which the
+            note is purged.
+          type: string
+          example: 00/00/0000
+        referenceNumber:
+          format: uppercase
+          description: Reference Number - This field is used for the identification
+            of the reference number associated with the transaction
+          type: string
+          example: ""
+        cashAvailable:
+          default: 0.0
+          description: Cash Available - This field displays the cash available credit
+            balance associated with the transaction
+          type: string
+          example: $0.00
+        creditLimit:
+          default: 0.0
+          description: Credit Limit - This field displays the credit limit associated
+            with the transaction
+          type: string
+          example: "$5,000.00"
+        repBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Representative Business Unit - This field displays the identification
+            number of the business unit associated with the representative
+          type: number
+          minimum: 0.0
+          example: 600
+        actionCode:
+          format: uppercase
+          description: Action Code - Action code placed on the account
+          type: string
+          example: AINQ
+        resolutionReferenceNumber:
+          default: 0.0
+          maximum: 9.99999999999999E14
+          description: Resolution Reference Number - Resolution reference number for
+            payments received for open billing accounts
+          type: number
+          minimum: -9.99999999999999E14
+          example: 0
+        cardSequenceNumber:
+          default: 0.0
+          maximum: 99999.0
+          description: Card Sequence - This field displays the sequence number associated
+            with this card which belongs to the action
+          type: number
+          minimum: -99999.0
+          example: 1
+        sKUNumber:
+          default: 0.0
+          maximum: 9.99999999E8
+          description: SKU Number - SKU number associated with the transaction
+          type: number
+          minimum: -9.99999999E8
+          example: 0
+        letterCode:
+          format: uppercase
+          description: Letter Code - This field displays the identification number
+            of the Letter
+          type: string
+          example: ""
+        fundingCardNumber:
+          description: Funding Card Number 2 - Funding Card Number 2
+          type: string
+          example: ' '
+        currentBalance:
+          default: 0.0
+          description: Current Balance - This field displays the current balance associated
+            with the transaction
+          type: string
+          example: $72.00
+        nextReviewTime:
+          default: 0.0
+          maximum: 9999999.0
+          description: Next Review Time - This field displays the time at which next
+            review is triggered
+          type: number
+          minimum: -9999999.0
+          example: 0
+        actionRepId:
+          format: uppercase
+          description: Action Representative ID - This field displays the identification
+            of the Collector ID
+          type: string
+          maxLength: 3.0
+          example: NAB
+        transactionCode:
+          default: 0.0
+          maximum: 9999.0
+          description: Transaction Code - This field displays the identification of
+            the code associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 2006
+        foreignUseIndicator:
+          default: 0.0
+          maximum: 9.0
+          description: Foreign Use Indicator - This field helps to provide details
+            of which account needs to be used for the transaction
+          type: number
+          minimum: 0.0
+          example: 0
+        planNumber:
+          default: 0.0
+          maximum: 99999.0
+          description: Plan Number - Credit plan number associated with the transaction
+          type: number
+          minimum: -99999.0
+          example: 10002
+        authorizationNumber:
+          format: uppercase
+          description: Authorization Code - Authorization code associated with the
+            transaction
+          type: string
+          example: ""
+        departmentNumber:
+          format: uppercase
+          description: Department Number - Department associated with the transaction
+          type: string
+          example: ""
+        notesHistoryStatus:
+          format: uppercase
+          description: Notes History Status - This field helps to identify the status
+            of the notes
+          type: string
+          example: O
+        name:
+          format: uppercase
+          description: Name - This field displays the name of the customer
+          type: string
+          example: RACHEL TEST BY SASHI
+        cTAFile:
+          format: uppercase
+          description: CTA File -This field is used for the identification of the
+            CTA file
+          type: string
+          example: ""
+        cardNumber:
+          format: uppercase
+          description: Card Number - This field displays the identification number
+            of the card associated with this action
+          type: string
+          example: 0006000011000000160
+        accountBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Account Business Unit - This field is used as the identification
+            of the Business unit associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 600
+        ticketNumber:
+          format: uppercase
+          description: Ticket Number - Ticket number (invoice number) associated with
+            the transaction
+          type: string
+          example: 0
+        retentionDuration:
+          format: uppercase
+          description: Retention Duration - This field is used for the identification
+            of the code related to the retention of the transaction
+          type: string
+          example: ""
+        actionCodePriority:
+          default: 0.0
+          maximum: 9.0
+          description: Action Code Priority - This field helps to display the priority
+            of the action code
+          type: number
+          minimum: 0.0
+          example: 0
+        workExtension:
+          default: 0.0
+          maximum: 99999.0
+          description: Work Extension - This field displays the customer’s work extension
+            number
+          type: number
+          minimum: 0.0
+          example: ""
+        autoReferenceFlag:
+          default: 0.0
+          maximum: 9.0
+          description: Auto Reference Flag - Code that indicates the status of a referral
+          type: number
+          minimum: 0.0
+          example: 1
+        nextReviewDate:
+          format: date
+          description: Next Review Date - This field displays the date at which next
+            review is triggered
+          type: string
+          example: 00/00/0000
+        transactionAmount:
+          default: 0.0
+          description: Transaction Amount - Transaction amount to be posted
+          type: string
+          example: "$3,000.00"
+        storeBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Store Business Unit - This field is used to display the identification
+            number of the Business unit associated with the store
+          type: number
+          minimum: 0.0
+          example: 0
+        accountProduct:
+          default: 0.0
+          maximum: 999.0
+          description: Account Logo - This field is used as the identification of
+            the product associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 1
+        actionDate:
+          format: date
+          description: Action Code Date- This field displays the date on which action
+            is performed
+          type: string
+          example: 00/00/0000
+        actionCodeDescription:
+          format: uppercase
+          description: Action Code Description -This field displays the description
+            of the Action code placed on the account
+          type: string
+          example: ACCOUNT INQ
+        declineReason:
+          format: uppercase
+          description: Decline Reason - This field displays the reason for declination
+            related to the fund card of this transaction
+          type: string
+          example: ' '
+        decision:
+          format: uppercase
+          description: Decision - This field is used as an indicator which helps to
+            identify whether the transaction is approved or declined
+          type: string
+          example: A
+        pointsAmount:
+          default: 0.0
+          description: Points Amount - This field displays the amount related to the
+            points claimed by the user
+          type: string
+          example: $0.00
+        recordType:
+          format: uppercase
+          description: Record Type - This field displays the record type of the transaction.
+            This field will have fixed value of “M”
+          type: string
+          example: M
+        planSequenceNumber:
+          default: 0.0
+          maximum: 99.0
+          description: Plan Sequence Number - Sequence number of the plan segment
+            associated with the transaction
+          type: number
+          minimum: 0.0
+          example: 1
+        referralRepBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Referral REP Business Unit - This field displays the identification
+            number of the business unit associated with the representative referred
+          type: number
+          minimum: 0.0
+          example: 0
+        openToBuy:
+          default: 0.0
+          description: Open to Buy - This field displays the open-to-buy balance associated
+            with the transaction
+          type: string
+          example: "-$80,072.00"
+        accountNumber:
+          format: uppercase
+          description: Account Number - This field is used as the identification number
+            of the account associated with the transaction
+          type: string
+          example: "0006000011000000160"
+        clerk:
+          format: uppercase
+          description: Clerk - Sales clerk associated with the transaction
+          type: string
+          example: ""
+        transactionType:
+          format: uppercase
+          description: Transaction Type -This field is used to identify the type of
+            the transaction
+          type: string
+          example: ""
+        feeAmount:
+          default: 0.0
+          description: Fee Amount - This field is used to display the fee amount associated
+            with the transaction
+          type: string
+          example: $0.00
+        purchaseOrderNumber:
+          format: uppercase
+          description: Purchase Order Number - Purchase order number of the transaction
+          type: string
+          example: 0
+        referralRepId:
+          format: uppercase
+          description: Referral REP ID - This field displays the identification number
+            of the representative referred
+          type: string
+          example: ""
+        workPhone:
+          format: uppercase
+          description: Work phone - This field displays the customer’s work phone
+            number
+          type: string
+          example: 00000000000000000000
+        historyTime:
+          default: 0.0
+          maximum: 9999999.0
+          description: History Time - This field displays the history time associated
+            with the transaction
+          type: number
+          minimum: -9999999.0
+          example: 101933
+        currencyCode:
+          format: uppercase
+          description: Currency Code - This field displays the identification of the
+            currency code associated with the transaction
+          type: string
+          example: 036
+        effectiveDate:
+          format: date
+          description: Effective Date - Date when this action is to take effect
+          type: string
+          example: 18/08/2021
     MonetaryActionReq:
       type: object
       properties:
@@ -4112,6 +4430,7 @@ components:
           type: string
           maxLength: 19.0
           example: "0006000011000000160"
+    
     CreditLimitUpdateReq:
       type: object
       properties:
@@ -4128,20 +4447,108 @@ components:
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
-          example: 600
+          example: '"600"'
         creditLimit:
           default: 0.0
           description: Credit limit of the account
           type: string
-          example: 50
+          example: '"50"'
         accountNumber:
           format: uppercase
           description: Account Number - Unique Identification numbers of the Account
           type: string
           maxLength: 19.0
-          example: 9994588580000000011
+          example: '"9994588580000000011"'
         creditLimitDate:
           format: uppercase
           description: Date on which the current credit limit was assigned
           type: string
-          example: 19/08/2021
+          example: '"19/08/2021"'
+    DirectDebitUpdateReq:
+      type: object
+      properties:
+        dDPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account
+          type: string
+          example: '"04/11/2021"'
+        product:
+          default: 0.0
+          type: number
+        dDRoutingBankID:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          example: '"123456"'
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          example: '"1"'
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: '"0"'
+        dDNominatedPaymentAmtorPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          example: '"10"'
+        billingAcctInd:
+          default: 0.0
+          type: number
+        dDAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 17
+          example: '"0000000001000000057"'
+        dDPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account
+          type: string
+          example: '"04/10/2021"'
+        dDAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          example: '"D"'
+    DirectDebitUpdateResp:
+      type: object
+      properties:
+        product:
+          default: 0.0
+          type: number
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: '"600"'
+        accountNumber:
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: '"0000000001000000057"'
+        billingAcctInd:
+          default: 0.0
+          type: number
