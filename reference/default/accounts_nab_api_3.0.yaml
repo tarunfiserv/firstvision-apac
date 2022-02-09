@@ -757,7 +757,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/account/{accountNumber}/creditLimit:
+  /v1/accounts/{accountNumber}/creditLimit:
     put:
       tags:
       - Account Management
@@ -865,6 +865,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+                
   /v1/accounts/{accountNumber}/pricingControls:
     put:
       tags:
@@ -1544,17 +1545,7 @@ components:
             expire for the account
           type: string
           example: 31/12/2025
-    CreditLimitUpdateReq:
-      type: object
-      properties:
-        creditLimit:
-          default: 0.0
-          description: Credit limit of the account
-          type: string
-          example: 50
-        creditLimitDate:
-          format: uppercase
-          type: string
+    
     UpdateTemporaryCreditLimitResp:
       type: object
       properties:
@@ -3678,24 +3669,7 @@ components:
         datefirstcardVerify:
           format: uppercase
           type: string
-    CreditLimitUpdateResp:
-      type: object
-      properties:
-        businessUnit:
-          default: 0.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          example: 600
-        accountNumber:
-          format: uppercase
-          description: Account Number - Unique Identification numbers of the Account
-          type: string
-          maxLength: 19.0
-          example: 9994588580000000011
-        creditLimitDate:
-          format: uppercase
-          type: string
+    
     AccountChargeoffUpdateResp:
       type: object
       properties:
@@ -4138,3 +4112,36 @@ components:
           type: string
           maxLength: 19.0
           example: "0006000011000000160"
+    CreditLimitUpdateReq:
+      type: object
+      properties:
+        creditLimit:
+          default: 0.0
+          description: Credit limit of the account
+          type: string
+          example: 50
+    CreditLimitUpdateResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          example: 600
+        creditLimit:
+          default: 0.0
+          description: Credit limit of the account
+          type: string
+          example: 50
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19.0
+          example: 9994588580000000011
+        creditLimitDate:
+          format: uppercase
+          description: Date on which the current credit limit was assigned
+          type: string
+          example: 19/08/2021
