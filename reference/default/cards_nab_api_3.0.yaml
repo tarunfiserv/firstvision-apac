@@ -558,118 +558,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/cards/{cardNumber}/validateCVV2:
-    post:
-      tags:
-      - Card Management
-      summary: Validate CVV2
-      description: The Card Secure Code Validation service is used to validate the
-        CVV2 and optionally the expiry date of a given card. This service is typically
-        called before the card activation or PIN reset service to validate the cardholder.
-      operationId: cardSecureCode
-      x-group-name: Card Management
-      x-proxy-name: Validate CVV2
-      parameters:
-      - name: X-Correl-Id
-        description: Any correlational text client's may want to send in the request
-          for mapping the response on their side. Any value passed in the request
-          message will be return back as-is in the API response message
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 40.0
-          example: ABC123
-        required: false
-      - name: X-Name
-        description: User’s sign-on name. The value passed in this field will be validated
-          within application for user's authority to consume the requested API
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: X-context
-        description: A unique random ID assigned to the requestor once authenticated
-          to the First Vision application. Value passed in this field will be used
-          within application to authenticate the valid signed-on user
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: businessUnit
-        in: query
-        description: "Business Unit - Identification number associated with this Account\
-          \ Base Segment record, the values are 001–998"
-        required: true
-        schema:
-          default: 0.0
-          maximum: 999.0
-          type: number
-          minimum: 0.0
-          example: 100
-      - name: cardNumber
-        in: path
-        description: Token Number assigned to the cardholder embosser record.
-        required: true
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 19.0
-          example: 0009846801010065787
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/cardSecureCodeReq'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/cardSecureCodeResp'
-        "400":
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "401":
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "500":
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "404":
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "503":
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "504":
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
+  
   /v1/cards/{cardNumber}/cardType:
     put:
       tags:
@@ -883,115 +772,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/cards/{cardNumber}/spendLimits:
-    put:
-      tags:
-      - Card Management
-      summary: Update Spend Limits
-      description: This service is used to update the spending limits to control the
-        card usage. These limits are set at individual card level.
-      operationId: SpendLimitUpdate
-      x-group-name: Card Management
-      x-proxy-name: Spend Limit Updates
-      parameters:
-      - name: X-Correl-Id
-        description: Any correlational text client's may want to send in the request
-          for mapping the response on their side. Any value passed in the request
-          message will be return back as-is in the API response message
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 40.0
-          example: ABC123
-        required: false
-      - name: X-Name
-        description: User’s sign-on name. The value passed in this field will be validated
-          within application for user's authority to consume the requested API
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: X-context
-        description: A unique random ID assigned to the requestor once authenticated
-          to the First Vision application. Value passed in this field will be used
-          within application to authenticate the valid signed-on user
-        in: header
-        schema:
-          minLength: 0.0
-          type: string
-          maxLength: 20.0
-          example: 00000AUNAB
-        required: true
-      - name: businessUnit
-        in: query
-        description: Business Unit - Identification number associated with this Account
-          Base Segment record
-        schema:
-          default: 0.0
-          type: number
-          example: 100
-      - name: cardNumber
-        in: path
-        description: Card Number - Token Number assigned to the cardholder embosser
-          record.
-        required: true
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 19.0
-          example: 0009846801010000001
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SpendLimitUpdateReq'
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SpendLimitUpdateResp'
-        "400":
-          description: The request cannot be validated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "401":
-          description: The request was unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "500":
-          description: An unexpected internal server error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "404":
-          description: The request resource does not exist
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "503":
-          description: The service was unavailable
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
-        "504":
-          description: The request timed out while waiting for a response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorList'
+  
   /v1/cards/{cardNumber}/transfer:
     put:
       tags:
@@ -1177,6 +958,228 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BlockUnblockCardResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/validateCVV2:
+    post:
+      tags:
+      - Card Management
+      summary: Validate CVV2
+      description: The Card Secure Code Validation service is used to validate the
+        CVV2 and optionally the expiry date of a given card. This service is typically
+        called before the card activation or PIN reset service to validate the cardholder.
+      operationId: CardSecureCode
+      x-group-name: Card Management
+      x-proxy-name: Validate CVV2
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Token Number assigned to the cardholder embosser record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0009846801010065787
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardSecureCodeReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardSecureCodeResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+  /v1/cards/{cardNumber}/spendLimits:
+    put:
+      tags:
+      - Card Management
+      summary: Update Spend Limits
+      description: This service is used to update the spending limits to control the
+        card usage. These limits are set at individual card level.
+      operationId: UpdateSpendLimit
+      x-group-name: Card Management
+      x-proxy-name: Update Spend Limits
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: Business Unit - Identification number associated with this Account
+          Base Segment record
+        schema:
+          default: 0.0
+          type: number
+          maxLength: 3
+          example: 100
+      - name: cardNumber
+        in: path
+        description: Card Number - Token Number assigned to the cardholder embosser
+          record.
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19
+          example: 0009846801010273605
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSpendLimitReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSpendLimitResp'
         "400":
           description: The request cannot be validated
           content:
@@ -1442,26 +1445,7 @@ components:
           type: number
           minimum: 0.0
           example: 0
-    cardSecureCodeReq:
-      type: object
-      properties:
-        cVV2:
-          format: uppercase
-          description: Token Number assigned to the cardholder embosser record.
-          type: string
-          maxLength: 3.0
-          example: 9.846801010065788E15
-        expiryDateMMYY:
-          format: uppercase
-          description: Expire Date-valid card expire date should be provided which
-            is of 4 character with MMYY format
-          type: string
-          maxLength: 4.0
-          example: 1123
-        signonName:
-          type: string
-        securitySignon:
-          type: string
+    
     InquireCardDetailsResp:
       type: object
       properties:
@@ -2463,95 +2447,7 @@ components:
           - "N"
           maxLength: 1
           example: "N"
-    SpendLimitUpdateResp:
-      type: object
-      properties:
-        maximumNumberOTCAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-          type: number
-          example: 1
-        maximumNumberATMCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number ATM cash authorization-Maximum number of ATM
-            cash authorizations allowed for thisEmbosser record for the frequency
-            defined in the FREQ field
-          type: number
-          example: 1
-        singleRetailAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single retail authorization allowed- Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            'this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          example: 0000
-        businessUnit:
-          default: 0.0
-          description: Business Unit - Identification number associated with this
-            Account Base Segment record
-          type: number
-          example: 100
-        maximumAuthorizationsFrequency:
-          description: "Maximum authorization frequency-Code that indicates the frequency\
-            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          example: 1
-        maximumAmountRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount retail authorization-Maximum amount in monetary
-            units and subunits of retailauthorizations allowed for this Embosser record
-            for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-        maximumNumberRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number retail authorization-Maximum number of retail
-            authorizations allowed for thisEmbosser record for the frequency defined
-            in the FREQ field
-          type: number
-          example: 1
-        maximumAmountSingleATMTransactionAllowed:
-          default: 0.0
-          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
-            amount in monetary units and subunitsof a single ATM transaction allowed
-            for this Embosser recordfor the frequency defined in the FREQ field'
-          type: string
-          example: 10000
-        singleOTCCashAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-        maximumAmountOTCCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary
-            units and subunits of OTC cashauthorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          example: 20000
-        maximumAmountATMCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary
-            units and subunits of ATM cash authorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-        cardNumber:
-          format: uppercase
-          description: Card Number - Token Number assigned to the cardholder embosser
-            record.
-          type: string
-          maxLength: 19.0
-          example: 0009846801010000001
+    
     UpdateCardControlsReq:
       type: object
       properties:
@@ -2630,88 +2526,7 @@ components:
           - "Y"
           - "N"
           example: "N"
-    SpendLimitUpdateReq:
-      type: object
-      properties:
-        maximumNumberOTCAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-          type: number
-          example: 1
-        maximumNumberATMCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number ATM cash authorization-Maximum number of ATM
-            cash authorizations allowed for thisEmbosser record for the frequency
-            defined in the FREQ field
-          type: number
-          example: 1
-        singleRetailAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single retail authorization allowed- Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            'this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          example: 0000
-        maximumAmountRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount retail authorization-Maximum amount in monetary
-            units and subunits of retailauthorizations allowed for this Embosser record
-            for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-        maximumAuthorizationsFrequency:
-          description: "Maximum authorization frequency-Code that indicates the frequency\
-            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          example: 1
-        maximumNumberRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number retail authorization-Maximum number of retail
-            authorizations allowed for thisEmbosser record for the frequency defined
-            in the FREQ field
-          type: number
-          example: 1
-        maximumAmountSingleATMTransactionAllowed:
-          default: 0.0
-          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
-            amount in monetary units and subunitsof a single ATM transaction allowed
-            for this Embosser recordfor the frequency defined in the FREQ field'
-          type: string
-          example: 10000
-        singleOTCCashAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-        maximumAmountOTCCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary
-            units and subunits of OTC cashauthorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          example: 20000
-        maximumAmountATMCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary
-            units and subunits of ATM cash authorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          example: 10000
-    cardSecureCodeResp:
-      type: object
-      properties:
-        cardNumber:
-          format: uppercase
-          type: string
+    
     BlockUnblockCardReq:
       type: object
       properties:
@@ -2910,3 +2725,213 @@ components:
           type: string
           maxLength: 19.0
           example: 0009846801010273613
+    UpdateSpendLimitReq:
+      type: object
+      properties:
+        singleOtcCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountSingleAtmTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountOtcCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 20000
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 0000
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumAmountAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberOtcAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumNumberAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+    CardSecureCodeReq:
+      type: object
+      properties:
+        cvv2:
+          format: uppercase
+          description: Token Number assigned to the cardholder embosser record.
+          type: string
+          maxLength: 3.0
+          example: 855
+        expiryDateMmyy:
+          format: uppercase
+          description: Expire Date-valid card expire date should be provided which
+            is of 4 character with MMYY format
+          type: string
+          maxLength: 4.0
+          example: 1123
+    UpdateSpendLimitResp:
+      type: object
+      properties:
+        singleOtcCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountOtcCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 20000
+        maximumAmountSingleAtmTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          maxLength: 17
+          example: 10000
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 0000
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          maxLength: 3
+          example: 100
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumAmountAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberOtcAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
+          type: number
+          maxLength: 1
+          example: 1
+        cardNumber:
+          format: uppercase
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19
+          example: 0009846801010273605
+        maximumNumberAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+    CardSecureCodeResp:
+      type: object
+      properties:
+        cardNumber:
+          format: uppercase
+          description: Token Number assigned to the cardholder embosser record.
+          type: string
+          example: 0009846801010065787
