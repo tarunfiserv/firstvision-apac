@@ -4437,7 +4437,7 @@ components:
           default: 0.0
           description: Credit limit of the account
           type: string
-          example: 50
+          example: '"50"'
     CreditLimitUpdateResp:
       type: object
       properties:
@@ -4501,9 +4501,6 @@ components:
             expires for the account
           type: string
           example: '"04/11/2021"'
-        billingacctind:
-          default: 0.0
-          type: number
         ddAccountNumber:
           description: DD Account Number - This field is the account number
           type: string
@@ -4543,6 +4540,9 @@ components:
           - 1
           - 2
           example: '"0"'
+        billingAcctInd:
+          default: 0.0
+          type: number
         ddRoutingBankId:
           default: 0.0
           description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
