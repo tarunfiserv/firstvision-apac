@@ -4430,74 +4430,6 @@ components:
           type: string
           maxLength: 19.0
           example: "0006000011000000160"
-    DirectDebitUpdateReq:
-      type: object
-      properties:
-        dDPaymentExpiryDate:
-          format: date
-          description: DD Payment Expiry Date - Date on which direct debit processing
-            expires for the account
-          type: string
-          example: 04/11/2021
-        product:
-          default: 0.0
-          type: number
-        dDRoutingBankID:
-          default: 0.0
-          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
-            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
-            to identify the financial institution to receive direct debit transactions
-            for account payments
-          type: number
-          example: 123456
-        fixedPaymentAmount:
-          description: DD Nominated Type - Code that indicates the type of customer-nominated
-            payment
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 9
-          example: 1
-        paymentRemittanceMethod:
-          description: Payment Remittance Method - Code that indicates the payment
-            remittance method for the account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          example: 0
-        dDNominatedPaymentAmtorPercentage:
-          default: 0.0
-          description: DD Nominated Payment Amt/% - This field is the amount of direct
-            debit
-          type: number
-          example: 10
-        billingAcctInd:
-          default: 0.0
-          type: number
-        dDAccountNumber:
-          description: DD Account Number - This field is the account number
-          type: string
-          maxLength: 17
-          example: 0000000001000000057
-        dDPaymentStartDate:
-          format: date
-          description: DD Payment Start Date - Date on which direct debit processing
-            starts for the account
-          type: string
-          example: 04/10/2021
-        dDAccountType:
-          description: DD Account Type - This field is a code that indicates the type
-            of account to which the direct debit is sent
-          type: string
-          enum:
-          - D
-          - S
-          example: D
     CreditLimitUpdateReq:
       type: object
       properties:
@@ -4514,23 +4446,23 @@ components:
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
-          example: 600
+          example: '"600"'
         creditLimit:
           default: 0.0
           description: Credit limit of the account
           type: string
-          example: 50
+          example: '"50"'
         accountNumber:
           format: uppercase
           description: Account Number - Unique Identification numbers of the Account
           type: string
           maxLength: 19.0
-          example: 9994588580000000011
+          example: '"9994588580000000011"'
         creditLimitDate:
           format: uppercase
           description: Date on which the current credit limit was assigned
           type: string
-          example: 19/08/2021
+          example: '"19/08/2021"'
     DirectDebitUpdateResp:
       type: object
       properties:
@@ -4542,13 +4474,81 @@ components:
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
-          example: 600
+          example: '"600"'
         accountNumber:
           description: Account Number - Unique Identification numbers of the Account
           type: string
           maxLength: 19.0
-          example: 0000000001000000057
+          example: '"0000000001000000057"'
         billingAcctInd:
           default: 0.0
           type: number
+    DirectDebitUpdateReq:
+      type: object
+      properties:
+        ddNominatedPaymentAmtOrPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          example: '"10"'
+        product:
+          default: 0.0
+          type: number
+        ddPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account
+          type: string
+          example: '"04/11/2021"'
+        billingacctind:
+          default: 0.0
+          type: number
+        ddAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 17
+          example: '"0000000001000000057"'
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          example: '"1"'
+        ddAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          example: '"D"'
+        ddPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account
+          type: string
+          example: '"04/10/2021"'
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          example: '"0"'
+        ddRoutingBankId:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          example: '"123456"'
  
