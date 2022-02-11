@@ -408,7 +408,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0009544410000000062
+          example: "0000000001000000115"
       responses:
         "200":
           description: Success
