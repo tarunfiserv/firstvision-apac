@@ -443,7 +443,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/accounts/{accountRelationshipNBR}/transactions/memopost:
+  /v1/accounts/{accountRelationshipNbr}/transactions/memoPost:
     get:
       tags:
       - Account Management
@@ -486,7 +486,7 @@ paths:
           maxLength: 20.0
           example: 00000AUNAB
         required: true
-      - name: accountRelationshipNBR
+      - name: accountRelationshipNbr
         in: path
         description: Identification number of the Account Base Segment record.
         required: true
@@ -3026,12 +3026,6 @@ components:
           type: string
           maxLength: 30
           example: ""
-        aRIndicator:
-          format: uppercase
-          description: Account / Relationship Indicator
-          type: string
-          maxLength: 1
-          example: ""
         product:
           default: 0.0
           maximum: 999
@@ -3039,6 +3033,12 @@ components:
             the Account
           type: number
           minimum: 0.0
+          example: ""
+        arIndicator:
+          format: uppercase
+          description: Account / Relationship Indicator
+          type: string
+          maxLength: 1
           example: ""
         businessUnit:
           default: 0.0
