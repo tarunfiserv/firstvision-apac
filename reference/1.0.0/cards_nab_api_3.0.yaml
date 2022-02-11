@@ -388,8 +388,16 @@ paths:
         schema:
           default: 0.0
           type: number
-          maxLength: 3
           example: 600
+      - name: cardSequence
+        in: query
+        description: Card Sequence - Identification number assigned to an Embosser
+          record to distinguish between multiple cards issued with the same card number
+        required: true
+        schema:
+          default: 0001
+          type: number
+          example: 1
       - name: cardNumber
         in: path
         description: Card Number - Number that is embossed on the plastic card. Enter
@@ -399,7 +407,7 @@ paths:
         schema:
           format: uppercase
           type: string
-          maxLength: 19
+          maxLength: 19.0
           example: 0009544410000000062
       responses:
         "200":
@@ -1223,56 +1231,72 @@ components:
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
-          maxLength: 3
           example: 600
         cardSequence:
-          default: 0.0
+          default: 0001
           description: Card Sequence - Identification number assigned to an Embosser
             record to distinguish between multiple cards issued with the same card
             number
           type: number
-          maxLength: 4
           example: 1
+        iNTATMPOSFlag:
+          description: International ATM POS Flag - International ATM POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
         maximumNumberRetailAuthorizationsAllowed:
           default: 0.0
           description: Maximum Number Retail Auths allowed - Maximum number of retail
             authorizations allowed for this Embosser record for the frequency defined
             in the FREQ field
           type: number
-          maxLength: 9
           example: 999999999
+        motoFlag:
+          description: MOTO Flag - MOTO Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "Y"
         maximumAmountSingleATMTransactionAllowed:
           default: 0.0
           description: Maximum Amount Single ATM Transaction Allowed - Maximum authorization
             amount in monetary units and subunits of a single ATM transaction allowed
             for this Embosser record for the frequency defined in the FREQ field
           type: string
-          maxLength: 17
           example: "$2,000.00"
+        payWaveSwitch:
+          description: Pay Wave Switch - Pay Wave Switch
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          maxLength: 1
+          example: "N"
         singleOTCCashAuthorizationAllowed:
           default: 0.0
           description: Single OTC Cash Authorization Allowed - Maximum amount in monetary
             units and subunits of OTC authorizations allowed for this Embosser record
             for the frequency defined in the FREQ field
           type: string
-          maxLength: 17
           example: $0.00
-        postToAccountNumber:
-          format: uppercase
-          description: "Post To Account Number - Code that indicates whether the account\
-            \ being added is a transaction (cardholder), billing, control, or diversion\
-            \ account. This field displays only in add mode (ARAB) and is open to\
-            \ input only"
+        cashBackTranFlag:
+          description: Cash Back Transaction Flag -  Cash Back Transaction Flag
           type: string
-          maxLength: 19
-          example: 0006000022000000076
+          enum:
+          - "Y"
+          - "N"
+          example: "Y"
         maximumAmountATMCashAuthorizationsAllowed:
           default: 0.0
           description: Maximum Amount ATM Cash Authorizations Allowed - Maximum amount
             in monetary units and subunits of ATM cash authorizations allowed for
             this Embosser record for the frequency defined in the FREQ field.
           type: string
-          maxLength: 17
           example: "$1,000.00"
         maximumNumberOTCAuthorizationsAllowed:
           default: 0.0
@@ -1280,7 +1304,6 @@ components:
             of OTC authorizations allowed for this Embosser record for the frequency
             defined in the FREQ field
           type: number
-          maxLength: 9
           example: 999999999
         maximumNumberATMCashAuthorizationsAllowed:
           default: 0.0
@@ -1288,15 +1311,13 @@ components:
             of ATM cash authorizations allowed for this Embosser record for the frequency
             defined in the FREQ field
           type: number
-          maxLength: 9
           example: 999999999
         singleRetailAuthorizationAllowed:
-          default: 0.0
+          default: 0.0          
           description: Single Retail Authorization Allowed - Maximum amount in monetary
             units and subunits of retail authorizations allowed for this Embosser
             record for the frequency defined in the FREQ field
           type: string
-          maxLength: 17
           example: "$999,999,999,999,999.99"
         maximumAmountRetailAuthorizationsAllowed:
           default: 0.0
@@ -1304,8 +1325,31 @@ components:
             units and subunits of retail authorizations allowed for this Embosser
             record for the frequency defined in the FREQ field
           type: string
-          maxLength: 17
           example: "$1,000.00"
+        ecomActiveSwitch:
+          description: ECOM Active switch - ECOM Active switch
+          type: string
+          enum:
+          - 0
+          - 1
+          example: 1
+        atmFlag:
+          description: ATM Flag - ATM Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          example: "Y"
+        posFlag:
+          description: POS Flag - POS Flag
+          type: string
+          enum:
+          - "Y"
+          - "N"
+          - ' '
+          maxLength: 1
+          example: "N"
         maximumAuthorizationsFrequnecy:
           description: "Maximum Authorizations Frequency - Code that indicates the\
             \ frequency for the maximum authorization parameters. This frequency code\
@@ -1316,7 +1360,6 @@ components:
           - 1
           - 2
           - 3
-          maxLength: 1
           example: 1
         maximumAmountOTCCashAuthorizationsAllowed:
           default: 0.0
@@ -1324,7 +1367,6 @@ components:
             in monetary units and subunits of OTC cash authorizations allowed for
             this Embosser record for the frequency defined in the FREQ field
           type: string
-          maxLength: 17
           example: "$1,000.00"
         cardNumber:
           format: uppercase
@@ -1332,7 +1374,7 @@ components:
             Enter a value in this field only if the card number is different from
             the post-to account number
           type: string
-          maxLength: 19
+          maxLength: 19.0
           example: 0009544410000000062
     CardPinBlockReq:
       type: object
