@@ -508,6 +508,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+  /v1/customers/searchCustomer:
+    post:
+      tags:
+      - Customer Management
+      summary: List Customers
+      description: "This service is used to retrieve customer's information based\
+        \ on primary and optional search values like Last name, Indentification number,\
+        \ Phone number etc."
+      operationId: ListCustomers
+      x-group-name: Customer Management
+      x-proxy-name: List Customers
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCustomersReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomersResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
     BoardCustomerResp:
@@ -1799,3 +1891,364 @@ components:
           description: "DOB - Date of Birth of the customer, format is MM/DD/YYYY"
           type: string
           example: 06/24/1986
+    ListCustomersResp:
+      type: object
+      properties:
+        country:
+          format: uppercase
+          description: Country - The value entered must be a valid country code
+          type: string
+          maxLength: 3
+          example: ""
+        lastName:
+          format: uppercase
+          description: Last Name - Last name of the Customer.
+          type: string
+          maxLength: 40
+          example: ""
+        businessUnit:
+          format: uppercase
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: string
+          maxLength: 3
+          example: 0
+        user15:
+          format: uppercase
+          description: User 15 - User-defined field for the search. This field literal
+            displays as USER 15 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        user14:
+          format: uppercase
+          description: User 14 - User-defined field for the search. This field literal
+            displays as User 14 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        postalCode:
+          format: uppercase
+          description: Postal Code - Postal code portion of the mailing address of
+            the owner
+          type: string
+          maxLength: 10
+          example: ""
+        dateOfBirth:
+          format: uppercase
+          description: Date of Birth - Format is DD/MM/YYYY.
+          type: string
+          maxLength: 10
+          example: 01/09/1990
+        title:
+          format: uppercase
+          description: Title - Professional or honorary title of the customer
+          type: string
+          maxLength: 20
+          example: ""
+        suffix:
+          format: uppercase
+          description: "Suffix - Suffix for the customer. Examples include Jr., Sr.,\
+            \ etc."
+          type: string
+          maxLength: 20
+          example: ""
+        token:
+          type: array
+          items:
+            type: object
+            properties:
+              country:
+                format: uppercase
+                type: string
+                description: Country - The value entered must be a valid country code
+                  previously definedin the Security Subsystem and Common Routines
+                  (SSC) system
+                maxLength: 3
+                example: ""
+              businessUnit:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: 0.0
+                description: "Business Unit - Identification number associated with\
+                  \ this Account Base Segment record, the values are 001–998"
+                maxLength: 3
+                example: 600
+              user15:
+                format: uppercase
+                type: string
+                description: User 15 - User-defined field for the search. This field
+                  literal displays as USER 15 unless changed on the Organization record
+                  (ARMO11).
+                maxLength: 20
+                example: ""
+              user14:
+                format: uppercase
+                type: string
+                description: User 14 - User-defined field for the search. This field
+                  literal displays as User 14 unless changed on the Organization record
+                  (ARMO11).
+                maxLength: 20
+                example: ""
+              postalCode:
+                format: uppercase
+                type: string
+                description: Postal Code - Postal code portion of the mailing address
+                  of the owner
+                maxLength: 10
+                example: ""
+              nameField:
+                format: uppercase
+                type: string
+                description: 'Name Field '
+                maxLength: 30
+                example: MR CRUOSAREOBUCDK C CUACOEBKNQ
+              lastbusinesstoregenricName:
+                format: uppercase
+                type: string
+                description: Last/Busines/Store/Genric Name
+                maxLength: 40
+                example: CUACOEBKNQJRXD
+              dateOfBirth:
+                format: uppercase
+                type: string
+                description: Date of Birth. Format is DD/MM/YYYY.
+                maxLength: 10
+                example: 24/04/1990
+              suffix:
+                format: uppercase
+                type: string
+                description: "Suffix - Suffix for the customer. Examples include Jr.,\
+                  \ Sr., etc."
+                maxLength: 20
+                example: ""
+              title:
+                format: uppercase
+                type: string
+                description: Title - Professional or honorary title of the customer
+                maxLength: 20
+                example: ""
+              nameAndOtherDetails:
+                format: uppercase
+                type: string
+                description: Name and Other Details
+                maxLength: 76
+                example: CUACOEBKNQJRXD/CRUOSAREOBUCDK/C/390539172/          /0000000
+                  ///////
+              firstName:
+                format: uppercase
+                type: string
+                description: First Name - First name of the customer
+                maxLength: 40
+                example: CRUOSAREOBUCDK
+              sourceCode:
+                format: uppercase
+                pattern: "^[O][1-4]$|^[C][1-4]$|^M1$|^MD$|^S1$|^SD$"
+                type: string
+                description: Source Code
+                maxLength: 2
+                example: O2
+              phoneNumber:
+                format: uppercase
+                type: string
+                description: Phone Number - Phone Number of Customer
+                maxLength: 20
+                example: 0950340942
+              custstoremerch:
+                format: uppercase
+                type: string
+                maxLength: 19
+                description: "CUST#/STORE#/MERCH# - Number of the customer, store,\
+                  \ or merchant record that was found to contain the name information."
+                example: 0000000001000000024
+              identificationNumber:
+                format: uppercase
+                type: string
+                description: Identification Number - Code that indicates if this number
+                  is a Social Security number or other tax identification number.
+                maxLength: 25
+                example: 390539172
+              middleName:
+                format: uppercase
+                type: string
+                description: Middle Name - Middle name of the customer.
+                maxLength: 40
+                example: C
+        firstName:
+          format: uppercase
+          description: First Name - First name of the customer
+          type: string
+          maxLength: 40
+          example: ""
+        phoneNumber:
+          format: uppercase
+          description: Phone Number - Phone Number of Customer
+          type: string
+          maxLength: 20
+          example: ""
+        mobileDeviceId:
+          format: uppercase
+          description: 'Mobile Device ID - Identification of a mobile device associated
+            with a mobile payment instrument (PI) embosser. CMS does not validate
+            this field; it is stored only. '
+          type: string
+          maxLength: 20
+          example: ""
+        primaryKeyField:
+          format: uppercase
+          description: Primary Key Field - Key field provided in input request
+          type: string
+          maxLength: 40
+          example: 390539172
+        countryCode:
+          format: uppercase
+          description: "Country Code - Country for the customer. If you use this field,\
+            \ enter the exact country code"
+          type: string
+          maxLength: 3
+          example: ""
+        identificationNumber:
+          format: uppercase
+          description: Identification Number - Code that indicates if this number
+            is a Social Security number or other tax identification number.
+          type: string
+          maxLength: 25
+          example: ""
+        middleName:
+          format: uppercase
+          description: Middle Name - Middle name of the customer.
+          type: string
+          maxLength: 40
+          example: ""
+    ListCustomersReq:
+      type: object
+      properties:
+        lastName:
+          format: uppercase
+          description: 'Last Name - Last name of the Customer. '
+          type: string
+          maxLength: 40
+          example: ""
+        primaryDataSwitch:
+          description: "Primary Data Switch - A primary search value must be supplied,\
+            \ and can be based on one of four fields - last/business/generic/store\
+            \ name, identification number, phone number, postal code or mobile device\
+            \ id"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          maxLength: 1
+          example: 1
+        businessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 0
+        user15:
+          format: uppercase
+          description: User 15 - User-defined field for the search. This field literal
+            displays as USER 15 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        user14:
+          format: uppercase
+          description: User 14 - User-defined field for the search. This field literal
+            displays as User 14 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        postalCode:
+          format: uppercase
+          description: Postal Code - Postal code portion of the mailing address of
+            the owner
+          type: string
+          maxLength: 10
+          example: ""
+        dateOfBirth:
+          format: date
+          description: Date Of Birth - Date of Birth of Customer. Format is DD/MM/YYYY.
+          type: string
+          maxLength: 10
+          example: 0
+        title:
+          format: uppercase
+          description: Title - Professional or honorary title of the customer
+          type: string
+          maxLength: 20
+          example: ""
+        suffix:
+          format: uppercase
+          description: "Suffix - Suffix for the customer. Examples include Jr., Sr.,\
+            \ etc."
+          type: string
+          maxLength: 20
+          example: ""
+        primaryData:
+          format: uppercase
+          description: Primary Data - Search field as per Primary data switch
+          type: string
+          maxLength: 40
+          example: 390539172
+        firstName:
+          format: uppercase
+          description: First Name - First name of the customer
+          type: string
+          maxLength: 40
+          example: ""
+        phoneNumber:
+          format: uppercase
+          description: Phone Number - Phone Number of Customer
+          type: string
+          maxLength: 20
+          example: ""
+        mobileDeviceId:
+          format: uppercase
+          description: 'Mobile Device ID - Identification of a mobile device associated
+            with a mobile payment instrument (PI) embosser. CMS does not validate
+            this field; it is stored only. '
+          type: string
+          maxLength: 20
+          example: ""
+        countryCode:
+          format: uppercase
+          description: "Country Code - Country for the customer. If you use this field,\
+            \ enter the exact country code"
+          type: string
+          maxLength: 3
+          example: ""
+        identificationNumber:
+          format: uppercase
+          description: Identification Number -  Code that indicates if this number
+            is a Social Security number or other tax identification number.
+          type: string
+          maxLength: 25
+          example: ""
+        middleName:
+          format: uppercase
+          description: Middle Name - Middle name of the customer.
+          type: string
+          maxLength: 40
+          example: ""
+        optionalDataMatch:
+          description: "Optional Data Match - Code that indicates the degree of matching\
+            \ required for optional data fields. When an optional field contains a\
+            \ value greater than spaces, this field defines whether the resulting\
+            \ search data should match on all optional fields or on any optional field.\
+            \ The values are: 0 = Display any optional field match (Default) 1 = Display\
+            \ only those records that match all requested optional fields. "
+          type: string
+          enum:
+          - 1
+          - 0
+          maxLength: 1
+          example: 1
