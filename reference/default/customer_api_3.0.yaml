@@ -508,6 +508,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
+  
   /v1/customers/searchCustomer:
     post:
       tags:
