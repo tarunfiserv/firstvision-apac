@@ -510,7 +510,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009846801010273605
+          example: 0009846801010273613
       requestBody:
         content:
           application/json:
@@ -2417,92 +2417,7 @@ components:
           type: string
           maxLength: 10
           example: ' '
-    UpdateSpendLimitReq:
-      type: object
-      properties:
-        singleOtcCashAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumAmountSingleAtmTransactionAllowed:
-          default: 0.0
-          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
-            amount in monetary units and subunitsof a single ATM transaction allowed
-            for this Embosser recordfor the frequency defined in the FREQ field'
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumAmountOtcCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary
-            units and subunits of OTC cashauthorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 20000
-        singleRetailAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single retail authorization allowed- Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            'this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 0000
-        maximumAmountRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount retail authorization-Maximum amount in monetary
-            units and subunits of retailauthorizations allowed for this Embosser record
-            for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumAuthorizationsFrequency:
-          description: "Maximum authorization frequency-Code that indicates the frequency\
-            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          maxLength: 1
-          example: 1
-        maximumNumberRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number retail authorization-Maximum number of retail
-            authorizations allowed for thisEmbosser record for the frequency defined
-            in the FREQ field
-          type: number
-          maxLength: 1
-          example: 1
-        maximumAmountAtmCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary
-            units and subunits of ATM cash authorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumNumberOtcAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-          type: number
-          maxLength: 1
-          example: 1
-        maximumNumberAtmCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number ATM cash authorization-Maximum number of ATM
-            cash authorizations allowed for thisEmbosser record for the frequency
-            defined in the FREQ field
-          type: number
-          maxLength: 1
-          example: 1
+    
     LostStolenCardTransferResp:
       type: object
       properties:
@@ -2716,106 +2631,7 @@ components:
           type: string
           maxLength: 19
           example: 0009846801010273613
-    UpdateSpendLimitResp:
-      type: object
-      properties:
-        singleOtcCashAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single OTC cash authorization allowed-Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumAmountOtcCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount OTC cash authorization-Maximum amount in monetary
-            units and subunits of OTC cashauthorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 20000
-        maximumAmountSingleAtmTransactionAllowed:
-          default: 0.0
-          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
-            amount in monetary units and subunitsof a single ATM transaction allowed
-            for this Embosser recordfor the frequency defined in the FREQ field'
-          type: string
-          maxLength: 17
-          example: 10000
-        singleRetailAuthorizationAllowed:
-          default: 0.0
-          description: Maximum Amount Single retail authorization allowed- Maximum
-            amount in monetary units and subunits of OTCauthorizations allowed for
-            'this Embosser record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 0000
-        businessUnit:
-          default: 0.0
-          description: Business Unit - Identification number associated with this
-            Account Base Segment record
-          type: number
-          maxLength: 3
-          example: 100
-        maximumAuthorizationsFrequency:
-          description: "Maximum authorization frequency-Code that indicates the frequency\
-            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          maxLength: 1
-          example: 1
-        maximumAmountRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount retail authorization-Maximum amount in monetary
-            units and subunits of retailauthorizations allowed for this Embosser record
-            for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumNumberRetailAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number retail authorization-Maximum number of retail
-            authorizations allowed for thisEmbosser record for the frequency defined
-            in the FREQ field
-          type: number
-          maxLength: 1
-          example: 1
-        maximumAmountAtmCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum amount ATM cash authorization-Maximum amount in monetary
-            units and subunits of ATM cash authorizations allowed for this Embosser
-            record for thefrequency defined in the FREQ field
-          type: string
-          maxLength: 17
-          example: 10000
-        maximumNumberOtcAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
-            allowed for thisEmbosser record for the frequency defined in the FREQ
-            field
-          type: number
-          maxLength: 1
-          example: 1
-        cardNumber:
-          format: uppercase
-          description: Card Number - Token Number assigned to the cardholder embosser
-            record.
-          type: string
-          maxLength: 19
-          example: 0009846801010273605
-        maximumNumberAtmCashAuthorizationsAllowed:
-          default: 0.0
-          description: Maximum number ATM cash authorization-Maximum number of ATM
-            cash authorizations allowed for thisEmbosser record for the frequency
-            defined in the FREQ field
-          type: number
-          maxLength: 1
-          example: 1
+   
     CardSecureCodeResp:
       type: object
       properties:
@@ -3544,3 +3360,189 @@ components:
           type: string
           maxLength: 19
           example: 0009846801010273613
+    UpdateSpendLimitReq:
+      type: object
+      properties:
+        singleOtcCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountSingleAtmTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountOtcCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 20000
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 0000
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumAmountAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberOtcAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumNumberAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+    UpdateSpendLimitResp:
+      type: object
+      properties:
+        singleOtcCashAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single OTC cash authorization allowed-Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumAmountOtcCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount OTC cash authorization-Maximum amount in monetary
+            units and subunits of OTC cashauthorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 20000
+        maximumAmountSingleAtmTransactionAllowed:
+          default: 0.0
+          description: ' Maximum amount SINGLE ATM Transaction-Maximum authorization
+            amount in monetary units and subunitsof a single ATM transaction allowed
+            for this Embosser recordfor the frequency defined in the FREQ field'
+          type: string
+          maxLength: 17
+          example: 10000
+        singleRetailAuthorizationAllowed:
+          default: 0.0
+          description: Maximum Amount Single retail authorization allowed- Maximum
+            amount in monetary units and subunits of OTCauthorizations allowed for
+            'this Embosser record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 0000
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number associated with this
+            Account Base Segment record
+          type: number
+          maxLength: 3
+          example: 100
+        maximumAuthorizationsFrequency:
+          description: "Maximum authorization frequency-Code that indicates the frequency\
+            \ for the maximum authorization parameters The values are 0=Not used,1=Daily,2=Cycle-to-date,3=Year-to-date"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          maxLength: 1
+          example: 1
+        maximumAmountRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount retail authorization-Maximum amount in monetary
+            units and subunits of retailauthorizations allowed for this Embosser record
+            for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberRetailAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number retail authorization-Maximum number of retail
+            authorizations allowed for thisEmbosser record for the frequency defined
+            in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
+        maximumAmountAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum amount ATM cash authorization-Maximum amount in monetary
+            units and subunits of ATM cash authorizations allowed for this Embosser
+            record for thefrequency defined in the FREQ field
+          type: string
+          maxLength: 17
+          example: 10000
+        maximumNumberOtcAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number OTC  authorization-Maximum number of OTC authorizations
+            allowed for thisEmbosser record for the frequency defined in the FREQ
+            field
+          type: number
+          maxLength: 1
+          example: 1
+        cardNumber:
+          format: uppercase
+          description: Card Number - Token Number assigned to the cardholder embosser
+            record.
+          type: string
+          maxLength: 19
+          example: 0009846801010273613
+        maximumNumberAtmCashAuthorizationsAllowed:
+          default: 0.0
+          description: Maximum number ATM cash authorization-Maximum number of ATM
+            cash authorizations allowed for thisEmbosser record for the frequency
+            defined in the FREQ field
+          type: number
+          maxLength: 1
+          example: 1
