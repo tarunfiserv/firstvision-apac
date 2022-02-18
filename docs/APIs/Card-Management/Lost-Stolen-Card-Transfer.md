@@ -1,4 +1,4 @@
-# Lost Stolen Card Transfer
+# Transfer Lost Stolen Card 
 
 This Lost or Stolen service is used to block the lost card and request for the replacement card.
 
@@ -12,12 +12,22 @@ This Lost or Stolen service is used to block the lost card and request for the r
 
 ```json
 {
-    "cardSequenceNumber": "0001",
-    "accountNumber": "0001000010000003777",
-    "action": "T",
-    "effectiveDate": "",
-    "cardReplacementIndicator": "1",
-    "blockCode": "L"    
+  "blockCode": "L",
+  "product": 1,
+  "cardReplacementIndicator": 0,
+  "terminalId": " ",
+  "accountNumber": 0001000010000003777,
+  "customerBusinessUnit": 0,
+  "transferToAccount": " ",
+  "transferToCustomer": " ",
+  "signonName": " ",
+  "action": "T",
+  "securitySignon": " ",
+  "processType": " ",
+  "operatorId": " ",
+  "effectiveDate": " ",
+  "cardSequenceNumber": 1,
+  "startDate": " "
 }
 ```
 

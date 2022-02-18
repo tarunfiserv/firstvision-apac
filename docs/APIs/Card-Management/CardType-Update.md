@@ -1,4 +1,4 @@
-# CardType Update
+# Update Card Type
 
 This service is used to update the type of cardholder between primary and supplementary (Joint Cardholder). 
 

@@ -12,10 +12,16 @@ The PIN Block Change Service is used to update the PIN Block with the prerequisi
 
 ```json
 {
-    "currentPinBlock": "A8EFRS432RTODS2R",
-    "requestedPinBlock": "6BA8F5DFB742A878",
-    "pinChannel": "W",    
-    "pinOffset": ""
+  "userFiller": " ",
+  "product": 1,
+  "signonName": " ",
+  "requestedPinBlock": 123456,
+  "pinChannel": "A",
+  "securitySignon": " ",
+  "currentPinBlock": " ",
+  "keyAssociation": " ",
+  "vgsFiller": " ",
+  "pinOffset": 0
 }
 ```
 
