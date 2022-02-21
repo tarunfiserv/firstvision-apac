@@ -26,9 +26,11 @@ The below table identifies the required query parameters in the request payload.
 
 ### Successful Response Payload
 
->Shoud be empty.
-***The Business Unit and cardNumber should be sent as query parameters.***
-
+```json
+{
+  "cardNumber": 9846801010273604
+}
+```
 ### Error Response Payload
 
 ```json

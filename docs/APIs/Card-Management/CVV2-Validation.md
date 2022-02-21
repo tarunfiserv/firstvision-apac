@@ -14,8 +14,8 @@ This service is typically called before the card activation or PIN reset service
 
 ```json
 {
-    "cVV2": "855",
-    "expiryDateMMYY": "1123"
+  "cvv2": 855,
+  "expiryDateMmyy": 1123
 }
 ```
 

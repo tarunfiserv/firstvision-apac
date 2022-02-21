@@ -32,7 +32,7 @@ The below table identifies the required parameters in the request payload.
 
 ```json
 {
-  "aRIndicator": "A",
+  "arIndicator": "A",
   "accountNumber": "0000000001000000073",
   "businessUnit": "600",
   "fileFlag": "",

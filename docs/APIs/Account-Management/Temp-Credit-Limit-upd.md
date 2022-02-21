@@ -1,4 +1,4 @@
-# Update Temp Credit Limit
+# Update Temporary Credit Limit
 
 This service is used to update temporary credit limit to an account.
 

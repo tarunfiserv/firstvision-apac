@@ -12,16 +12,16 @@ This service is used to update the spending limits to control the card usage.  T
 
 ```json
 {
-  "maximumAuthorizationsFrequency": "1",
-  "maximumAmountATMCashAuthorizationsAllowed": "10000",
-  "maximumNumberATMCashAuthorizationsAllowed": 1,
-  "maximumAmountSingleATMTransactionAllowed": 10000,
-  "maximumNumberOTCAuthorizationsAllowed": 1,
-  "maximumAmountOTCCashAuthorizationsAllowed": 2000,
-  "singleOTCCashAuthorizationAllowed": 10000,
-  "maximumAmountRetailAuthorizationsAllowed": 1000,
+  "singleOtcCashAuthorizationAllowed": 10000,
+  "maximumAmountSingleAtmTransactionAllowed": 10000,
+  "maximumAmountOtcCashAuthorizationsAllowed": 20000,
+  "singleRetailAuthorizationAllowed": 0,
+  "maximumAmountRetailAuthorizationsAllowed": 10000,
+  "maximumAuthorizationsFrequency": 1,
   "maximumNumberRetailAuthorizationsAllowed": 1,
-  "singleRetailAuthorizationAllowed": "0000"  
+  "maximumAmountAtmCashAuthorizationsAllowed": 10000,
+  "maximumNumberOtcAuthorizationsAllowed": 1,
+  "maximumNumberAtmCashAuthorizationsAllowed": 1
 }
 ```
 
@@ -44,20 +44,18 @@ The below table identifies the required parameters in the request payload.
 
 ```json
 {
+  "singleOtcCashAuthorizationAllowed": 10000,
+  "maximumAmountOtcCashAuthorizationsAllowed": 20000,
+  "maximumAmountSingleAtmTransactionAllowed": 10000,
+  "singleRetailAuthorizationAllowed": 0,
   "businessUnit": 100,
-  "cardSequence": 0,
+  "maximumAuthorizationsFrequency": 1,
+  "maximumAmountRetailAuthorizationsAllowed": 10000,
   "maximumNumberRetailAuthorizationsAllowed": 1,
-  "maximumAmountSingleATMTransactionAllowed": "1000",
-  "singleOTCCashAuthorizationAllowed": "100",
-  "postToAccountNumber": "0001000CCCCCC510760",
-  "maximumAmountATMCashAuthorizationsAllowed": "100",
-  "maximumNumberOTCAuthorizationsAllowed": 1,
-  "maximumNumberATMCashAuthorizationsAllowed": 1,
-  "singleRetailAuthorizationAllowed": "0",
-  "maximumAmountRetailAuthorizationsAllowed": "1000",
-  "maximumAuthorizationsFrequnecy": "1",
-  "maximumAmountOTCCashAuthorizationsAllowed": "2000",
-  "cardNumber": "00098468CCCCC273605"    
+  "maximumAmountAtmCashAuthorizationsAllowed": 10000,
+  "maximumNumberOtcAuthorizationsAllowed": 1,
+  "cardNumber": 9846801010273612,
+  "maximumNumberAtmCashAuthorizationsAllowed": 1
 }
 ```
 

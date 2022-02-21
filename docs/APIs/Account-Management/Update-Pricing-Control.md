@@ -12,11 +12,11 @@ This service is used update pricing control structure over an accounts. This ser
 
 ```json
 {
-  "pCTOverride": "HCS",
-  "pCTStartDate": "29/01/2022",
+  "pctOverride": "HCS",
   "stateOfResidency": "SX1",
   "stateOfIssuance": "SX1",
-  "pCTExpiryDate": "31/12/2025"
+  "pctExpiryDate": "31/12/2025",
+  "pctStartDate": "29/01/2022"
 }
 ```
 
@@ -40,13 +40,13 @@ The below table identifies the required parameters in the request payload.
 
 ```json
 {
-  "pCTOverride": "HCS",
-  "pCTStartDate": "29/01/2022",
   "businessUnit": 600,
+  "pctOverride": "HCS",
   "stateOfResidency": "SX1",
   "stateOfIssuance": "SX1",
-  "accountNumber": "0006000011000000137",
-  "pCTExpiryDate": "31/12/2025"
+  "pctExpiryDate": "31/12/2025",
+  "accountNumber": 6000011000000137,
+  "pctStartDate": "29/01/2022"
 }
 ```
 
