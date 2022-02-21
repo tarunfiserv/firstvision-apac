@@ -344,9 +344,9 @@ paths:
       summary: Transfer Lost Stolen Card
       description: This Lost or Stolen service is used to block the lost card and
         request for the replacement card.
-      operationId: LostStolenCardTransfer
+      operationId: TransferLostStolenCard
       x-group-name: Card Management
-      x-proxy-name: Lost Stolen Card Transfer
+      x-proxy-name: Transfer Lost Stolen Card
       parameters:
       - name: X-Correl-Id
         description: Any correlational text client's may want to send in the request
@@ -405,14 +405,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LostStolenCardTransferReq'
+              $ref: '#/components/schemas/TransferLostStolenCardReq'
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LostStolenCardTransferResp'
+                $ref: '#/components/schemas/TransferLostStolenCardResp'
         "400":
           description: The request cannot be validated
           content:
@@ -2290,145 +2290,7 @@ components:
             type: string
             example: Some message from the service
             description: Error message associated with the response
-    LostStolenCardTransferReq:
-      type: object
-      properties:
-        blockCode:
-          format: uppercase
-          description: Block code-Block code to apply to the transfer card. The values
-            are blank(or space) and A to Z
-          type: string
-          maxLength: 1
-          example: L
-        product:
-          default: 0.0
-          maximum: 999.0
-          description: Product - Product associated with this Account. The values
-            are 001–998
-          type: number
-          minimum: 0.0
-          maxLength: 1
-          example: 1
-        cardReplacementIndicator:
-          description: "Card replacement indicator-Code that indicates whether CMS\
-            \ replaces the transfer card by generating a new Embosser record on the\
-            \ original account. The values are 0=Replace lost/stolen/fraud card (Default),\
-            \ 1=Do not replace lost/stolen/fraud card\""
-          type: string
-          enum:
-          - 0 - Replace
-          - 1 - Do Not Replace
-          maxLength: 1
-          example: 0
-        terminalId:
-          format: uppercase
-          description: Terminal id- The terminal from where the service was called
-          type: string
-          maxLength: 4
-          example: ' '
-        accountNumber:
-          format: uppercase
-          description: Account Number - Identification number of the Account Base
-            Segment record to which CMS posts transactions received for this Embosser
-            record.
-          type: string
-          maxLength: 19
-          example: 0001000011000033827
-        customerBusinessUnit:
-          default: 0.0
-          maximum: 999.0
-          description: Card transfer org-Identification number of the organization
-            associated with thisAccount Base Segment record. The values are 001–9
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: ' '
-        transferToAccount:
-          format: uppercase
-          description: Transfer to account-Number of the account to which you want
-            to transfer the cardYou can enter a specific account number or enter a
-            slash (/) ifthe auto-generation functionality is active for account numbers.
-          type: string
-          maxLength: 19
-          example: ' '
-        transferToCustomer:
-          format: uppercase
-          description: Transfer to customer-Number that identifies the Customer Name/Address
-            record associated with the transfer-to accountIf you are transferring
-            the card to an existing accountdo notmake an entry in the CUSTOMER fieldCMS
-            uses the customernumber associated with the existing account
-          type: string
-          maxLength: 19
-          example: ' '
-        signonName:
-          description: Sign on Name
-          type: string
-          maxLength: 20
-          example: ' '
-        action:
-          description: "Action-This field is system-generated; you cannot modify it.\
-            \ The values are R=Reverse a card transfer, T=Transfer the card (lost,\
-            \ stolen, or fraud)."
-          type: string
-          enum:
-          - T - Transfer
-          - R - Reversal
-          maxLength: 1
-          example: T
-        securitySignon:
-          description: security signon
-          type: string
-          maxLength: 20
-          example: ' '
-        processType:
-          type: string
-          enum:
-          - 0
-          - 1
-        operatorId:
-          format: uppercase
-          description: Operator id-user signon operator id
-          type: string
-          maxLength: 3
-          example: ' '
-        effectiveDate:
-          format: date
-          description: Effective date-Date that the fraud card transfer is effective
-            The value must be a date less than or equal to today’sdateThe default
-            value is today’s date. If you enter a future date The system will abend.
-            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
-            on the System record (DATE FORMAT on ARMS01)."
-          type: string
-          maxLength: 10
-          example: ' '
-        cardSequenceNumber:
-          default: 1.0
-          maximum: 9999.0
-          description: Card Sequence Number.
-          type: number
-          minimum: 1.0
-          maxLength: 4
-          example: 0001
-        startDate:
-          format: date
-          description: Start date- the date when the service was called.The format
-            is MM/DD/YYYY or DD/MM/YYYY depending on the date format established on
-            the System record (DATE FORMAT on ARMS01).
-          type: string
-          maxLength: 10
-          example: ' '
     
-    LostStolenCardTransferResp:
-      type: object
-      properties:
-        errorDescription:
-          type: string
-        errorType:
-          type: string
-        transactionReturnCode:
-          type: string
-        errorCode:
-          type: string
     CardSecureCodeReq:
       type: object
       properties:
@@ -3546,3 +3408,141 @@ components:
           type: number
           maxLength: 1
           example: 1
+    TransferLostStolenCardResp:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+        errorType:
+          type: string
+        transactionReturnCode:
+          type: string
+        errorCode:
+          type: string
+    TransferLostStolenCardReq:
+      type: object
+      properties:
+        blockCode:
+          format: uppercase
+          description: Block code-Block code to apply to the transfer card. The values
+            are blank(or space) and A to Z
+          type: string
+          maxLength: 1
+          example: L
+        product:
+          default: 0.0
+          maximum: 999.0
+          description: Product - Product associated with this Account. The values
+            are 001–998
+          type: number
+          minimum: 0.0
+          maxLength: 1
+          example: 1
+        cardReplacementIndicator:
+          description: "Card replacement indicator-Code that indicates whether CMS\
+            \ replaces the transfer card by generating a new Embosser record on the\
+            \ original account. The values are 0=Replace lost/stolen/fraud card (Default),\
+            \ 1=Do not replace lost/stolen/fraud card\""
+          type: string
+          enum:
+          - 0 - Replace
+          - 1 - Do Not Replace
+          maxLength: 1
+          example: 0
+        terminalId:
+          format: uppercase
+          description: Terminal id- The terminal from where the service was called
+          type: string
+          maxLength: 4
+          example: ' '
+        accountNumber:
+          format: uppercase
+          description: Account Number - Identification number of the Account Base
+            Segment record to which CMS posts transactions received for this Embosser
+            record.
+          type: string
+          maxLength: 19
+          example: 0001000011000033827
+        customerBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Card transfer org-Identification number of the organization
+            associated with thisAccount Base Segment record. The values are 001–9
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: ' '
+        transferToAccount:
+          format: uppercase
+          description: Transfer to account-Number of the account to which you want
+            to transfer the cardYou can enter a specific account number or enter a
+            slash (/) ifthe auto-generation functionality is active for account numbers.
+          type: string
+          maxLength: 19
+          example: ' '
+        transferToCustomer:
+          format: uppercase
+          description: Transfer to customer-Number that identifies the Customer Name/Address
+            record associated with the transfer-to accountIf you are transferring
+            the card to an existing accountdo notmake an entry in the CUSTOMER fieldCMS
+            uses the customernumber associated with the existing account
+          type: string
+          maxLength: 19
+          example: ' '
+        signonName:
+          description: Sign on Name
+          type: string
+          maxLength: 20
+          example: ' '
+        action:
+          description: "Action-This field is system-generated; you cannot modify it.\
+            \ The values are R=Reverse a card transfer, T=Transfer the card (lost,\
+            \ stolen, or fraud)."
+          type: string
+          enum:
+          - T - Transfer
+          - R - Reversal
+          maxLength: 1
+          example: T
+        securitySignon:
+          description: security signon
+          type: string
+          maxLength: 20
+          example: ' '
+        processType:
+          type: string
+          enum:
+          - 0
+          - 1
+        operatorId:
+          format: uppercase
+          description: Operator id-user signon operator id
+          type: string
+          maxLength: 3
+          example: ' '
+        effectiveDate:
+          format: date
+          description: Effective date-Date that the fraud card transfer is effective
+            The value must be a date less than or equal to today’sdateThe default
+            value is today’s date. If you enter a future date The system will abend.
+            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
+            on the System record (DATE FORMAT on ARMS01)."
+          type: string
+          maxLength: 7
+          example: ' '
+        cardSequenceNumber:
+          default: 1.0
+          maximum: 9999.0
+          description: Card Sequence Number.
+          type: number
+          minimum: 1.0
+          maxLength: 4
+          example: 0001
+        startDate:
+          format: date
+          description: Start date- the date when the service was called.The format
+            is MM/DD/YYYY or DD/MM/YYYY depending on the date format established on
+            the System record (DATE FORMAT on ARMS01).
+          type: string
+          maxLength: 7
+          example: ' '
