@@ -1,6 +1,6 @@
 # Monetary Action
 
-This will update the Open-to-Buy, memo debit and credit fields on the Account Base Segment and generate an outstanding authorization record and log records.
+This service will update the Open-to-Buy, memo debit and credit fields on the Account Base Segment and generate an outstanding authorization record and log records.
 
   
 ## Endpoint
@@ -13,7 +13,6 @@ This will update the Open-to-Buy, memo debit and credit fields on the Account Ba
 
 ```json
 {
-  "walletID": " ",
   "ticketNumber": 0,
   "storeNumber": 999999998,
   "flag": " ",
@@ -24,30 +23,31 @@ This will update the Open-to-Buy, memo debit and credit fields on the Account Ba
   "letterBusinessUnit": 0,
   "referralRepresentativeId": " ",
   "insuranceCode": " ",
+  "skuNumber": 0,
   "referenceNumber": 0,
   "caseNumber": 0,
-  "aSMRepresentative": "NAB",
   "transactionAmount": 3000,
   "lineData3": " ",
-  "aSMBusinessUnit": 600,
   "lineData2": " ",
   "lineData5": " ",
   "actionCode": "AINQ",
   "lineData4": " ",
   "lineData1": " ",
-  "sKUNumber": 0,
+  "walletId": " ",
   "cardSequence": 0,
   "letterCode": " ",
   "referralRepBusinessUnit": 0,
   "foreignUseIndicator": 0,
   "planNumber": 10002,
+  "asmRepresentative": "NAB",
   "planSequence": 1,
   "signonName": "string",
   "purchaseOrderNumber": 0,
   "referralOption": 0,
   "securitySignon": "string",
   "effectiveDate": "18/08/2021",
-  "cardNumber": "0006000011000000160"
+  "asmBusinessUnit": 600,
+  "cardNumber": 6000011000000160
 }
 ```
 
@@ -102,41 +102,73 @@ The below table identifies the required parameters in the request payload.
 
 ```json
 {
-  "walletID": " ",
-  "ticketNumber": 0,
+  "insurance": "",
   "storeNumber": 999999998,
-  "flag": " ",
-  "authorizationCode": " ",
-  "actionCodePriority": 0,
-  "departmentCode": " ",
-  "salesClerk": " ",
+  "collectionSequenceNumber": 0,
+  "currrencyNod": 2,
+  "departmentCode": "",
+  "pointsProgram": 0,
   "letterBusinessUnit": 0,
-  "referralRepresentativeId": " ",
-  "insuranceCode": " ",
-  "referenceNumber": 0,
-  "caseNumber": 0,
-  "aSMRepresentative": "NAB",
-  "transactionAmount": 3000,
-  "lineData3": " ",
-  "aSMBusinessUnit": 600,
-  "lineData2": " ",
-  "lineData5": " ",
+  "transactionDescription": "  ",
+  "historyDate": "27/01/2022",
+  "notePurgeDate": "00/00/0000",
+  "skuNumber": 0,
+  "referenceNumber": "",
+  "cashAvailable": "$0.00",
+  "creditLimit": "$5,000.00",
+  "repBusinessUnit": 600,
   "actionCode": "AINQ",
-  "lineData4": " ",
-  "lineData1": " ",
-  "sKUNumber": 0,
-  "cardSequence": 0,
-  "letterCode": " ",
-  "referralRepBusinessUnit": 0,
+  "resolutionReferenceNumber": 0,
+  "cardSequenceNumber": 1,
+  "walletId": "",
+  "letterCode": "",
+  "fundingCardNumber": " ",
+  "currentBalance": "$72.00",
+  "nextReviewTime": 0,
+  "actionRepId": "NAB",
+  "transactionCode": 2006,
   "foreignUseIndicator": 0,
+  "memoLines": [
+    {
+      "note": ""
+    }
+  ],
   "planNumber": 10002,
-  "planSequence": 1,
-  "signonName": "string",
+  "authorizationNumber": "",
+  "departmentNumber": "",
+  "notesHistoryStatus": "O",
+  "name": "RACHEL TEST BY SASHI",
+  "cardNumber": 6000011000000160,
+  "accountBusinessUnit": 600,
+  "ticketNumber": 0,
+  "retentionDuration": "",
+  "actionCodePriority": 0,
+  "workExtension": 0,
+  "autoReferenceFlag": 1,
+  "nextReviewDate": "00/00/0000",
+  "transactionAmount": "$3,000.00",
+  "storeBusinessUnit": 0,
+  "accountProduct": 1,
+  "actionDate": "00/00/0000",
+  "actionCodeDescription": "ACCOUNT INQ",
+  "declineReason": " ",
+  "ctaFile": "",
+  "decision": "A",
+  "pointsAmount": "$0.00",
+  "recordType": "M",
+  "planSequenceNumber": 1,
+  "referralRepBusinessUnit": 0,
+  "openToBuy": "-$80,072.00",
+  "accountNumber": 6000011000000160,
+  "clerk": "",
+  "transactionType": "",
+  "feeAmount": "$0.00",
   "purchaseOrderNumber": 0,
-  "referralOption": 0,
-  "securitySignon": "string",
-  "effectiveDate": "18/08/2021",
-  "cardNumber": "0006000011000000160"
+  "referralRepId": "",
+  "workPhone": 0,
+  "historyTime": 101933,
+  "currencyCode": 36,
+  "effectiveDate": "18/08/2021"
 }
 ```
 
