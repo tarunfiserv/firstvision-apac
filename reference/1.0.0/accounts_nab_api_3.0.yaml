@@ -387,7 +387,7 @@ paths:
         schema:
           type: string
           maxLength: 19
-          example: 0000000001000000057
+          example: 0000000001000000073
       - name: businessUnit
         in: query
         description: Identification number of the business unit associated with this
@@ -982,7 +982,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/accounts/{accountNumber}/statementDetails:
+  /v1/accounts/{accountNumber}/statement/details:
     get:
       tags:
       - Account Management
@@ -1034,6 +1034,17 @@ paths:
           type: string
           maxLength: 80
           example: ' '
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        schema:
+          default: 0
+          maximum: 999.0
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 600
       - name: planType
         in: header
         description: Plan Type - Plan Type
@@ -1600,7 +1611,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 9994588580000000011
+          example: 0006000011000000152
       requestBody:
         content:
           application/json:
@@ -2975,7 +2986,123 @@ components:
           example: 0
     ListUnbilledTransactionsResp:
       type: object
-      properties: {}
+      properties:
+        transactionType:
+          format: uppercase
+          description: Transaction Type Description
+          type: string
+          maxLength: 40
+          example: CYCLE-TO-DATE TRANSACTION
+        product:
+          default: 0.0
+          maximum: 999
+          description: Product - Identification number of the product associated with
+            the Account
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 600
+        businessUnit:
+          default: 0.0
+          maximum: 999
+          description: Business Unit - Identification number of the business unit
+            associated with this Account Base Segment record
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 600
+        transactionList:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                format: uppercase
+                type: string
+                maxLength: 23
+                description: Reference number of transaction.
+                example: 09999999980818000080016
+              recordNumber:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: 0.0
+                description: Record Number of the transaction
+                maxLength: 5
+                example: 2
+              amount:
+                default: 0.0
+                type: string
+                description: Amount of the transaction.
+                maxLength: 17
+                example: "$15,000.00"
+              authorizationCode:
+                format: uppercase
+                type: string
+                maxLength: 6
+                description: Authorization code assigned to the transaction
+                example: ' '
+              typeOfTransaction:
+                format: uppercase
+                type: string
+                maxLength: 1
+                description: "Transaction type that identifies the type of transaction.\
+                  \ The values are D (debit), C (credit), and M (memo)"
+                example: D
+              creditPlan:
+                default: 0.0
+                maximum: 99999.0
+                type: number
+                minimum: 0.0
+                description: Number that identifies the Credit Plan Master record
+                  for the credit plan to which the transaction was posted (applicable
+                  only for posted transaction)
+                maxLength: 5
+                example: 70001
+              description:
+                format: uppercase
+                type: string
+                maxLength: 40
+                description: Description of the Transaction
+                example: INITIAL LOAN DISBURSEMENT
+              logicModule:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: 0.0
+                description: Logic module associated with the transaction code
+                maxLength: 3
+                example: 1
+              postingDate:
+                format: date
+                type: string
+                description: Posting date (month/day) of the memo-posted transaction.
+                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
+                  established on the System record (DATE FORMAT on ARMS01)
+                maxLength: 10
+                example: 18/08/2021
+              transactionCode:
+                default: 0.0
+                maximum: 9999.0
+                type: number
+                minimum: 0.0
+                description: Transaction Code associated with the transaction
+                maxLength: 4
+                example: 4565
+              effectiveDate:
+                format: date
+                type: string
+                description: Effective date (month/day) of the memo-posted transaction.
+                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
+                  established on the System record (DATE FORMAT on ARMS01)
+                maxLength: 10
+                example: 18/08/2021
+        accountNumber:
+          format: uppercase
+          description: Account Number of customer
+          type: string
+          maxLength: 19
+          example: 0000000001000000073
     UpdateTemporaryCreditLimitReq:
       type: object
       properties:
@@ -4889,14 +5016,14 @@ components:
           description: Account Number - Unique Identification numbers of the Account
           type: string
           maxLength: 19
-          example: 9994588580000000011
+          example: 0006000011000000152
         creditLimitDate:
           format: uppercase
           description: "Date on which the current credit limit was assigned, The format\
             \ is MM/DD/YYYY or DD/MM/YYYY depending on the date format established\
-            \ on the System record (DATE FORMAT on ARMS01)."
+            \ on the System record."
           type: string
-          maxLength: 10
+          maxLength: 7
           example: 19/08/2021
     BoardAccountResp:
       type: object
