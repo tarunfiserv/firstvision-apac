@@ -179,7 +179,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0009544410000000062
+          example: 0000000001000000115
       responses:
         "200":
           description: Success
@@ -1040,7 +1040,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009544410000000062
+          example: 0000000001000000115
       responses:
         "200":
           description: Success
@@ -1744,7 +1744,7 @@ components:
             record.
           type: string
           maxLength: 19.0
-          example: 0009544410000000062
+          example: 0000000001000000115
         statusDateChange:
           format: uppercase
           description: "Status Change Date - Date on which the status was last changed,\
@@ -2792,7 +2792,7 @@ components:
             record
           type: string
           maxLength: 19
-          example: 0009544410000000062
+          example: 0000000001000000115
     BoardCardResp:
       type: object
       properties:
