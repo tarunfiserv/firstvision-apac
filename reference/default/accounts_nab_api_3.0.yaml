@@ -4254,64 +4254,7 @@ components:
           type: number
           maxLength: 10
           example: 123456
-    UpdateAccountChargeOffResp:
-      type: object
-      properties:
-        businessUnit:
-          default: 0.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          maxLength: 3
-          example: 600
-        systemDefinedChargeOffReason:
-          description: System Defined Charge  Off Reason - Code that identifies the
-            charge-off reason for the account
-          type: string
-          enum:
-          - C
-          - B
-          - F
-          - T
-          - SPACES
-          maxLength: 1
-          example: C
-        numberOfChargeOffDays:
-          default: 0.0
-          description: Number of Charge Off Days - Number of days until charge-off
-          type: number
-          maxLength: 3
-          example: 0
-        chargeOffStatus:
-          description: Charge Off Status - Code that identifies the charge-off status
-            of this account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 9
-          maxLength: 1
-          example: 0
-        accountNumber:
-          format: uppercase
-          description: Account Number - Unique Identification numbers of the Account
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        dateOfNotificationReceived:
-          format: uppercase
-          description: Date of Notification Received - Date on which a bankruptcy
-            notification was received or date on which a fraudulent loan was discovered
-            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
-            on the System record (DATE FORMAT on ARMS01)."
-          type: string
-          maxLength: 10
-          example: 01/01/2018
+    
     AccountDetailsResp:
       type: object
       properties:
@@ -5103,30 +5046,7 @@ components:
           type: string
           maxLength: 10
           example: 29/01/2022
-    UpdateAccountChargeOffReq:
-      type: object
-      properties:
-        systemDefinedChargeOffReason:
-          description: System Defined Charge  Off Reason - Code that identifies the
-            charge-off reason for the account
-          type: string
-          enum:
-          - C
-          - B
-          - F
-          - T
-          - SPACES
-          maxLength: 1
-          example: C
-        dateOfNotificationReceived:
-          format: uppercase
-          description: Date of Notification Received - Date on which a bankruptcy
-            notification was received or date on which a fraudulent loan was discovered
-            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
-            on the System record (DATE FORMAT on ARMS01)."
-          type: string
-          maxLength: 10
-          example: 01/01/2018
+    
     UpdatePricingControlReq:
       type: object
       properties:
@@ -6231,3 +6151,85 @@ components:
           type: string
           maxLength: 7
           example: 18/08/2021
+    UpdateAccountChargeOffResp:
+      type: object
+      properties:
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 600
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - T
+          - ' '
+          maxLength: 1
+          example: C
+        numberOfChargeOffDays:
+          default: 0.0
+          description: Number of Charge Off Days - Number of days until charge-off
+          type: number
+          maxLength: 3
+          example: 0
+        chargeOffStatus:
+          description: Charge Off Status - Code that identifies the charge-off status
+            of this account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 9
+          maxLength: 1
+          example: 0
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        dateOfNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
+            on the System record (DATE FORMAT on ARMS01)."
+          type: string
+          maxLength: 10
+          example: 01/01/2018
+    UpdateAccountChargeOffReq:
+      type: object
+      properties:
+        systemDefinedChargeOffReason:
+          description: System Defined Charge  Off Reason - Code that identifies the
+            charge-off reason for the account
+          type: string
+          enum:
+          - C
+          - B
+          - F
+          - T
+          - ' '
+          maxLength: 1
+          example: C
+        dateOfNotificationReceived:
+          format: uppercase
+          description: Date of Notification Received - Date on which a bankruptcy
+            notification was received or date on which a fraudulent loan was discovered
+            The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
+            on the System record (DATE FORMAT on ARMS01)."
+          type: string
+          maxLength: 10
+          example: 01/01/2018
