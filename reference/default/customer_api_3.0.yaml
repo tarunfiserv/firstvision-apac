@@ -603,22 +603,7 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
-    BoardCustomerResp:
-      type: object
-      properties:
-        businessUnit:
-          default: 0.0
-          description: Business Unit - Identification number of the business unit
-            associated with the  account or relationship
-          type: number
-          maxLength: 3
-          example: 600
-        customerNumber:
-          format: uppercase
-          description: Customer Number - The newly generated customer number
-          type: string
-          maxLength: 19.0
-          example: 0000000001000000007
+    
     ListCustomersCardsResp:
       type: object
       properties:
@@ -1325,217 +1310,7 @@ components:
             type: string
             example: Some message from the service
             description: Error message associated with the response
-    BoardCustomerReq:
-      type: object
-      properties:
-        dualFlag:
-          default: 0.0
-          description: Dual Flag - This field indicates whether CMS adds a duplicate
-            customer  record in the associated business unit for dual currency processing
-          type: number
-          maxLength: 1
-          example: 0
-        postalCode1:
-          format: uppercase
-          description: Postal Code - Postal code
-          type: string
-          maxLength: 10.0
-          example: 112345
-        city1:
-          format: uppercase
-          description: City - Name of Customer City
-          type: string
-          maxLength: 30.0
-          example: La Vegas
-        nameLine21:
-          format: uppercase
-          description: Name Line 2 - Customer Name Line 2
-          type: string
-          maxLength: 40.0
-          example: ' Jacob '
-        businessUnit:
-          default: 0.0
-          description: Business Unit - Identification number of the business unit
-            associated with the  account or relationship
-          type: number
-          maxLength: 3
-          example: 600
-        firstName1:
-          format: uppercase
-          description: First Name - First Name of customer
-          type: string
-          maxLength: 40.0
-          example: ' Samuel'
-        state1:
-          format: uppercase
-          description: State - Name of state
-          type: string
-          maxLength: 3.0
-          example: California
-        middleName1:
-          format: uppercase
-          description: Middle Name - Middle name of Customer
-          type: string
-          maxLength: 40.0
-          example: ' '
-        email1:
-          format: uppercase
-          description: E-Mail -  customer email
-          type: string
-          maxLength: 60.0
-          example: abc@goole.com
-        addressLine21:
-          format: uppercase
-          description: Address Line 2 - Customer Address Line 2
-          type: string
-          maxLength: 40.0
-          example: ' S.H. Qo'
-        addressLine41:
-          format: uppercase
-          description: Address Line 4 - Customer Address Line 4
-          type: string
-          maxLength: 40.0
-          example: USA
-        lastName1:
-          format: uppercase
-          description: Last Name - Last name of Customer
-          type: string
-          maxLength: 40.0
-          example: Christopher
-        nameTypeInd21:
-          description: Name Type Ind 2 - Name Indicator 2
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 3
-          maxLength: 1
-          example: 0
-        employeePhone1:
-          format: uppercase
-          description: Employee Phone -  Employee Phone Number
-          type: string
-          maxLength: 20.0
-          example: 67894
-        nameLine31:
-          format: uppercase
-          description: Name Line 3 - Customer Name Line 3
-          type: string
-          maxLength: 40.0
-          example: Samuel
-        nameLine11:
-          format: uppercase
-          description: Name Line 1 - Customer Name Line 1
-          type: string
-          maxLength: 40.0
-          example: John
-        product:
-          default: 0.0
-          description: Product - Identification number of the product associated with
-            the  account or relationship
-          type: number
-          maxLength: 3
-          example: 600
-        gender1:
-          description: Gender - Gender of customer
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 2
-          maxLength: 1
-          example: 1
-        title1:
-          format: uppercase
-          description: Title - Name of Customer
-          type: string
-          maxLength: 20.0
-          example: ADWSQQ
-        mobileNumber1:
-          format: uppercase
-          description: Mobile Number - Customer mobile number
-          type: string
-          maxLength: 20.0
-          example: 11231232
-        homePhone1:
-          format: uppercase
-          description: Home Phone - residential phone number
-          type: string
-          maxLength: 20.0
-          example: 11230342
-        nationalId1:
-          format: uppercase
-          description: National ID - Customer National ID Number
-          type: string
-          maxLength: 25.0
-          example: 2363-12-2839-1
-        countryCode1:
-          format: uppercase
-          description: Country Code - code of country
-          type: string
-          maxLength: 3.0
-          example: 'USA '
-        residenceFlag1:
-          description: Residence Flag - residential status
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 2
-          - 3
-          maxLength: 1
-          example: 1
-        altEmail1:
-          format: uppercase
-          description: Alt E-Mail - Customer alternate mail id
-          type: string
-          maxLength: 50.0
-          example: abc1@google.com
-        addressLine31:
-          format: uppercase
-          description: Address Line 3 -  Customer Address Line 3
-          type: string
-          maxLength: 40.0
-          example: California
-        addressLine11:
-          format: uppercase
-          description: Address Line 1 - Customer Address Line 1
-          type: string
-          maxLength: 40.0
-          example: House No. 12
-        emailFlag1:
-          description: E-Mail Flag - Email-ID of the Customer
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 2
-          maxLength: 1
-          example: 1
-        nameTypeInd31:
-          description: Name Type Ind 3 - Name Indiacator 3
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 3
-          maxLength: 1
-          example: 0
-        nameTypeInd11:
-          description: Name Type Ind 1 - Name Indicator
-          type: string
-          enum:
-          - ZERO
-          - 1
-          - 3
-          maxLength: 1
-          example: 0
-        dateOfBirth1:
-          format: uppercase
-          description: Date of Birth - Customer Date of Birth. Date format is 'DD/MM/YYYY'
-          type: string
-          maxLength: 10
-          example: 01/02/2010
+    
     ListCustomersAccountsResp:
       type: object
       properties:
@@ -1892,6 +1667,137 @@ components:
           description: "DOB - Date of Birth of the customer, format is MM/DD/YYYY"
           type: string
           example: 06/24/1986
+    ListCustomersReq:
+      type: object
+      properties:
+        lastName:
+          format: uppercase
+          description: 'Last Name - Last name of the Customer. '
+          type: string
+          maxLength: 40
+          example: ""
+        primaryDataSwitch:
+          description: "Primary Data Switch - A primary search value must be supplied,\
+            \ and can be based on one of four fields - last/business/generic/store\
+            \ name, identification number, phone number, postal code or mobile device\
+            \ id"
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          maxLength: 1
+          example: 1
+        businessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 0
+        user15:
+          format: uppercase
+          description: User 15 - User-defined field for the search. This field literal
+            displays as USER 15 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        user14:
+          format: uppercase
+          description: User 14 - User-defined field for the search. This field literal
+            displays as User 14 unless changed on the Organization record (ARMO11).
+          type: string
+          maxLength: 20
+          example: ""
+        postalCode:
+          format: uppercase
+          description: Postal Code - Postal code portion of the mailing address of
+            the owner
+          type: string
+          maxLength: 10
+          example: ""
+        dateOfBirth:
+          format: date
+          description: Date Of Birth - Date of Birth of Customer. Format is DD/MM/YYYY.
+          type: string
+          maxLength: 10
+          example: 0
+        title:
+          format: uppercase
+          description: Title - Professional or honorary title of the customer
+          type: string
+          maxLength: 20
+          example: ""
+        suffix:
+          format: uppercase
+          description: "Suffix - Suffix for the customer. Examples include Jr., Sr.,\
+            \ etc."
+          type: string
+          maxLength: 20
+          example: ""
+        primaryData:
+          format: uppercase
+          description: Primary Data - Search field as per Primary data switch
+          type: string
+          maxLength: 40
+          example: 390539172
+        firstName:
+          format: uppercase
+          description: First Name - First name of the customer
+          type: string
+          maxLength: 40
+          example: ""
+        phoneNumber:
+          format: uppercase
+          description: Phone Number - Phone Number of Customer
+          type: string
+          maxLength: 20
+          example: ""
+        mobileDeviceId:
+          format: uppercase
+          description: 'Mobile Device ID - Identification of a mobile device associated
+            with a mobile payment instrument (PI) embosser. CMS does not validate
+            this field; it is stored only. '
+          type: string
+          maxLength: 20
+          example: ""
+        countryCode:
+          format: uppercase
+          description: "Country Code - Country for the customer. If you use this field,\
+            \ enter the exact country code"
+          type: string
+          maxLength: 3
+          example: ""
+        identificationNumber:
+          format: uppercase
+          description: Identification Number -  Code that indicates if this number
+            is a Social Security number or other tax identification number.
+          type: string
+          maxLength: 25
+          example: ""
+        middleName:
+          format: uppercase
+          description: Middle Name - Middle name of the customer.
+          type: string
+          maxLength: 40
+          example: ""
+        optionalDataMatch:
+          description: "Optional Data Match - Code that indicates the degree of matching\
+            \ required for optional data fields. When an optional field contains a\
+            \ value greater than spaces, this field defines whether the resulting\
+            \ search data should match on all optional fields or on any optional field.\
+            \ The values are: 0 = Display any optional field match (Default) 1 = Display\
+            \ only those records that match all requested optional fields. "
+          type: string
+          enum:
+          - 1
+          - 0
+          maxLength: 1
+          example: 1
     ListCustomersResp:
       type: object
       properties:
@@ -2122,134 +2028,230 @@ components:
           type: string
           maxLength: 40
           example: ""
-    ListCustomersReq:
+    BoardCustomerResp:
       type: object
       properties:
-        lastName:
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number of the business unit
+            associated with the  account or relationship
+          type: number
+          maxLength: 3
+          example: 600
+        customerNumber:
           format: uppercase
-          description: 'Last Name - Last name of the Customer. '
+          description: Customer Number - The newly generated customer number
           type: string
-          maxLength: 40
-          example: ""
-        primaryDataSwitch:
-          description: "Primary Data Switch - A primary search value must be supplied,\
-            \ and can be based on one of four fields - last/business/generic/store\
-            \ name, identification number, phone number, postal code or mobile device\
-            \ id"
+          maxLength: 19.0
+          example: 0000000001000000007
+    BoardCustomerReq:
+      type: object
+      properties:
+        dualFlag:
+          default: 0.0
+          description: Dual Flag - This field indicates whether CMS adds a duplicate
+            customer  record in the associated business unit for dual currency processing
+          type: number
+          maxLength: 1
+          example: 0
+        postalCode1:
+          format: uppercase
+          description: Postal Code - Postal code
+          type: string
+          maxLength: 10.0
+          example: 112345
+        city1:
+          format: uppercase
+          description: City - Name of Customer City
+          type: string
+          maxLength: 30.0
+          example: La Vegas
+        nameLine21:
+          format: uppercase
+          description: Name Line 2 - Customer Name Line 2
+          type: string
+          maxLength: 40.0
+          example: 'Jacob '
+        businessUnit:
+          default: 0.0
+          description: Business Unit - Identification number of the business unit
+            associated with the  account or relationship
+          type: number
+          maxLength: 3
+          example: 600
+        firstName1:
+          format: uppercase
+          description: First Name - First Name of customer
+          type: string
+          maxLength: 40.0
+          example: Samuel
+        state1:
+          format: uppercase
+          description: State - Name of state
+          type: string
+          maxLength: 3.0
+          example: CL
+        middleName1:
+          format: uppercase
+          description: Middle Name - Middle name of Customer
+          type: string
+          maxLength: 40.0
+          example: ' '
+        email1:
+          format: uppercase
+          description: E-Mail -  customer email
+          type: string
+          maxLength: 60.0
+          example: abc@goole.com
+        addressLine21:
+          format: uppercase
+          description: Address Line 2 - Customer Address Line 2
+          type: string
+          maxLength: 40.0
+          example: S.H. Qo
+        addressLine41:
+          format: uppercase
+          description: Address Line 4 - Customer Address Line 4
+          type: string
+          maxLength: 40.0
+          example: USA
+        lastName1:
+          format: uppercase
+          description: Last Name - Last name of Customer
+          type: string
+          maxLength: 40.0
+          example: Christopher
+        nameTypeInd21:
+          description: Name Type Ind 2 - Name Indicator 2
           type: string
           enum:
-          - 0
+          - ZERO
+          - 1
+          - 3
+          maxLength: 1
+          example: 0
+        employeePhone1:
+          format: uppercase
+          description: Employee Phone -  Employee Phone Number
+          type: string
+          maxLength: 20.0
+          example: 67894
+        nameLine31:
+          format: uppercase
+          description: Name Line 3 - Customer Name Line 3
+          type: string
+          maxLength: 40.0
+          example: Samuel
+        nameLine11:
+          format: uppercase
+          description: Name Line 1 - Customer Name Line 1
+          type: string
+          maxLength: 40.0
+          example: John
+        product:
+          default: 0.0
+          description: Product - Identification number of the product associated with
+            the  account or relationship
+          type: number
+          maxLength: 3
+          example: 2
+        gender1:
+          description: Gender - Gender of customer
+          type: string
+          enum:
+          - ZERO
+          - 1
+          - 2
+          maxLength: 1
+          example: 1
+        title1:
+          format: uppercase
+          description: Title - Name of Customer
+          type: string
+          maxLength: 20.0
+          example: ADWSQQ
+        mobileNumber1:
+          format: uppercase
+          description: Mobile Number - Customer mobile number
+          type: string
+          maxLength: 20.0
+          example: 11231232
+        homePhone1:
+          format: uppercase
+          description: Home Phone - residential phone number
+          type: string
+          maxLength: 20.0
+          example: 11230342
+        nationalId1:
+          format: uppercase
+          description: National ID - Customer National ID Number
+          type: string
+          maxLength: 25.0
+          example: 2363-12-2839-1
+        countryCode1:
+          format: uppercase
+          description: Country Code - code of country
+          type: string
+          maxLength: 3.0
+          example: USA
+        residenceFlag1:
+          description: Residence Flag - residential status
+          type: string
+          enum:
+          - ZERO
           - 1
           - 2
           - 3
-          - 4
           maxLength: 1
           example: 1
-        businessUnit:
-          default: 0.0
-          maximum: 999.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 0
-        user15:
+        altEmail1:
           format: uppercase
-          description: User 15 - User-defined field for the search. This field literal
-            displays as USER 15 unless changed on the Organization record (ARMO11).
+          description: Alt E-Mail - Customer alternate mail id
           type: string
-          maxLength: 20
-          example: ""
-        user14:
+          maxLength: 50.0
+          example: abc1@google.com
+        addressLine31:
           format: uppercase
-          description: User 14 - User-defined field for the search. This field literal
-            displays as User 14 unless changed on the Organization record (ARMO11).
+          description: Address Line 3 -  Customer Address Line 3
           type: string
-          maxLength: 20
-          example: ""
-        postalCode:
+          maxLength: 40.0
+          example: California
+        addressLine11:
           format: uppercase
-          description: Postal Code - Postal code portion of the mailing address of
-            the owner
+          description: Address Line 1 - Customer Address Line 1
           type: string
-          maxLength: 10
-          example: ""
-        dateOfBirth:
-          format: date
-          description: Date Of Birth - Date of Birth of Customer. Format is DD/MM/YYYY.
-          type: string
-          maxLength: 10
-          example: 0
-        title:
-          format: uppercase
-          description: Title - Professional or honorary title of the customer
-          type: string
-          maxLength: 20
-          example: ""
-        suffix:
-          format: uppercase
-          description: "Suffix - Suffix for the customer. Examples include Jr., Sr.,\
-            \ etc."
-          type: string
-          maxLength: 20
-          example: ""
-        primaryData:
-          format: uppercase
-          description: Primary Data - Search field as per Primary data switch
-          type: string
-          maxLength: 40
-          example: 390539172
-        firstName:
-          format: uppercase
-          description: First Name - First name of the customer
-          type: string
-          maxLength: 40
-          example: ""
-        phoneNumber:
-          format: uppercase
-          description: Phone Number - Phone Number of Customer
-          type: string
-          maxLength: 20
-          example: ""
-        mobileDeviceId:
-          format: uppercase
-          description: 'Mobile Device ID - Identification of a mobile device associated
-            with a mobile payment instrument (PI) embosser. CMS does not validate
-            this field; it is stored only. '
-          type: string
-          maxLength: 20
-          example: ""
-        countryCode:
-          format: uppercase
-          description: "Country Code - Country for the customer. If you use this field,\
-            \ enter the exact country code"
-          type: string
-          maxLength: 3
-          example: ""
-        identificationNumber:
-          format: uppercase
-          description: Identification Number -  Code that indicates if this number
-            is a Social Security number or other tax identification number.
-          type: string
-          maxLength: 25
-          example: ""
-        middleName:
-          format: uppercase
-          description: Middle Name - Middle name of the customer.
-          type: string
-          maxLength: 40
-          example: ""
-        optionalDataMatch:
-          description: "Optional Data Match - Code that indicates the degree of matching\
-            \ required for optional data fields. When an optional field contains a\
-            \ value greater than spaces, this field defines whether the resulting\
-            \ search data should match on all optional fields or on any optional field.\
-            \ The values are: 0 = Display any optional field match (Default) 1 = Display\
-            \ only those records that match all requested optional fields. "
+          maxLength: 40.0
+          example: House No. 12
+        emailFlag1:
+          description: E-Mail Flag - Email-ID of the Customer
           type: string
           enum:
+          - ZERO
           - 1
-          - 0
+          - 2
           maxLength: 1
           example: 1
+        nameTypeInd31:
+          description: Name Type Ind 3 - Name Indiacator 3
+          type: string
+          enum:
+          - ZERO
+          - 1
+          - 3
+          maxLength: 1
+          example: 0
+        nameTypeInd11:
+          description: Name Type Ind 1 - Name Indicator
+          type: string
+          enum:
+          - ZERO
+          - 1
+          - 3
+          maxLength: 1
+          example: 0
+        dateOfBirth1:
+          format: uppercase
+          description: Date of Birth - Customer Date of Birth. Date format is 'DD/MM/YYYY'
+          type: string
+          maxLength: 10
+          example: 01/02/2010
