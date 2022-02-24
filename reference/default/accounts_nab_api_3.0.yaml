@@ -1034,17 +1034,6 @@ paths:
           type: string
           maxLength: 80
           example: ' '
-      - name: businessUnit
-        in: query
-        description: "Business Unit - Identification number associated with this Account\
-          \ Base Segment record, the values are 001–998"
-        schema:
-          default: 0
-          maximum: 999.0
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 600
       - name: planType
         in: header
         description: Plan Type - Plan Type
