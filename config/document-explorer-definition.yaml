@@ -68,7 +68,8 @@
               link: docs/APIs/Account-Management/Account-Status-Update.md   
             - title: Update Waive Fee
               link: docs/APIs/Account-Management/Update-Waive-Fee.md   
-              
+            - title: Board Account
+              link: docs/APIs/Account-Management/Board-Account.md                
         - title: Card Management
           sections:
             - title: Activate Card
@@ -88,7 +89,7 @@
             - title: Update Spend Limit
               link: docs/APIs/Card-Management/Spend-limit-Updates.md
             - title: Inquire Card
-              link: docs/APIs/Card-Management/Inquire-Card-Details.md
+              link: docs/APIs/Card-Management/Inquire-Card.md
             - title: Update Card Controls
               link: docs/APIs/Card-Management/Update-Card-Controls.md    
             - title: Inquire Card Controls
@@ -103,4 +104,5 @@
               link: docs/APIs/Customer-Management/List-Customers-Accounts.md
             - title: List Customers' Cards
               link: docs/APIs/Customer-Management/List-Customers-Cards.md
-
+            - title: Board Customer
+              link: docs/APIs/Customer-Management/Board-Customer.md

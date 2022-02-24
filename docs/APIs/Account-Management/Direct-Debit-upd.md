@@ -1,4 +1,4 @@
-# Update Direct Debit
+# Update Accounts' Direct Debit
 
 The Direct Debit Update message enables the user to update the Direct Debit information on an account. 
 The information that can be updated includes:  bank account and routing data and various other associated fields. 
@@ -15,16 +15,16 @@ This service does not initiate the Direct Debit, it just provides a mechanism to
 
 ```json
 {
-  "dDPaymentExpiryDate": "10/04/2024",
+  "ddNominatedPaymentAmtOrPercentage": 10,
   "product": 0,
-  "dDRoutingBankID": 123456,
+  "ddPaymentExpiryDate": "10/04/2022",
+  "ddAccountNumber": 1000000057,
   "fixedPaymentAmount": 1,
-  "paymentRemittanceMethod": "0",
-  "dDNominatedPaymentAmtorPercentage": 10,
+  "ddAccountType": "D",
+  "ddPaymentStartDate": "09/04/2022",
+  "paymentRemittanceMethod": 0,
   "billingAcctInd": 0,
-  "dDAccountNumber": "1000000057",
-  "dDPaymentStartDate": "09/04/2022",
-  "dDAccountType": "D"
+  "ddRoutingBankId": 123456
 }
 ```
 
@@ -49,12 +49,12 @@ The below table identifies the required parameters in the request payload.
   "accountNumber": "0000000001000000057",
   "billingAcctInd": "0",
   "businessUnit": "600",
-  "dDAccountNumber": "1000000057",
-  "dDAccountType": "D",
-  "dDNominatedPaymentAmtorPercentage": "10",
-  "dDPaymentExpiryDate": "10/04/2024",
-  "dDPaymentStartDate": "09/04/2022",
-  "dDRoutingBankID": "123456",
+  "ddAccountNumber": "1000000057",
+  "ddAccountType": "D",
+  "ddNominatedPaymentAmtOrPercentage": "10",
+  "ddPaymentExpiryDate": "10/04/2022",
+  "ddPaymentStartDate": "09/04/2022",
+  "ddRoutingBankId": "123456",
   "fixedPaymentAmount": "1",
   "paymentRemittanceMethod": "0",
   "product": "600"

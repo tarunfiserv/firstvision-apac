@@ -28,19 +28,25 @@ The below table identifies the required query parameters in the request payload.
 
 ```json
 {
+  "maximumAmountOtcCashAuthorizationsAllowed": "$1,000.00",
   "businessUnit": 600,
-  "cardSequence": 1,
-  "maximumNumberRetailAuthorizationsAllowed": 999999999,
-  "maximumAmountSingleATMTransactionAllowed": "$2,000.00",
-  "singleOTCCashAuthorizationAllowed": "$0.00",
-  "postToAccountNumber": "0006000022000000076",
-  "maximumAmountATMCashAuthorizationsAllowed": "$1,000.00",
-  "maximumNumberOTCAuthorizationsAllowed": 999999999,
-  "maximumNumberATMCashAuthorizationsAllowed": 999999999,
-  "singleRetailAuthorizationAllowed": "$999,999,999,999,999.99",
+  "maximumNumberRetailAuthorizationsAllowed": 2,
+  "motoFlag": "Y",
+  "payWaveSwitch": "N",
+  "maximumNumberOtcAuthorizationsAllowed": 5,
+  "cashBackTranFlag": "Y",
+  "maximumNumberAtmCashAuthorizationsAllowed": 2,
+  "singleOtcCashAuthorizationAllowed": "$100.00",
+  "maximumAmountSingleAtmTransactionAllowed": "$2,000.00",
+  "singleRetailAuthorizationAllowed": "$1,000.00",
   "maximumAmountRetailAuthorizationsAllowed": "$1,000.00",
+  "ecomActiveSwitch": 1,
+  "atmFlag": "Y",
+  "posFlag": "N",
+  "maximumAmountAtmCashAuthorizationsAllowed": "$1,000.00",
   "maximumAuthorizationsFrequnecy": 1,
-  "maximumAmountOTCCashAuthorizationsAllowed": "string"
+  "intAtmPosFlag": "Y",
+  "cardNumber": 9544410000000062
 }
 ```
 

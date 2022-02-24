@@ -30,21 +30,21 @@ The below table identifies the required parameters in the request payload.
 {
   "accountList": [
     {
-      "accountnumber": "0001000011000052268",
-      "amountmemocredit": "$0.00",
-      "amountmemodebit": "$0.00",
-      "blockcode1": " ",
-      "blockcode1date": "00/00/0000",
-      "blockcode2": " ",
-      "blockcode2date": "00/00/0000",
-      "businessunit": "100",
-      "ddaaccountnumber": "890005226",
-      "internalstatus": "D",
-      "mailingindicator": " ",
-      "nbroftokenizedcards": "0",
+      "accountNumber": "0001000011000052268",
+      "amountMemoCredit": "$0.00",
+      "amountMemoDebit": "$0.00",
+      "blockCode1": " ",
+      "blockCode1Date": "00/00/0000",
+      "blockCode2": " ",
+      "blockCode2Date": "00/00/0000",
+      "businessUnit": "100",
+      "ddaAccountNumber": "890005226",
+      "internalStatus": "D",
+      "mailingIndicator": " ",
+      "nbrOfTokenizedCards": 0,
       "product": "1",
-      "reisscontolmethod": "0",
-      "suppresstoken": "0"
+      "reissContolMethod": 0,
+      "suppressToken": "0"
     }
   ],
   "addressLine1": "62 CHARTERIS DR",
@@ -70,10 +70,9 @@ The below table identifies the required parameters in the request payload.
   "ssnId": "113902",
   "status": "",
   "totalAvailable": "$0.00",
-  "userDefinedField4": "",
+  "userDefinedField4": "Y",
   "workPhoneNumber": "++61430010348"
 }
-
 ```
 
 ### Error Response Payload
