@@ -2071,7 +2071,7 @@ components:
           description: Name Line 2 - Customer Name Line 2
           type: string
           maxLength: 40.0
-          example: ' Jacob '
+          example: 'Jacob '
         businessUnit:
           default: 0.0
           description: Business Unit - Identification number of the business unit
@@ -2084,13 +2084,13 @@ components:
           description: First Name - First Name of customer
           type: string
           maxLength: 40.0
-          example: ' Samuel'
+          example: Samuel
         state1:
           format: uppercase
           description: State - Name of state
           type: string
           maxLength: 3.0
-          example: California
+          example: CL
         middleName1:
           format: uppercase
           description: Middle Name - Middle name of Customer
@@ -2108,7 +2108,7 @@ components:
           description: Address Line 2 - Customer Address Line 2
           type: string
           maxLength: 40.0
-          example: ' S.H. Qo'
+          example: S.H. Qo
         addressLine41:
           format: uppercase
           description: Address Line 4 - Customer Address Line 4
@@ -2193,7 +2193,7 @@ components:
           description: Country Code - code of country
           type: string
           maxLength: 3.0
-          example: 'USA '
+          example: USA
         residenceFlag1:
           description: Residence Flag - residential status
           type: string
