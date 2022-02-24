@@ -64,6 +64,11 @@
               link: docs/APIs/Account-Management/Inquire-Statement.md
             - title: Update Pricing Control  
               link: docs/APIs/Account-Management/Update-Pricing-Control.md              
+            - title: Monetary Action
+              link: docs/APIs/Account-Management/Account-Status-Update.md   
+            - title: Update Waive Fee
+              link: docs/APIs/Account-Management/Update-Waive-Fee.md   
+              
         - title: Card Management
           sections:
             - title: Activate Card
@@ -96,6 +101,6 @@
               link: docs/APIs/Customer-Management/Customer-Demographic-Update.md
             - title: List Customers' Accounts
               link: docs/APIs/Customer-Management/List-Customers-Accounts.md
-            - title: "List Customers' Cards"
+            - title: List Customers' Cards
               link: docs/APIs/Customer-Management/List-Customers-Cards.md
 
