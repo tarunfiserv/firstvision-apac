@@ -5396,266 +5396,6 @@ components:
                 - 1
                 - 2
                 - 3 
-    MonetaryActionReq:
-      type: object
-      properties:
-        ticketNumber:
-          default: 0.0
-          maximum: 9.99999999999999E14
-          description: Ticket Number - Ticket number (invoice number) associated with
-            the transaction
-          type: number
-          minimum: 0.0
-          maxLength: 15
-          example: 0
-        storeNumber:
-          default: 0.0
-          maximum: 9.99999999E8
-          description: Store Number - Store number associated with the transaction
-          type: number
-          minimum: -9.99999999E8
-          maxLength: 9
-          example: 999999998
-        flag:
-          format: uppercase
-          description: Flag - Flag
-          type: string
-          maxLength: 3
-          example: ' '
-        authorizationCode:
-          format: uppercase
-          description: AUTH Code -  Authorization code associated with the transaction
-          type: string
-          maxLength: 6
-          example: ' '
-        actionCodePriority:
-          default: 0.0
-          maximum: 9.0
-          description: Action Code Priority - This field helps to set priority for
-            the action code
-          type: number
-          minimum: 0.0
-          maxLength: 1
-          example: 0
-        departmentCode:
-          format: uppercase
-          description: Department Code - Department associated with the transaction
-          type: string
-          maxLength: 4
-          example: ' '
-        salesClerk:
-          format: uppercase
-          description: Sales Clerk - Sales clerk associated with the transaction
-          type: string
-          maxLength: 12
-          example: ' '
-        letterBusinessUnit:
-          default: 0.0
-          maximum: 998.0
-          description: Letter Business Unit - This field indicates the business unit
-            of the LTS letter to be sent to the customer
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 0
-        referralRepresentativeId:
-          format: uppercase
-          description: Referral Representative ID - This field is the identification
-            number of the referral representative
-          type: string
-          maxLength: 3
-          example: ' '
-        insuranceCode:
-          format: uppercase
-          description: Insurance Code - Code that identifies the insurance product
-            associated with the transaction
-          type: string
-          maxLength: 14
-          example: ' '
-        skuNumber:
-          default: 0.0
-          maximum: 9.99999999E8
-          description: SKU Number - SKU number associated with the transaction
-          type: number
-          minimum: -9.99999999E8
-          maxLength: 9
-          example: 0
-        referenceNumber:
-          default: 0.0
-          maximum: 9.99999999999999E14
-          description: Reference Number - Resolution reference number for payments
-            received for open billing accounts
-          type: number
-          minimum: -9.99999999999999E14
-          example: 0
-        caseNumber:
-          default: 0.0
-          maximum: 9.9999999999E10
-          description: Case Number - This field is the identification number of the
-            case related to the transaction
-          type: number
-          minimum: 0.0
-          maxLength: 11
-          example: 0
-        transactionAmount:
-          default: 0.0
-          description: Transaction Amount - Transaction amount to be posted
-          type: string
-          maxLength: 17
-          example: 3000.00
-        lineData3:
-          format: uppercase
-          description: LINE DATA 3 - This field is used to enter a note for the action
-            to be taken
-          type: string
-          maxLength: 60
-          example: ' '
-        lineData2:
-          format: uppercase
-          description: LINE DATA 2 - This field is used to enter a note for the action
-            to be taken
-          type: string
-          maxLength: 60
-          example: ' '
-        lineData5:
-          format: uppercase
-          description: LINE DATA 5 - This field is used to enter a note for the action
-            to be taken
-          type: string
-          maxLength: 60
-          example: ' '
-        actionCode:
-          format: uppercase
-          description: Action Code - Action code placed on the account
-          type: string
-          maxLength: 4
-          example: AINQ
-        lineData4:
-          format: uppercase
-          description: LINE DATA 4 - This field is used to enter a note for the action
-            to be taken
-          type: string
-          maxLength: 60
-          example: ' '
-        lineData1:
-          format: uppercase
-          description: LINE DATA 1 - This field is used to enter a note for the action
-            to be taken
-          type: string
-          maxLength: 60
-          example: ' '
-        walletId:
-          format: uppercase
-          description: Wallet ID - This field is the identification Wallet associated
-            with the transaction
-          type: string
-          maxLength: 3
-          example: ' '
-        cardSequence:
-          default: 0.0
-          maximum: 99999.0
-          description: Card Sequence - This field represents the card sequence number
-            associated with the card number of the transaction
-          type: number
-          minimum: -99999.0
-          maxLength: 5
-          example: 0
-        letterCode:
-          format: uppercase
-          description: Letter Code - This field indicates the user-defined letter
-            code of the LTS letter to be sent to the customer through batch processing
-          type: string
-          maxLength: 3
-          example: ' '
-        referralRepBusinessUnit:
-          default: 0.0
-          maximum: 999.0
-          description: Referral REP Business Unit - This field is the identification
-            number of the Business unit of the referral representative
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 0
-        foreignUseIndicator:
-          description: Foreign Indicator - This field helps to provide details of
-            which account needs to be used for the transaction
-          type: string
-          enum:
-          - 0
-          - 1
-          - space
-          maxLength: 1
-          example: 0
-        planNumber:
-          default: 0.0
-          maximum: 99999.0
-          description: Plan Number - Credit plan number associated with the transaction
-          type: number
-          minimum: -99999.0
-          maxLength: 5
-          example: 10002
-        asmRepresentative:
-          format: uppercase
-          description: ASM Representative - This field displays the identification
-            of the representative who performed the action
-          type: string
-          maxLength: 3
-          example: NAB
-        planSequence:
-          default: 0.0
-          maximum: 99.0
-          description: Plan Sequence - Sequence number of the plan segment associated
-            with the transaction
-          type: number
-          minimum: 0.0
-          maxLength: 2
-          example: 1
-        signonName:
-          type: string
-        purchaseOrderNumber:
-          default: 0.0
-          maximum: 1.0E16
-          description: Purchase Order Number - Purchase order number of the transaction
-          type: number
-          minimum: 0.0
-          maxLength: 16
-          example: 0
-        referralOption:
-          description: Referral Option - This field helps to provide referral option
-            manually
-          type: string
-          enum:
-          - 0
-          - ' '
-          - 1
-          maxLength: 1
-          example: 0
-        securitySignon:
-          type: string
-        effectiveDate:
-          format: date
-          description: Effective Date - Date when this action is to take effect. The
-            format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
-            on the System record
-          type: string
-          maxLength: 7
-          example: 18/08/2021
-        asmBusinessUnit:
-          default: 0.0
-          maximum: 998.0
-          description: ASM Business Unit - This field displays the ASM business unit
-            number who performed the action
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 600
-        cardNumber:
-          format: uppercase
-          description: Card Number - This field represents the card number associated
-            with the transaction
-          type: string
-          maxLength: 19
-          example: 0006000011000000160
     MonetaryActionResp:
       type: object
       properties:
@@ -6140,6 +5880,262 @@ components:
           type: string
           maxLength: 7
           example: 18/08/2021
+    MonetaryActionReq:
+      type: object
+      properties:
+        ticketNumber:
+          default: 0.0
+          maximum: 9.99999999999999E14
+          description: Ticket Number - Ticket number (invoice number) associated with
+            the transaction
+          type: number
+          minimum: 0.0
+          maxLength: 15
+          example: 0
+        storeNumber:
+          default: 0.0
+          maximum: 9.99999999E8
+          description: Store Number - Store number associated with the transaction
+          type: number
+          minimum: -9.99999999E8
+          maxLength: 9
+          example: 999999998
+        flag:
+          format: uppercase
+          description: Flag - Flag
+          type: string
+          maxLength: 3
+          example: ' '
+        authorizationCode:
+          format: uppercase
+          description: AUTH Code -  Authorization code associated with the transaction
+          type: string
+          maxLength: 6
+          example: ' '
+        actionCodePriority:
+          default: 0.0
+          maximum: 9.0
+          description: Action Code Priority - This field helps to set priority for
+            the action code
+          type: number
+          minimum: 0.0
+          maxLength: 1
+          example: 0
+        departmentCode:
+          format: uppercase
+          description: Department Code - Department associated with the transaction
+          type: string
+          maxLength: 4
+          example: ' '
+        salesClerk:
+          format: uppercase
+          description: Sales Clerk - Sales clerk associated with the transaction
+          type: string
+          maxLength: 12
+          example: ' '
+        letterBusinessUnit:
+          default: 0.0
+          maximum: 998.0
+          description: Letter Business Unit - This field indicates the business unit
+            of the LTS letter to be sent to the customer
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 0
+        referralRepresentativeId:
+          format: uppercase
+          description: Referral Representative ID - This field is the identification
+            number of the referral representative
+          type: string
+          maxLength: 3
+          example: ' '
+        insuranceCode:
+          format: uppercase
+          description: Insurance Code - Code that identifies the insurance product
+            associated with the transaction
+          type: string
+          maxLength: 14
+          example: ' '
+        skuNumber:
+          default: 0.0
+          maximum: 9.99999999E8
+          description: SKU Number - SKU number associated with the transaction
+          type: number
+          minimum: -9.99999999E8
+          maxLength: 9
+          example: 0
+        referenceNumber:
+          default: 0.0
+          maximum: 9.99999999999999E14
+          description: Reference Number - Resolution reference number for payments
+            received for open billing accounts
+          type: number
+          minimum: -9.99999999999999E14
+          example: 0
+        caseNumber:
+          default: 0.0
+          maximum: 9.9999999999E10
+          description: Case Number - This field is the identification number of the
+            case related to the transaction
+          type: number
+          minimum: 0.0
+          maxLength: 11
+          example: 0
+        transactionAmount:
+          default: 0.0
+          description: Transaction Amount - Transaction amount to be posted
+          type: string
+          maxLength: 17
+          example: 3000.00
+        lineData3:
+          format: uppercase
+          description: LINE DATA 3 - This field is used to enter a note for the action
+            to be taken
+          type: string
+          maxLength: 60
+          example: ' '
+        lineData2:
+          format: uppercase
+          description: LINE DATA 2 - This field is used to enter a note for the action
+            to be taken
+          type: string
+          maxLength: 60
+          example: ' '
+        lineData5:
+          format: uppercase
+          description: LINE DATA 5 - This field is used to enter a note for the action
+            to be taken
+          type: string
+          maxLength: 60
+          example: ' '
+        actionCode:
+          format: uppercase
+          description: Action Code - Action code placed on the account
+          type: string
+          maxLength: 4
+          example: AINQ
+        lineData4:
+          format: uppercase
+          description: LINE DATA 4 - This field is used to enter a note for the action
+            to be taken
+          type: string
+          maxLength: 60
+          example: ' '
+        lineData1:
+          format: uppercase
+          description: LINE DATA 1 - This field is used to enter a note for the action
+            to be taken
+          type: string
+          maxLength: 60
+          example: ' '
+        walletId:
+          format: uppercase
+          description: Wallet ID - This field is the identification Wallet associated
+            with the transaction
+          type: string
+          maxLength: 3
+          example: ' '
+        cardSequence:
+          default: 0.0
+          maximum: 99999.0
+          description: Card Sequence - This field represents the card sequence number
+            associated with the card number of the transaction
+          type: number
+          minimum: -99999.0
+          maxLength: 5
+          example: 0
+        letterCode:
+          format: uppercase
+          description: Letter Code - This field indicates the user-defined letter
+            code of the LTS letter to be sent to the customer through batch processing
+          type: string
+          maxLength: 3
+          example: ' '
+        referralRepBusinessUnit:
+          default: 0.0
+          maximum: 999.0
+          description: Referral REP Business Unit - This field is the identification
+            number of the Business unit of the referral representative
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 0
+        foreignUseIndicator:
+          description: Foreign Indicator - This field helps to provide details of
+            which account needs to be used for the transaction
+          type: string
+          enum:
+          - 0
+          - 1
+          - ' '
+          maxLength: 1
+          example: 0
+        planNumber:
+          default: 0.0
+          maximum: 99999.0
+          description: Plan Number - Credit plan number associated with the transaction
+          type: number
+          minimum: -99999.0
+          maxLength: 5
+          example: 10002
+        asmRepresentative:
+          format: uppercase
+          description: ASM Representative - This field displays the identification
+            of the representative who performed the action
+          type: string
+          maxLength: 3
+          example: NAB
+        planSequence:
+          default: 0.0
+          maximum: 99.0
+          description: Plan Sequence - Sequence number of the plan segment associated
+            with the transaction
+          type: number
+          minimum: 0.0
+          maxLength: 2
+          example: 1
+        purchaseOrderNumber:
+          default: 0.0
+          maximum: 1.0E16
+          description: Purchase Order Number - Purchase order number of the transaction
+          type: number
+          minimum: 0.0
+          maxLength: 16
+          example: 0
+        referralOption:
+          description: Referral Option - This field helps to provide referral option
+            manually
+          type: string
+          enum:
+          - 0
+          - ' '
+          - 1
+          maxLength: 1
+          example: 0
+        effectiveDate:
+          format: date
+          description: Effective Date - Date when this action is to take effect. The
+            format is MM/DD/YYYY or DD/MM/YYYY depending on the date format established
+            on the System record
+          type: string
+          maxLength: 7
+          example: 18/08/2021
+        asmBusinessUnit:
+          default: 0.0
+          maximum: 998.0
+          description: ASM Business Unit - This field displays the ASM business unit
+            number who performed the action
+          type: number
+          minimum: 0.0
+          maxLength: 3
+          example: 600
+        cardNumber:
+          format: uppercase
+          description: Card Number - This field represents the card number associated
+            with the transaction
+          type: string
+          maxLength: 19
+          example: 0006000011000000160
     UpdateAccountChargeOffResp:
       type: object
       properties:
