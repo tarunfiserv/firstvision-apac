@@ -603,314 +603,6 @@ paths:
                 $ref: '#/components/schemas/ErrorList'
 components:
   schemas:
-    
-    ListCustomersCardsResp:
-      type: object
-      properties:
-        totalAvailable:
-          default: 0.0
-          description: Total Available balance at the relationship level
-          type: string
-          maxLength: 17
-          example: $0.00
-        businessUnit:
-          format: uppercase
-          type: string
-        homePhoneNumber:
-          format: uppercase
-          type: string
-        ssnId:
-          format: uppercase
-          type: string
-        gender:
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-        mobileNumber:
-          format: uppercase
-          type: string
-        nameLine1:
-          format: uppercase
-          type: string
-        emailAddress:
-          format: uppercase
-          type: string
-        workPhoneNumber:
-          format: uppercase
-          type: string
-        addressLine1:
-          format: uppercase
-          type: string
-        creditLimit:
-          default: 0.0
-          description: Overall Credit Limit at the relationship level  (if relationship
-            is active)
-          type: string
-          maxLength: 17
-          example: $0.00"
-        addressLine2:
-          format: uppercase
-          type: string
-        addressLine3:
-          format: uppercase
-          type: string
-        addressLine4:
-          format: uppercase
-          type: string
-        billingLvl:
-          description: Flag indicating the Level of billing is at relationship level
-            or at subordnate account level
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          maxLength: 1
-          example: 0
-        userDefinedField4:
-          format: uppercase
-          type: string
-        numberOfAccounts:
-          format: uppercase
-          type: string
-        dateOfBirth:
-          format: date
-          type: string
-        customerNumber:
-          format: uppercase
-          type: string
-        customerName:
-          format: uppercase
-          type: string
-        homeDistricName:
-          format: uppercase
-          type: string
-        cardList:
-          type: array
-          items:
-            type: object
-            properties:
-              cardholderType:
-                default: 0.0
-                maximum: 9.0
-                type: number
-                minimum: 0.0
-              businessUnit:
-                default: 0.0
-                maximum: 999.0
-                type: number
-                minimum: 0.0
-              lastCardExpirationDate:
-                format: date
-                type: string
-              cardIssueDate:
-                format: date
-                type: string
-              lastCardAction:
-                type: string
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
-                - 4
-                - 5
-                - 6
-                - 7
-                - 8
-                - 9
-              dateLastWalletUsed:
-                format: uppercase
-                type: string
-              dateOpened:
-                format: date
-                type: string
-              ecomActFlag:
-                format: uppercase
-                type: string
-              maskCardNumber:
-                format: uppercase
-                type: string
-              lastCardNeedActivation:
-                format: uppercase
-                type: string
-              productDescription:
-                format: uppercase
-                type: string
-              mccLimit9:
-                default: 0.0
-                type: string
-              mccLimit8:
-                default: 0.0
-                type: string
-              blockDate:
-                format: date
-                type: string
-              mccLimit7:
-                default: 0.0
-                type: string
-              mccLimit6:
-                default: 0.0
-                type: string
-              digitalId:
-                format: uppercase
-                type: string
-              mccLimit1:
-                default: 0.0
-                type: string
-              cardTechnology:
-                type: string
-                enum:
-                - 0
-                - 1
-                - 3
-                - 5
-                - 2
-                - 4
-              mccLimit5:
-                default: 0.0
-                type: string
-              mccLimit4:
-                default: 0.0
-                type: string
-              mccLimit3:
-                default: 0.0
-                type: string
-              mccLimit2:
-                default: 0.0
-                type: string
-              currCardAction:
-                type: string
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
-                - 4
-                - 5
-                - 6
-                - 7
-                - 8
-                - 9
-              embosserRecordStatus:
-                type: string
-                enum:
-                - 0
-                - 1
-                - F
-                - S
-                - T
-                - P
-                - ' '
-              intAtmPosFlag:
-                format: uppercase
-                type: string
-              plasticSuppressStatus:
-                format: uppercase
-                type: string
-              cardNumber:
-                format: uppercase
-                type: string
-              timeLastPlasticIssue:
-                default: 0.0
-                maximum: 9999999.0
-                type: number
-                minimum: -9999999.0
-              payWaveFlag:
-                format: uppercase
-                type: string
-              mccLimit10:
-                default: 0.0
-                type: string
-              savingsAccountNbr:
-                format: uppercase
-                type: string
-              motoFlag:
-                format: uppercase
-                type: string
-              currentCardNeedActivation:
-                format: uppercase
-                type: string
-              nameOnCard:
-                format: uppercase
-                type: string
-              pinOffset:
-                format: uppercase
-                type: string
-              cardActivatedDate:
-                format: date
-                type: string
-              blockCode:
-                format: uppercase
-                type: string
-              product:
-                default: 0.0
-                maximum: 999.0
-                type: number
-                minimum: 0.0
-              cardSequence:
-                default: 0.0
-                maximum: 9999.0
-                type: number
-                minimum: 0.0
-              warningCode:
-                format: uppercase
-                type: string
-              embrName2:
-                format: uppercase
-                type: string
-              cashBackTranFlag:
-                format: uppercase
-                type: string
-              chequeAccountNbr:
-                format: uppercase
-                type: string
-              postToAccount:
-                format: uppercase
-                type: string
-              atmFlag:
-                format: uppercase
-                type: string
-              cardExpirationDate:
-                format: date
-                type: string
-              posFlag:
-                format: uppercase
-                type: string
-              numberOfCards:
-                format: uppercase
-                type: string
-              dateLastPlasticUsed:
-                format: uppercase
-                type: string
-              dateLastPlasticSupresed:
-                format: uppercase
-                type: string
-        relName:
-          format: uppercase
-          description: Name on the relationship Record  (if relationship is active)
-          type: string
-          maxLength: 40
-          example: ' '
-        numberOfCards:
-          format: uppercase
-          type: string
-        relationshipNbr:
-          format: uppercase
-          type: string
-        status:
-          description: Status of the Relationship Record  (if relationship is active)
-          type: string
-          enum:
-          - 0
-          - 1
-          - 8
-          - P
-          - 9
-          maxLength: 1
-          example: ""
     UpdateCustomerDemographicsResp:
       type: object
       properties:
@@ -1311,196 +1003,7 @@ components:
             example: Some message from the service
             description: Error message associated with the response
     
-    ListCustomersAccountsResp:
-      type: object
-      properties:
-        totalAvailable:
-          default: 0.0
-          description: Total Available balance at the relationship level
-          type: string
-          maxLength: 17
-          example: $0.00
-        businessUnit:
-          format: uppercase
-          type: string
-        homePhoneNumber:
-          format: uppercase
-          type: string
-        ssnId:
-          format: uppercase
-          type: string
-        gender:
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-        mobileNumber:
-          format: uppercase
-          type: string
-        nameLine1:
-          format: uppercase
-          type: string
-        emailAddress:
-          format: uppercase
-          type: string
-        workPhoneNumber:
-          format: uppercase
-          type: string
-        addressLine1:
-          format: uppercase
-          type: string
-        creditLimit:
-          default: 0.0
-          description: Overall Credit Limit at the relationship level  (if relationship
-            is active)
-          type: string
-          maxLength: 17
-          example: $0.00"
-        addressLine2:
-          format: uppercase
-          type: string
-        addressLine3:
-          format: uppercase
-          type: string
-        addressLine4:
-          format: uppercase
-          type: string
-        billingLvl:
-          description: Flag indicating the Level of billing is at relationship level
-            or at subordnate account level
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          maxLength: 1
-          example: 0
-        userDefinedField4:
-          format: uppercase
-          type: string
-        numberOfAccounts:
-          format: uppercase
-          type: string
-        dateOfBirth:
-          format: date
-          type: string
-        customerNumber:
-          format: uppercase
-          type: string
-        customerName:
-          format: uppercase
-          type: string
-        homeDistricName:
-          format: uppercase
-          type: string
-        relName:
-          format: uppercase
-          description: Name on the relationship Record  (if relationship is active)
-          type: string
-          maxLength: 40
-          example: ' '
-        accountList:
-          type: array
-          items:
-            type: object
-            properties:
-              product:
-                format: uppercase
-                type: string
-                description: Product associated with the account
-                maxLength: 3
-                example: 1
-              businessUnit:
-                format: uppercase
-                type: string
-              amountMemoCredit:
-                default: 0.0
-                type: string
-              ddaAccountNumber:
-                format: uppercase
-                type: string
-              mailingIndicator:
-                type: string
-                enum:
-                - H
-                - O
-              blockCode2Date:
-                format: date
-                type: string
-              accountNumber:
-                format: uppercase
-                type: string
-              suppressToken:
-                type: string
-                enum:
-                - 0
-                - 1
-              internalStatus:
-                type: string
-                enum:
-                - "N"
-                - A
-                - F
-                - D
-                - I
-                - M
-                - Z
-                - B
-                - C
-                - H
-                - V
-                - X
-                - Q
-                - J
-                - V
-                - T
-                - R
-                - K
-                - J
-                - 8
-                - 9
-                - P
-                - H
-              reissContolMethod:
-                default: 0.0
-                maximum: 9.0
-                type: number
-                minimum: 0.0
-              amountMemoDebit:
-                default: 0.0
-                type: string
-              nbrOfTokenizedCards:
-                default: 0.0
-                maximum: 99.0
-                type: number
-                minimum: 0.0
-              blockCode1:
-                format: uppercase
-                type: string
-              blockCode2:
-                format: uppercase
-                type: string
-              blockCode1Date:
-                format: date
-                type: string
-        numberOfCards:
-          format: uppercase
-          type: string
-        relationshipNbr:
-          format: uppercase
-          type: string
-        status:
-          description: Status of the Relationship Record  (if relationship is active)
-          type: string
-          enum:
-          - 0
-          - 1
-          - 8
-          - P
-          - 9
-          maxLength: 1
-          example: ""
+    
     CustomersNameAddressInquireResp:
       type: object
       properties:
@@ -2255,3 +1758,834 @@ components:
           type: string
           maxLength: 10
           example: 01/02/2010
+    ListCustomersCardsResp:
+      type: object
+      properties:
+        totalAvailable:
+          default: 0.0
+          description: Total Available balance at the relationship level
+          type: string
+          maxLength: 17
+          example: $0.00
+        businessUnit:
+          format: uppercase
+          description: Business Unit of the Relationship account (if relationship
+            is active)
+          type: string
+          maxLength: 3
+          example: 0
+        homePhoneNumber:
+          format: uppercase
+          description: Home Phone Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        ssnId:
+          format: uppercase
+          description: SSN ID of the Customer
+          type: string
+          maxLength: 25
+          example: 113902
+        gender:
+          description: Gender of the Customer
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        mobileNumber:
+          format: uppercase
+          description: Mobile Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        nameLine1:
+          format: uppercase
+          description: First Name of the Customer
+          type: string
+          maxLength: 40
+          example: UATMFNCU448 TWOPPPUATMLNCUST448
+        emailAddress:
+          format: uppercase
+          description: Email Address of the Customer
+          type: string
+          maxLength: 60
+          example: UATMFNCU448@GMAIL.COM
+        workPhoneNumber:
+          format: uppercase
+          description: Work Phone Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        addressLine1:
+          format: uppercase
+          description: Address line 1 of the Customer
+          type: string
+          maxLength: 40
+          example: 62 CHARTERIS DR
+        creditLimit:
+          default: 0.0
+          description: Overall Credit Limit at the relationship level  (if relationship
+            is active)
+          type: string
+          maxLength: 17
+          example: $0.00"
+        addressLine2:
+          format: uppercase
+          description: Address Line 2 of the Customer
+          type: string
+          maxLength: 40
+          example: ""
+        addressLine3:
+          format: uppercase
+          description: Address Line 3 of the Customer
+          type: string
+          maxLength: 40
+          example: ""
+        addressLine4:
+          format: uppercase
+          description: Address Line 4 of the Customer
+          type: string
+          maxLength: 40
+          example: ""
+        billingLvl:
+          description: Flag indicating the Level of billing is at relationship level
+            or at subordnate account level
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        userDefinedField4:
+          format: uppercase
+          description: User Defined Field 4
+          type: string
+          maxLength: 1
+          example: ""
+        numberOfAccounts:
+          format: uppercase
+          description: Number of Accounts associated with the Customer
+          type: string
+          maxLength: 3
+          example: 1
+        dateOfBirth:
+          format: date
+          description: "Date of Birth of the Customer, format is DD/MM/YYYY"
+          type: string
+          maxLength: 10
+          example: 14/11/1940
+        customerNumber:
+          format: uppercase
+          description: Customer Number - This field is Identification number of the
+            Name and Address record.
+          type: string
+          maxLength: 19
+          example: 0001000000000113902
+        customerName:
+          format: uppercase
+          description: Name of the Customer
+          type: string
+          maxLength: 40
+          example: UATMFNCU448
+        homeDistricName:
+          format: uppercase
+          description: Home Distric Name of the Customer
+          type: string
+          maxLength: 20
+          example: ""
+        cardList:
+          type: array
+          items:
+            type: object
+            properties:
+              cardholderType:
+                default: 0.0
+                maximum: 9.0
+                type: number
+                minimum: 0.0
+                description: Type of Cardholder - Main or Supplementary
+                maxLength: 1
+                example: 1
+              businessUnit:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: 0.0
+                description: Business Unit - Identification number of the business
+                  unit associated with the  customer
+                maxLength: 3
+                example: 100
+              lastCardExpirationDate:
+                format: date
+                type: string
+                description: "Expiration Date of the last card issued to cardholder,\
+                  \ format is DD/MM/YYYY"
+                maxLength: 10
+                example: 00/00/0000
+              cardIssueDate:
+                format: date
+                type: string
+                description: "Date the Card is Issued, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 28/09/2020
+              lastCardAction:
+                type: string
+                enum:
+                - 0
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                description: Last Embossing Action requested on the card
+                maxLength: 1
+                example: 1
+              dateLastWalletUsed:
+                format: uppercase
+                type: string
+                description: "Date the last wallet associated with card is used, format\
+                  \ is DD/MM/YYYY"
+                maxLength: 10
+                example: 0
+              dateOpened:
+                format: date
+                type: string
+                description: "Date the Card is issued, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 17/09/2020
+              ecomActFlag:
+                format: uppercase
+                type: string
+                description: Flag for e-commerce usage
+                maxLength: 1
+                example: "Y"
+              maskCardNumber:
+                format: uppercase
+                type: string
+                description: Mask Card number of the actual card number associated
+                  with the card Id
+                maxLength: 19
+                example: 000984680XXXXXX9405
+              lastCardNeedActivation:
+                format: uppercase
+                type: string
+                description: Last Card Need Activation
+                maxLength: 1
+                example: "Y"
+              productDescription:
+                format: uppercase
+                type: string
+                description: Description of the Card
+                maxLength: 30
+                example: VISA PLATINUM DEBIT
+              mccLimit9:
+                default: 0.0
+                type: string
+                description: Occurence-9 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              mccLimit8:
+                default: 0.0
+                type: string
+                description: Occurence-8 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              blockDate:
+                format: date
+                type: string
+                description: "Date the Block Code is assigned on the card, format\
+                  \ is DD/MM/YYYY."
+                maxLength: 10
+                example: 00/00/0000
+              mccLimit7:
+                default: 0.0
+                type: string
+                description: Occurence-7 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              mccLimit6:
+                default: 0.0
+                type: string
+                description: Occurence-6 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              digitalId:
+                format: uppercase
+                type: string
+                description: digital id of the wallet
+                maxLength: 10
+                example: ' '
+              mccLimit1:
+                default: 0.0
+                type: string
+                description: Occurence-1 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.01
+              cardTechnology:
+                type: string
+                enum:
+                - 0
+                - 1
+                - 3
+                - 5
+                - 2
+                - 4
+                description: Technology (chip / magnetic / contactless) used to emboss
+                  the card
+                maxLength: 1
+                example: 3
+              mccLimit5:
+                default: 0.0
+                type: string
+                description: Occurence-5 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              mccLimit4:
+                default: 0.0
+                type: string
+                description: Occurence-4 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              mccLimit3:
+                default: 0.0
+                type: string
+                description: Occurence-3 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              mccLimit2:
+                default: 0.0
+                type: string
+                description: Occurence-2 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              currCardAction:
+                type: string
+                enum:
+                - 0
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                description: Current Embossing Action requested on the card
+                maxLength: 1
+                example: 0
+              embosserRecordStatus:
+                type: string
+                enum:
+                - 0
+                - 1
+                - F
+                - S
+                - T
+                - P
+                - ' '
+                description: Status of the card
+                maxLength: 1
+                example: 0
+              intAtmPosFlag:
+                format: uppercase
+                type: string
+                description: Flag for international ATM POS usage
+                maxLength: 1
+                example: "Y"
+              plasticSuppressStatus:
+                format: uppercase
+                type: string
+                description: Flag for plastic usage suppression
+                maxLength: 1
+                example: "N"
+              cardNumber:
+                format: uppercase
+                type: string
+                description: Card Number - Token Number assigned to the cardholder
+                  embosser record
+                maxLength: 19
+                example: 0009846801010009405
+              timeLastPlasticIssue:
+                default: 0.0
+                maximum: 9999999.0
+                type: number
+                minimum: -9999999.0
+                description: Time Last Plastic Issue
+                maxLength: 6
+                example: 131201
+              payWaveFlag:
+                format: uppercase
+                type: string
+                description: Flag for Paywave usage
+                maxLength: 1
+                example: "Y"
+              mccLimit10:
+                default: 0.0
+                type: string
+                description: Occurence-10 of the MCC limit applied on the Card
+                maxLength: 11
+                example: $0.00
+              savingsAccountNbr:
+                format: uppercase
+                type: string
+                description: Saving Account number associated with the card (Debit
+                  Card Only)
+                maxLength: 17
+                example: ' '
+              motoFlag:
+                format: uppercase
+                type: string
+                description: Flag to determine MOTO transaction is allowed
+                maxLength: 1
+                example: ' '
+              currentCardNeedActivation:
+                format: uppercase
+                type: string
+                description: Current Card Activation Status
+                maxLength: 1
+                example: "Y"
+              nameOnCard:
+                format: uppercase
+                type: string
+                description: Embossed Name On Card
+                maxLength: 26
+                example: U T UATMLNCUST448
+              pinOffset:
+                format: uppercase
+                type: string
+                description: Pin offset
+                maxLength: 6
+                example: 329861
+              cardActivatedDate:
+                format: date
+                type: string
+                description: "Date the card is activated, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 00/00/0000
+              blockCode:
+                format: uppercase
+                type: string
+                description: Block Code on the card
+                maxLength: 1
+                example: ' '
+              product:
+                default: 0.0
+                maximum: 999.0
+                type: number
+                minimum: 0.0
+                description: Product associated with the Card
+                maxLength: 3
+                example: 001
+              cardSequence:
+                default: 0.0
+                maximum: 9999.0
+                type: number
+                minimum: 0.0
+                description: Sequence of the card ID
+                maxLength: 4
+                example: 1
+              warningCode:
+                format: uppercase
+                type: string
+                description: Warning Code applied to the card
+                maxLength: 1
+                example: 0
+              embrName2:
+                format: uppercase
+                type: string
+                description: Embossed Name-2 on the Card
+                maxLength: 26
+                example: ' '
+              cashBackTranFlag:
+                format: uppercase
+                type: string
+                description: Flag for cashback usage
+                maxLength: 1
+                example: "Y"
+              chequeAccountNbr:
+                format: uppercase
+                type: string
+                description: Checking Account number associated with the card (Debit
+                  Card Only)
+                maxLength: 19
+                example: ' '
+              postToAccount:
+                format: uppercase
+                type: string
+                description: Account to which the card is linked
+                maxLength: 19
+                example: 0001000011000052268
+              atmFlag:
+                format: uppercase
+                type: string
+                description: Flag for ATM usage
+                maxLength: 1
+                example: "Y"
+              cardExpirationDate:
+                format: date
+                type: string
+                description: "Expiration Date on the card, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 16/09/2023
+              posFlag:
+                format: uppercase
+                type: string
+                description: Flag for POS usage
+                maxLength: 1
+                example: "Y"
+              numberOfCards:
+                format: uppercase
+                type: string
+                description: Number of wallet token associated with card
+                maxLength: 2
+                example: 0
+              dateLastPlasticUsed:
+                format: uppercase
+                type: string
+                description: "Date the last plastic is used, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 13815
+              dateLastPlasticSupresed:
+                format: uppercase
+                type: string
+                description: "Date the last plastic usage is suppressed, format is\
+                  \ DD/MM/YYYY"
+                maxLength: 10
+                example: 0
+        relName:
+          format: uppercase
+          description: Name on the relationship Record  (if relationship is active)
+          type: string
+          maxLength: 40
+          example: ' '
+        numberOfCards:
+          format: uppercase
+          description: Number of Cards associated with the Customer
+          type: string
+          maxLength: 3
+          example: 1
+        relationshipNbr:
+          format: uppercase
+          description: Relationship number associated with the customer (if relationship
+            is active)
+          type: string
+          maxLength: 19
+          example: ""
+        status:
+          description: Status of the Relationship Record  (if relationship is active)
+          type: string
+          enum:
+          - 0
+          - 1
+          - 8
+          - P
+          - 9
+          maxLength: 1
+          example: ""
+    ListCustomersAccountsResp:
+      type: object
+      properties:
+        totalAvailable:
+          default: 0.0
+          description: Total Available balance at the relationship level
+          type: string
+          maxLength: 17
+          example: $0.00
+        businessUnit:
+          format: uppercase
+          description: Business Unit of the Relationship account (if relationship
+            is active)
+          type: string
+          maxLength: 3
+          example: 0
+        homePhoneNumber:
+          format: uppercase
+          description: Home Phone Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        ssnId:
+          format: uppercase
+          description: SSN ID of the Customer
+          type: string
+          maxLength: 25
+          example: 113902
+        gender:
+          description: Gender of the Customer
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        mobileNumber:
+          format: uppercase
+          description: Mobile Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        nameLine1:
+          format: uppercase
+          description: First Name of the Customer
+          type: string
+          maxLength: 40
+          example: UATMFNCU448 TWOPPPUATMLNCUST448
+        emailAddress:
+          format: uppercase
+          description: Email Address of the Customer
+          type: string
+          maxLength: 60
+          example: UATMFNCU448@GMAIL.COM
+        workPhoneNumber:
+          format: uppercase
+          description: Work Phone Number of the Customer
+          type: string
+          maxLength: 20
+          example: ++61430010348
+        addressLine1:
+          format: uppercase
+          description: Address line 1 of the Customer
+          type: string
+          maxLength: 40
+          example: 62 CHARTERIS DR
+        creditLimit:
+          default: 0.0
+          description: Overall Credit Limit at the relationship level  (if relationship
+            is active)
+          type: string
+          maxLength: 17
+          example: $0.00"
+        addressLine2:
+          format: uppercase
+          description: Address Line 2 of the Customer
+          type: string
+          maxLength: 40
+          example: ' '
+        addressLine3:
+          format: uppercase
+          description: Address Line 3 of the Customer
+          type: string
+          maxLength: 40
+          example: ' '
+        addressLine4:
+          format: uppercase
+          description: Address Line 4 of the Customer
+          type: string
+          maxLength: 40
+          example: ""
+        billingLvl:
+          description: Flag indicating the Level of billing is at relationship level
+            or at subordnate account level
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        userDefinedField4:
+          format: uppercase
+          description: User Defined Field 4
+          type: string
+          maxLength: 1
+          example: ""
+        numberOfAccounts:
+          format: uppercase
+          description: Number of Accounts associated with the Customer
+          type: string
+          maxLength: 3
+          example: 1
+        dateOfBirth:
+          format: date
+          description: "Date of Birth of the Customer, format is DD/MM/YYYY"
+          type: string
+          maxLength: 10
+          example: 14/11/1940
+        customerNumber:
+          format: uppercase
+          description: Customer Number - This field is Identification number of the
+            Name and Address record.
+          type: string
+          maxLength: 19
+          example: 0001000000000113902
+        customerName:
+          format: uppercase
+          description: Name of the Customer
+          type: string
+          maxLength: 40
+          example: UATMFNCU448
+        homeDistricName:
+          format: uppercase
+          description: Home Distric Name of the Customer
+          type: string
+          maxLength: 20
+          example: ""
+        relName:
+          format: uppercase
+          description: Name on the relationship Record  (if relationship is active)
+          type: string
+          maxLength: 40
+          example: ' '
+        accountList:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                format: uppercase
+                type: string
+                description: Product associated with the account
+                maxLength: 3
+                example: 1
+              businessUnit:
+                format: uppercase
+                type: string
+                description: Business Unit - Identification number of the business
+                  unit associated with the  account
+                maxLength: 3
+                example: 100
+              amountMemoCredit:
+                default: 0.0
+                type: string
+                description: Amount of Credit Authorization applied on hte account
+                maxLength: 17
+                example: $0.00
+              ddaAccountNumber:
+                format: uppercase
+                type: string
+                description: Debit Account number associated with the account
+                maxLength: 17
+                example: 890005226
+              mailingIndicator:
+                type: string
+                enum:
+                - H
+                - O
+                description: Mailing Indicator for sending mails to either Office
+                  Address or Home Address
+                maxLength: 1
+                example: ' '
+              blockCode2Date:
+                format: date
+                type: string
+                description: "Date the Block Code 2 is applied, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 00/00/0000
+              accountNumber:
+                format: uppercase
+                type: string
+                description: Account ID assigned to the customer for a given product
+                maxLength: 19
+                example: 0001000011000052268
+              suppressToken:
+                type: string
+                enum:
+                - 0
+                - 1
+                description: Flag to supporess the wallet token creation
+                maxLength: 1
+                example: 0
+              internalStatus:
+                type: string
+                enum:
+                - "N"
+                - A
+                - F
+                - D
+                - I
+                - M
+                - Z
+                - B
+                - C
+                - H
+                - V
+                - X
+                - Q
+                - J
+                - V
+                - T
+                - R
+                - K
+                - J
+                - 8
+                - 9
+                - P
+                - H
+                description: Status of the account
+                maxLength: 1
+                example: D
+              reissContolMethod:
+                default: 0.0
+                maximum: 9.0
+                type: number
+                minimum: 0.0
+                description: Flag to indicate method to reissue
+                maxLength: 1
+                example: 0
+              amountMemoDebit:
+                default: 0.0
+                type: string
+                description: 'Amount of Debit Authorization that holds the Open to
+                  Buy '
+                maxLength: 17
+                example: $0.00
+              nbrOfTokenizedCards:
+                default: 0.0
+                maximum: 99.0
+                type: number
+                minimum: 0.0
+                description: Number of wallet cards associated with account
+                maxLength: 2
+                example: 0
+              blockCode1:
+                format: uppercase
+                type: string
+                description: Block Code 1 on the account
+                maxLength: 1
+                example: A
+              blockCode2:
+                format: uppercase
+                type: string
+                description: Block Code 2 on the account
+                maxLength: 1
+                example: ""
+              blockCode1Date:
+                format: date
+                type: string
+                description: "Date the Block Code 1 is applied, format is DD/MM/YYYY"
+                maxLength: 10
+                example: 19/08/2021
+        numberOfCards:
+          format: uppercase
+          description: Number of Cards associated with the Customer
+          type: string
+          maxLength: 3
+          example: 1
+        relationshipNbr:
+          format: uppercase
+          description: Relationship number associated with the customer (if relationship
+            is active)
+          type: string
+          maxLength: 19
+          example: ""
+        status:
+          description: Status of the Relationship Record  (if relationship is active)
+          type: string
+          enum:
+          - 0
+          - 1
+          - 8
+          - P
+          - 9
+          maxLength: 1
+          example: ""
