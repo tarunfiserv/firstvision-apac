@@ -1848,6 +1848,116 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'              
+  /v1/account/{accountNumber}/statementPreference:
+    put:
+      tags:
+      - Account Management
+      summary: Update Statement Preferences
+      description: This service is used to update the statement preference indicators
+        for the given account
+      operationId: UpdateStatementPreferences
+      x-group-name: Account Management
+      x-proxy-name: Update Statement Preferences
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessUnit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          maxLength: 3
+          example: 600
+      - name: accountNumber
+        in: path
+        description: Account Number - Unique Identification number of the Account
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: 0000000001000000123
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStatementPreferencesReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateStatementPreferencesResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
     
@@ -6218,3 +6328,114 @@ components:
           type: string
           maxLength: 10
           example: 01/01/2018
+    UpdateStatementPreferencesResp:
+      type: object
+      properties:
+        statementReprintFlag:
+          description: Statement Reprint Flag - Code that indicates whether to request
+            a reprinted statement or an interim statement
+          type: string
+          enum:
+          - P
+          - C
+          - I
+          - F
+          - D
+          - Q
+          maxLength: 1
+          example: C
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 600
+        statementFlag:
+          description: Statement Flag - Code that indicates how CMS generates a statement
+            for this account
+          type: string
+          enum:
+          - H
+          - O
+          - R
+          - S
+          - U
+          - Z
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - ' '
+          maxLength: 1
+          example: O
+        accountNumber:
+          format: uppercase
+          description: Account Number - Unique Identification number of the Account
+          type: string
+          maxLength: 19.0
+          example: 0000000001000000123
+        customerStatementFlag:
+          description: "Customer Statement Flag - This field controls statements,\
+            \ whether it should be sent to owner (or) owner and co-owner"
+          type: string
+          enum:
+          - ZERO
+          - 1
+          maxLength: 1
+          example: 0      
+    UpdateStatementPreferencesReq:
+      type: object
+      properties:
+        statementReprintFlag:
+          description: Statement Reprint Flag - Code that indicates whether to request
+            a reprinted statement or an interim statement
+          type: string
+          enum:
+          - P
+          - C
+          - I
+          - F
+          - D
+          - Q
+          maxLength: 1
+          example: C
+        statementFlag:
+          description: Statement Flag - Code that indicates how CMS generates a statement
+            for this account
+          type: string
+          enum:
+          - H
+          - O
+          - R
+          - S
+          - U
+          - Z
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - ' '
+          maxLength: 1
+          example: O
+        customerStatementFlag:
+          description: "Customer Statement Flag - This field controls statements,\
+            \ whether it should be sent to owner (or) owner and co-owner"
+          type: string
+          enum:
+          - ZERO
+          - 1
+          maxLength: 1
+          example: 0      
