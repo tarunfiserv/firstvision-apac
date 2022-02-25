@@ -65,7 +65,7 @@
             - title: Update Pricing Control  
               link: docs/APIs/Account-Management/Update-Pricing-Control.md              
             - title: Monetary Action
-              link: docs/APIs/Account-Management/Account-Status-Update.md   
+              link: docs/APIs/Account-Management/Monetary-Action.md   
             - title: Update Waive Fee
               link: docs/APIs/Account-Management/Update-Waive-Fee.md   
             - title: Board Account
