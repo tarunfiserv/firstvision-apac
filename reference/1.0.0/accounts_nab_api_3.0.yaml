@@ -282,6 +282,7 @@ paths:
         description: Identification number of the Account Base Segment record.
         required: true
         schema:
+          format: uppercase
           type: string
           maxLength: 19
           example: 0000000001000000057
@@ -385,9 +386,10 @@ paths:
         description: Identification number of the Account Base Segment record.
         required: true
         schema:
+          format: uppercase
           type: string
           maxLength: 19
-          example: 0000000001000000073
+          example: 0001000010000510001
       - name: businessUnit
         in: query
         description: Identification number of the business unit associated with this
@@ -396,7 +398,7 @@ paths:
           default: 0.0
           type: number
           maxLength: 1
-          example: 600
+          example: 100
       responses:
         "200":
           description: Success
@@ -708,7 +710,6 @@ paths:
         in: query
         description: "Business Unit - Identification number associated with this Account\
           \ Base Segment record, the values are 001–998"
-        required: true
         schema:
           default: 0.0
           type: number
@@ -816,7 +817,6 @@ paths:
         in: query
         description: "Business Unit - Identification number associated with this Account\
           \ Base Segment record, the values are 001–998"
-        required: true
         schema:
           default: 0.0
           type: number
@@ -3083,125 +3083,6 @@ components:
           type: number
           maxLength: 1
           example: 0
-    ListUnbilledTransactionsResp:
-      type: object
-      properties:
-        transactionType:
-          format: uppercase
-          description: Transaction Type Description
-          type: string
-          maxLength: 40
-          example: CYCLE-TO-DATE TRANSACTION
-        product:
-          default: 0.0
-          maximum: 999
-          description: Product - Identification number of the product associated with
-            the Account
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 600
-        businessUnit:
-          default: 0.0
-          maximum: 999
-          description: Business Unit - Identification number of the business unit
-            associated with this Account Base Segment record
-          type: number
-          minimum: 0.0
-          maxLength: 3
-          example: 600
-        transactionList:
-          type: array
-          items:
-            type: object
-            properties:
-              reference:
-                format: uppercase
-                type: string
-                maxLength: 23
-                description: Reference number of transaction.
-                example: 09999999980818000080016
-              recordNumber:
-                default: 0.0
-                maximum: 99999.0
-                type: number
-                minimum: 0.0
-                description: Record Number of the transaction
-                maxLength: 5
-                example: 2
-              amount:
-                default: 0.0
-                type: string
-                description: Amount of the transaction.
-                maxLength: 17
-                example: "$15,000.00"
-              authorizationCode:
-                format: uppercase
-                type: string
-                maxLength: 6
-                description: Authorization code assigned to the transaction
-                example: ' '
-              typeOfTransaction:
-                format: uppercase
-                type: string
-                maxLength: 1
-                description: "Transaction type that identifies the type of transaction.\
-                  \ The values are D (debit), C (credit), and M (memo)"
-                example: D
-              creditPlan:
-                default: 0.0
-                maximum: 99999.0
-                type: number
-                minimum: 0.0
-                description: Number that identifies the Credit Plan Master record
-                  for the credit plan to which the transaction was posted (applicable
-                  only for posted transaction)
-                maxLength: 5
-                example: 70001
-              description:
-                format: uppercase
-                type: string
-                maxLength: 40
-                description: Description of the Transaction
-                example: INITIAL LOAN DISBURSEMENT
-              logicModule:
-                default: 0.0
-                maximum: 999.0
-                type: number
-                minimum: 0.0
-                description: Logic module associated with the transaction code
-                maxLength: 3
-                example: 1
-              postingDate:
-                format: date
-                type: string
-                description: Posting date (month/day) of the memo-posted transaction.
-                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
-                  established on the System record (DATE FORMAT on ARMS01)
-                maxLength: 10
-                example: 18/08/2021
-              transactionCode:
-                default: 0.0
-                maximum: 9999.0
-                type: number
-                minimum: 0.0
-                description: Transaction Code associated with the transaction
-                maxLength: 4
-                example: 4565
-              effectiveDate:
-                format: date
-                type: string
-                description: Effective date (month/day) of the memo-posted transaction.
-                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
-                  established on the System record (DATE FORMAT on ARMS01)
-                maxLength: 10
-                example: 18/08/2021
-        accountNumber:
-          format: uppercase
-          description: Account Number of customer
-          type: string
-          maxLength: 19
-          example: 0000000001000000073
     UpdateTemporaryCreditLimitReq:
       type: object
       properties:
@@ -3996,363 +3877,7 @@ components:
           type: string
           maxLength: 17
           example: 0
-    InquireDirectDebitResp:
-      type: object
-      properties:
-        ddNominatedPaymentAmtOrPercentage:
-          default: 0.0
-          description: DD Nominated Payment Amt/% - This field is the amount of direct
-            debit
-          type: number
-          maxLength: 17
-          example: 10
-        product:
-          default: 0.0
-          type: number
-        businessUnit:
-          default: 0.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          maxLength: 3
-          example: 600
-        ddPaymentExpiryDate:
-          format: date
-          description: DD Payment Expiry Date - Date on which direct debit processing
-            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record
-          type: string
-          maxLength: 7
-          example: 04/11/2021
-        ddAccountNumber:
-          description: DD Account Number - This field is the account number
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        fixedPaymentAmount:
-          description: DD Nominated Type - Code that indicates the type of customer-nominated
-            payment
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 9
-          maxLength: 1
-          example: 1
-        ddAccountType:
-          description: DD Account Type - This field is a code that indicates the type
-            of account to which the direct debit is sent
-          type: string
-          enum:
-          - D
-          - S
-          maxLength: 1
-          example: D
-        ddPaymentStartDate:
-          format: date
-          description: DD Payment Start Date - Date on which direct debit processing
-            starts for the account.  The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record
-          type: string
-          maxLength: 7
-          example: 04/10/2021
-        accountNumber:
-          description: Account Number - Unique Identification numbers of the Account
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        paymentRemittanceMethod:
-          description: Payment Remittance Method - Code that indicates the payment
-            remittance method for the account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          maxLength: 1
-          example: 0
-        billingAcctInd:
-          default: 0.0
-          type: number
-        ddRoutingBankId:
-          default: 0.0
-          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
-            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
-            to identify the financial institution to receive direct debit transactions
-            for account payments
-          type: number
-          maxLength: 10
-          example: 123456
-    ListOutstandingAuthResp:
-      type: object
-      properties:
-        transactionList:
-          type: array
-          items:
-            type: object
-            properties:
-              date:
-                default: 0.0
-                maximum: 9999999.0
-                type: number
-                minimum: 0.0
-                description: Date
-                maxLength: 10
-                example: ""
-              recordNumber:
-                default: 0.0
-                maximum: 99999.0
-                type: number
-                minimum: 0.0
-                description: Record Number of the transaction
-                maxLength: 5
-                example: ""
-              amount:
-                default: 0.0
-                type: string
-                description: Amount of the transaction
-                maxLength: 17
-                example: ""
-              authorizationCode:
-                format: uppercase
-                type: string
-                maxLength: 6
-                description: Authorization code assigned to the transaction
-                example: ""
-              typeOfTransaction:
-                format: uppercase
-                type: string
-                maxLength: 1
-                description: "Transaction type that identifies the type of transaction.\
-                  \ The values are D (debit), C (credit), and M (memo)"
-                example: ""
-              description:
-                format: uppercase
-                type: string
-                maxLength: 40
-                description: Description of the Transaction
-                example: ""
-              postingDate:
-                format: date
-                type: string
-                description: Posting date of the transaction.(applicable only for
-                  posted transaction)
-                maxLength: 10
-                example: ""
-              transactionCode:
-                default: 0.0
-                maximum: 9999.0
-                type: number
-                minimum: 0.0
-                description: Transaction Code associated with the transaction
-                maxLength: 4
-                example: ""
-              reference:
-                format: uppercase
-                type: string
-                maxLength: 23
-                description: Reference number assigned to the transaction
-                example: ""
-              creditPlan:
-                default: 0.0
-                maximum: 99999.0
-                type: number
-                minimum: 0.0
-                description: Number that identifies the Credit Plan Master record
-                  for the credit plan to which the transaction was posted (applicable
-                  only for posted transaction)
-                maxLength: 5
-                example: ""
-              logicModule:
-                default: 0.0
-                maximum: 999.0
-                type: number
-                minimum: 0.0
-                description: Logic module associated with the transaction code
-                maxLength: 3
-                example: ""
-              time:
-                default: 0.0
-                maximum: 9999999.0
-                type: number
-                minimum: 0.0
-                description: Time
-                maxLength: 7
-                example: ""
-              effectiveDate:
-                format: date
-                type: string
-                description: Effective date of the transaction.
-                maxLength: 10
-                example: ""
-    UpdateAccountsDirectDebitReq:
-      type: object
-      properties:
-        ddNominatedPaymentAmtOrPercentage:
-          default: 0.0
-          description: DD Nominated Payment Amt/% - This field is the amount of direct
-            debit
-          type: number
-          maxLength: 17
-          example: 10
-        product:
-          default: 0.0
-          type: number
-        ddPaymentExpiryDate:
-          format: date
-          description: DD Payment Expiry Date - Date on which direct debit processing
-            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record (DATE FORMAT on ARMS01).
-          type: string
-          maxLength: 7
-          example: 04/11/2021
-        ddAccountNumber:
-          description: DD Account Number - This field is the account number
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        fixedPaymentAmount:
-          description: DD Nominated Type - Code that indicates the type of customer-nominated
-            payment
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 9
-          maxLength: 1
-          example: 1
-        ddAccountType:
-          description: DD Account Type - This field is a code that indicates the type
-            of account to which the direct debit is sent
-          type: string
-          enum:
-          - D
-          - S
-          maxLength: 1
-          example: D
-        ddPaymentStartDate:
-          format: date
-          description: DD Payment Start Date - Date on which direct debit processing
-            starts for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record.
-          type: string
-          maxLength: 7
-          example: 04/10/2021
-        paymentRemittanceMethod:
-          description: Payment Remittance Method - Code that indicates the payment
-            remittance method for the account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          maxLength: 1
-          example: 0
-        billingAcctInd:
-          default: 0.0
-          type: number
-        ddRoutingBankId:
-          default: 0.0
-          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
-            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
-            to identify the financial institution to receive direct debit transactions
-            for account payments
-          type: number
-          maxLength: 10
-          example: 123456
-    UpdateAccountsDirectDebitResp:
-      type: object
-      properties:
-        ddNominatedPaymentAmtOrPercentage:
-          default: 0.0
-          description: DD Nominated Payment Amt/% - This field is the amount of direct
-            debit
-          type: number
-          maxLength: 17
-          example: 10
-        product:
-          default: 0.0
-          type: number
-        businessUnit:
-          default: 0.0
-          description: "Business Unit - Identification number associated with this\
-            \ Account Base Segment record, the values are 001–998"
-          type: number
-          maxLength: 3
-          example: 600
-        ddPaymentExpiryDate:
-          format: date
-          description: DD Payment Expiry Date - Date on which direct debit processing
-            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record (DATE FORMAT on ARMS01).
-          type: string
-          maxLength: 7
-          example: 04/11/2021
-        ddAccountNumber:
-          description: DD Account Number - This field is the account number
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        fixedPaymentAmount:
-          description: DD Nominated Type - Code that indicates the type of customer-nominated
-            payment
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 9
-          maxLength: 1
-          example: 1
-        ddAccountType:
-          description: DD Account Type - This field is a code that indicates the type
-            of account to which the direct debit is sent
-          type: string
-          enum:
-          - D
-          - S
-          maxLength: 1
-          example: D
-        ddPaymentStartDate:
-          format: date
-          description: DD Payment Start Date - Date on which direct debit processing
-            starts for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
-            on the date format established on the System record.
-          type: string
-          maxLength: 7
-          example: 04/10/2021
-        accountNumber:
-          description: Account Number - Unique Identification numbers of the Account
-          type: string
-          maxLength: 19
-          example: 0000000001000000057
-        paymentRemittanceMethod:
-          description: Payment Remittance Method - Code that indicates the payment
-            remittance method for the account
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          maxLength: 1
-          example: 0
-        billingAcctInd:
-          default: 0.0
-          type: number
-        ddRoutingBankId:
-          default: 0.0
-          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
-            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
-            to identify the financial institution to receive direct debit transactions
-            for account payments
-          type: number
-          maxLength: 10
-          example: 123456
+    
     
     AccountDetailsResp:
       type: object
@@ -6439,3 +5964,450 @@ components:
           - 1
           maxLength: 1
           example: 0      
+    ListUnbilledTransactionsResp:
+      type: object
+      properties:
+        transactionList:
+          type: array
+          items:
+            type: object
+            properties:
+              logicModule1:
+                default: 0.0
+                type: number
+                description: Logic module associated with the transaction code
+                maxLength: 3
+                example: 99
+              reference1:
+                format: uppercase
+                type: string
+                maxLength: 23
+                description: Reference number of transaction.
+                example: FV090921017335430013773
+              cardNbr:
+                format: uppercase
+                type: string
+                maxLength: 19
+                description: Card NBR 1
+                example: 0009846801010272888
+              authorizationCode1:
+                format: uppercase
+                type: string
+                maxLength: 6
+                description: Authorization code assigned to the transaction
+                example: 052205
+              transactionCode1:
+                default: 0.0
+                type: number
+                description: Transaction Code associated with the transaction
+                maxLength: 4
+                example: 9000
+              description1:
+                format: uppercase
+                type: string
+                maxLength: 40
+                description: Description of the Transaction
+                example: HOT PIPIS PTY LTD MOOLOOLABA   AU
+              recordNumber1:
+                default: 0.0
+                type: number
+                description: Record Number of the transaction
+                maxLength: 5
+                example: 1
+              typeOfTransaction1:
+                format: uppercase
+                type: string
+                maxLength: 1
+                description: "Transaction type that identifies the type of transaction.\
+                  \ The values are D (debit), C (credit), and M (memo)"
+                example: M
+              amount1:
+                default: 0.0
+                type: string
+                description: Amount of the transaction.
+                maxLength: 17
+                example: $0.00
+              creditPlan1:
+                default: 0.0
+                type: number
+                description: Number that identifies the Credit Plan Master record
+                  for the credit plan to which the transaction was posted (applicable
+                  only for posted transaction)
+                maxLength: 5
+                example: 10001
+              postingDate1:
+                format: uppercase
+                type: string
+                description: Posting date (month/day) of the memo-posted transaction.
+                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
+                  established on the System record
+                maxLength: 10
+                example: 17/08/2021
+              effectiveDate1:
+                format: uppercase
+                type: string
+                description: Effective date (month/day) of the memo-posted transaction.
+                  The format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
+                  established on the System record
+                maxLength: 10
+                example: 17/08/2021
+    ListOutstandingAuthResp:
+      type: object
+      properties:
+        product:
+          default: 0.0
+          description: Product - Identification number of the product associated with
+            the Account
+          type: number
+          maxLength: 3
+          example: 600
+        businessUnit:
+          default: 0.0
+          description: Business Unit
+          type: number
+          example: 600
+        transactionList:
+          type: array
+          items:
+            type: object
+            properties:
+              typeOfTransaction1:
+                format: uppercase
+                type: string
+                maxLength: 1
+                description: "Transaction type that identifies the type of transaction.\
+                  \ The values are D (debit), C (credit), and M (memo)"
+                example: ' '
+              amount1:
+                default: 0.0
+                type: string
+                description: Amount of the transaction
+                maxLength: 17
+                example: $1.00
+              logicModule1:
+                default: 0.0
+                type: number
+                description: Logic module associated with the transaction code
+                maxLength: 3
+                example: 0
+              creditPlan1:
+                default: 0.0
+                type: number
+                description: Credit Plan - Number that identifies the Credit Plan
+                  Master record for the credit plan to which the transaction was posted
+                  (applicable only for posted transaction)
+                maxLength: 5
+                example: 10002
+              reference1:
+                format: uppercase
+                type: string
+                maxLength: 23
+                description: Reference number assigned to the transaction
+                example: ' '
+              authorizationCode1:
+                format: uppercase
+                type: string
+                maxLength: 6
+                description: Authorization code assigned to the transaction
+                example: 051180
+              postingDate1:
+                format: uppercase
+                type: string
+                description: Posting date - Posting date of the transaction(applicable
+                  only for posted transaction).The format is MM/DD/YYYY or DD/MM/YYYY
+                  depending on the date format established on the System record (DATE
+                  FORMAT on ARMS01).
+                maxLength: 10
+                example: 16/08/2021
+              cardNbr1:
+                format: uppercase
+                type: string
+                maxLength: 19.0
+              effectiveDate1:
+                format: uppercase
+                type: string
+                description: Effective date - Effective date of the transaction.The
+                  format is MM/DD/YYYY or DD/MM/YYYY depending on the date format
+                  established on the System record (DATE FORMAT on ARMS01).
+                maxLength: 10
+                example: 04/09/2021
+              transactionCode1:
+                default: 0.0
+                type: number
+                description: Transaction Code associated with the transaction
+                maxLength: 4
+                example: 0
+              description1:
+                format: uppercase
+                type: string
+                maxLength: 40
+                description: Description of the Transaction
+                example: MEMO POSTED DEBIT
+        accountNumber:
+          format: uppercase
+          description: Account Number
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+    InquireDirectDebitResp:
+      type: object
+      properties:
+        ddNominatedPaymentAmtOrPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          maxLength: 17
+          example: 10
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 600
+        ddPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record
+          type: string
+          maxLength: 7
+          example: 04/11/2021
+        ddAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          maxLength: 1
+          example: 1
+        ddAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          maxLength: 1
+          example: D
+        ddPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account.  The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record
+          type: string
+          maxLength: 7
+          example: 04/10/2021
+        accountNumber:
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        billingAcctInd:
+          default: 0.0
+          description: "Billing Account Ind - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account etc."
+          type: number
+          maxLength: 1
+          example: 1
+        ddRoutingBankId:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          maxLength: 10
+          example: 123456
+    
+    UpdateAccountsDirectDebitReq:
+      type: object
+      properties:
+        ddNominatedPaymentAmtOrPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          maxLength: 17
+          example: 10
+        ddPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record (DATE FORMAT on ARMS01).
+          type: string
+          maxLength: 7
+          example: 04/11/2021
+        ddAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          maxLength: 1
+          example: 1
+        ddAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          maxLength: 1
+          example: D
+        ddPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record.
+          type: string
+          maxLength: 7
+          example: 04/10/2021
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        billingAcctInd:
+          default: 0.0
+          description: "Billing Account Ind - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account etc."
+          type: number
+          maxLength: 1
+          example: 1
+        ddRoutingBankId:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          maxLength: 10
+          example: 123456
+    UpdateAccountsDirectDebitResp:
+      type: object
+      properties:
+        ddNominatedPaymentAmtOrPercentage:
+          default: 0.0
+          description: DD Nominated Payment Amt/% - This field is the amount of direct
+            debit
+          type: number
+          maxLength: 17
+          example: 10
+        businessUnit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 600
+        ddPaymentExpiryDate:
+          format: date
+          description: DD Payment Expiry Date - Date on which direct debit processing
+            expires for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record (DATE FORMAT on ARMS01).
+          type: string
+          maxLength: 7
+          example: 04/11/2021
+        ddAccountNumber:
+          description: DD Account Number - This field is the account number
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        fixedPaymentAmount:
+          description: DD Nominated Type - Code that indicates the type of customer-nominated
+            payment
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 9
+          maxLength: 1
+          example: 1
+        ddAccountType:
+          description: DD Account Type - This field is a code that indicates the type
+            of account to which the direct debit is sent
+          type: string
+          enum:
+          - D
+          - S
+          maxLength: 1
+          example: D
+        ddPaymentStartDate:
+          format: date
+          description: DD Payment Start Date - Date on which direct debit processing
+            starts for the account. The format is MM/DD/YYYY or DD/MM/YYYY depending
+            on the date format established on the System record.
+          type: string
+          maxLength: 7
+          example: 04/10/2021
+        accountNumber:
+          description: Account Number - Unique Identification numbers of the Account
+          type: string
+          maxLength: 19
+          example: 0000000001000000057
+        paymentRemittanceMethod:
+          description: Payment Remittance Method - Code that indicates the payment
+            remittance method for the account
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          maxLength: 1
+          example: 0
+        billingAcctInd:
+          default: 0.0
+          description: "Billing Account Ind - Code that indicates whether the account\
+            \ being added is a transaction (cardholder), billing, control, or diversion\
+            \ account etc."
+          type: number
+          maxLength: 1
+          example: 1
+        ddRoutingBankId:
+          default: 0.0
+          description: DD Routing Bank ID - Dual-use field that accepts a nine-digit
+            routing/transit number (ACH format) or a ten-digit bank ID (non-ACH format)
+            to identify the financial institution to receive direct debit transactions
+            for account payments
+          type: number
+          maxLength: 10
+          example: 123456
