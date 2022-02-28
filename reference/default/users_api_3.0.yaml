@@ -1,0 +1,141 @@
+openapi: 3.0.1
+info:
+  title: Vision10 API Documentation
+  description: V10 open API document.
+  version: 1.0.0
+servers:
+- url: https://stg34.visionplus.io:24500/fva_apac
+tags:
+- name: User Management
+paths:
+  /v1/users/Signon:
+    post:
+      tags:
+      - User Management
+      summary: User Signon
+      description: This service is used for user Signon
+      operationId: UserSignon
+      x-group-name: User Management
+      x-proxy-name: User Signon
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSignonReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSignonResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+components:
+  schemas:
+    UserSignonResp:
+      type: object
+      properties:
+        securityContext:
+          format: uppercase
+          description: Security Context - This field is the security context of the
+            person signing on to the system
+          type: string
+          maxLength: 20.0
+          example: 00004753153543545
+    ErrorList:
+      type: array
+      items:
+        type: object
+        properties:
+          errorCode:
+            type: string
+            example: XXXXXX
+            description: Error code associated with the response
+          errorMessage:
+            type: string
+            example: Some message from the service
+            description: Error message associated with the response
+    UserSignonReq:
+      type: object
+      properties:
+        securityName:
+          format: uppercase
+          description: Security Name - Sign-on name assigned to the person signing
+            on to the system
+          type: string
+          maxLength: 128.0
+          example: 00001NABTEST5
+        encryptedData1:
+          format: uppercase
+          description: Encrypted Data 1 - Password for signing on to the system
+          type: string
+          maxLength: 512.0
+          example: A3CDCAE523A132FFAE3800958AC12AB7B62E0DA876C4C91A10C9AC4FF7DF18BF6940F5AEAF33BA381522594D03108CB7A8B46FF39BEE944A98DD26201F36ACFA71D15A875947741961188B661123BF507AB6A9D5E82BA5083D0DB98F54E6D857D9A5B4A48D2750A81A405563B656352230D9613D80F3A362867C1C59BBA09FFED3669DE30905631A4DD9DF68CA47F6E58A0987CCDECBEBD72229F8312684F7E3A5DBDB7E1F99690B7AD44A645EBA0D3BC5CD26F411E6FBED3F430BD2BA372118D934350A7BAC7DBD18BFDB54B3DEFCBC24A8C75768C3C9C766FE75AD3032BAFED6F886F02692DD1C38FF6088088069B281CFF12F745606F758932E83301878CA
