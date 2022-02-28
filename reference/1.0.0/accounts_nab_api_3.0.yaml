@@ -1958,6 +1958,116 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'              
+  /v1/accounts/{accountNumber}/customersProfile:
+    put:
+      tags:
+      - Account Management
+      summary: Update Customer's Profile
+      description: This service is used to update the customer profiles for a given
+        account number
+      operationId: UpdateCustomersProfile
+      x-group-name: Account Management
+      x-proxy-name: Update Customer's Profile
+      parameters:
+      - name: X-Correl-Id
+        description: Any correlational text client's may want to send in the request
+          for mapping the response on their side. Any value passed in the request
+          message will be return back as-is in the API response message
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 40.0
+          example: ABC123
+        required: false
+      - name: X-Name
+        description: User’s sign-on name. The value passed in this field will be validated
+          within application for user's authority to consume the requested API
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: X-context
+        description: A unique random ID assigned to the requestor once authenticated
+          to the First Vision application. Value passed in this field will be used
+          within application to authenticate the valid signed-on user
+        in: header
+        schema:
+          minLength: 0.0
+          type: string
+          maxLength: 20.0
+          example: 00000AUNAB
+        required: true
+      - name: businessunit
+        in: query
+        description: "Business Unit - Identification number associated with this Account\
+          \ Base Segment record, the values are 001–998"
+        required: true
+        schema:
+          default: 0.0
+          type: number
+          maxLength: 3
+          example: "0"
+      - name: accountNumber
+        in: path
+        description: Account Number - Unique Identification number of the Account
+        required: true
+        schema:
+          format: uppercase
+          type: string
+          maxLength: 19.0
+          example: "0004440010000000017"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCustomersProfileReq'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCustomersProfileResp'
+        "400":
+          description: The request cannot be validated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "401":
+          description: The request was unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "500":
+          description: An unexpected internal server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "404":
+          description: The request resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "503":
+          description: The service was unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'
+        "504":
+          description: The request timed out while waiting for a response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
     
@@ -6411,3 +6521,110 @@ components:
           type: number
           maxLength: 10
           example: 123456
+    UpdateCustomersProfileResp:
+      type: object
+      properties:
+        businessunit:
+          default: 0.0
+          description: "Business Unit - Identification number associated with this\
+            \ Account Base Segment record, the values are 001–998"
+          type: number
+          maxLength: 3
+          example: 0
+        customernumber:
+          format: uppercase
+          description: Customer Number - Customer number that identifies the Customer
+            Name/Address record to which this account is assigned. A valid customer
+            name and address must be on file for this account
+          type: string
+          maxLength: 19.0
+          example: 9006000000000300015
+        alternatecustomernumberflag:
+          description: Altermate Customer Number Flag - Code that indicates how CMS
+            generates statements and other correspondence when an alternate Customer
+            Name/Address record exists for the account
+          type: string
+          enum:
+          - ' '
+          - A
+          - B
+          - C
+          example: A
+        accountnumber:
+          format: uppercase
+          description: Account Number - Unique Identification number of the Account
+          type: string
+          maxLength: 19.0
+          example: "0004440010000000017"
+        correspondencecustomernumber:
+          format: uppercase
+          description: Correspondence Customer Number - Number that identifies the
+            Customer Name/Address record that contains the correspondence customer
+            address for statements and other correspondence
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000065"
+        altcustomerexpirydate:
+          format: uppercase
+          description: "Alternate Customer Number Expiry Date - Expiration date of\
+            \ the alternate customer address, The format is MMDDYYYY or DDMMYYYY depending\
+            \ on the date format established on the System record (DATE FORMAT on\
+            \ ARMS01)"
+          type: string
+          maxLength: 10
+          example: 15/04/2022
+        alternatecustomernumber:
+          format: uppercase
+          description: Alternate Customer Number - Number that identifies the alternate
+            Customer Name/Address record containing an alternate address for statements
+            and other correspondence
+          type: string
+          maxLength: 19
+          example: "0000000001000000032"      
+    UpdateCustomersProfileReq:
+      type: object
+      properties:
+        customernumber:
+          format: uppercase
+          description: Customer Number - Customer number that identifies the Customer
+            Name/Address record to which this account is assigned. A valid customer
+            name and address must be on file for this account
+          type: string
+          maxLength: 19.0
+          example: 9006000000000300015
+        alternatecustomernumberflag:
+          description: Altermate Customer Number Flag - Code that indicates how CMS
+            generates statements and other correspondence when an alternate Customer
+            Name/Address record exists for the account
+          type: string
+          enum:
+          - ' '
+          - A
+          - B
+          - C
+          example: A
+        correspondencecustomernumber:
+          format: uppercase
+          description: Correspondence Customer Number - Number that identifies the
+            Customer Name/Address record that contains the correspondence customer
+            address for statements and other correspondence
+          type: string
+          maxLength: 19.0
+          example: "0000000001000000065"
+        altcustomerexpirydate:
+          format: uppercase
+          description: "Alternate Customer Number Expiry Date - Expiration date of\
+            \ the alternate customer address, The format is MMDDYYYY or DDMMYYYY depending\
+            \ on the date format established on the System record (DATE FORMAT on\
+            \ ARMS01)"
+          type: string
+          maxLength: 10
+          example: 15/04/2022
+        alternatecustomernumber:
+          format: uppercase
+          description: Alternate Customer Number - Number that identifies the alternate
+            Customer Name/Address record containing an alternate address for statements
+            and other correspondence
+          type: string
+          maxLength: 19
+          example: "0000000001000000032"      
