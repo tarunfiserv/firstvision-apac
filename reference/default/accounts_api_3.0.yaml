@@ -1743,11 +1743,12 @@ paths:
     put:
       tags:
       - Account Management
-      summary: Waive Fee
-      description: This service is used waive the fees at account level
-      operationId: WaiveFee
+      summary: Update Waive Fee
+      description: This service is used to update the flags related to waive fees
+        at account level
+      operationId: UpdateWaiveFee
       x-group-name: Account Management
-      x-proxy-name: Waive Fee
+      x-proxy-name: Update Waive Fee
       parameters:
       - name: X-Correl-Id
         description: Any correlational text client's may want to send in the request
@@ -1799,19 +1800,19 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: "0000000001000000115"
+          example: "0009544410000000062"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WaiveFeeReq'
+              $ref: '#/components/schemas/UpdateWaiveFeeReq'
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WaiveFeeResp'
+                $ref: '#/components/schemas/UpdateWaiveFeeResp'
         "400":
           description: The request cannot be validated
           content:
@@ -1847,7 +1848,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorList'              
+                $ref: '#/components/schemas/ErrorList'
   /v1/account/{accountNumber}/statementPreference:
     put:
       tags:
@@ -5037,7 +5038,7 @@ components:
           type: string
           maxLength: 10
           example: 29/01/2022
-    WaiveFeeResp:
+    UpdateWaiveFeeResp:
       type: object
       properties:
         waiveInterest:
@@ -5048,6 +5049,16 @@ components:
           - 0
           - 1
           example: 1
+        waiveNsf15Fees:
+          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
+            funds (NSF) fees for returned checks
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          example: 3
         product:
           default: 0.0
           description: Product - Identification number of the product associated with
@@ -5084,30 +5095,6 @@ components:
           - 0
           - 1
           example: 0
-        serviceFees:
-          type: array
-          items:
-            type: object
-            properties:
-              serviceFees1:
-                type: string
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
-        cashAdvanceFees:
-          type: array
-          items:
-            type: object
-            properties:
-              waiveCashAdvance1:
-                type: string
-                enum:
-                - 0
-                - 1
-                - 2
-                - 3
         userFees6:
           description: User Fees 6 - Flag that indicates whether to waive user fees
             6 for the account
@@ -5122,7 +5109,7 @@ components:
             Segment record
           type: string
           maxLength: 19.0
-          example: 0000000001000000115
+          example: 0009544410000000062
         userFees1:
           description: User Fees 1 - Flag that indicates whether to waive user fees
             1 for the account
@@ -5146,6 +5133,7 @@ components:
           enum:
           - 0
           - 1
+          example: 1
         userFees2:
           description: User Fees 2 - Flag that indicates whether to waive user fees
             2 for the account
@@ -5188,16 +5176,6 @@ components:
           - 0
           - 1
           example: 1
-        waiveNSF15Fees:
-          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
-            funds (NSF) fees for returned checks
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          example: 3
         waiveLetterFee:
           description: Waive Letter Fee - Flag that indicates whether to waive the
             letter fee for the account
@@ -5205,8 +5183,8 @@ components:
           enum:
           - 0
           - 1
-          example: 1      
-    WaiveFeeReq:
+          example: 1
+    UpdateWaiveFeeReq:
       type: object
       properties:
         waiveInterest:
@@ -5217,6 +5195,16 @@ components:
           - 0
           - 1
           example: 1
+        waiveNsf15Fees:
+          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
+            funds (NSF) fees for returned checks
+          type: string
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          example: 3
         userFees5:
           description: User Fees 5 - Flag that indicates whether to waive user fees
             5 for the account
@@ -5272,6 +5260,7 @@ components:
           enum:
           - 0
           - 1
+          example: 1
         userFees2:
           description: User Fees 2 - Flag that indicates whether to waive user fees
             2 for the account
@@ -5314,16 +5303,6 @@ components:
           - 0
           - 1
           example: 1
-        waiveNSF15Fees:
-          description: Waive NSF 1-5 Fees - Flag that indicates whether to waive nonsufficient
-            funds (NSF) fees for returned checks
-          type: string
-          enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          example: 3
         waiveLetterFee:
           description: Waive Letter Fee - Flag that indicates whether to waive the
             letter fee for the account
@@ -5355,7 +5334,7 @@ components:
                 - 0
                 - 1
                 - 2
-                - 3 
+                - 3         
     MonetaryActionResp:
       type: object
       properties:
