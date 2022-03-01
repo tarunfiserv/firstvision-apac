@@ -13,6 +13,8 @@ Our APIs are broadly grouped into following sub-catagories.  Please click to spe
 
 - [Transaction Management](./?path=/docs/Transaction-Management.md)
 
+- [User Management](./?path=/docs/User-Management.md)
+
 ---
 
 ## Access FirstVision-APAC APIs
