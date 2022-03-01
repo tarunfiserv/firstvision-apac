@@ -1909,7 +1909,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0000000001000000123
+          example: "0000000001000000123"
       requestBody:
         content:
           application/json:
@@ -2001,7 +2001,7 @@ paths:
           maxLength: 20.0
           example: 00000AUNAB
         required: true
-      - name: businessunit
+      - name: businessUnit
         in: query
         description: "Business Unit - Identification number associated with this Account\
           \ Base Segment record, the values are 001–998"
@@ -6739,22 +6739,31 @@ components:
     UpdateCustomersProfileResp:
       type: object
       properties:
-        businessunit:
+        altCustomerExpiryDate:
+          format: uppercase
+          description: "Alternate Customer Number Expiry Date - Expiration date of\
+            \ the alternate customer address, The format is MMDDYYYY or DDMMYYYY depending\
+            \ on the date format established on the System record (DATE FORMAT on\
+            \ ARMS01)"
+          type: string
+          maxLength: 10
+          example: 15/04/2022
+        businessUnit:
           default: 0.0
           description: "Business Unit - Identification number associated with this\
             \ Account Base Segment record, the values are 001–998"
           type: number
           maxLength: 3
           example: 0
-        customernumber:
+        alternateCustomerNumber:
           format: uppercase
-          description: Customer Number - Customer number that identifies the Customer
-            Name/Address record to which this account is assigned. A valid customer
-            name and address must be on file for this account
+          description: Alternate Customer Number - Number that identifies the alternate
+            Customer Name/Address record containing an alternate address for statements
+            and other correspondence
           type: string
-          maxLength: 19.0
-          example: 9006000000000300015
-        alternatecustomernumberflag:
+          maxLength: 19
+          example: "0000000001000000032"
+        alternateCustomerNumberFlag:
           description: Altermate Customer Number Flag - Code that indicates how CMS
             generates statements and other correspondence when an alternate Customer
             Name/Address record exists for the account
@@ -6765,13 +6774,21 @@ components:
           - B
           - C
           example: A
-        accountnumber:
+        customerNumber:
+          format: uppercase
+          description: Customer Number - Customer number that identifies the Customer
+            Name/Address record to which this account is assigned. A valid customer
+            name and address must be on file for this account
+          type: string
+          maxLength: 19.0
+          example: "9006000000000300015"
+        accountNumber:
           format: uppercase
           description: Account Number - Unique Identification number of the Account
           type: string
           maxLength: 19.0
           example: "0004440010000000017"
-        correspondencecustomernumber:
+        correspondenceCustomerNumber:
           format: uppercase
           description: Correspondence Customer Number - Number that identifies the
             Customer Name/Address record that contains the correspondence customer
@@ -6779,7 +6796,10 @@ components:
           type: string
           maxLength: 19.0
           example: "0000000001000000065"
-        altcustomerexpirydate:
+    UpdateCustomersProfileReq:
+      type: object
+      properties:
+        altCustomerExpiryDate:
           format: uppercase
           description: "Alternate Customer Number Expiry Date - Expiration date of\
             \ the alternate customer address, The format is MMDDYYYY or DDMMYYYY depending\
@@ -6788,26 +6808,15 @@ components:
           type: string
           maxLength: 10
           example: 15/04/2022
-        alternatecustomernumber:
+        alternateCustomerNumber:
           format: uppercase
           description: Alternate Customer Number - Number that identifies the alternate
             Customer Name/Address record containing an alternate address for statements
             and other correspondence
           type: string
           maxLength: 19
-          example: "0000000001000000032"      
-    UpdateCustomersProfileReq:
-      type: object
-      properties:
-        customernumber:
-          format: uppercase
-          description: Customer Number - Customer number that identifies the Customer
-            Name/Address record to which this account is assigned. A valid customer
-            name and address must be on file for this account
-          type: string
-          maxLength: 19.0
-          example: 9006000000000300015
-        alternatecustomernumberflag:
+          example: "0000000001000000032"
+        alternateCustomerNumberFlag:
           description: Altermate Customer Number Flag - Code that indicates how CMS
             generates statements and other correspondence when an alternate Customer
             Name/Address record exists for the account
@@ -6818,7 +6827,15 @@ components:
           - B
           - C
           example: A
-        correspondencecustomernumber:
+        customerNumber:
+          format: uppercase
+          description: Customer Number - Customer number that identifies the Customer
+            Name/Address record to which this account is assigned. A valid customer
+            name and address must be on file for this account
+          type: string
+          maxLength: 19.0
+          example: "9006000000000300015"
+        correspondenceCustomerNumber:
           format: uppercase
           description: Correspondence Customer Number - Number that identifies the
             Customer Name/Address record that contains the correspondence customer
@@ -6826,23 +6843,6 @@ components:
           type: string
           maxLength: 19.0
           example: "0000000001000000065"
-        altcustomerexpirydate:
-          format: uppercase
-          description: "Alternate Customer Number Expiry Date - Expiration date of\
-            \ the alternate customer address, The format is MMDDYYYY or DDMMYYYY depending\
-            \ on the date format established on the System record (DATE FORMAT on\
-            \ ARMS01)"
-          type: string
-          maxLength: 10
-          example: 15/04/2022
-        alternatecustomernumber:
-          format: uppercase
-          description: Alternate Customer Number - Number that identifies the alternate
-            Customer Name/Address record containing an alternate address for statements
-            and other correspondence
-          type: string
-          maxLength: 19
-          example: "0000000001000000032"      
     InquirePaymentHistoryResp:
       type: object
       properties:
