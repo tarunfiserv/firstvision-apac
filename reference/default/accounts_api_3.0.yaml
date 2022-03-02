@@ -982,7 +982,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorList'
-  /v1/accounts/{accountNumber}/statement/details:
+  /v1/accounts/{accountNumber}/statementDetails:
     get:
       tags:
       - Account Management
@@ -1025,68 +1025,34 @@ paths:
           maxLength: 20.0
           example: 00000AUNAB
         required: true
-      - name: planNextToken
+      - name: tableInd
         in: header
-        description: Plan Next Token -  Plan Next Token
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: planType
-        in: header
-        description: Plan Type - Plan Type
+        description: Table Indicator
         required: false
         schema:
           format: uppercase
           type: string
           maxLength: 1
-          example: ' '
-      - name: hiddenKeyPlan
-        in: header
-        description: Hidden Key Plan - Hidden Key Plan
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: tranPrevToken
-        in: header
-        description: Transaction Previous Token - Transaction Previous Token
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
           example: ' '
       - name: tranNextTokenLast
         in: header
-        description: Transaction Next Token Last - Transaction Next Token Last
+        description: Transaction Next Token Last - Transaction Token which is used
+          to get next set of transactions
         required: false
         schema:
           format: uppercase
           type: string
           maxLength: 80
           example: ' '
-      - name: tranNextToken
+      - name: planNextTokenLast
         in: header
-        description: Transaction Next Token - Transaction Next Token
+        description: Plan Next Token Last - Plan Token which is used to get next set
+          of plan details
         required: false
         schema:
           format: uppercase
           type: string
           maxLength: 80
-          example: ' '
-      - name: cpLastFunc
-        in: header
-        description: Plan Last Function - Plan Last Function
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 1
           example: ' '
       - name: statementDate
         in: query
@@ -1098,15 +1064,6 @@ paths:
           type: string
           maxLength: 10
           example: 18/08/2021
-      - name: hiddenKey
-        in: header
-        description: Transaction/Hidden Key -  Transaction/Hidden Key
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
       - name: accountNumber
         in: path
         description: Account Number - Unique Identification numbers of the Account
@@ -1116,61 +1073,6 @@ paths:
           type: string
           maxLength: 19
           example: 0006000011000000137
-      - name: tranPrevTokenLast
-        in: header
-        description: Transaction Previous Token Last - Transaction Previous Token
-          Last
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: tableInd
-        in: header
-        description: Table Indicator - Table Indicator
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 1
-          example: ' '
-      - name: planPrevToken
-        in: header
-        description: Plan Previous Token -  Plan Previous Token
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: planNextTokenLast
-        in: header
-        description: Plan Next Token Last - Plan Next Token Last
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: planPrevTokenLast
-        in: header
-        description: Plan Previous Token Last - Plan Previous Token Last
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: ttLastFunc
-        in: header
-        description: Transaction Last Function - Transaction Last Function
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 1
-          example: ' '
       responses:
         "200":
           description: Success
@@ -2377,7 +2279,6 @@ paths:
                 $ref: '#/components/schemas/ErrorList'              
 components:
   schemas:
-    
     InquireStatementResp:
       type: object
       properties:
@@ -2828,6 +2729,13 @@ components:
           minimum: 0.0
           maxLength: 2
           example: 1
+        planNextToken:
+          format: uppercase
+          description: Plan Next Token - Plan Token which is used to get next set
+            of plan details
+          type: string
+          maxLength: 80
+          example: ' '
         totalPastDue:
           default: 0.0
           description: Total Past Due - Total amount billed as past due at the time
@@ -2877,6 +2785,13 @@ components:
           minimum: 0.0
           maxLength: 12
           example: 0
+        tranNextToken:
+          format: uppercase
+          description: Transaction Next Token - Transaction Token which is used to
+            get next set of transactions
+          type: string
+          maxLength: 80
+          example: ' '
         dateThisStatement:
           format: date
           description: Statement Date - Effective date of this statement
