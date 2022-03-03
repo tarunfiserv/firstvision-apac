@@ -368,7 +368,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000000000113902
+          example: "0001000000000113902"
       responses:
         "200":
           description: Success
@@ -464,7 +464,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000000000113902
+          example: "0001000000000113902"
       responses:
         "200":
           description: Success
