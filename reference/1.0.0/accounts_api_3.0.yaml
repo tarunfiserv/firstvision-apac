@@ -67,7 +67,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0000000001000000065
+          example: "0000000001000000065"
       responses:
         "200":
           description: Success
@@ -190,7 +190,7 @@ paths:
         schema:
           type: string
           maxLength: 19
-          example: 0002000010000001211
+          example: "0002000010000001211"
       responses:
         "200":
           description: Success
@@ -285,7 +285,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0000000001000000057
+          example: "0000000001000000057"
       - name: businessUnit
         in: query
         description: Identification number of the business unit associated with this
@@ -389,7 +389,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000010000510001
+          example: "0001000010000510001"
       - name: businessUnit
         in: query
         description: Identification number of the business unit associated with this
@@ -505,7 +505,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 3
-          example: 0006000011000000160
+          example: "0006000011000000160"
       requestBody:
         content:
           application/json:
@@ -615,7 +615,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0006000011000000137
+          example: "0006000011000000137"
       requestBody:
         content:
           application/json:
@@ -722,7 +722,7 @@ paths:
         schema:
           type: string
           maxLength: 19
-          example: 0000000001000000057
+          example: "0000000001000000057"
       requestBody:
         content:
           application/json:
@@ -829,7 +829,7 @@ paths:
         schema:
           type: string
           maxLength: 19
-          example: 0000000001000000057
+          example: "0000000001000000057"
       responses:
         "200":
           description: Success
@@ -933,7 +933,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0006000011000000103
+          example: "0006000011000000103"
       requestBody:
         content:
           application/json:
@@ -1025,35 +1025,6 @@ paths:
           maxLength: 20.0
           example: 00000AUNAB
         required: true
-      - name: tableInd
-        in: header
-        description: Table Indicator
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 1
-          example: ' '
-      - name: tranNextTokenLast
-        in: header
-        description: Transaction Next Token Last - Transaction Token which is used
-          to get next set of transactions
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
-      - name: planNextTokenLast
-        in: header
-        description: Plan Next Token Last - Plan Token which is used to get next set
-          of plan details
-        required: false
-        schema:
-          format: uppercase
-          type: string
-          maxLength: 80
-          example: ' '
       - name: statementDate
         in: query
         description: Statement Date - Identification number of the logo associated
@@ -1072,7 +1043,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0006000011000000137
+          example: "0006000011000000137"
       responses:
         "200":
           description: Success
@@ -1176,7 +1147,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000010000510481
+          example: "0001000010000510481"
       requestBody:
         content:
           application/json:
@@ -1285,7 +1256,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0000000001000000057
+          example: "0000000001000000057"
       requestBody:
         content:
           application/json:
@@ -1398,7 +1369,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 70369818052278
+          example: "70369818052278"
       responses:
         "200":
           description: Success
@@ -1502,7 +1473,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0006000011000000152
+          example: "0006000011000000152"
       requestBody:
         content:
           application/json:
@@ -3472,9 +3443,6 @@ components:
           description: Add Insurance Product - This is the code that indicates whether
             to add an Insurance Product record
           type: string
-          enum:
-          - "N"
-          - "Y"
           maxLength: 1
           example: "N"
         creditLimit:
@@ -3508,7 +3476,7 @@ components:
             the  account or relationship
           type: number
           maxLength: 3
-          example: 600
+          example: 1
         corporateIdNumber:
           default: 0.0
           description: Corporate ID Number - Corporate identification number assigned
@@ -3566,7 +3534,7 @@ components:
             to add a new Customer  Name/Address record
           type: string
           maxLength: 19.0
-          example: 0000000001000000007
+          example: "9996000012222000016"
         ibsDdaRoutingNumber:
           default: 0.0
           description: IBS DDA Routing Number - This is ABA-assigned routing and transit
@@ -3630,7 +3598,7 @@ components:
             CMS performs cycle processing for the account
           type: number
           maxLength: 2
-          example: 18
+          example: "18"
         coreBankingIndicator:
           description: Core Banking Indicator - Core Banking Indicator
           type: string
@@ -4719,7 +4687,7 @@ components:
           enum:
           - 0
           - 1
-          example: 0
+          example: "0"
         userFees4:
           description: User Fees 4 - Flag that indicates whether to waive user fees
             4 for the account
@@ -4735,7 +4703,7 @@ components:
           enum:
           - 0
           - 1
-          example: 0
+          example: "0"
         userFees6:
           description: User Fees 6 - Flag that indicates whether to waive user fees
             6 for the account
@@ -4743,7 +4711,7 @@ components:
           enum:
           - 0
           - 1
-          example: 0
+          example: "0"
         userFees1:
           description: User Fees 1 - Flag that indicates whether to waive user fees
             1 for the account
@@ -4751,7 +4719,7 @@ components:
           enum:
           - 0
           - 1
-          example: 0
+          example: "0"
         waiveOverlimitFee:
           description: Waive Overlimit Fee - Flag that indicates whether to waive
             the overlimit fee for the account
@@ -4759,7 +4727,7 @@ components:
           enum:
           - 0
           - 1
-          example: 0
+          example: "0"
         userFees3:
           description: User Fees 3 - Flag that indicates whether to waive user fees
             3 for the account
@@ -4793,7 +4761,7 @@ components:
           - 1
           - 2
           - 3
-          example: 0
+          example: "0"
         waiveLateCharges:
           description: Waive Late Charges - Flag that indicates whether to waive late
             charges for the account
@@ -4830,6 +4798,7 @@ components:
                 - "1"
                 - "2"
                 - "3"
+                example: "0"
         cashAdvanceFees:
           type: array
           items:
@@ -4841,7 +4810,8 @@ components:
                 - "0"
                 - "1"
                 - "2"
-                - "3"         
+                - "3"  
+                example: "0"                
     MonetaryActionResp:
       type: object
       properties:
