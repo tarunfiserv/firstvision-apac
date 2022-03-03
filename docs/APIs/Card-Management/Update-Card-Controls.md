@@ -13,23 +13,23 @@ This service updates the card controls for a given card number like ECOM Active 
 
 ```json
 {
-  "maximumAmountOtcCashAuthorizationsAllowed": 1000,
-  "ecomactiveswitch": 0,
-  "posflag": "N",
-  "maximumNumberRetailAuthorizationsAllowed": 2,
-  "maximumNumberOtcAuthorizationsAllowed": 5,
-  "cashBackTranFlag": "Y",
-  "maximumNumberAtmCashAuthorizationsAllowed": 10,
-  "singleOtcCashAuthorizationAllowed": 1200,
-  "maximumAmountSingleAtmTransactionAllowed": 1000,
-  "singleRetailAuthorizationAllowed": 1600,
-  "maximumAmountRetailAuthorizationsAllowed": 1000,
-  "atmflag": "Y",
-  "maximumAmountAtmCashAuthorizationsAllowed": 1000,
-  "maximumAuthorizationsFrequnecy": 1,
-  "motoflag": "Y",
-  "intAtmPosFlag": "Y",
-  "paywaveswitch": "N"
+"maximumAmountOtcCashAuthorizationsAllowed": 1000,
+"maximumNumberRetailAuthorizationsAllowed": 2,
+"motoFlag": "Y",
+"payWaveSwitch": "N",
+"maximumNumberOtcAuthorizationsAllowed": 5,
+"cashBackTranFlag": "Y",
+"maximumNumberAtmCashAuthorizationsAllowed": 10,
+"singleOtcCashAuthorizationAllowed": 1200,
+"maximumAmountSingleAtmTransactionAllowed": 1000,
+"singleRetailAuthorizationAllowed": 1600,
+"maximumAmountRetailAuthorizationsAllowed": 1000,
+"ecomActiveSwitch": 0,
+"atmFlag": "Y",
+"posFlag": "N",
+"maximumAmountAtmCashAuthorizationsAllowed": 1000,
+"maximumAuthorizationsFrequnecy": 1,
+"intAtmPosFlag": "Y"
 }
 ```
 

@@ -1,6 +1,6 @@
 # Board Customer
 
- This API is used to board the new customer..
+This API is used to board the new customer.
 
 ## Endpoint
 
@@ -12,42 +12,55 @@
 
 ```json
 {
-Shoud be empty.
-***The Business Unit and Account Number should be sent as query parameters and path variable.***
+  "dualFlag": 0,
+  "postalCode1": 112345,
+  "city1": "La Vegas",
+  "nameLine21": " Jacob ",
+  "businessUnit": 600,
+  "firstName1": " Samuel",
+  "state1": "California",
+  "middleName1": " ",
+  "email1": "abc@goole.com",
+  "addressLine21": " S.H. Qo",
+  "addressLine41": "USA",
+  "lastName1": "Christopher",
+  "nameTypeInd21": 0,
+  "employeePhone1": 67894,
+  "nameLine31": "Samuel",
+  "nameLine11": "John",
+  "product": 600,
+  "gender1": 1,
+  "title1": "ADWSQQ",
+  "mobileNumber1": 11231232,
+  "homePhone1": 11230342,
+  "nationalId1": "2363-12-2839-1",
+  "countryCode1": "USA ",
+  "residenceFlag1": 1,
+  "altEmail1": "abc1@google.com",
+  "addressLine31": "California",
+  "addressLine11": "House No. 12",
+  "emailFlag1": 1,
+  "nameTypeInd31": 0,
+  "nameTypeInd11": 0,
+  "dateOfBirth1": "01/02/2010"
 }
 ``` 
 
 ### Minimum Requirements
 
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/customers/boardCustomer).
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=post&path=/v1/customers/boardCustomer).
 
 The below table identifies the required parameters in the request payload.
 
 | Variable | Passed as | Type | Length | Description/Values |
 | -------- | :-------: | :--: | :------------: | ------------------ |
-| `Base Account Number` | Payload | *string* | 19 | This is the identification number to assign to the new Account Base Segment record. |
-| `Create Customer Record` | Payload | *string* | 1 | This is the identification number to assign to the new Customer Name/Address record. |
-| `Create Account Record` | Payload | *string* | 1 | This is the code that indicates whether to add a new account record. |
-| `Same Cust/Base Number` | Payload | *string* | 1 | This is the code that indicates whether Customer number and BASE Account number are to be the same number. |
-| `Create Relationship Record` | Payload | *string* | 1 | This is the code that indicates whether to add a new Relationship record. |
-| `Create Embosser Records` | Payload | *string* | 1 | This is the code that indicates whether to add a new Embosser record. |
-| `Customer Number` | Payload | *string* | 19 | Identifies the customer number of the Account Base Segment. |
-| `Add Insurance Product` | Payload | *string* | 1 | This is the code that indicates whether to add an Insurance Product record. |
 | `Business Unit` | Payload | *number* | 3 | Identification number of the business unit associated with the  account or relationship. |
 | `Product` | Payload | *number* | 3 | Identification number of the product associated with the  account or relationship. |
-| `Owner/Co-owner` | Payload | *number* | 1 | This is the Code that indicates whether to display information  for the owner, co-owner, or both. |
 | `Dual Flag` | Payload | *number* | 1 | This field indicates whether CMS adds a duplicate customer  record in the associated business unit for dual currency processing. |
 | `Title` | Payload | *string* | 20 | Customer title. |
-| `Name Type Ind 1` | Payload | *number* | 1 | Name indiacator 1. |
-| `Name Type Ind 2` | Payload | *number* | 1 | Name indiacator 2. |
-| `Name Type Ind 3` | Payload | *number* | 1 | Name indiacator 3. |
-| `Name Line 1` | Payload | *string* | 40 | Customer name line 1. |
-| `Name Line 2` | Payload | *string* | 40 | Customer name line 2. |
-| `Name Line 3` | Payload | *string* | 40 | Customer name line 3. |
-| `Address Line 1` | Payload | *string* | 40 | Customer address line 1. |
-| `Address Line 2` | Payload | *string* | 40 | Customer address line 2. |
-| `Address Line 3` | Payload | *string* | 40 | Customer address line 3. |
-| `Address Line 4` | Payload | *string* | 40 | Customer address line 4. |
+| `Name Type Ind***` | Payload | *number* | 1 | Name Type indiacators 1/2/3. |
+| `Name Line***` | Payload | *string* | 40 | Customer name line 1/2/3. |
+| `Address Line***` | Payload | *string* | 40 | Customer address line 1/2/3/4. |
 | `City` | Payload | *string* | 30 | Name of customer city. |
 | `State` | Payload | *string* | 30 | Name of state. |
 | `Postal Code` | Payload | *string* | 10 | Postal code. |
@@ -55,7 +68,7 @@ The below table identifies the required parameters in the request payload.
 | `Residence Flag` | Payload | *number* | 1 | Residential status. |
 | `Home Phone` | Payload | *string* | 20 | Residential phone number. |
 | `Employee Phone` | Payload | *string* | 20 | Employee phone number. |
-| `Date of Birth` | Payload | *number* | 7 | Customer date of birth. |
+| `Date of Birth` | Payload | *date* | DD/MM/YYYY | Customer date of birth. |
 | `Last Name` | Payload | *string* | 40 | Last name of customer. |
 | `Middle Name` | Payload | *string* | 40 | Middle name of customer. |
 | `First Name` | Payload | *string* | 40 | First name of customer. |
@@ -65,19 +78,13 @@ The below table identifies the required parameters in the request payload.
 | `Alt E-Mail` | Payload | *string* | 50 | Customer alternate mail id. |
 | `Mobile Number` | Payload | *string* | 20 | Customer mobile number. |
 | `E-Mail Flag` | Payload | *number* | 1 | This is the code that indicates to select mail id for communication. |
-| `Core Banking Indicator` | Payload | *string* | 1 | This is the code indicates type of bannking. |
-| `Cardholder Flag` | Payload | *number* | 1 | This is the code that indicates whether the card is issued as a primary or secondary card. |
-| `Billing Cycle` | Payload | *number* | 2 | Cycle code that indicates the day of the month that CMS performs cycle processing for the account. |
-| `Supress letter` | Payload | *number* | 1 | Code that indicates whether CMS suppresses letters for accounts assigned this block code. |
-| `Waive Membership Fees` | Payload | *number* | 1 | Code that indicates whether CMS waives account-level membership fees and supplemental card membership fees for accounts assigned this block code. |
-| `Suppress TKN at accnt level` | Payload | *number* | 1 | Code that indicates to supress token at account level. |
 
 ### Successful Response Payload
 
 ```json
 {
- 
-
+  "businessUnit": 600,
+  "customerNumber": 0000000001000000007
 }
 ```
 

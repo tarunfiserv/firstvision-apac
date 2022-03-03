@@ -106,3 +106,5 @@
               link: docs/APIs/Customer-Management/List-Customers-Cards.md
             - title: Board Customer
               link: docs/APIs/Customer-Management/Board-Customer.md
+            - title: Search Customer
+              link: docs/APIs/Customer-Management/Search-Customer.md
