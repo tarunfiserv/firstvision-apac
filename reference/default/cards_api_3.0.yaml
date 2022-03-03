@@ -69,7 +69,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0009846801010434751
+          example: "0009846801010434751"
       requestBody:
         content:
           application/json:
@@ -179,7 +179,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0000000001000000115
+          example: "0000000001000000115"
       responses:
         "200":
           description: Success
@@ -288,7 +288,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0009846801010065787
+          example: "0009846801010065787"
       requestBody:
         content:
           application/json:
@@ -400,7 +400,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009846801010001345
+          example: "0009846801010001345"
       requestBody:
         content:
           application/json:
@@ -510,7 +510,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009846801010273613
+          example: "0009846801010273613"
       requestBody:
         content:
           application/json:
@@ -620,7 +620,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009846801010273613
+          example: "0009846801010273613"
       requestBody:
         content:
           application/json:
@@ -819,7 +819,7 @@ paths:
         schema:
           type: string
           maxLength: 19
-          example: 0009846801010273613
+          example: "0009846801010273613"
       requestBody:
         content:
           application/json:
@@ -930,7 +930,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0009544401000009153
+          example: "0009544401000009153"
       requestBody:
         content:
           application/json:
@@ -1040,7 +1040,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0000000001000000115
+          example: "0000000001000000115"
       responses:
         "200":
           description: Success
@@ -1146,7 +1146,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0009846801010273605
+          example: "0009846801010273605"
       responses:
         "200":
           description: Success
@@ -1252,7 +1252,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 119
-          example: 0009846801010273605
+          example: "0009846801010273605"
       requestBody:
         content:
           application/json:
@@ -2633,7 +2633,7 @@ components:
           - 1
           - 0
           maxLength: 1
-          example: 0
+          example: 1
         city:
           format: uppercase
           description: City - This is the city portion of the mailing address for
@@ -2729,7 +2729,7 @@ components:
             the  account or relationship
           type: number
           maxLength: 3
-          example: 600
+          example: 2
         embossedName1:
           format: uppercase
           description: Embossed Name 1 - Name to be embossed on the first embossing
@@ -2789,13 +2789,13 @@ components:
             to add a new Customer  Name/Address record
           type: string
           maxLength: 19.0
-          example: 9006000000000300015
+          example: "9996000012222000016"
         stateprovince:
           format: uppercase
           description: State/Province - This field that identifies the state or province
           type: string
           maxLength: 3.0
-          example: Utah
+          example: ""
         chequeAccountNbr:
           format: uppercase
           description: Cheque account number - account cheque details
@@ -2810,14 +2810,14 @@ components:
           - 0
           - 1
           maxLength: 1
-          example: ' '
+          example: "0"
         baseAccountNumber:
           format: uppercase
           description: Base Account Number - This is the identification number to
             assign to the new Account Base Segment record
           type: string
           maxLength: 19.0
-          example: 0004440010000000017
+          example: "0006000011000002331"
         cardAction:
           description: Card Action - This field is the card issue action code that
             determines the action CMS performs during the next run
@@ -2834,14 +2834,14 @@ components:
           - 8
           - 9
           maxLength: 1
-          example: 0
+          example: 1
         numberOfCardsRequested:
           default: 0.0
           description: Number Of Cards Requested - This field identifies the number
             of cards required
           type: number
           maxLength: 2
-          example: 0
+          example: 1
         createEmbosserRecords:
           default: "Y"
           description: Create Embosser Records -This is the code that indicates whether
@@ -2865,7 +2865,7 @@ components:
             factor) written to the track data on the card
           type: string
           maxLength: 1
-          example: ' '
+          example: "0"
         name1:
           format: uppercase
           description: Name 1 - This field identifies the name of the cardholder
@@ -2879,6 +2879,8 @@ components:
           type: number
           maxLength: 1
           example: 0
+
+
     ActivateCardResp:
       type: object
       required:
