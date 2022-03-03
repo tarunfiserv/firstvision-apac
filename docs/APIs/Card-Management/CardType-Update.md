@@ -1,10 +1,10 @@
-# CardType Update
+# Update Card Type
 
 This service is used to update the type of cardholder between primary and supplementary (Joint Cardholder). 
 
 ## Endpoint
 
-`PUT /v1/cards/profile`
+`PUT /v1/cards/{cardNumber}/profile`
 
 ## Payload Example
 
@@ -12,7 +12,6 @@ This service is used to update the type of cardholder between primary and supple
 
 ```json
 {
-    "cardSequence": "0001",
     "cardholderType": "1"
 }
 ```
@@ -23,22 +22,21 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. | 
-| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. | 
-| `cardholderType` | *numeric* | 1 | Pass value 1 for Single primary cardholder. Pass value 0 for Joint cardholder |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. | 
+| `cardholderType` | Payload | *numeric* | 1 | Pass value 1 for Single primary cardholder. Pass value 0 for Joint cardholder |
 
 ### Successful Response Payload
 
 ```json
 {
-    "businessUnit": "100",
-    "cardNumber": "0009846801010273613",
-    "cardSequence": "1",
-    "postToAccountNumber": "0001000010000510760",    
-    "cardholderType": "1",
+  "cardholderType": "1",
+  "businessUnit": 100,
+  "cardSequence": 1,
+  "postToAccountNumber": "000100001NNNNN0760",
+  "cardNumber": "000984680NNNNN73613"
 }
 ```
 

@@ -1,4 +1,4 @@
-# Update Temp Credit Limit
+# Update Temporary Credit Limit
 
 This service is used to update temporary credit limit to an account.
 
@@ -6,7 +6,7 @@ This service can be called with an account number to update the *temporary credi
 
 ## Endpoint
 
-`PUT /v1/accounts/{accountNumber}/tempCreditLimit?businessUnit=nnn`
+`PUT /v1/accounts/{accountNumber}/tempCreditLimit`
 
 ## Payload Example
 
@@ -25,12 +25,12 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `temporaryCreditLimitExpiryDate` | *string* | 10 | Temporary credit limit expiry date |  
-| `temporaryCreditLimit` | *string* | 17 | Temporary line of credit for the account in whole monetary units. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `temporaryCreditLimitExpiryDate` | Payload | *Date* | DD/MM/YYYY  | Temporary credit limit expiry date |  
+| `temporaryCreditLimit` | Payload | *string* | 17 | Temporary line of credit for the account in whole monetary units. |
 
 ### Successful Response Payload
 
@@ -59,6 +59,7 @@ Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
+| `V5BS0010SF` | Update Request - Record not found|
 | `V5BS0601EA` | Temp credit limit does not conform to currency nod |
 | `V5BS0601EB` | Temp credit limit field not editable when debit active at logo |
 | `V5BS0601EC` | Temp credit limit cannot be greater than logo credit limit |

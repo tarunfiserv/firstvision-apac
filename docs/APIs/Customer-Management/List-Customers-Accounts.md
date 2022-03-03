@@ -4,13 +4,14 @@
 
 ## Endpoint
 
-`GET /v1/customers/{customerNumber}/accountList/`
+`GET /v1/customers/{customerNumber}/accountList`
 
 ## Payload Example
 
 ### Request Payload
 
-> Empty.  
+>Shoud be empty.  
+***Customer Number should be sent as Path Variable.***  
 
 ### Minimum Requirements
 
@@ -18,60 +19,60 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `customerNumber` | *string* | 19 | An identifier of the customer. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `customerNumber` | Path Variable | *string* | 19 | An identifier of the customer. |
 
 ### Successful Response Payload
 
 ```json
-{
-    "accountList": [
-        {
-            "product": "1",
-            "businessUnit": "100",
-            "amountMemoCredit": "$0.00",
-            "ddaAccountNumber": "890005226",
-            "mailingIndicator": " ",
-            "blockCode2Date": "00/00/0000",
-            "accountNumber": "0001000011000052268",
-            "sUPPRESSTOKEN": "0",
-            "internalStatus": "D",
-            "amountMemoDebit": "$0.00",
-            "nbrOfTokenizedCards": "0",
-            "blockCode1": " ",
-            "rEISSCONTOLMETHOD": "0",
-            "blockCode2": " ",
-            "blockCode1Date": "00/00/0000"
-        }
-    ],
-    "totalAvailable": "$0.00",
-    "dateofBirth": "11/14/1940",
-    "businessUnit": "0",
-    "homePhoneNumber": "++61430010348",
-    "gender": "0",
-    "mobileNumber": "++61430010348",
-    "nameLine1": "UATMFNCU448 TWOPPPUATMLNCUST448",
-    "emailAddress": "UATMFNCU448@GMAIL.COM",
-    "sSNID": "113902",
-    "workPhoneNumber": "++61430010348",
-    "cREDITlimit": "$0.00",
-    "addressLine1": "62 CHARTERIS DR",
-    "addressLine2": "",
-    "addressLine3": "",
-    "addressLine4": "",
-    "relationshipnbr": "",
-    "billingLvl": "0",
-    "userDefinedField4": "",
-    "numberofCards": "1",
-    "numberofAccounts": "1",
-    "customerNumber": "0001000000000113902",
-    "customerName": "UATMFNCU448",
-    "homeDistricName": "",    
-    "rELNAME": "",
-    "status": ""
-}
 
+{
+  "accountList": [
+    {
+      "accountNumber": "0001000011000052268",
+      "amountMemoCredit": "$0.00",
+      "amountMemoDebit": "$0.00",
+      "blockCode1": " ",
+      "blockCode1Date": "00/00/0000",
+      "blockCode2": " ",
+      "blockCode2Date": "00/00/0000",
+      "businessUnit": "100",
+      "ddaAccountNumber": "890005226",
+      "internalStatus": "D",
+      "mailingIndicator": " ",
+      "nbrOfTokenizedCards": 0,
+      "product": "1",
+      "reissContolMethod": 0,
+      "suppressToken": "0"
+    }
+  ],
+  "addressLine1": "62 CHARTERIS DR",
+  "addressLine2": "",
+  "addressLine3": "",
+  "addressLine4": "",
+  "billingLvl": "0",
+  "businessUnit": "0",
+  "creditLimit": "$0.00",
+  "customerName": "UATMFNCU448",
+  "customerNumber": "0001000000000113902",
+  "dateOfBirth": "14/11/1940",
+  "emailAddress": "UATMFNCU448@GMAIL.COM",
+  "gender": "0",
+  "homeDistricName": "",
+  "homePhoneNumber": "++61430010348",
+  "mobileNumber": "++61430010348",
+  "nameLine1": "UATMFNCU448 TWOPPPUATMLNCUST448",
+  "numberOfAccounts": "1",
+  "numberOfCards": "1",
+  "relName": "",
+  "relationshipNbr": "",
+  "ssnId": "113902",
+  "status": "",
+  "totalAvailable": "$0.00",
+  "userDefinedField4": "Y",
+  "workPhoneNumber": "++61430010348"
+}
 ```
 
 ### Error Response Payload
@@ -79,7 +80,7 @@ The below table identifies the required parameters in the request payload.
 ```json
 {
   "errorCode": "V5DB4001AS",
-  "errorMessage": "Customer Number not found"  
+  "errorMessage": "Cust nbr not found"  
 }
 ```
 
@@ -87,4 +88,4 @@ Below table provides the list of application's error code and its description.
 
 | ErrorCode |  Description/Values |
 | --------  | ------------------ |
-| `V5DB4001AS` |Customer Number not found|
+| `V5DB4001AS` |Cust nbr not found|

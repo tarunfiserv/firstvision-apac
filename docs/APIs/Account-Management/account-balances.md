@@ -1,6 +1,6 @@
 # Inquire Account Balances
 
- The service provide account's balances such as available balance/ current balance / due amount / last payment amount / first purchase amount / credit limit, associated with the customer.
+ The service provide account's balances such as available balance/ current balance / due amount / last payment amount / first purchase amount / credit limit, associated with the customer..
 
 ## Endpoint
 
@@ -10,7 +10,12 @@
 
 ### Request Payload
 
-> Empty.  
+```json
+{
+Shoud be empty.
+***The Business Unit and Account Number should be sent as query parameters and path variable.***
+}
+``` 
 
 ### Minimum Requirements
 
@@ -18,10 +23,10 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. |
 
 ### Successful Response Payload
 

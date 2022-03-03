@@ -1,61 +1,61 @@
-# Inquire Customer Demographic Information
+# Customer Demographic Inquiry
 
 This service will be used to enquire the customer demographic details such as Name / Address / Phone Number / Email ID/ Date of Birth of the given customer.  The customer ID will be passed in the input request to retrieve the demographic information. 
 
 ## Endpoint
 
-`GET /v1/customers/{accountNumber}/nameAddress`
+`GET /v1/customers/{customerNumber}/nameAddress`
 
 ## Payload Example
 
 ### Request Payload
 
 >Shoud be empty.  
-***The Business Unit and AccountNumber should be sent as query parameters.***
+***Customer Number should be sent as Path Variable.***
 
 ### Minimum Requirements
 
-The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/customers/{accountNumber}/nameAddress).
+The below table contains the mandatory fields required for a successful request. The full request schemas are available in our [API Explorer](../api/?type=get&path=/v1/customers/{customerNumber}/nameAddress).
 
 The below table identifies the required query parameters in the request message.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the Card. |
-| `accountNumber` | *string* | 19 | Customer Number of the cardholder. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the Card. |
+| `customerNumber` | Path Variable | *string* | 19 | Customer Number of the cardholder. |
 
 ### Successful Response Payload
 
 ```json
 {
-    "postalCode1": "2011",
-    "city1": "SYDNEY",
-    "nameLine21": "CHRISTIAN",
-    "firstName1": "KIARA",
-    "emailAddress1": "SAM@GMAIL.COM",
-    "homePhoneFlag1": "0",
-    "userDefinedField41": "Y",
-    "stateProvince1": "NSW",
-    "middleName1": "CHRISTIAN",
-    "faxNumber1": "",
-    "addressLine21": "",
-    "addressLine41": "",
-    "lastName1": "HARBER",
-    "faxPhoneFlag1": "0",
-    "nameLine31": "HARBER",
-    "nameLine11": "KIARA",
-    "mobileNumber1": "12345678901",
-    "countryCode1": "AU",
-    "accountNumber": "0001000000000150191",
-    "businessunit": "100",
-    "languageIndicator1": "AUS",
-    "addressLine31": "",
-    "sMSFlag1": "0",
-    "homePhoneNumber1": "123456788999999",
-    "addressLine11": "77 30 HARVEY ISLAND",
-    "houseNumber1": "",
-    "mobilePhoneFlag1": "0",
-    "dateOfBirth1": "04/02/1975"
+  "accountNumber": "0001000000000150191",
+  "addressLine11": "",
+  "addressLine21": "",
+  "addressLine31": "",
+  "addressLine41": "",
+  "businessUnit": "100",
+  "city1": "",
+  "countryCode1": "",
+  "dateOfBirth1": "00/00/0000",
+  "emailAddress1": "SAM@FISERV.COM",
+  "faxNumber1": "",
+  "faxPhoneFlag1": "0",
+  "firstName1": "ABC",
+  "homePhoneFlag1": "0",
+  "homePhoneNumber1": "1234567",
+  "houseNumber1": "",
+  "languageIndicator1": "",
+  "lastName1": "",
+  "middleName1": "",
+  "mobileNumber1": "112233",
+  "mobilePhoneFlag1": "0",
+  "nameLine11": "",
+  "nameLine21": "",
+  "nameLine31": "",
+  "postalCode1": "",
+  "sMSFlag1": "0",
+  "stateProvince1": "",
+  "userDefinedField41": "Y"
 }
 ```
 
@@ -63,8 +63,8 @@ The below table identifies the required query parameters in the request message.
 
 ```json
 {
-  "errorCode": "V5ED0301EA",
-  "errorMessage": "Priority of new block code cannnot be lower than the existing block code"  
+  "errorCode": "V5NA4002SA",
+  "errorMessage": "Customer Account not found"  
 }
 ```
 

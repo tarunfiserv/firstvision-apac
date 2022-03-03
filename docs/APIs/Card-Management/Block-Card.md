@@ -12,8 +12,7 @@ This service is used to update the block codes and the reason codes for the bloc
 
 ```json
 {
-  "cardSequence": "0001",
-  "blockCode": "X" 
+  "blockCode": "X"
 }
 ```
 
@@ -23,25 +22,24 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the Card. |
-| `CardNumber` | *string* | 19 | Card Number of the cardholder. | 
-| `cardSequence` | *number* | 04 | A sequence number of the card in case of card scheme 2 else pass the default value of 0001. | 
-| `blockCode1` | *string* | 1 | Block Code to assign to the Card. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the Card. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. | 
+| `blockCode1` | Payload | *string* | 1 | Block Code to assign to the Card. |
 
 ### Successful Response Payload
 
 ```json
 {
-    "businessUnit": "100",
-    "cardNumber": "0009846801010273605",
-    "cardSequence": "1",
-    "postToAccountNumber": "0001000010000510760",    
-    "blockCode": "X",
-    "blockDate": "01/10/2021", 
-    "warningCode1": "1",
-    "cardholderType": "1"
+  "businessUnit": 100,
+  "cardholderType": "1",
+  "blockCode": "E",
+  "blockDate": "00/00/0000",
+  "cardSequence": 1,
+  "postToAccountNumber": "ABCDEFGHIJABCDEFGHI",
+  "cardNumber": "00098468CCCCC273605",
+  "warningCode1": "0"
 }
 ```
 

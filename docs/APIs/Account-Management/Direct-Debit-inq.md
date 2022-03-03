@@ -4,7 +4,7 @@ This service is used to get detail for direct debit.
 
 ## Endpoint
 
-`GET /v1/accounts/{accountNumber}/directDebit?businessUnit=nnn`
+`GET /v1/accounts/{accountNumber}/directDebit`
 
 ## Payload Example
 
@@ -12,7 +12,8 @@ This service is used to get detail for direct debit.
 
 ```json
 {
-  
+Shoud be empty.
+***The Business Unit and Account Number should be sent as query parameters and path variable.*** 
 }
 ```
 
@@ -22,10 +23,10 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
 
 ### Successful Response Payload
 
@@ -34,12 +35,12 @@ The below table identifies the required parameters in the request payload.
   "accountNumber": "0000000001000000057",
   "billingAcctInd": "0",
   "businessUnit": "600",
-  "dDAccountNumber": " ",
-  "dDAccountType": "D",
-  "dDNominatedPaymentAmtorPercentage": "10",
-  "dDPaymentExpiryDate": "00/00/0000",
-  "dDPaymentStartDate": "04/10/2021",
-  "dDRoutingBankID": "0",
+  "ddAccountNumber": " ",
+  "ddAccountType": "D",
+  "ddNominatedPaymentAmtorPercentage": "10",
+  "ddPaymentExpiryDate": "00/00/0000",
+  "ddPaymentStartDate": "04/10/2021",
+  "ddRoutingBankID": "0",
   "fixedPaymentAmount": "1",
   "paymentRemittanceMethod": "2",
   "product": "600"

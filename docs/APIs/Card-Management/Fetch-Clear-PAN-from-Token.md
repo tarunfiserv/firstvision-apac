@@ -11,7 +11,7 @@ This service is used to fetch the clear pan for the requested First Vision's Tok
 ### Request Payload
 
 >Shoud be empty.  
-***The Business Unit and AccountNumber should be sent as query parameters.***
+***The Business Unit and Card Number should be sent as query parameters and path variable.***
 
 ### Minimum Requirements
 
@@ -19,16 +19,18 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required query parameters in the request payload.
 
-| Variable | Type | Length | Description |
-| -------- | :--: | :------------: | ------------------ |
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `cardNumber` | *string* | 19 | Token Number associated with the clear PAN. |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `cardNumber` | Path Variable | *string* | 19 | Token Number associated with the clear PAN. |
 
 ### Successful Response Payload
 
->Shoud be empty.
-***The Business Unit and cardNumber should be sent as query parameters.***
-
+```json
+{
+  "cardNumber": 9846801010273604
+}
+```
 ### Error Response Payload
 
 ```json

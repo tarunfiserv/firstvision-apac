@@ -4,13 +4,18 @@
 
 ## Endpoint
 
-`GET /v1/accounts/{accountNumber}/transactions/lastStatement/?businessUnit=xxx&product=n&statementDate=DD/MM/YYYY`
+`GET /v1/accounts/{accountNumber}/transactions/lastStatement`
 
 ## Payload Example
 
 ### Request Payload
 
-> Empty.  
+```json
+{
+Shoud be empty.
+***The Business Unit/Product/Statement date and Account Number should be sent as query parameters and path variable.***
+}
+```
 
 ### Minimum Requirements
 
@@ -18,61 +23,41 @@ The below table contains the mandatory fields required for a successful request.
 
 The below table identifies the required parameters in the request payload.
 
-| Variable | Type | Length | Description/Values |
-| -------- | :--: | :------------: | ------------------ |
-| `accountNumber` | *string* | 19 | Account Number of the cardholder. | 
-| `businessUnit` | *number* | 3 | Identification number of the organization associated with the account. |
-| `product` | *number* | 3 | Product associated with the Account. |
-| `statementDate` | *Date* | DD/MM/YYYY | Date the statement is produced for the account holder |
+| Variable | Passed as | Type | Length | Description/Values |
+| -------- | :-------: | :--: | :------------: | ------------------ |
+| `accountNumber` | Path Variable | *string* | 19 | Account Number of the cardholder. | 
+| `businessUnit` | Query Parameter | *number* | 3 | Identification number of the organization associated with the account. |
+| `product` | Query Parameter | *number* | 3 | Product associated with the Account. |
+| `statementDate` | Query Parameter | *Date* | DD/MM/YYYY | Date the statement is produced for the account holder |
 
 ### Successful Response Payload
 
 ```json
+
 {
-    "transactionList": [
-        {
-            "recordNumber": "52",
-            "amount": "$30.83",
-            "businessUnit": "200",
-            "authorizationCode": " ",
-            "description": "DEBIT CARD OFFSET CREDIT",
-            "postingDate": "03/26/2021",
-            "transactionCode": "7016",
-            "aMSLKey": " ",
-            "reference": "19999999980326199980140",
-            "transactionType": "C",
-            "creditPlan": "10002",
-            "logo": "1",
-            "logicModule": "4",
-            "effectiveDate": "03/26/2021"
-        },
-        {
-            "recordNumber": "52",
-            "amount": "$30.83",
-            "businessUnit": "200",
-            "authorizationCode": " ",
-            "description": "DEBIT CARD OFFSET CREDIT",
-            "postingDate": "03/26/2021",
-            "transactionCode": "7016",
-            "aMSLKey": " ",
-            "reference": "19999999980326199980140",
-            "transactionType": "C",
-            "creditPlan": "10002",
-            "logo": "1",
-            "logicModule": "4",
-            "effectiveDate": "03/26/2021"
-        }
-    ],
-    "accountRelationship": "0002000010000001211",
-    "statementDate": "04/09/2021",
-    "tranPrevToken": "2000002000010000001211202109y50003",
-    "tranNextToken": "2000002000010000001211202109y50052",
-    "planNextTokenlast": "",
-    "tableIND": "",
-    "cPLastFunc": "",
-    "hiddenKey": "",
-    "planPREVTokenlast": "",
-    "fileType": "SL"
+  "tranPrevToken": "2000002000010000001211202109y50003",
+  "planNextTokenLast": " ",
+  "transactionList": [
+    {
+      "recordNumber": 0,
+      "amount": "$61.40",
+      "businessUnit": 200,
+      "authorizationCode": 49461,
+      "description": "MBS SPORT Paya Lebar SG ",
+      "postingDate": "26/03/2021",
+      "transactionCode": 0,
+      "reference": "VT210850003000020000014",
+      "transactionType": "M",
+      "creditPlan": 10002,
+      "logo": 1,
+      "logicModule": 1,
+      "effectiveDate": "26/03/2021"
+    }
+  ],
+  "tranNextToken": "2000002000010000001211202109y50052",
+  "accountRelationship": 2000010000001211,
+  "planPrevTokenLast": " ",
+  "statementDate": "2021-09-03"
 }
 ```
 
