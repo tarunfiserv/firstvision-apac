@@ -162,7 +162,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0001000000000150191
+          example: "0001000000000150191"
       requestBody:
         content:
           application/json:
@@ -272,7 +272,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19.0
-          example: 0001000000000150191
+          example: "0001000000000150191"
       responses:
         "200":
           description: Success
@@ -368,7 +368,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000000000113902
+          example: "0001000000000113902"
       responses:
         "200":
           description: Success
@@ -464,7 +464,7 @@ paths:
           format: uppercase
           type: string
           maxLength: 19
-          example: 0001000000000113902
+          example: "0001000000000113902"
       responses:
         "200":
           description: Success
