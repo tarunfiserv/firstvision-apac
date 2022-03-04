@@ -6561,7 +6561,7 @@ components:
             on the date format established on the System record (DATE FORMAT on ARMS01).
           type: string
           maxLength: 7
-          example: 04/11/2021
+          example: '04/11/2021'
         ddAccountNumber:
           description: DD Account Number - This field is the account number
           type: string
@@ -6595,7 +6595,7 @@ components:
             on the date format established on the System record.
           type: string
           maxLength: 7
-          example: 04/10/2021
+          example: '04/10/2021'
         paymentRemittanceMethod:
           description: Payment Remittance Method - Code that indicates the payment
             remittance method for the account
