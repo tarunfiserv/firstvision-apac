@@ -2187,7 +2187,7 @@ paths:
           minLength: 0.0
           type: string
           maxLength: 20.0
-          example: 00002AUNAB
+          example: 00000AUNAB
         required: true
       - name: X-context
         description: A unique random ID assigned to the requestor once authenticated
@@ -2198,7 +2198,7 @@ paths:
           minLength: 0.0
           type: string
           maxLength: 20.0
-          example: 00002AUNAB
+          example: 00000AUNAB
         required: true
       requestBody:
         content:
